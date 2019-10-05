@@ -1,0 +1,70 @@
+#example0 {
+  background: #DDD;
+  & > div {
+    border: 1px solid red;
+    margin: 10px 0;
+  }
+
+  .top3 {
+    display: inline-block;
+    width: 90vw;
+  }
+}
+
+#example1 {
+  background: #DDD;
+  overflow: hidden;
+  bottom: 0;
+  margin: 50px 0;
+  .left {
+    float: left;
+    width: 100px;
+    background: red;
+    margin: 10px;
+  }
+
+  .inline {
+    margin: 10px;
+    // outline: 5px yellow dashed;
+    border: 10px solid red;
+    padding: 10px;
+    background: blue;
+  }
+}
+
+#example2 {
+  background: #DDD;
+  overflow: hidden;
+  .left, .left2, .left3 {
+    float: left;
+    width: 100px;
+    background: red;
+  }
+
+  .right {
+    background: pink;
+  }
+
+  .right2 {
+    // display: inline-block;
+    background: pink;;
+    overflow: hidden;
+  }
+
+  .left3 {
+    height: 100px;
+    transition: height 1s;
+    &:hover {
+      height: 500px;
+    }
+  }
+  .right3 {
+    display: inline-block;
+    height: 100px;
+    background: pink;;
+    transition: height 1s;
+    &:hover {
+      height: 500px;
+    }
+  }
+}
