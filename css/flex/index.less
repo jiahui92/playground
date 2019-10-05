@@ -1,11 +1,60 @@
 #example1 {
   background: #DDD;
-  overflow: hidden;
   display: flex;
+  align-items: stretch;
+  min-height: 100px;
+
+  & > div {
+    flex: 1;
+  }
+
   .left {
-    // float: left;
-    // height: 500px;
-    width: 100px;
     background: red;
+  }
+
+  .center {
+    background: green;
+  }
+
+  .right {
+    background: blue;
+  }
+}
+
+
+.left {
+  background: red;
+}
+
+.center {
+  background: green;
+}
+
+.right {
+  background: blue;
+}
+
+#example2 {
+  padding: 0 220px 0 200px;
+  height: 100px;
+  position: relative;
+
+  & > div {
+    height: 100%;
+    float: left;
+    position: relative;
+  }
+
+  .left {
+    width: 200px;
+    margin-left: -200px;
+  }
+  .right {
+    width: 220px;
+    margin-right: -220px;
+  }
+
+  .center {
+    width: 100%;
   }
 }
