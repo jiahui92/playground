@@ -11,8 +11,8 @@ BFC 可以简单的理解为某个元素的一个 CSS 属性，只不过这个�
 
 > 或者更简单来说
 * overflow:hidden
-  * 撑开父元素的高度（包含float子元素）
-  * 防止被float同级元素阻挡（取消img环绕效果）
+  * 让父元素包裹所有子元素（通常是包裹float子元素）
+  * 防止被float同级元素覆盖（取消img环绕效果／rightDiv防止被aside覆盖）
 * 两列布局：自适应高度，宽度
 
 
@@ -22,8 +22,3 @@ BFC 可以简单的理解为某个元素的一个 CSS 属性，只不过这个�
 * position: absoulte | fixed
 * display: inline-block | flex
 * overflow: hidden | auto | scroll
-
-
-
-* 取消浮动
-* 层次管理
