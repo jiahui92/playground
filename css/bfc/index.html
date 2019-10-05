@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <link rel="stylesheet/less" type="text/css" href="index.less" />
+</head>
+<body>
+
+
+  <div id="example0">
+    <h4>* 属于同一个BFC的两个相邻Box的margin会发生重叠。（这句话感觉是错的，试验后发现只有block元素才会重叠，inline和inline-block都不会，这和是不是BFC没有关系）</h4>
+    <div class="top1">
+      block: margin: 10px 0;
+    </div>
+    <div class="top2">
+      block: margin: 10px 0;
+    </div>
+    <div class="top3">
+      inline-block BFC: margin: 10px 0;
+    </div>
+  </div>
+
+
+  <div id="example1">
+    <h4>* BFC父元素会包裹子元素的margin和浮动子元素</h4>
+    <div class="left">
+      <div>left</div>
+      <div>left</div>
+      <div>left</div>
+      <div>left</div>
+    </div>
+    <div class="right">
+      right
+    </div>
+
+    <!-- inline的特殊情况 -->
+    <div style="display: none;">
+      <div style="clear:both">--------------------</div>
+
+      <h4>* inline子元素会被截断式包裹（只会被content撑高，但是其padding,border,margin都会被截断）</h4>
+  
+      <span class="inline">inline</span>
+
+    </div>
+    
+  </div>
+
+
+  <div id="example2">
+    <h4>* BFC两列自适应高度布局</h4>
+    <div class="left">left</div>
+    <div class="right">
+      <div>普通元素会被floatBox覆盖</div>
+      <div>right</div>
+      <div>right</div>
+      <div>right</div>
+    </div>
+
+    <div>--------------------</div>
+
+    <div class="left2">left</div>
+    <div class="right2">
+      <div>1.BFC元素不会被floatBox覆盖</div>
+      <div>2.自适应余下的宽度(inline-block触发的BFC不会自适应宽度)</div>
+      <div>right</div>
+      <div>right</div>
+      <div>right</div>
+    </div>
+
+    <div>--------------------</div>
+
+    <div class="left3">left</div>
+    <div class="right3">
+      <div>right</div>
+    </div>
+
+  </div>
+
+</body>
+<script src="https://cdn.bootcss.com/less.js/3.10.3/less.min.js"></script>
+</html>
