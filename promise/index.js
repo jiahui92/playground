@@ -6,17 +6,17 @@ import('./promise.js').then(({MyPromise}) => {
   })
 
   /** test2 *******************************************************/
-  const p = (text) => {
+  const p = () => {
     return new MyPromise((resolve, reject) => {
       setTimeout(() => {
-        resolve()
+        resolve('resolve text --> thenFn1')
         // reject('my reject error')
       }, 1000)
     })
   }
 
-  p().then(() => {
-    console.log('thenFn1')
+  p().then((text) => {
+    console.log(text)
     return 'test thenFn return value'
   }).then(text => {
     console.log(text)
@@ -32,6 +32,15 @@ import('./promise.js').then(({MyPromise}) => {
     console.log('finally')
   })
 
+  /** test3 *******************************************************/
+  // new Promise((resolve) => {
+  //   setTimeout(resolve, 100)
+  // }).then((resolve) => {
+  //   setTimeout(() => {
+  //     console.log('thenFn')
+  //     resolve()
+  //   }, 100)
+  // })
 })
 
 
