@@ -4,9 +4,8 @@
  * 缺陷1: 内部使用了setTimeout，实际上把Promise从micro task 变成了 task
  *  * 使用MutationObserver|postMessage代替setTimeout（实际中使用immediate库即可）
  * 缺陷2: 不符合Promises/A+规范 https://promisesaplus.com/
- *  * then没有返回一个新的promise
  *  * then不支持返回一个promise (实现需要将parentPromise.thenArr push到 childPromise.thenArr里)
- *  * then不支持传入reject (不能够单独处理同级的resolve.Error)
+ *  * then不支持传入reject (不能够单独处理同级的resolve.Error，需要为每一个then返回一个新的promise)
  */
 
 export function MyPromise (fn) {
