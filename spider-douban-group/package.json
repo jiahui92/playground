@@ -1,0 +1,13 @@
+{
+  "name": "spider-webside",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/JiaHui-STU/spider.git",
+  "author": "guangjun <guangjun@mogujie.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "1.0.0-rc.2",
+    "koa": "2.5.1",
+    "superagent": "3.8.3"
+  }
+}
