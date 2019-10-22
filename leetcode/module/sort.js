@@ -59,9 +59,31 @@ const sort = {
     this.quick2(arr, i + 1, right);
   },
 
+  // 桶排序: 支持负数
+  bucket (arr) {
+    const result = [];
+    const bucketArr = [];
+    const min = Math.min(...arr);
+
+    arr.forEach(n => {
+      const k = n - min;
+      bucketArr[k] ? bucketArr[k]++ : bucketArr[k] = 1;
+    });
+
+    bucketArr.forEach((count, i) => {
+      if (count) {
+        const k = i + min;
+        result.push(...(new Array(count).fill(k)));
+      }
+    })
+
+    return result;
+  }
+
 }
 
 sort.excute('bubble')
 sort.excute('quick')
 sort.excute('quick2')
+sort.excute('bucket')
 
