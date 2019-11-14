@@ -7,4 +7,4 @@ come to play play ya
 
 ### todo
 * [ ] css grid
-* [ ] xxx
+* [ ] readme目录
