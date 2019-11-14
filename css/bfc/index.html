@@ -12,7 +12,7 @@
 
 
   <div id="example0">
-    <h4>* 属于同一个BFC的两个相邻Box的margin会发生重叠。（这句话感觉是错的，试验后发现只有block元素才会重叠，inline和inline-block都不会，这和是不是BFC没有关系）</h4>
+    <h4>* 相邻块级BFC的垂直margin会发生折叠</h4>
     <div class="top1">
       block: margin: 10px 0;
     </div>
@@ -20,13 +20,13 @@
       block: margin: 10px 0;
     </div>
     <div class="top3">
-      inline-block BFC: margin: 10px 0;
+      inline-block不会折叠
     </div>
   </div>
 
 
   <div id="example1">
-    <h4>* BFC父元素会包裹子元素的margin和浮动子元素</h4>
+    <h4>* BFC父元素会包裹子元素的margin和浮动子元素（使用overflow:hidden来撑开父元素高度／包裹float子元素）</h4>
     <div class="left">
       <div>left</div>
       <div>left</div>
@@ -51,7 +51,6 @@
 
 
   <div id="example2">
-    <h4>* BFC两列自适应宽度布局</h4>
     <div class="left">left</div>
     <div class="right">
       <div>普通元素会被floatBox覆盖</div>
@@ -61,12 +60,12 @@
     </div>
 
     <div>--------------------</div>
-
+    <h4>* BFC两列自适应宽度布局</h4>
     <div class="left2">left</div>
     <div class="right2">
       <div>1.BFC元素不会被floatBox覆盖</div>
-      <div>2.自适应余下的宽度(inline-block触发的BFC不会自适应宽度)</div>
-      <div>right</div>
+      <div>2.自适应余下的宽度(overflow:hidden)</div>
+      <div>3.inline-block触发的BFC不会自适应宽度</div>
       <div>right</div>
       <div>right</div>
     </div>
@@ -75,7 +74,7 @@
 
     <div class="left3">left</div>
     <div class="right3">
-      <div>right：inline-block</div>
+      <div>right: inline-block</div>
     </div>
 
   </div>
