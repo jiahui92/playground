@@ -33,8 +33,27 @@ function throttle (fn ,delay) {
   }
 }
 
+/**
+ * 节流2：一个更简单的实现版本
+ */
+function throttle2 (fn ,delay) {
+  let canRun = true;
+
+  return () => {
+    if (!canRun) return;
+    canRun = false;
+
+    setTimeout(() => {
+      fn(arguments);
+      canRun = true;
+    }, delay);
+  }
+}
+
+
 const fn = (a) => {
   console.log(a);
 }
 // window.onscroll = debounce(fn.bind(this, 'debounce'), 1000)
-window.onscroll = throttle(fn.bind(this, 'throttle'), 1000)
+// window.onscroll = throttle(fn.bind(this, 'throttle'), 1000)
+window.onscroll = throttle2(fn.bind(this, 'throttle2'), 1000)
