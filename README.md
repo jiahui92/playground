@@ -2,7 +2,7 @@
 come to play play ya
 
 ### launch
-* yarn global add live-server
+* npm i -g live-server
 * live-server
 
 ### todo
