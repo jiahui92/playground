@@ -1,7 +1,7 @@
 # playground
-come to play play ya
+一些简单的试验
 
-### launch
-* npm i -g live-server
-* live-server
+
+### todo
+* [] 增加template/webpack
 
