@@ -1,7 +1,24 @@
+<base href="https://github.com/jiahui92/playground/tree/master" target="_blank" />
+
 # playground
 一些简单的试验
 
 
 ### todo
-* [] 增加template/webpack
+* xx
 
+### 目录
+* [Leetcode](leetcode)
+* CSS
+  * [BFC](css/bfc)
+  * [flex](css/flex)
+* JS
+  * [promise](promise)
+  * [throttle](throttle)
+* Machine Learning
+  * [Google ML](machine-learning)
+  * [Face API](face-api)
+  * [OCR](ocr)
+* 其它
+  * [豆瓣小组抓包](spider-douban-group)
+  * [xmind](xmind)

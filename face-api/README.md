@@ -2,8 +2,10 @@
 * npm i
 * npm run server
 
-## f
+## face-api
+* 人脸检测
 * face landmark
+* 情绪识别
 
 ## 其它资料
 * https://github.com/justadudewhohacks/face-api.js
