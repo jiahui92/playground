@@ -21,7 +21,7 @@ print(pd.DataFrame({ 'CityName': city_name, 'Population': population }))
 
 print('\n------读取文件------')
 ## 从csv文件读取california住房数据 
-california_housing_dataframe = pd.read_csv('./data/california_housing_train.csv', sep=',')
+california_housing_dataframe = pd.read_csv('https://download.mlcc.google.cn/mledu-datasets/california_housing_train.csv', sep=',')
 # print(california_housing_dataframe.describe())
 print(california_housing_dataframe.head())
 california_housing_dataframe.hist('housing_median_age')

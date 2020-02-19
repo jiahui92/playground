@@ -14,7 +14,8 @@ tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 pd.options.display.max_rows = 10
 pd.options.display.float_format = '{:.1f}'.format
 
-california_housing_dataframe = pd.read_csv('./data/california_housing_train.csv', sep=',')
+
+california_housing_dataframe = pd.read_csv('https://download.mlcc.google.cn/mledu-datasets/california_housing_train.csv', sep=',')
 
 california_housing_dataframe.reindex( # 将数据排序打乱，否则可能会影响随机梯度下降法的效果(原csv的数据是按照logitude进行排序的)
     np.random.permutation(california_housing_dataframe.index)
