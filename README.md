@@ -15,6 +15,7 @@
 * JS
   * [promise](promise)
   * [throttle](throttle)
+  * [webpack-plugin](webpack-plugin)
 * Machine Learning
   * [Google ML](machine-learning)
   * [Face API](face-api)
