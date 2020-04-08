@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DependencyPlugin = require('./plugins/dependency.js');
 
 module.exports = {
   devServer: {
@@ -47,6 +48,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new DependencyPlugin(),
     new HtmlWebpackPlugin({
       template: './template/index.html'
     }),
