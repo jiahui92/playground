@@ -6,5 +6,5 @@ fetch();
 haha();
 
 function haha () {
-  xxx1;
+  xxx2;
 }
