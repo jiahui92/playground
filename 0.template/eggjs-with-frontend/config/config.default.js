@@ -1,6 +1,5 @@
 /* eslint valid-jsdoc: "off" */
 
-'use strict';
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -21,6 +20,15 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
+  };
+
+  // doc: https://github.com/eggjs/egg-static
+  config.static = {
+    dir: [
+      { prefix: '/public', dir: 'app/public' },
+      { prefix: '/assets', dir: 'dist/assets' }, // 前端打包资源:css/js
+      { prefix: '/', dir: 'dist', maxAge: 0 }, // 前端打包资源:html
+    ]
   };
 
   return {

@@ -16,6 +16,7 @@ module.exports = {
   
   extends: [
     "eslint:recommended",
+    "eslint-config-egg",
     "plugin:react/recommended"
   ],
   // 插件可以用于rules、env和extends等配置中
@@ -25,5 +26,6 @@ module.exports = {
   ],
   rules: {
     indent: ["error", 2],
+    "comma-dangle": 0
   },
 };

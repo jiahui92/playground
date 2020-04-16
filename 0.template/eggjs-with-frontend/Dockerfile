@@ -21,9 +21,10 @@ WORKDIR /app
 # 如果package.json和源代码一起添加到镜像，则每次修改源码都需要重新安装npm模块，这样木有必要。
 # 所以，正确的顺序是: 添加package.json；安装npm模块；添加源代码。
 COPY package*.json /app/
-RUN npm i --registry=https://registry.npm.taobao.org  --production
+RUN npm i --registry=https://registry.npm.taobao.org
 # 拷贝所有源代码到工作目录，不需要拷贝的话可以在.dockerignore文件忽略
 COPY . /app
+RUN npm run build
 
 EXPOSE 7001
 VOLUME [ "/root/logs" ]

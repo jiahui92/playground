@@ -1,8 +1,8 @@
-'use strict';
+
 
 /** @type Egg.EggPlugin */
 module.exports = {
-  // had enabled by egg
+  // static默认已开
   // static: {
   //   enable: true,
   // }

@@ -17,6 +17,10 @@
   * [throttle](throttle)
   * [webpack-plugin](webpack-plugin)
   * [reactnative](reactnative)
+* [Scaffolding](0.template)
+  * static
+  * webpack & react
+  * eggjs-with-frontend
 * Machine Learning
   * [Google ML](machine-learning)
   * [Face API](face-api)

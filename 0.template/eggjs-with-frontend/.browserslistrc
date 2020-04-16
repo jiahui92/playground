@@ -1,0 +1,7 @@
+# Browsers that we support
+
+> 1%  # 占有率大于1%
+last 2 versions  # 最新两个版本（新版本占有率通常还小于1%）
+Android >= 3.2
+iOS 7
+not ie <= 8

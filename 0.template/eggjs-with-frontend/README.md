@@ -1,14 +1,26 @@
-# api
-* 主要用于生成各应用的log打点数据，然后通过filebaet录入到ELK中
-  * `/logger/log`
-  * log默认生成在`~/logs`
-  * 前端打点参考 [log.js](https://github.com/jiahui92/taro-douban-group-filter/blob/master/src/utils/logger.tsx)
-* <s>其次可简单地提供可配置的数据 (使用consul代替了)</s>
+postcss-loader 俩个项目
 
-
-### 启动
+# 启动
 * 本地开发
   * npm run dev
+  * open http://localhost:9000
 * 服务器部署
+  * npm run build
   * npm run start
-  * 或者 使用jenkins + docker
+  * open http://localhost:7001
+
+
+# 目录结构
+* eggjs
+* frontend
+
+
+# TODO
+* 是否要使用目录分离backend和frontend的代码
+
+# 其它资料
+* 类似的full-stack框架
+  * [pickpost-platform](https://github.com/pickpost/pickpost-platform)
+  * [react-eggjs-starter-kit](https://github.com/JackLLLLL/react-eggjs-starter-kit)
+
+
