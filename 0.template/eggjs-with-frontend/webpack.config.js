@@ -2,10 +2,11 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-const isProduction = process.env.production;
+const isProduction = process.env.NODE_ENV === 'production';
 const devtool = isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map';
 
 module.exports = {
+  mode: isProduction ? 'production' : 'development',
   devtool,
   context: __dirname,
   entry: './frontend/pages/index.js',

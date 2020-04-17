@@ -6,9 +6,8 @@
     "lint"
   ],
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "server": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open",
+    "build": "export NODE_ENV=production && webpack",
     "lint": "eslint ./"
   },
   "keywords": [],

@@ -18,7 +18,7 @@
     "dev": "npm run dev:backend & npm run dev:frontend",
     "dev:backend": "egg-bin dev --port 7001",
     "dev:frontend": "webpack-dev-server --open",
-    "build": "webpack --mode production",
+    "build": "export NODE_ENV=production && webpack",
     "start": "egg-scripts start --title=egg-server-api",
     "stop": "egg-scripts stop --title=egg-server-api",
     "lint": "eslint ./",
