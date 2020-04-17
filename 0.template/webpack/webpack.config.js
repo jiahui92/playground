@@ -1,11 +1,13 @@
-const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const isProduction = process.env.production;
+const devtool = isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map';
+
 module.exports = {
+  devtool,
   devServer: {
     hot: true,
-    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000
   },
