@@ -19,11 +19,6 @@ module.exports = {
     "eslint-config-egg",
     "plugin:react/recommended"
   ],
-  // 插件可以用于rules、env和extends等配置中
-  plugins: [
-    // "vue", // eslint-plugin-vue
-    // "react", // eslint-plugin-react
-  ],
   rules: {
     indent: ["error", 2],
     "comma-dangle": 0
