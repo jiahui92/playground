@@ -1,4 +1,4 @@
 ## 启动
 * npm i
-* npm run server
+* npm run start
 
