@@ -8,6 +8,7 @@ module.exports = {
   mode: isProduction ? 'production' : 'development',
   devtool,
   devServer: {
+    host: '0.0.0.0',
     hot: true,
     compress: true,
     port: 9000

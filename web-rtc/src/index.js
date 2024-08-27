@@ -20,6 +20,7 @@ function Page () {
       <button onClick={startConnection}>Start Connection</button>
       <button onClick={sendFile}>Send File</button>
       <pre id="log"></pre>
+      <div id="qrcode"></div>
     </div>
   )
 }
