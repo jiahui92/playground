@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, set } from 'firebase/database'
+import { getDatabase, ref, get, set, onValue } from 'firebase/database'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -35,4 +35,12 @@ export async function setData(key, value) {
   } catch(e) {
     console.error(e.message);
   }
+}
+
+export function onDataChange(key, cb) {
+  const userRef = ref(database, key);
+  onValue(userRef, (snapshot) => {
+    const data = snapshot.val();
+    cb(data);
+  });
 }

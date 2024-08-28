@@ -13,10 +13,13 @@ module.exports = {
     compress: true,
     port: 9000
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
   module: {
     rules: [
       {
-        test: /\.js|.ts$/,
+        test: /\.js|.tsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"

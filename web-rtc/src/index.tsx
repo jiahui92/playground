@@ -1,7 +1,7 @@
 import './index.less';
-// import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { startConnection, sendFile } from './web-rtc';
+import { startConnection, sendFile } from './web-rtc.ts';
 
 // class View extends React.Component {
 //   render() {
