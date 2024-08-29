@@ -1,6 +1,10 @@
 import QRCode from 'easyqrcodejs';
 import { v4 as uuidv4 } from 'uuid';
 import { getData, setData, onDataChange } from './firebase.ts';
+import VConsole from 'vconsole';
+import { logMessage } from './utils.ts';
+
+const vConsole = new VConsole();
 
 interface IceData {
   peerACandidate?: string[];
@@ -16,16 +20,18 @@ let receiveChannel;
 let offer;
 let answer;
 
-function logMessage(message) {
-  let log = document.getElementById('log');
-  log.textContent += message + '\n';
-  // console.log(`webRTC:${message}`)
+const urlParams = new URLSearchParams(location.search)
+const isPeerA = !urlParams.get('shareId');
+
+if (isPeerA) {
+  startConnection()
 }
 
 export async function startConnection() {
   // 可获取到本地和公网的ip
   localConnection = new RTCPeerConnection({
     iceServers: [{
+      // https://github.com/pradt2/always-online-stun?tab=readme-ov-file
       urls: ['stun:stun.freeswitch.org:3478'],
       username: '',
       credential: ''
@@ -35,9 +41,6 @@ export async function startConnection() {
   localConnection.icegatheringstatechange = (e) => logMessage(`icegatheringstate: ${e.target.iceGatheringState}`)
 
   handleDataChannel()
-
-  const urlParams = new URLSearchParams(location.search)
-  const isPeerA = !urlParams.get('shareId');
 
   // 创建和交换SDP
   if (isPeerA) {
@@ -123,38 +126,36 @@ export function sendFile() {
     })
     sendChannel.send(dataStr)
 
+    // TODO showSaveFilePicker 实时写到硬盘
     const fileReader = new FileReader();
+    // 分段上传
+    // TODO 这里的大小设置会影响传输速度
+    const chunkSize = 2 * 128 * 1024; // RTCDataChannel一般支持每次最大传输16~64KB
+    let offset = 0;
     fileReader.onload = (event) => {
-      const arrayBuffer = event.target.result as ArrayBuffer;
-      // 发送数据
-      sendChannel.send(arrayBuffer);
-      logMessage(`File sent successfully`);
-      sendChannel.send('EOF'); // 发送结束标识
+      sendChannel.send(event.target.result);
+      offset += event.target.result.byteLength;
+
+      if (offset < file.size) {
+        readSlice(offset);
+      } else {
+        logMessage('File sent successfully.');
+        sendChannel.send('EOF'); // 发送结束标识
+      }
     };
 
-    fileReader.readAsArrayBuffer(file)
-    
-    // 分段上传、断点续传？
-    // const chunkSize = 16384; // 每次发送16KB
-    // let offset = 0;
-    // fileReader.onload = (event) => {
-    //   sendChannel.send(event.target.result);
-    //   offset += event.target.result.byteLength;
 
-    //   if (offset < file.size) {
-    //     readSlice(offset);
-    //   } else {
-    //     logMessage('File sent successfully.');
-    //     sendChannel.send('EOF'); // 发送结束标识
-    //   }
-    // };
+    const readSlice = () => {
+      if (sendChannel.bufferedAmount < chunkSize) {
+        const slice = file.slice(offset, offset + chunkSize);
+        fileReader.readAsArrayBuffer(slice);
+      } else {
+        console.log('DataChannel buffer is full, waiting to send more data');
+        requestAnimationFrame(() => readSlice());
+      }
+    };
 
-    // const readSlice = (o) => {
-    //   const slice = file.slice(offset, o + chunkSize);
-    //   fileReader.readAsArrayBuffer(slice);
-    // };
-
-    // readSlice(0);
+    readSlice();
   }
 }
 
@@ -176,18 +177,26 @@ export function handleDataChannel() {
 }
 
 let downloadingFile: File | null = null
+let contentBuffer: ArrayBuffer[] = []
+let contentSize = 0
 function receiveMessage(event) {
   if (event.data instanceof ArrayBuffer) {
     const arrayBuffer = event.data;
-    logMessage('Received ' + arrayBuffer.byteLength + ' bytes');
-    // 在这里可以处理接收到的文件数据
-    downloadFile(downloadingFile, arrayBuffer);
+    contentSize += arrayBuffer.byteLength;
+    const percent = Math.ceil(contentSize / downloadingFile?.size * 100)
+    console.log(`Received ${contentSize/1024/1024} Mb, ${percent}%`);
+    contentBuffer.push(arrayBuffer)
   }
 
   if (typeof event.data === 'string') {
     if (event.data === 'EOF') {
       logMessage('File received successfully.');
-      return downloadingFile = null;
+      // 在这里可以处理接收到的文件数据
+      downloadFile(downloadingFile, contentBuffer);
+      downloadingFile = null;
+      contentBuffer = []
+      contentSize = 0
+      return;
     }
 
     const file: File = JSON.parse(event.data)
@@ -196,9 +205,9 @@ function receiveMessage(event) {
   }
 }
 
-function downloadFile(fileData: File, content: ArrayBuffer) {
+function downloadFile(fileData: File, contentBuffer: ArrayBuffer[]) {
   // 创建一个 Blob 对象，用于保存接收到的二进制数据
-  const blob = new Blob([content]);
+  const blob = new Blob(contentBuffer, { type: 'application/octet-stream' });
 
   // 创建一个临时的下载链接
   const url = URL.createObjectURL(blob);
