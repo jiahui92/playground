@@ -35,23 +35,7 @@ export async function startConnection() {
 
   localConnection.icegatheringstatechange = (e) => logMessage(`icegatheringstate: ${e.target.iceGatheringState}`)
 
-  // remoteConnection = new RTCPeerConnection({});
-
-  // 创建发送数据通道
-  sendChannel = localConnection.createDataChannel('sendDataChannel');
-  sendChannel.onopen = () => {
-    logMessage('Data channel is open')
-    sendChannel.send('hello')
-  };
-  sendChannel.onclose = () => logMessage('Data channel is closed');
-
-  // 处理接收端的数据通道
-  localConnection.ondatachannel = (event) => {
-    receiveChannel = event.channel;
-    receiveChannel.onmessage = receiveMessage;
-    receiveChannel.onopen = () => logMessage('Receive channel is open');
-    receiveChannel.onclose = () => logMessage('Receive channel is closed');
-  };
+  handleDataChannel()
 
   const urlParams = new URLSearchParams(location.search)
   const isPeerA = !urlParams.get('shareId');
@@ -60,11 +44,8 @@ export async function startConnection() {
   if (isPeerA) {
     offer = await localConnection.createOffer();
     await localConnection.setLocalDescription(offer);
-    // TODO 怎么拿到远端的answer
-    // await localConnection.setRemoteDescription(offer);
   } else {
     const shareId = urlParams.get('shareId');
-    // 与远端进行连接
     try {
       const dataStr = await getData(`ice/${shareId}`)
       const data: IceData = JSON.parse(dataStr)
@@ -136,38 +117,99 @@ export function sendFile() {
   let fileInput = document.getElementById('fileInput');
   const file = fileInput.files[0];
   if (file) {
-    const chunkSize = 16384; // 每次发送16KB
+    const dataStr = JSON.stringify({
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    })
+    sendChannel.send(dataStr)
+
     const fileReader = new FileReader();
-    let offset = 0;
-
     fileReader.onload = (event) => {
-      sendChannel.send(event.target.result);
-      offset += event.target.result.byteLength;
-
-      if (offset < file.size) {
-        readSlice(offset);
-      } else {
-        logMessage('File sent successfully.');
-        sendChannel.send('EOF'); // 发送结束标识
-      }
+      const arrayBuffer = event.target.result as ArrayBuffer;
+      // 发送数据
+      sendChannel.send(arrayBuffer);
+      logMessage(`File sent successfully`);
+      sendChannel.send('EOF'); // 发送结束标识
     };
 
-    const readSlice = (o) => {
-      const slice = file.slice(offset, o + chunkSize);
-      fileReader.readAsArrayBuffer(slice);
-    };
+    fileReader.readAsArrayBuffer(file)
+    
+    // 分段上传、断点续传？
+    // const chunkSize = 16384; // 每次发送16KB
+    // let offset = 0;
+    // fileReader.onload = (event) => {
+    //   sendChannel.send(event.target.result);
+    //   offset += event.target.result.byteLength;
 
-    readSlice(0);
+    //   if (offset < file.size) {
+    //     readSlice(offset);
+    //   } else {
+    //     logMessage('File sent successfully.');
+    //     sendChannel.send('EOF'); // 发送结束标识
+    //   }
+    // };
+
+    // const readSlice = (o) => {
+    //   const slice = file.slice(offset, o + chunkSize);
+    //   fileReader.readAsArrayBuffer(slice);
+    // };
+
+    // readSlice(0);
   }
 }
 
+export function handleDataChannel() {
+  // 创建发送数据通道
+  sendChannel = localConnection.createDataChannel('sendDataChannel');
+  sendChannel.onopen = () => {
+    logMessage('Data channel is open')
+  };
+  sendChannel.onclose = () => logMessage('Data channel is closed');
+
+  // 处理接收端的数据通道
+  localConnection.ondatachannel = (event) => {
+    receiveChannel = event.channel;
+    receiveChannel.onmessage = receiveMessage;
+    receiveChannel.onopen = () => logMessage('Receive channel is open');
+    receiveChannel.onclose = () => logMessage('Receive channel is closed');
+  };
+}
+
+let downloadingFile: File | null = null
 function receiveMessage(event) {
-  if (event.data === 'EOF') {
-    logMessage('File received successfully.');
-    return;
+  if (event.data instanceof ArrayBuffer) {
+    const arrayBuffer = event.data;
+    logMessage('Received ' + arrayBuffer.byteLength + ' bytes');
+    // 在这里可以处理接收到的文件数据
+    downloadFile(downloadingFile, arrayBuffer);
   }
 
-  const arrayBuffer = event.data;
-  logMessage('Received ' + arrayBuffer.byteLength + ' bytes');
-  // 在这里可以处理接收到的文件数据
+  if (typeof event.data === 'string') {
+    if (event.data === 'EOF') {
+      logMessage('File received successfully.');
+      return downloadingFile = null;
+    }
+
+    const file: File = JSON.parse(event.data)
+    logMessage(`File receiving: ${file.name}`);
+    return downloadingFile = file;
+  }
+}
+
+function downloadFile(fileData: File, content: ArrayBuffer) {
+  // 创建一个 Blob 对象，用于保存接收到的二进制数据
+  const blob = new Blob([content]);
+
+  // 创建一个临时的下载链接
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileData.name; // 指定下载的文件名
+  document.body.appendChild(a);
+  a.style.display = 'none';
+  a.click();
+
+  // 释放 URL 对象
+  URL.revokeObjectURL(url);
 }
