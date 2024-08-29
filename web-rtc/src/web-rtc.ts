@@ -1,4 +1,4 @@
-import * as qrcode from 'qrcode';
+import QRCode from 'easyqrcodejs';
 import { v4 as uuidv4 } from 'uuid';
 import { getData, setData, onDataChange } from './firebase.ts';
 
@@ -21,13 +21,12 @@ function logMessage(message) {
   log.textContent += message + '\n';
   // console.log(`webRTC:${message}`)
 }
-startConnection()
 
 export async function startConnection() {
   // 可获取到本地和公网的ip
   localConnection = new RTCPeerConnection({
     iceServers: [{
-      urls: ['stun:stun.l.google.com:19302'],
+      urls: ['stun:stun.freeswitch.org:3478'],
       username: '',
       credential: ''
     }]
@@ -101,15 +100,15 @@ export async function startConnection() {
     }
 
     if (isPeerA) {
-      const url = `${location.host}?shareId=${key}`;
+      const url = `${location.origin}?shareId=${key}`;
       logMessage(`stun已完成: ${url}`);
+      const qrcodeDom = document.getElementById('qrcode')
+      new QRCode(qrcodeDom, {
+        text: url,
+      });
     } else {
       logMessage(`stun已完成`)
     }
-    
-    // qrcode.toCanvas(document.getElementById('qrcode'), url, (error) => {
-    //     if (error) console.error(error)
-    // });
   };
 }
 
