@@ -72,7 +72,8 @@ export async function startConnection() {
   // 交换ICE候选
   const candidateArr = [];
   localConnection.onicecandidate = async (event) => {
-    const key = 'test1' || uuidv4();
+    const key = localStorage.getItem('shareId') || uuidv4();
+    localStorage.setItem('shareId', key)
     if (event.candidate) {
       candidateArr.push(event.candidate)
       return
