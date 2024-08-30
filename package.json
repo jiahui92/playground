@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "easyqrcodejs": "^4.6.1",
-    "vconsole": "^3.15.1"
-  }
-}
