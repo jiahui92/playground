@@ -27,6 +27,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./web-rtc/
 
     strategy:
       matrix:
@@ -43,8 +46,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: web-rtc/package-lock.json
-    - run: cd web-rtc
+        # cache-dependency-path: web-rtc/package-lock.json
+    # - run: cd web-rtc
     - run: npm ci
     - run: npm run build
     - name: Setup Pages
@@ -53,7 +56,8 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         # Upload folder
-        path: './web-rtc/public'
+        path: './public'
+        # path: './web-rtc/public'
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
