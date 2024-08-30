@@ -14,14 +14,14 @@ interface IceData {
 }
 
 let localConnection;
-let remoteConnection;
 let sendChannel;
 let receiveChannel;
 let offer;
 let answer;
 
 const urlParams = new URLSearchParams(location.search)
-const isPeerA = !urlParams.get('shareId');
+const shareId = urlParams.get('shareId');
+const isPeerA = !shareId;
 
 if (isPeerA) {
   startConnection()
@@ -47,7 +47,6 @@ export async function startConnection() {
     offer = await localConnection.createOffer();
     await localConnection.setLocalDescription(offer);
   } else {
-    const shareId = urlParams.get('shareId');
     try {
       const dataStr = await getData(`ice/${shareId}`)
       const data: IceData = JSON.parse(dataStr)
@@ -59,7 +58,6 @@ export async function startConnection() {
       data.peerACandidate?.forEach((candidate) => {
         localConnection.addIceCandidate(candidate);
       })
-      logMessage('Connection established.');
     } catch (e) {
       logMessage(`Connection error: ${e.message}`)
     }
@@ -72,8 +70,14 @@ export async function startConnection() {
   // 交换ICE候选
   const candidateArr = [];
   localConnection.onicecandidate = async (event) => {
-    const key = localStorage.getItem('shareId') || uuidv4();
-    localStorage.setItem('shareId', key)
+    let key;
+    if (isPeerA) {
+      key = localStorage.getItem('shareId') || uuidv4()
+      localStorage.setItem('shareId', key)
+    } else {
+      key = shareId
+    }
+    
     if (event.candidate) {
       candidateArr.push(event.candidate)
       return
@@ -87,6 +91,7 @@ export async function startConnection() {
       data.peerBCandidate = candidateArr
       data.answer = answer
     }
+
     await setData(`ice/${key}`, JSON.stringify(data));
 
     if (isPeerA) {
@@ -140,7 +145,7 @@ export function sendFile() {
       offset += event.target.result.byteLength;
 
       if (offset < file.size) {
-        readSlice(offset);
+        readSlice();
       } else {
         logMessage('File sent successfully.');
         sendChannel.send('EOF'); // 发送结束标识
