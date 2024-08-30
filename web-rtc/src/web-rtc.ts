@@ -128,9 +128,11 @@ export function sendFile() {
 
     // TODO showSaveFilePicker 实时写到硬盘
     const fileReader = new FileReader();
-    // 分段上传
-    // TODO 这里的大小设置会影响传输速度
-    const chunkSize = 2 * 128 * 1024; // RTCDataChannel一般支持每次最大传输16~64KB
+    // 
+    // 分段上传：RTCDataChannel旧版本chorme只支持64KB，旧版本firefox --> 16kb
+    // https://stackoverflow.com/questions/56327783/webrtc-datachannel-for-high-bandwidth-application
+    // https://blog.mozilla.org/webrtc/large-data-channel-messages/
+    const chunkSize = localConnection?.sctp?.maxMessageSize || 16 * 1024;
     let offset = 0;
     fileReader.onload = (event) => {
       sendChannel.send(event.target.result);
@@ -167,12 +169,19 @@ export function handleDataChannel() {
   };
   sendChannel.onclose = () => logMessage('Data channel is closed');
 
+  sendChannel.onerror = (event) => {
+    logMessage(`Data channel error: ${event.message}`)
+  }
+
   // 处理接收端的数据通道
   localConnection.ondatachannel = (event) => {
     receiveChannel = event.channel;
     receiveChannel.onmessage = receiveMessage;
     receiveChannel.onopen = () => logMessage('Receive channel is open');
     receiveChannel.onclose = () => logMessage('Receive channel is closed');
+    receiveChannel.onerror = (event) => {
+      logMessage(`Receive channel error: ${event.message}`)
+    }
   };
 }
 
