@@ -51,7 +51,7 @@ jobs:
 
     - run: npm ci
     - run: npm run build
-    - run: mkdir mkdir -p public/web-rtc && mv dist/* public/web-rtc/
+    - run: mkdir -p public/web-rtc && mv dist/* public/web-rtc/
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
