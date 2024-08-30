@@ -153,7 +153,7 @@ export function sendFile() {
         fileReader.readAsArrayBuffer(slice);
       } else {
         console.log('DataChannel buffer is full, waiting to send more data');
-        requestAnimationFrame(() => readSlice());
+        setTimeout(() => readSlice(), 0);
       }
     };
 
