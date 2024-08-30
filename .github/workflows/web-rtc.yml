@@ -41,21 +41,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: web-rtc/package-lock.json
+
     - run: npm ci
     - run: npm run build
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         # Upload folder
-        path: './web-rtc/public'
+        path: './web-rtc'
+
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
