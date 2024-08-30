@@ -1,8 +1,10 @@
 const webpack = require('webpack');
+const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const devtool = isProduction ? 'cheap-module-source-map' : 'source-map';
+const devtool = isProduction ? 'source-map' : 'cheap-module-source-map';
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
@@ -12,6 +14,10 @@ module.exports = {
     hot: true,
     compress: true,
     port: 9000
+  },
+  output: {
+    filename: 'bundle.[hash].js',
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
