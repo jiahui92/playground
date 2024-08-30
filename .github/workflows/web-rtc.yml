@@ -59,7 +59,7 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         # Upload folder
-        path: './web-rtc'
+        path: './web-rtc/dist'
 
     - name: Deploy to GitHub Pages
       id: deployment
