@@ -175,8 +175,8 @@ export function handleDataChannel() {
   };
   sendChannel.onclose = () => logMessage('Data channel is closed');
 
-  sendChannel.onerror = (event) => {
-    logMessage(`Data channel error: ${event.message}`)
+  sendChannel.onerror = (error) => {
+    logMessage(`Data channel error: ${error}`)
   }
 
   // 处理接收端的数据通道
@@ -185,8 +185,8 @@ export function handleDataChannel() {
     receiveChannel.onmessage = receiveMessage;
     receiveChannel.onopen = () => logMessage('Receive channel is open');
     receiveChannel.onclose = () => logMessage('Receive channel is closed');
-    receiveChannel.onerror = (event) => {
-      logMessage(`Receive channel error: ${event.message}`)
+    receiveChannel.onerror = (error) => {
+      logMessage(`Receive channel error: ${error}`)
     }
   };
 }
