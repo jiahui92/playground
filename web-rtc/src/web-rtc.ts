@@ -104,7 +104,7 @@ export async function startConnection() {
     }
 
     if (isPeerA) {
-      const url = `${location.origin}?shareId=${key}`;
+      const url = `${location.origin}${location.pathname}?shareId=${key}`;
       logMessage(`stun已完成: ${url}`);
       const qrcodeDom = document.getElementById('qrcode')
       new QRCode(qrcodeDom, {
