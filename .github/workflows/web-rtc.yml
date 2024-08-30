@@ -51,6 +51,7 @@ jobs:
 
     - run: npm ci
     - run: npm run build
+    - run: mkdir mkdir -p public/web-rtc && mv dist/* public/web-rtc/
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -59,11 +60,9 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         # Upload folder
-        path: './web-rtc/dist'
+        path: './web-rtc/public'
 
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
-      with:
-        folder: './web-rtc'
     
