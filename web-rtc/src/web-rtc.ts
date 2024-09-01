@@ -18,6 +18,7 @@ let sendChannel;
 let receiveChannel;
 let offer;
 let answer;
+let readSliceTimer;
 
 const urlParams = new URLSearchParams(location.search)
 const shareId = urlParams.get('shareId');
@@ -159,7 +160,7 @@ export function sendFile() {
         fileReader.readAsArrayBuffer(slice);
       } else {
         console.log('DataChannel buffer is full, waiting to send more data');
-        setTimeout(() => readSlice(), 0);
+        readSliceTimer = setTimeout(() => readSlice(), 0);
       }
     };
 
@@ -173,10 +174,14 @@ export function handleDataChannel() {
   sendChannel.onopen = () => {
     logMessage('Data channel is open')
   };
-  sendChannel.onclose = () => logMessage('Data channel is closed');
+  sendChannel.onclose = () => {
+    logMessage('Data channel is closed');
+    clearTimeout(readSliceTimer)
+  }
 
   sendChannel.onerror = (event) => {
     logMessage(`Data channel error: ${event.error.message}`)
+    clearTimeout(readSliceTimer)
   }
 
   // 处理接收端的数据通道
@@ -235,4 +240,23 @@ function downloadFile(fileData: File, contentBuffer: ArrayBuffer[]) {
 
   // 释放 URL 对象
   URL.revokeObjectURL(url);
+}
+
+export async function startVideo() {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    logMessage('not support getUserMedia')
+    return
+  }
+
+  try {
+    const videoStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+    const videoA = document.querySelector('#videoA');
+    videoA.srcObject = videoStream;
+    localConnection.onaddStream = (event) => {
+      const videoB = document.querySelector('#videoB');
+      videoB.srcObject = event.stram;
+    }
+  } catch (error) {
+    logMessage(error.message)
+  }
 }

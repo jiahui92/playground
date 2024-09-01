@@ -1,7 +1,7 @@
 import './index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { startConnection, sendFile } from './web-rtc.ts';
+import { startConnection, sendFile, startVideo } from './web-rtc.ts';
 
 // class View extends React.Component {
 //   render() {
@@ -16,11 +16,20 @@ import { startConnection, sendFile } from './web-rtc.ts';
 function Page () {
   return (
     <div>
-      <input type="file" id="fileInput" />
-      <button onClick={startConnection}>Start Connection</button>
-      <button onClick={sendFile}>Send File</button>
+      <div>
+        <div id="qrcode"></div>
+        <button onClick={startConnection}>Start Connection</button>
+      </div>
+      <div>
+        <input type="file" id="fileInput" />
+        <button onClick={sendFile}>Send File</button>
+      </div>
+      <div>
+        <video id='videoA' />
+        <video id='videoB' />
+        <button onClick={startVideo}>start video</button>
+      </div>
       <pre id="log"></pre>
-      <div id="qrcode"></div>
     </div>
   )
 }
