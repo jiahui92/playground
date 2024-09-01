@@ -27,8 +27,8 @@ function Page () {
       </div>
       <div>
         <button onClick={startVideo}>start video</button>
-        <video id='videoA' width="320" height="240" autoplay />
-        <video id='videoB' width="320" height="240" autoplay />
+        <video id='videoA' width="320" height="240" controls />
+        <video id='videoB' width="320" height="240" controls />
       </div>
       <div>
         <button onClick={shareScreen}>share screen</button>

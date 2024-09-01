@@ -9,7 +9,13 @@ export async function initMedia(localConnection: RTCPeerConnection) {
   try {
     const videoStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true })
     const videoA = document.querySelector('#videoA') as HTMLVideoElement;
+
     videoA.srcObject = videoStream;
+    videoA.onloadedmetadata = (e) => {
+      videoA.muted = true;
+      videoA.play();
+    };
+    
     for (const track of videoStream.getTracks()) {
       localConnection.addTrack(track, videoStream);
     }
@@ -17,9 +23,9 @@ export async function initMedia(localConnection: RTCPeerConnection) {
     logMessage(e.message)
   }
 
+  const videoB = document.querySelector('#videoB') as HTMLVideoElement;
+  let remoteStream;
   localConnection.ontrack = (event) => {
-    let remoteStream;
-    const videoB = document.querySelector('#videoB') as HTMLVideoElement;
     if (!remoteStream) {
       remoteStream = new MediaStream();
       videoB.srcObject = remoteStream;
@@ -27,6 +33,10 @@ export async function initMedia(localConnection: RTCPeerConnection) {
     if (event.streams?.[0]) {
       remoteStream.addTrack(event.track);
     }
+  };
+
+  videoB.onloadedmetadata = (e) => {
+    videoB.play();
   };
 }
 

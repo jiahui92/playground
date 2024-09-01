@@ -42,7 +42,7 @@ export async function startConnection() {
 
   localConnection.onicegatheringstatechange = (e) => logMessage(`icegatheringstate: ${e.target?.iceGatheringState}`)
   
-  initMedia(localConnection)
+  await initMedia(localConnection)
 
   handleDataChannel()
 
