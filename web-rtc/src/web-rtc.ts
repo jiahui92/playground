@@ -252,7 +252,7 @@ export async function startVideo() {
     const videoStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true })
     const videoA = document.querySelector('#videoA');
     videoA.srcObject = videoStream;
-    localConnection.onaddStream = (event) => {
+    localConnection.onaddstream = (event) => {
       const videoB = document.querySelector('#videoB');
       videoB.srcObject = event.stram;
     }

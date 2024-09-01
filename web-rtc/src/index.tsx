@@ -25,8 +25,8 @@ function Page () {
         <button onClick={sendFile}>Send File</button>
       </div>
       <div>
-        <video id='videoA' />
-        <video id='videoB' />
+        <video id='videoA' width="320" height="240" autoplay />
+        <video id='videoB' width="320" height="240" autoplay />
         <button onClick={startVideo}>start video</button>
       </div>
       <pre id="log"></pre>
