@@ -1,7 +1,7 @@
 import './index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { startConnection, sendFile, startVideo } from './web-rtc.ts';
+import { startConnection, sendFile, startVideo, shareScreen } from './web-rtc.ts';
 
 // class View extends React.Component {
 //   render() {
@@ -25,9 +25,13 @@ function Page () {
         <button onClick={sendFile}>Send File</button>
       </div>
       <div>
+        <button onClick={startVideo}>start video</button>
         <video id='videoA' width="320" height="240" autoplay />
         <video id='videoB' width="320" height="240" autoplay />
-        <button onClick={startVideo}>start video</button>
+      </div>
+      <div>
+        <button onClick={shareScreen}>share screen</button>
+        <video id='screen' width="320" height="240" autoplay />
       </div>
       <pre id="log"></pre>
     </div>

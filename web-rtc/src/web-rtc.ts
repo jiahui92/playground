@@ -13,9 +13,9 @@ interface IceData {
   answer?: string;
 }
 
-let localConnection;
-let sendChannel;
-let receiveChannel;
+let localConnection: RTCPeerConnection;
+let sendChannel: RTCDataChannel;
+let receiveChannel: RTCDataChannel;
 let offer;
 let answer;
 let readSliceTimer;
@@ -250,13 +250,39 @@ export async function startVideo() {
 
   try {
     const videoStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-    const videoA = document.querySelector('#videoA');
+    const videoA = document.querySelector('#videoA') as HTMLVideoElement;
     videoA.srcObject = videoStream;
-    localConnection.onaddstream = (event) => {
-      const videoB = document.querySelector('#videoB');
-      videoB.srcObject = event.stram;
+    for (const track of videoStream.getTracks()) {
+      localConnection.addTrack(track);
     }
   } catch (error) {
     logMessage(error.message)
+  }
+
+  localConnection.ontrack = (ev) => {
+    const videoB = document.querySelector('#videoB') as HTMLVideoElement;
+    if (ev.streams && ev.streams[0]) {
+      videoB.srcObject = ev.streams[0];
+    }
+  };
+}
+
+export async function shareScreen() {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    logMessage('not support getUserMedia')
+    return
+  }
+
+  try {
+    const videoStream = await navigator.mediaDevices.getUserMedia({ screen: true })
+    const videoA = document.querySelector('#videoA');
+    videoA.srcObject = videoStream;
+  } catch (error) {
+    logMessage(error.message)
+  }
+
+  localConnection.onaddstream = (event) => {
+    const videoB = document.querySelector('#videoB');
+    videoB.srcObject = event.stram;
   }
 }
