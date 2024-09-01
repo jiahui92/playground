@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getData, setData, onDataChange } from './firebase.ts';
 import VConsole from 'vconsole';
 import { logMessage } from './utils.ts';
+import { initMedia } from './meida.ts';
 
 const vConsole = new VConsole();
 
@@ -39,7 +40,9 @@ export async function startConnection() {
     }]
   });
 
-  localConnection.icegatheringstatechange = (e) => logMessage(`icegatheringstate: ${e.target.iceGatheringState}`)
+  localConnection.onicegatheringstatechange = (e) => logMessage(`icegatheringstate: ${e.target?.iceGatheringState}`)
+  
+  initMedia(localConnection)
 
   handleDataChannel()
 
@@ -240,49 +243,4 @@ function downloadFile(fileData: File, contentBuffer: ArrayBuffer[]) {
 
   // 释放 URL 对象
   URL.revokeObjectURL(url);
-}
-
-export async function startVideo() {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    logMessage('not support getUserMedia')
-    return
-  }
-
-  try {
-    const videoStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-    const videoA = document.querySelector('#videoA') as HTMLVideoElement;
-    videoA.srcObject = videoStream;
-    for (const track of videoStream.getTracks()) {
-      localConnection.addTrack(track);
-    }
-  } catch (error) {
-    logMessage(error.message)
-  }
-
-  localConnection.ontrack = (ev) => {
-    const videoB = document.querySelector('#videoB') as HTMLVideoElement;
-    if (ev.streams && ev.streams[0]) {
-      videoB.srcObject = ev.streams[0];
-    }
-  };
-}
-
-export async function shareScreen() {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    logMessage('not support getUserMedia')
-    return
-  }
-
-  try {
-    const videoStream = await navigator.mediaDevices.getUserMedia({ screen: true })
-    const videoA = document.querySelector('#videoA');
-    videoA.srcObject = videoStream;
-  } catch (error) {
-    logMessage(error.message)
-  }
-
-  localConnection.onaddstream = (event) => {
-    const videoB = document.querySelector('#videoB');
-    videoB.srcObject = event.stram;
-  }
 }

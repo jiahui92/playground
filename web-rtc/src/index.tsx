@@ -1,7 +1,8 @@
 import './index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { startConnection, sendFile, startVideo, shareScreen } from './web-rtc.ts';
+import { startConnection, sendFile, } from './web-rtc.ts';
+import { startVideo, shareScreen } from './meida.ts';
 
 // class View extends React.Component {
 //   render() {
