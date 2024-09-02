@@ -40,11 +40,8 @@ export async function initMedia(localConnection: RTCPeerConnection) {
   };
 }
 
-export async function startVideo(localConnection: RTCPeerConnection) {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    logMessage('not support getUserMedia')
-    return
-  }
+export async function toggleVideo(localConnection: RTCPeerConnection) {
+  // 停止视频
 }
 
 export async function shareScreen(localConnection: RTCPeerConnection) {
