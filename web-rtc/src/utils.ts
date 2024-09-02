@@ -1,5 +1,4 @@
 export function logMessage(message) {
-  let log = document.getElementById('log');
+  const log = document.getElementById('log') as HTMLElement;
   log.textContent += message + '\n';
-  // console.log(`webRTC:${message}`)
 }
