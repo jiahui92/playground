@@ -1,10 +1,11 @@
 {
   "presets": [
       ["@babel/preset-env", {
-        "modules": false,
-        "useBuiltIns": "usage",
+        "modules": false, // 不作为模块导出给第三方使用
+        "useBuiltIns": "usage", // 自动使用的地方引入对应依赖库
         "corejs": "3"
       }],
+      "@babel/preset-typescript",
       "@babel/preset-react"
   ]
 }

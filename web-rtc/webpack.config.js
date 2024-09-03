@@ -16,8 +16,20 @@ module.exports = {
     port: 9000
   },
   output: {
-    filename: 'bundle.[hash].js',
+    filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']

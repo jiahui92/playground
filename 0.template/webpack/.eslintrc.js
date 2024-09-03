@@ -1,22 +1,15 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true
-  },
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
-  // 指定传给 parser 的信息，eslint使用的默认是Espree
+  ignorePatterns: ['node_modules/', '*.js'],
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: "module",
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    jsx: true,
   },
-  
+  parser: '@typescript-eslint/parser',
   extends: [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    'plugin:@typescript-eslint/recommended',
   ],
   rules: {
     indent: ["error", 2],
