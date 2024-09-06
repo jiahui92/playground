@@ -9,29 +9,6 @@ type User {
   email: String!
 }
 
-type User3 {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Query {
   getUsers: [User!]!
-  user3(id: Int!): User3!
-}
-
-type Mutation {
-  createUser3(createUser3Input: CreateUser3Input!): User3!
-  updateUser3(updateUser3Input: UpdateUser3Input!): User3!
-  removeUser3(id: Int!): User3!
-}
-
-input CreateUser3Input {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateUser3Input {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
