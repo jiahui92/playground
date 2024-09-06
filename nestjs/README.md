@@ -45,38 +45,15 @@ $ npm run test:cov
 
 
 ## Structure
-* entity
+* entities: 根据数据库生成, `npm run generate-entities`
 * module
   * controller
   * service
 * entityModule
-  * entity: 与数据库交互的结构，可以由
   * dto: 增删改查的数据结构与校验等逻辑
 
 
 ## gql
-### 生成entity
-```sh
-npm install -g typeorm-model-generator
-typeorm-model-generator -h localhost -d test_db -u root -x password -e mysql
-```
-```ts
-// 生成的文件
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  email: string;
-}
-```
-
 ### gql schema
 运行时根据代码里定义的`@ObjectType,@Resolver,@Query`等自动生成gql相关的数据结构
 ```ts
@@ -93,8 +70,8 @@ type User {
 ```
 
 ### generate entities
+* 先配置.env文件sql相关的数据
+* 执行命令即可同步数据库model到代码`src/entities/*`
 ```bash
-# 先配置.env文件sql相关的数据
-# 执行命令即可同步数据库model到代码的entity
 npm run generate-entities
 ```
