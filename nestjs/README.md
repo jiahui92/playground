@@ -45,6 +45,7 @@ $ npm run test:cov
 
 
 ## Structure
+* entity
 * module
   * controller
   * service
@@ -76,11 +77,8 @@ export class User {
 }
 ```
 
-### schema
-gql相关的数据结构，运行时自动生成
-```bash
-
-```
+### gql schema
+运行时根据代码里定义的`@ObjectType,@Resolver,@Query`等自动生成gql相关的数据结构
 ```ts
 # ------------------------------------------------------
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -92,4 +90,11 @@ type User {
   age: Float!
   email: String!
 }
+```
+
+### generate entities
+```bash
+# 先配置.env文件sql相关的数据
+# 执行命令即可同步数据库model到代码的entity
+npm run generate-entities
 ```
