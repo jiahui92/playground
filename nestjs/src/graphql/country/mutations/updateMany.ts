@@ -1,0 +1,12 @@
+import { mutationField, nonNull } from 'nexus';
+
+export const CountryUpdateManyMutation = mutationField('updateManyCountry', {
+  type: nonNull('BatchPayload'),
+  args: {
+    data: nonNull('countryUpdateManyMutationInput'),
+    where: 'countryWhereInput',
+  },
+  resolve(_parent, args, { prisma }) {
+    return prisma.country.updateMany(args as any);
+  },
+});
