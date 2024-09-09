@@ -6,18 +6,23 @@
 ## Installation
 
 ```bash
-$ npm install
+npm install
+
+# 本项目依赖数据库，初次使用时可以使用prisma在本地自动创建数据库（根据schema.prisma）
+# https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/troubleshooting-development
+code ./env # 修改数据库连接相关信息
+npx prisma migrate dev --name init
 ```
 
 ## Running the app
 
 ```bash
 # developmen
-$ npm run start
+npm run start
 # watch mode
-$ npm run start:dev
+npm run start:dev
 
-$ npm run start:prod
+npm run start:prod
 ```
 
 
@@ -70,13 +75,26 @@ type User {
 ```
 
 ## entities
-## generate
+### generate
+* 配置`.env`的连接数据库信息
+* 执行`npx prisma db pull` 从数据库拉取最新的sqlSchema到`./schema.prisma`
+* 执行`npx prisma generate` 生成entity代码
+
+### migration
+数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
+```bash
+npx prisma db push
+```
+
+
+## entities (old: typeOrm这个库太多bug，已弃用)
+### generate
 * 先配置.env文件sql相关的数据
 * 执行命令即可同步数据库model到代码`src/entities/*`
 ```bash
 npm run generate-entities
 ```
-## migration
+### migration
 数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库【[参考资料](https://typeorm.bootcss.com/migrations)】
 ```sh
 # post.title 该成了 post.name

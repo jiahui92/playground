@@ -1,0 +1,65 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model city {
+  ID          Int     @id @default(autoincrement())
+  Name        String  @db.Char(35)
+  CountryCode String  @db.Char(3)
+  District    String  @db.Char(20)
+  Population  Int     @default(0)
+  country     country @relation(fields: [CountryCode], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "FK_c9a9a12ab44974db2d4a2da9dde")
+
+  @@index([CountryCode], map: "CountryCode")
+}
+
+model country {
+  Code            String            @id @db.Char(3)
+  Name            String            @db.Char(52)
+  Continent       country_Continent @default(Asia)
+  Region          String            @db.Char(26)
+  SurfaceArea     Decimal           @default(0.00) @db.Decimal(10, 2)
+  IndepYear       Int?              @db.SmallInt
+  Population      Int               @default(0)
+  LifeExpectancy  Decimal?          @db.Decimal(3, 1)
+  GNP             Decimal?          @db.Decimal(10, 2)
+  GNPOld          Decimal?          @db.Decimal(10, 2)
+  LocalName       String            @db.Char(45)
+  GovernmentForm  String            @db.Char(45)
+  HeadOfState     String?           @db.Char(60)
+  Capital         Int?
+  Code2           String            @db.Char(2)
+  city            city[]
+  countrylanguage countrylanguage[]
+}
+
+model countrylanguage {
+  CountryCode String                     @db.Char(3)
+  Language    String                     @db.Char(30)
+  IsOfficial  countrylanguage_IsOfficial @default(F)
+  Percentage  Decimal                    @default(0.0) @db.Decimal(4, 1)
+  country     country                    @relation(fields: [CountryCode], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "FK_4547315e562b849e7ca48e32dfc")
+
+  @@id([CountryCode, Language])
+  @@index([CountryCode], map: "CountryCode")
+}
+
+enum country_Continent {
+  Asia
+  Europe
+  North_America @map("North America")
+  Africa
+  Oceania
+  Antarctica
+  South_America @map("South America")
+}
+
+enum countrylanguage_IsOfficial {
+  T
+  F
+}
