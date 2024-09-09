@@ -8,14 +8,14 @@
 ```bash
 npm install
 
-# 本项目依赖数据库，初次使用时可以使用prisma在本地自动创建数据库（根据schema.prisma）
+# 本项目依赖mysql数据库，初次使用时可以使用prisma在本地自动创建数据库（根据./prisma/schema.prisma的表结构）
 # https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/troubleshooting-development
 code ./env # 修改数据库连接相关信息
 npx prisma migrate dev --name init
 ```
 
 ## Running the app
-
+* http://localhost:3000/graphql
 ```bash
 # developmen
 npm run start
@@ -23,6 +23,18 @@ npm run start
 npm run start:dev
 
 npm run start:prod
+```
+```gql
+query {
+  findFirstCity {
+    Name
+    CountryCode
+  }
+  findManyCity(where: { Name: { contains: "a" } }) {
+    Name
+    CountryCode
+  }
+}
 ```
 
 
@@ -77,14 +89,18 @@ type User {
 ## entities
 ### generate
 * 配置`.env`的连接数据库信息
-* 执行`npx prisma db pull` 从数据库拉取最新的sqlSchema到`./schema.prisma`
-* 执行`npx prisma generate` 生成entity代码
+* 执行`npx prisma db pull` 从数据库拉取最新的sqlSchema到`./prisma/schema.prisma`
+* 执行`npx prisma generate` 生成`@prisma/client`代码
+  * 根据sqlSchema生成prisma相关查询方法，比如`prisma.user.findMany/create/update`等
+* 执行`npm run generate` 生成`src/graphql`代码
+  * paljs(prisma-tool)根据sqlSchema生成prisma相关gql的方法，比如`findManyUser`
 
 ### migration
 数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
 ```bash
 npx prisma db push
 ```
+
 
 
 ## entities (old: typeOrm这个库太多bug，已弃用)
