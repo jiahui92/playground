@@ -13,7 +13,7 @@ export class Countrylanguage {
   @Column('enum', {
     name: 'IsOfficial',
     enum: ['T', 'F'],
-    default: () => "'F'",
+    default: 'F',
   })
   isOfficial: 'T' | 'F';
 

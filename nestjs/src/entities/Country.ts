@@ -21,7 +21,7 @@ export class Country {
       'Antarctica',
       'South America',
     ],
-    default: () => "'Asia'",
+    default: 'Asia',
   })
   continent:
     | 'Asia'
