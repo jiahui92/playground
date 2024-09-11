@@ -1,6 +1,6 @@
 import { PrismaService } from './prisma.service';
 import { Injectable } from '@nestjs/common';
-import { NexusGenObjects } from './generated/typings';
+import { city } from '@prisma/client';
 
 @Injectable()
 export class AppService {
@@ -10,7 +10,7 @@ export class AppService {
     return 'Hello World! jiahui';
   }
 
-  async getManyCity(): Promise<NexusGenObjects['city'][]> {
+  async getManyCity(): Promise<city[]> {
     const cities = await this.prisma.city.findMany({
       // take: 10,
       // select: { Name: true },

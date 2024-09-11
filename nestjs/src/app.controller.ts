@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { NexusGenObjects } from './generated/typings';
+import { city } from '@prisma/client';
 
 @Controller()
 export class AppController {
@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Get('getManyCity')
-  async getManyCity(): Promise<NexusGenObjects['city'][]> {
+  async getManyCity(): Promise<city[]> {
     return await this.appService.getManyCity();
   }
 }

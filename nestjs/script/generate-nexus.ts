@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-const entities_path = './src/graphql';
+const entities_path = './src/generated/nexus';
 
 // 删除旧文件 rm -rf
 const del = `rimraf ${entities_path}`;
