@@ -2,7 +2,7 @@ import { scalarType, objectType } from 'nexus';
 import { Kind } from 'graphql/language';
 
 // 貌似nexus不支持新版prisma.decimal
-const DecimalScalar = scalarType({
+export const DecimalScalar = scalarType({
   name: 'Decimal',
   asNexusMethod: 'decimal', // 允许在 Nexus Schema 中使用 `decimal` 方法
   parseValue(value: string) {
@@ -20,11 +20,9 @@ const DecimalScalar = scalarType({
 });
 
 // https://github.com/graphql-nexus/nexus-plugin-prisma/issues/341
-const BatchPayload = objectType({
+export const BatchPayload = objectType({
   name: 'BatchPayload',
   definition(t) {
     t.int('count');
   },
 });
-
-export const extendTypes = [DecimalScalar, BatchPayload];

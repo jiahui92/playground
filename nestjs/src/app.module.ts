@@ -9,13 +9,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { getPath, isDev } from './common/utils';
 import * as genTypes from './generated/nexus';
-import { extendTypes } from './graphql/extendTypes';
+import * as extendTypes from './graphql/extendTypes';
 
-const nexusGenTypes = Object.getOwnPropertyNames(genTypes).map(
-  (n) => genTypes[n],
-);
 const schema = makeSchema({
-  types: [...extendTypes, ...nexusGenTypes],
+  types: { ...extendTypes, ...genTypes },
   outputs: {
     schema: getPath('src/generated/schema.gql'),
     typegen: getPath('src/generated/typings.ts'),
