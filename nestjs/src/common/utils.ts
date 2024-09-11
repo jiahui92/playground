@@ -1,8 +1,8 @@
 import { resolve } from 'path';
 
-// 是否为生产环境
-export function isProd() {
-  return process.env.NODE_ENV === 'production';
+// 是否为开发环境
+export function isDev() {
+  return process.env.NODE_ENV !== 'production';
 }
 
 // 获取相对于项目根目录的路径

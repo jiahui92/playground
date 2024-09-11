@@ -27,4 +27,4 @@ const BatchPayload = objectType({
   },
 });
 
-export const nexusFixTypes = [DecimalScalar, BatchPayload];
+export const extendTypes = [DecimalScalar, BatchPayload];

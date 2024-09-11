@@ -7,16 +7,15 @@ import { PrismaClient } from '@prisma/client';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserResolver } from './gql/user.resolver';
-import { getPath, isProd } from './common/utils';
-import * as genTypes from './graphql';
-import { nexusFixTypes } from './common/nexusFixTypes';
+import { getPath, isDev } from './common/utils';
+import * as genTypes from './generated/nexus';
+import { extendTypes } from './graphql/extendTypes';
 
 const nexusGenTypes = Object.getOwnPropertyNames(genTypes).map(
   (n) => genTypes[n],
 );
 const schema = makeSchema({
-  types: [...nexusFixTypes, ...nexusGenTypes],
+  types: [...extendTypes, ...nexusGenTypes],
   outputs: {
     schema: getPath('src/generated/schema.gql'),
     typegen: getPath('src/generated/typings.ts'),
@@ -32,10 +31,10 @@ const prisma = new PrismaClient();
       schema,
       context: () => ({ prisma }),
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
-      playground: !isProd(),
+      playground: isDev(),
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService, UserResolver],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
