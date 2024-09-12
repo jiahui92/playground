@@ -62,13 +62,15 @@ $ npm run test:cov
 
 
 ## Structure
-* entities: 根据数据库生成, `npm run generate-entities`
 * module
   * controller
   * service
-* entityModule
-  * dto: 增删改查的数据结构与校验等逻辑
-
+* src/generated
+  * nexus: 由paljs生成的nexus代码，gql操作背后的执行逻辑，内部使用prisma连接数据库
+  * typings.ts: 由nexus生成的ts.types类型定义文件
+  * schema.gql: 由nexus生成的gqlSchema，一般提供给前端使用，类似curd里的api定义
+* src/graphql
+  * 拓展目录，覆盖重写`src/generated/nexus`里的types,resolver，比如`city.ts`增加字段级权限控制
 
 ## gql
 ### gql schema
@@ -78,11 +80,10 @@ $ npm run test:cov
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type City {
   id: Int!
   name: String!
-  age: Float!
-  email: String!
+  population: Int!
 }
 ```
 
@@ -92,15 +93,27 @@ type User {
 * 执行`npx prisma db pull` 从数据库拉取最新的sqlSchema到`./prisma/schema.prisma`
 * 执行`npx prisma generate` 生成`@prisma/client`代码
   * 根据sqlSchema生成prisma相关查询方法，比如`prisma.user.findMany/create/update`等
-* 执行`npm run generate` 生成`src/graphql`代码
+  * 生成数据库model的ts相关定义`node_modules/nexus-prisma`
+* 执行`npm run generate-nexus` 生成`src/generated/nexus`代码
   * paljs(prisma-tool)根据sqlSchema生成prisma相关gql的方法，比如`findManyUser`
+* 执行`npm start` 生成`src/generated/schema.gql,typings.ts`代码
 
 ### migration
 数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
 ```bash
 npx prisma db push
+npx prisma db reset
 ```
 
+
+## 安全校验
+可选安全校验的逻辑设置的优先级：`nestjs > prisma > nexus/gql`，比如
+* 登录校验建议设置在nestjs的中间件
+  * 例如`src/middleware/req.middleware.ts`
+* 对象级/字段级的安全校验建议设置在prisma的中间件
+  * 例如`src/middleware/prisma.middleware.ts`
+* gql的特殊层参数校验（不涉及prisma时）则使用nexus的中间件
+  * 例如`src/graphql/city.ts`
 
 
 ## entities (old: typeOrm这个库太多bug，已弃用)
