@@ -1,11 +1,11 @@
 import { queryField, list } from 'nexus';
 
 export const CountryFindFirstQuery = queryField('findFirstCountry', {
-  type: 'country',
+  type: 'Country',
   args: {
-    where: 'countryWhereInput',
-    orderBy: list('countryOrderByWithRelationInput'),
-    cursor: 'countryWhereUniqueInput',
+    where: 'CountryWhereInput',
+    orderBy: list('CountryOrderByWithRelationInput'),
+    cursor: 'CountryWhereUniqueInput',
     take: 'Int',
     skip: 'Int',
     distinct: list('CountryScalarFieldEnum'),

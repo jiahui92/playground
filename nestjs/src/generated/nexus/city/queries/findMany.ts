@@ -1,11 +1,11 @@
 import { queryField, nonNull, list } from 'nexus';
 
 export const CityFindManyQuery = queryField('findManyCity', {
-  type: nonNull(list(nonNull('city'))),
+  type: nonNull(list(nonNull('City'))),
   args: {
-    where: 'cityWhereInput',
-    orderBy: list('cityOrderByWithRelationInput'),
-    cursor: 'cityWhereUniqueInput',
+    where: 'CityWhereInput',
+    orderBy: list('CityOrderByWithRelationInput'),
+    cursor: 'CityWhereUniqueInput',
     take: 'Int',
     skip: 'Int',
     distinct: list('CityScalarFieldEnum'),

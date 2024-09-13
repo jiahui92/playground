@@ -1,9 +1,9 @@
 import { queryField, nonNull } from 'nexus';
 
 export const CityFindUniqueQuery = queryField('findUniqueCity', {
-  type: 'city',
+  type: 'City',
   args: {
-    where: nonNull('cityWhereUniqueInput'),
+    where: nonNull('CityWhereUniqueInput'),
   },
   resolve(_parent, { where }, { prisma, select }) {
     return prisma.city.findUnique({

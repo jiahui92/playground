@@ -1,11 +1,11 @@
 import { queryField, list } from 'nexus';
 
 export const CityFindFirstQuery = queryField('findFirstCity', {
-  type: 'city',
+  type: 'City',
   args: {
-    where: 'cityWhereInput',
-    orderBy: list('cityOrderByWithRelationInput'),
-    cursor: 'cityWhereUniqueInput',
+    where: 'CityWhereInput',
+    orderBy: list('CityOrderByWithRelationInput'),
+    cursor: 'CityWhereUniqueInput',
     take: 'Int',
     skip: 'Int',
     distinct: list('CityScalarFieldEnum'),

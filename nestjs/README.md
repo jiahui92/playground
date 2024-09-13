@@ -88,7 +88,7 @@ type City {
     * 生成数据库model的ts定义
 * 执行`npm run generate-nexus` 生成`src/generated/nexus`代码
   * paljs(prisma-tool)根据sqlSchema生成prisma相关gql的方法，比如`findManyUser`
-* <!--执行`npm start` 生成`src/generated/schema.gql,typings.ts`代码-->
+* 执行`npm start` 生成`src/generated/schema.gql,nexus-typings.ts`代码
 
 ### migration
 数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库

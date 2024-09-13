@@ -1,19 +1,19 @@
 import { queryField, nonNull, list } from 'nexus';
 
-export const CountrylanguageFindCountQuery = queryField(
-  'findManyCountrylanguageCount',
+export const CountryLanguageFindCountQuery = queryField(
+  'findManyCountryLanguageCount',
   {
     type: nonNull('Int'),
     args: {
-      where: 'countrylanguageWhereInput',
-      orderBy: list('countrylanguageOrderByWithRelationInput'),
-      cursor: 'countrylanguageWhereUniqueInput',
+      where: 'CountryLanguageWhereInput',
+      orderBy: list('CountryLanguageOrderByWithRelationInput'),
+      cursor: 'CountryLanguageWhereUniqueInput',
       take: 'Int',
       skip: 'Int',
-      distinct: list('CountrylanguageScalarFieldEnum'),
+      distinct: list('CountryLanguageScalarFieldEnum'),
     },
     resolve(_parent, args, { prisma }) {
-      return prisma.countrylanguage.count(args as any);
+      return prisma.countryLanguage.count(args as any);
     },
   },
 );

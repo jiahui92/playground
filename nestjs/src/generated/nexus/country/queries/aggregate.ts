@@ -3,9 +3,9 @@ import { queryField, list } from 'nexus';
 export const CountryAggregateQuery = queryField('aggregateCountry', {
   type: 'AggregateCountry',
   args: {
-    where: 'countryWhereInput',
-    orderBy: list('countryOrderByWithRelationInput'),
-    cursor: 'countryWhereUniqueInput',
+    where: 'CountryWhereInput',
+    orderBy: list('CountryOrderByWithRelationInput'),
+    cursor: 'CountryWhereUniqueInput',
     take: 'Int',
     skip: 'Int',
   },

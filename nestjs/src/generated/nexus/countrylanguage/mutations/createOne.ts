@@ -1,14 +1,14 @@
 import { mutationField, nonNull } from 'nexus';
 
-export const CountrylanguageCreateOneMutation = mutationField(
-  'createOneCountrylanguage',
+export const CountryLanguageCreateOneMutation = mutationField(
+  'createOneCountryLanguage',
   {
-    type: nonNull('countrylanguage'),
+    type: nonNull('CountryLanguage'),
     args: {
-      data: nonNull('countrylanguageCreateInput'),
+      data: nonNull('CountryLanguageCreateInput'),
     },
     resolve(_parent, { data }, { prisma, select }) {
-      return prisma.countrylanguage.create({
+      return prisma.countryLanguage.create({
         data,
         ...select,
       });

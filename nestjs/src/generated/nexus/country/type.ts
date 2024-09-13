@@ -1,33 +1,33 @@
 import { objectType, list } from 'nexus';
 
-export const country = objectType({
+export const Country = objectType({
   nonNullDefaults: {
     output: true,
     input: false,
   },
-  name: 'country',
+  name: 'Country',
   definition(t) {
-    t.string('Code');
-    t.string('Name');
-    t.field('Continent', { type: 'country_Continent' });
-    t.string('Region');
-    t.decimal('SurfaceArea');
-    t.nullable.int('IndepYear');
-    t.int('Population');
-    t.nullable.decimal('LifeExpectancy');
-    t.nullable.decimal('GNP');
-    t.nullable.decimal('GNPOld');
-    t.string('LocalName');
-    t.string('GovernmentForm');
-    t.nullable.string('HeadOfState');
-    t.nullable.int('Capital');
-    t.string('Code2');
+    t.string('code');
+    t.string('name');
+    t.field('continent', { type: 'CountryContinent' });
+    t.string('region');
+    t.decimal('surfaceArea');
+    t.nullable.int('indepYear');
+    t.int('population');
+    t.nullable.decimal('lifeExpectancy');
+    t.nullable.decimal('gnp');
+    t.nullable.decimal('gnpoId');
+    t.string('localName');
+    t.string('governmentForm');
+    t.nullable.string('headOfState');
+    t.nullable.int('capital');
+    t.string('code2');
     t.list.field('city', {
-      type: 'city',
+      type: 'City',
       args: {
-        where: 'cityWhereInput',
-        orderBy: list('cityOrderByWithRelationInput'),
-        cursor: 'cityWhereUniqueInput',
+        where: 'CityWhereInput',
+        orderBy: list('CityOrderByWithRelationInput'),
+        cursor: 'CityWhereUniqueInput',
         take: 'Int',
         skip: 'Int',
         distinct: list('CityScalarFieldEnum'),
@@ -36,18 +36,18 @@ export const country = objectType({
         return root.city;
       },
     });
-    t.list.field('countrylanguage', {
-      type: 'countrylanguage',
+    t.list.field('countryLanguage', {
+      type: 'CountryLanguage',
       args: {
-        where: 'countrylanguageWhereInput',
-        orderBy: list('countrylanguageOrderByWithRelationInput'),
-        cursor: 'countrylanguageWhereUniqueInput',
+        where: 'CountryLanguageWhereInput',
+        orderBy: list('CountryLanguageOrderByWithRelationInput'),
+        cursor: 'CountryLanguageWhereUniqueInput',
         take: 'Int',
         skip: 'Int',
-        distinct: list('CountrylanguageScalarFieldEnum'),
+        distinct: list('CountryLanguageScalarFieldEnum'),
       },
       resolve(root: any) {
-        return root.countrylanguage;
+        return root.countryLanguage;
       },
     });
     t.field('_count', {

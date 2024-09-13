@@ -1,18 +1,18 @@
 import { objectType } from 'nexus';
 
-export const countrylanguage = objectType({
+export const CountryLanguage = objectType({
   nonNullDefaults: {
     output: true,
     input: false,
   },
-  name: 'countrylanguage',
+  name: 'CountryLanguage',
   definition(t) {
-    t.string('CountryCode');
-    t.string('Language');
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.decimal('Percentage');
+    t.string('countryCode');
+    t.string('language');
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.decimal('percentage');
     t.field('country', {
-      type: 'country',
+      type: 'Country',
       resolve(root: any) {
         return root.country;
       },

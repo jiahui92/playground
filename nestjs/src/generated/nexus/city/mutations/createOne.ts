@@ -1,9 +1,9 @@
 import { mutationField, nonNull } from 'nexus';
 
 export const CityCreateOneMutation = mutationField('createOneCity', {
-  type: nonNull('city'),
+  type: nonNull('City'),
   args: {
-    data: nonNull('cityCreateInput'),
+    data: nonNull('CityCreateInput'),
   },
   resolve(_parent, { data }, { prisma, select }) {
     return prisma.city.create({

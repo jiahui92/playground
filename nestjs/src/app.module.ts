@@ -1,4 +1,4 @@
-import './generated/typings';
+import './generated/nexus-typings';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { makeSchema, fieldAuthorizePlugin } from 'nexus';
@@ -19,7 +19,7 @@ const schema = makeSchema({
   shouldGenerateArtifacts: isDev(),
   outputs: {
     schema: getPath('src/generated/schema.gql'),
-    typegen: getPath('src/generated/typings.ts'),
+    typegen: getPath('src/generated/nexus-typings.ts'),
   },
   prettierConfig: getPath('.prettierrc'),
   plugins: [fieldAuthorizePlugin()],

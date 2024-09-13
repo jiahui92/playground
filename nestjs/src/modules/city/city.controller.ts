@@ -20,7 +20,7 @@ export class CityController {
   @Get('findUnique/:id')
   findUnique(@Param('id', ParseIntPipe) id: number) {
     return this.prisma.city.findUnique({
-      where: { ID: id },
+      where: { id },
     });
   }
 
@@ -30,12 +30,12 @@ export class CityController {
   }
 
   @Post('create')
-  create(@Body() city: Prisma.cityCreateArgs) {
+  create(@Body() city: Prisma.CityCreateArgs) {
     return this.prisma.city.create(city);
   }
 
   @Post('update')
-  update(@Body() city: Prisma.cityUpdateArgs) {
+  update(@Body() city: Prisma.CityUpdateArgs) {
     return this.prisma.city.update(city);
   }
 

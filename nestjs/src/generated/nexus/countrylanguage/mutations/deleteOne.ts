@@ -1,14 +1,14 @@
 import { mutationField, nonNull } from 'nexus';
 
-export const CountrylanguageDeleteOneMutation = mutationField(
-  'deleteOneCountrylanguage',
+export const CountryLanguageDeleteOneMutation = mutationField(
+  'deleteOneCountryLanguage',
   {
-    type: 'countrylanguage',
+    type: 'CountryLanguage',
     args: {
-      where: nonNull('countrylanguageWhereUniqueInput'),
+      where: nonNull('CountryLanguageWhereUniqueInput'),
     },
     resolve: async (_parent, { where }, { prisma, select }) => {
-      return prisma.countrylanguage.delete({
+      return prisma.countryLanguage.delete({
         where,
         ...select,
       });

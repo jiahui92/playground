@@ -1,15 +1,15 @@
 import { mutationField, nonNull } from 'nexus';
 
-export const CountrylanguageUpdateManyMutation = mutationField(
-  'updateManyCountrylanguage',
+export const CountryLanguageUpdateManyMutation = mutationField(
+  'updateManyCountryLanguage',
   {
     type: nonNull('BatchPayload'),
     args: {
-      data: nonNull('countrylanguageUpdateManyMutationInput'),
-      where: 'countrylanguageWhereInput',
+      data: nonNull('CountryLanguageUpdateManyMutationInput'),
+      where: 'CountryLanguageWhereInput',
     },
     resolve(_parent, args, { prisma }) {
-      return prisma.countrylanguage.updateMany(args as any);
+      return prisma.countryLanguage.updateMany(args as any);
     },
   },
 );

@@ -1,11 +1,11 @@
 import { queryField, nonNull, list } from 'nexus';
 
 export const CountryFindManyQuery = queryField('findManyCountry', {
-  type: nonNull(list(nonNull('country'))),
+  type: nonNull(list(nonNull('Country'))),
   args: {
-    where: 'countryWhereInput',
-    orderBy: list('countryOrderByWithRelationInput'),
-    cursor: 'countryWhereUniqueInput',
+    where: 'CountryWhereInput',
+    orderBy: list('CountryOrderByWithRelationInput'),
+    cursor: 'CountryWhereUniqueInput',
     take: 'Int',
     skip: 'Int',
     distinct: list('CountryScalarFieldEnum'),

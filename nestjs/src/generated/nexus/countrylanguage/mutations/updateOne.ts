@@ -1,15 +1,15 @@
 import { mutationField, nonNull } from 'nexus';
 
-export const CountrylanguageUpdateOneMutation = mutationField(
-  'updateOneCountrylanguage',
+export const CountryLanguageUpdateOneMutation = mutationField(
+  'updateOneCountryLanguage',
   {
-    type: nonNull('countrylanguage'),
+    type: nonNull('CountryLanguage'),
     args: {
-      data: nonNull('countrylanguageUpdateInput'),
-      where: nonNull('countrylanguageWhereUniqueInput'),
+      data: nonNull('CountryLanguageUpdateInput'),
+      where: nonNull('CountryLanguageWhereUniqueInput'),
     },
     resolve(_parent, { data, where }, { prisma, select }) {
-      return prisma.countrylanguage.update({
+      return prisma.countryLanguage.update({
         where,
         data,
         ...select,

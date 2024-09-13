@@ -1,19 +1,19 @@
 import { objectType } from 'nexus';
 
-export const city = objectType({
+export const City = objectType({
   nonNullDefaults: {
     output: true,
     input: false,
   },
-  name: 'city',
+  name: 'City',
   definition(t) {
-    t.int('ID');
-    t.string('Name');
-    t.string('CountryCode');
-    t.string('District');
-    t.int('Population');
+    t.int('id');
+    t.string('name');
+    t.string('countryCode');
+    t.string('district');
+    t.int('population');
     t.field('country', {
-      type: 'country',
+      type: 'Country',
       resolve(root: any) {
         return root.country;
       },

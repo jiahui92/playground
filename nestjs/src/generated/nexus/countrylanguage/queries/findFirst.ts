@@ -1,19 +1,19 @@
 import { queryField, list } from 'nexus';
 
-export const CountrylanguageFindFirstQuery = queryField(
-  'findFirstCountrylanguage',
+export const CountryLanguageFindFirstQuery = queryField(
+  'findFirstCountryLanguage',
   {
-    type: 'countrylanguage',
+    type: 'CountryLanguage',
     args: {
-      where: 'countrylanguageWhereInput',
-      orderBy: list('countrylanguageOrderByWithRelationInput'),
-      cursor: 'countrylanguageWhereUniqueInput',
+      where: 'CountryLanguageWhereInput',
+      orderBy: list('CountryLanguageOrderByWithRelationInput'),
+      cursor: 'CountryLanguageWhereUniqueInput',
       take: 'Int',
       skip: 'Int',
-      distinct: list('CountrylanguageScalarFieldEnum'),
+      distinct: list('CountryLanguageScalarFieldEnum'),
     },
     resolve(_parent, args, { prisma, select }) {
-      return prisma.countrylanguage.findFirst({
+      return prisma.countryLanguage.findFirst({
         ...args,
         ...select,
       });

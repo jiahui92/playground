@@ -1,11 +1,11 @@
 import { mutationField, nonNull } from 'nexus';
 
 export const CityUpsertOneMutation = mutationField('upsertOneCity', {
-  type: nonNull('city'),
+  type: nonNull('City'),
   args: {
-    where: nonNull('cityWhereUniqueInput'),
-    create: nonNull('cityCreateInput'),
-    update: nonNull('cityUpdateInput'),
+    where: nonNull('CityWhereUniqueInput'),
+    create: nonNull('CityCreateInput'),
+    update: nonNull('CityUpdateInput'),
   },
   resolve(_parent, args, { prisma, select }) {
     return prisma.city.upsert({

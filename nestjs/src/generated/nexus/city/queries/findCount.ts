@@ -3,9 +3,9 @@ import { queryField, nonNull, list } from 'nexus';
 export const CityFindCountQuery = queryField('findManyCityCount', {
   type: nonNull('Int'),
   args: {
-    where: 'cityWhereInput',
-    orderBy: list('cityOrderByWithRelationInput'),
-    cursor: 'cityWhereUniqueInput',
+    where: 'CityWhereInput',
+    orderBy: list('CityOrderByWithRelationInput'),
+    cursor: 'CityWhereUniqueInput',
     take: 'Int',
     skip: 'Int',
     distinct: list('CityScalarFieldEnum'),

@@ -1,14 +1,14 @@
 import { queryField, nonNull } from 'nexus';
 
-export const CountrylanguageFindUniqueQuery = queryField(
-  'findUniqueCountrylanguage',
+export const CountryLanguageFindUniqueQuery = queryField(
+  'findUniqueCountryLanguage',
   {
-    type: 'countrylanguage',
+    type: 'CountryLanguage',
     args: {
-      where: nonNull('countrylanguageWhereUniqueInput'),
+      where: nonNull('CountryLanguageWhereUniqueInput'),
     },
     resolve(_parent, { where }, { prisma, select }) {
-      return prisma.countrylanguage.findUnique({
+      return prisma.countryLanguage.findUnique({
         where,
         ...select,
       });

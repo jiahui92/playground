@@ -1,6 +1,6 @@
 import { PrismaService } from './prisma.service';
 import { Injectable } from '@nestjs/common';
-import { city } from '@prisma/client';
+import { City } from '@prisma/client';
 
 @Injectable()
 export class AppService {
@@ -10,12 +10,12 @@ export class AppService {
     return 'Hello World! jiahui';
   }
 
-  async getManyCity(): Promise<city[]> {
+  async getManyCity(): Promise<City[]> {
     const cities = await this.prisma.city.findMany({
       // take: 10,
       // select: { Name: true },
       where: {
-        CountryCode: { equals: 'USA' },
+        countryCode: { equals: 'USA' },
       },
     });
     return cities;

@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { city } from '@prisma/client';
+import { City } from '@prisma/client';
 
 @Controller()
 export class AppController {
@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Get('getManyCity')
-  async getManyCity(): Promise<city[]> {
+  async getManyCity(): Promise<City[]> {
     return await this.appService.getManyCity();
   }
 }

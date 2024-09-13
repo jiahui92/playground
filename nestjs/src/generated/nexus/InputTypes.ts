@@ -12,33 +12,33 @@ export const TransactionIsolationLevel = enumType({
 
 export const CityScalarFieldEnum = enumType({
   name: 'CityScalarFieldEnum',
-  members: ['ID', 'Name', 'CountryCode', 'District', 'Population'],
+  members: ['id', 'name', 'countryCode', 'district', 'population'],
 });
 
 export const CountryScalarFieldEnum = enumType({
   name: 'CountryScalarFieldEnum',
   members: [
-    'Code',
-    'Name',
-    'Continent',
-    'Region',
-    'SurfaceArea',
-    'IndepYear',
-    'Population',
-    'LifeExpectancy',
-    'GNP',
-    'GNPOld',
-    'LocalName',
-    'GovernmentForm',
-    'HeadOfState',
-    'Capital',
-    'Code2',
+    'code',
+    'name',
+    'continent',
+    'region',
+    'surfaceArea',
+    'indepYear',
+    'population',
+    'lifeExpectancy',
+    'gnp',
+    'gnpoId',
+    'localName',
+    'governmentForm',
+    'headOfState',
+    'capital',
+    'code2',
   ],
 });
 
-export const CountrylanguageScalarFieldEnum = enumType({
-  name: 'CountrylanguageScalarFieldEnum',
-  members: ['CountryCode', 'Language', 'IsOfficial', 'Percentage'],
+export const CountryLanguageScalarFieldEnum = enumType({
+  name: 'CountryLanguageScalarFieldEnum',
+  members: ['countryCode', 'language', 'isOfficial', 'percentage'],
 });
 
 export const SortOrder = enumType({
@@ -51,8 +51,8 @@ export const NullsOrder = enumType({
   members: ['first', 'last'],
 });
 
-export const country_Continent = enumType({
-  name: 'country_Continent',
+export const CountryContinent = enumType({
+  name: 'CountryContinent',
   members: [
     'Asia',
     'Europe',
@@ -64,742 +64,742 @@ export const country_Continent = enumType({
   ],
 });
 
-export const countrylanguage_IsOfficial = enumType({
-  name: 'countrylanguage_IsOfficial',
+export const CountryLanguageIsOfficial = enumType({
+  name: 'CountryLanguageIsOfficial',
   members: ['T', 'F'],
 });
 
-export const cityWhereInput = inputObjectType({
+export const CityWhereInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityWhereInput',
+  name: 'CityWhereInput',
   definition(t) {
-    t.list.field('AND', { type: 'cityWhereInput' });
-    t.list.field('OR', { type: 'cityWhereInput' });
-    t.list.field('NOT', { type: 'cityWhereInput' });
-    t.field('ID', { type: 'IntFilter' });
-    t.field('Name', { type: 'StringFilter' });
-    t.field('CountryCode', { type: 'StringFilter' });
-    t.field('District', { type: 'StringFilter' });
-    t.field('Population', { type: 'IntFilter' });
+    t.list.field('AND', { type: 'CityWhereInput' });
+    t.list.field('OR', { type: 'CityWhereInput' });
+    t.list.field('NOT', { type: 'CityWhereInput' });
+    t.field('id', { type: 'IntFilter' });
+    t.field('name', { type: 'StringFilter' });
+    t.field('countryCode', { type: 'StringFilter' });
+    t.field('district', { type: 'StringFilter' });
+    t.field('population', { type: 'IntFilter' });
     t.field('country', { type: 'CountryRelationFilter' });
   },
 });
 
-export const cityOrderByWithRelationInput = inputObjectType({
+export const CityOrderByWithRelationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityOrderByWithRelationInput',
+  name: 'CityOrderByWithRelationInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('District', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('country', { type: 'countryOrderByWithRelationInput' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('district', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('country', { type: 'CountryOrderByWithRelationInput' });
   },
 });
 
-export const cityWhereUniqueInput = inputObjectType({
+export const CityWhereUniqueInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityWhereUniqueInput',
+  name: 'CityWhereUniqueInput',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.list.field('AND', { type: 'cityWhereInput' });
-    t.list.field('OR', { type: 'cityWhereInput' });
-    t.list.field('NOT', { type: 'cityWhereInput' });
-    t.field('Name', { type: 'StringFilter' });
-    t.field('CountryCode', { type: 'StringFilter' });
-    t.field('District', { type: 'StringFilter' });
-    t.field('Population', { type: 'IntFilter' });
+    t.field('id', { type: 'Int' });
+    t.list.field('AND', { type: 'CityWhereInput' });
+    t.list.field('OR', { type: 'CityWhereInput' });
+    t.list.field('NOT', { type: 'CityWhereInput' });
+    t.field('name', { type: 'StringFilter' });
+    t.field('countryCode', { type: 'StringFilter' });
+    t.field('district', { type: 'StringFilter' });
+    t.field('population', { type: 'IntFilter' });
     t.field('country', { type: 'CountryRelationFilter' });
   },
 });
 
-export const cityOrderByWithAggregationInput = inputObjectType({
+export const CityOrderByWithAggregationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityOrderByWithAggregationInput',
+  name: 'CityOrderByWithAggregationInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('District', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('_count', { type: 'cityCountOrderByAggregateInput' });
-    t.field('_avg', { type: 'cityAvgOrderByAggregateInput' });
-    t.field('_max', { type: 'cityMaxOrderByAggregateInput' });
-    t.field('_min', { type: 'cityMinOrderByAggregateInput' });
-    t.field('_sum', { type: 'citySumOrderByAggregateInput' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('district', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('_count', { type: 'CityCountOrderByAggregateInput' });
+    t.field('_avg', { type: 'CityAvgOrderByAggregateInput' });
+    t.field('_max', { type: 'CityMaxOrderByAggregateInput' });
+    t.field('_min', { type: 'CityMinOrderByAggregateInput' });
+    t.field('_sum', { type: 'CitySumOrderByAggregateInput' });
   },
 });
 
-export const cityScalarWhereWithAggregatesInput = inputObjectType({
+export const CityScalarWhereWithAggregatesInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityScalarWhereWithAggregatesInput',
+  name: 'CityScalarWhereWithAggregatesInput',
   definition(t) {
-    t.list.field('AND', { type: 'cityScalarWhereWithAggregatesInput' });
-    t.list.field('OR', { type: 'cityScalarWhereWithAggregatesInput' });
-    t.list.field('NOT', { type: 'cityScalarWhereWithAggregatesInput' });
-    t.field('ID', { type: 'IntWithAggregatesFilter' });
-    t.field('Name', { type: 'StringWithAggregatesFilter' });
-    t.field('CountryCode', { type: 'StringWithAggregatesFilter' });
-    t.field('District', { type: 'StringWithAggregatesFilter' });
-    t.field('Population', { type: 'IntWithAggregatesFilter' });
+    t.list.field('AND', { type: 'CityScalarWhereWithAggregatesInput' });
+    t.list.field('OR', { type: 'CityScalarWhereWithAggregatesInput' });
+    t.list.field('NOT', { type: 'CityScalarWhereWithAggregatesInput' });
+    t.field('id', { type: 'IntWithAggregatesFilter' });
+    t.field('name', { type: 'StringWithAggregatesFilter' });
+    t.field('countryCode', { type: 'StringWithAggregatesFilter' });
+    t.field('district', { type: 'StringWithAggregatesFilter' });
+    t.field('population', { type: 'IntWithAggregatesFilter' });
   },
 });
 
-export const countryWhereInput = inputObjectType({
+export const CountryWhereInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryWhereInput',
+  name: 'CountryWhereInput',
   definition(t) {
-    t.list.field('AND', { type: 'countryWhereInput' });
-    t.list.field('OR', { type: 'countryWhereInput' });
-    t.list.field('NOT', { type: 'countryWhereInput' });
-    t.field('Code', { type: 'StringFilter' });
-    t.field('Name', { type: 'StringFilter' });
-    t.field('Continent', { type: 'Enumcountry_ContinentFilter' });
-    t.field('Region', { type: 'StringFilter' });
-    t.field('SurfaceArea', { type: 'DecimalFilter' });
-    t.field('IndepYear', { type: 'IntNullableFilter' });
-    t.field('Population', { type: 'IntFilter' });
-    t.field('LifeExpectancy', { type: 'DecimalNullableFilter' });
-    t.field('GNP', { type: 'DecimalNullableFilter' });
-    t.field('GNPOld', { type: 'DecimalNullableFilter' });
-    t.field('LocalName', { type: 'StringFilter' });
-    t.field('GovernmentForm', { type: 'StringFilter' });
-    t.field('HeadOfState', { type: 'StringNullableFilter' });
-    t.field('Capital', { type: 'IntNullableFilter' });
-    t.field('Code2', { type: 'StringFilter' });
+    t.list.field('AND', { type: 'CountryWhereInput' });
+    t.list.field('OR', { type: 'CountryWhereInput' });
+    t.list.field('NOT', { type: 'CountryWhereInput' });
+    t.field('code', { type: 'StringFilter' });
+    t.field('name', { type: 'StringFilter' });
+    t.field('continent', { type: 'EnumCountryContinentFilter' });
+    t.field('region', { type: 'StringFilter' });
+    t.field('surfaceArea', { type: 'DecimalFilter' });
+    t.field('indepYear', { type: 'IntNullableFilter' });
+    t.field('population', { type: 'IntFilter' });
+    t.field('lifeExpectancy', { type: 'DecimalNullableFilter' });
+    t.field('gnp', { type: 'DecimalNullableFilter' });
+    t.field('gnpoId', { type: 'DecimalNullableFilter' });
+    t.field('localName', { type: 'StringFilter' });
+    t.field('governmentForm', { type: 'StringFilter' });
+    t.field('headOfState', { type: 'StringNullableFilter' });
+    t.field('capital', { type: 'IntNullableFilter' });
+    t.field('code2', { type: 'StringFilter' });
     t.field('city', { type: 'CityListRelationFilter' });
-    t.field('countrylanguage', { type: 'CountrylanguageListRelationFilter' });
+    t.field('countryLanguage', { type: 'CountryLanguageListRelationFilter' });
   },
 });
 
-export const countryOrderByWithRelationInput = inputObjectType({
+export const CountryOrderByWithRelationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryOrderByWithRelationInput',
+  name: 'CountryOrderByWithRelationInput',
   definition(t) {
-    t.field('Code', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('Continent', { type: 'SortOrder' });
-    t.field('Region', { type: 'SortOrder' });
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrderInput' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrderInput' });
-    t.field('GNP', { type: 'SortOrderInput' });
-    t.field('GNPOld', { type: 'SortOrderInput' });
-    t.field('LocalName', { type: 'SortOrder' });
-    t.field('GovernmentForm', { type: 'SortOrder' });
-    t.field('HeadOfState', { type: 'SortOrderInput' });
-    t.field('Capital', { type: 'SortOrderInput' });
-    t.field('Code2', { type: 'SortOrder' });
-    t.field('city', { type: 'cityOrderByRelationAggregateInput' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageOrderByRelationAggregateInput',
+    t.field('code', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('continent', { type: 'SortOrder' });
+    t.field('region', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrderInput' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrderInput' });
+    t.field('gnp', { type: 'SortOrderInput' });
+    t.field('gnpoId', { type: 'SortOrderInput' });
+    t.field('localName', { type: 'SortOrder' });
+    t.field('governmentForm', { type: 'SortOrder' });
+    t.field('headOfState', { type: 'SortOrderInput' });
+    t.field('capital', { type: 'SortOrderInput' });
+    t.field('code2', { type: 'SortOrder' });
+    t.field('city', { type: 'CityOrderByRelationAggregateInput' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageOrderByRelationAggregateInput',
     });
   },
 });
 
-export const countryWhereUniqueInput = inputObjectType({
+export const CountryWhereUniqueInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryWhereUniqueInput',
+  name: 'CountryWhereUniqueInput',
   definition(t) {
-    t.field('Code', { type: 'String' });
-    t.list.field('AND', { type: 'countryWhereInput' });
-    t.list.field('OR', { type: 'countryWhereInput' });
-    t.list.field('NOT', { type: 'countryWhereInput' });
-    t.field('Name', { type: 'StringFilter' });
-    t.field('Continent', { type: 'Enumcountry_ContinentFilter' });
-    t.field('Region', { type: 'StringFilter' });
-    t.field('SurfaceArea', { type: 'DecimalFilter' });
-    t.field('IndepYear', { type: 'IntNullableFilter' });
-    t.field('Population', { type: 'IntFilter' });
-    t.field('LifeExpectancy', { type: 'DecimalNullableFilter' });
-    t.field('GNP', { type: 'DecimalNullableFilter' });
-    t.field('GNPOld', { type: 'DecimalNullableFilter' });
-    t.field('LocalName', { type: 'StringFilter' });
-    t.field('GovernmentForm', { type: 'StringFilter' });
-    t.field('HeadOfState', { type: 'StringNullableFilter' });
-    t.field('Capital', { type: 'IntNullableFilter' });
-    t.field('Code2', { type: 'StringFilter' });
+    t.field('code', { type: 'String' });
+    t.list.field('AND', { type: 'CountryWhereInput' });
+    t.list.field('OR', { type: 'CountryWhereInput' });
+    t.list.field('NOT', { type: 'CountryWhereInput' });
+    t.field('name', { type: 'StringFilter' });
+    t.field('continent', { type: 'EnumCountryContinentFilter' });
+    t.field('region', { type: 'StringFilter' });
+    t.field('surfaceArea', { type: 'DecimalFilter' });
+    t.field('indepYear', { type: 'IntNullableFilter' });
+    t.field('population', { type: 'IntFilter' });
+    t.field('lifeExpectancy', { type: 'DecimalNullableFilter' });
+    t.field('gnp', { type: 'DecimalNullableFilter' });
+    t.field('gnpoId', { type: 'DecimalNullableFilter' });
+    t.field('localName', { type: 'StringFilter' });
+    t.field('governmentForm', { type: 'StringFilter' });
+    t.field('headOfState', { type: 'StringNullableFilter' });
+    t.field('capital', { type: 'IntNullableFilter' });
+    t.field('code2', { type: 'StringFilter' });
     t.field('city', { type: 'CityListRelationFilter' });
-    t.field('countrylanguage', { type: 'CountrylanguageListRelationFilter' });
+    t.field('countryLanguage', { type: 'CountryLanguageListRelationFilter' });
   },
 });
 
-export const countryOrderByWithAggregationInput = inputObjectType({
+export const CountryOrderByWithAggregationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryOrderByWithAggregationInput',
+  name: 'CountryOrderByWithAggregationInput',
   definition(t) {
-    t.field('Code', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('Continent', { type: 'SortOrder' });
-    t.field('Region', { type: 'SortOrder' });
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrderInput' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrderInput' });
-    t.field('GNP', { type: 'SortOrderInput' });
-    t.field('GNPOld', { type: 'SortOrderInput' });
-    t.field('LocalName', { type: 'SortOrder' });
-    t.field('GovernmentForm', { type: 'SortOrder' });
-    t.field('HeadOfState', { type: 'SortOrderInput' });
-    t.field('Capital', { type: 'SortOrderInput' });
-    t.field('Code2', { type: 'SortOrder' });
-    t.field('_count', { type: 'countryCountOrderByAggregateInput' });
-    t.field('_avg', { type: 'countryAvgOrderByAggregateInput' });
-    t.field('_max', { type: 'countryMaxOrderByAggregateInput' });
-    t.field('_min', { type: 'countryMinOrderByAggregateInput' });
-    t.field('_sum', { type: 'countrySumOrderByAggregateInput' });
+    t.field('code', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('continent', { type: 'SortOrder' });
+    t.field('region', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrderInput' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrderInput' });
+    t.field('gnp', { type: 'SortOrderInput' });
+    t.field('gnpoId', { type: 'SortOrderInput' });
+    t.field('localName', { type: 'SortOrder' });
+    t.field('governmentForm', { type: 'SortOrder' });
+    t.field('headOfState', { type: 'SortOrderInput' });
+    t.field('capital', { type: 'SortOrderInput' });
+    t.field('code2', { type: 'SortOrder' });
+    t.field('_count', { type: 'CountryCountOrderByAggregateInput' });
+    t.field('_avg', { type: 'CountryAvgOrderByAggregateInput' });
+    t.field('_max', { type: 'CountryMaxOrderByAggregateInput' });
+    t.field('_min', { type: 'CountryMinOrderByAggregateInput' });
+    t.field('_sum', { type: 'CountrySumOrderByAggregateInput' });
   },
 });
 
-export const countryScalarWhereWithAggregatesInput = inputObjectType({
+export const CountryScalarWhereWithAggregatesInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryScalarWhereWithAggregatesInput',
+  name: 'CountryScalarWhereWithAggregatesInput',
   definition(t) {
-    t.list.field('AND', { type: 'countryScalarWhereWithAggregatesInput' });
-    t.list.field('OR', { type: 'countryScalarWhereWithAggregatesInput' });
-    t.list.field('NOT', { type: 'countryScalarWhereWithAggregatesInput' });
-    t.field('Code', { type: 'StringWithAggregatesFilter' });
-    t.field('Name', { type: 'StringWithAggregatesFilter' });
-    t.field('Continent', { type: 'Enumcountry_ContinentWithAggregatesFilter' });
-    t.field('Region', { type: 'StringWithAggregatesFilter' });
-    t.field('SurfaceArea', { type: 'DecimalWithAggregatesFilter' });
-    t.field('IndepYear', { type: 'IntNullableWithAggregatesFilter' });
-    t.field('Population', { type: 'IntWithAggregatesFilter' });
-    t.field('LifeExpectancy', { type: 'DecimalNullableWithAggregatesFilter' });
-    t.field('GNP', { type: 'DecimalNullableWithAggregatesFilter' });
-    t.field('GNPOld', { type: 'DecimalNullableWithAggregatesFilter' });
-    t.field('LocalName', { type: 'StringWithAggregatesFilter' });
-    t.field('GovernmentForm', { type: 'StringWithAggregatesFilter' });
-    t.field('HeadOfState', { type: 'StringNullableWithAggregatesFilter' });
-    t.field('Capital', { type: 'IntNullableWithAggregatesFilter' });
-    t.field('Code2', { type: 'StringWithAggregatesFilter' });
+    t.list.field('AND', { type: 'CountryScalarWhereWithAggregatesInput' });
+    t.list.field('OR', { type: 'CountryScalarWhereWithAggregatesInput' });
+    t.list.field('NOT', { type: 'CountryScalarWhereWithAggregatesInput' });
+    t.field('code', { type: 'StringWithAggregatesFilter' });
+    t.field('name', { type: 'StringWithAggregatesFilter' });
+    t.field('continent', { type: 'EnumCountryContinentWithAggregatesFilter' });
+    t.field('region', { type: 'StringWithAggregatesFilter' });
+    t.field('surfaceArea', { type: 'DecimalWithAggregatesFilter' });
+    t.field('indepYear', { type: 'IntNullableWithAggregatesFilter' });
+    t.field('population', { type: 'IntWithAggregatesFilter' });
+    t.field('lifeExpectancy', { type: 'DecimalNullableWithAggregatesFilter' });
+    t.field('gnp', { type: 'DecimalNullableWithAggregatesFilter' });
+    t.field('gnpoId', { type: 'DecimalNullableWithAggregatesFilter' });
+    t.field('localName', { type: 'StringWithAggregatesFilter' });
+    t.field('governmentForm', { type: 'StringWithAggregatesFilter' });
+    t.field('headOfState', { type: 'StringNullableWithAggregatesFilter' });
+    t.field('capital', { type: 'IntNullableWithAggregatesFilter' });
+    t.field('code2', { type: 'StringWithAggregatesFilter' });
   },
 });
 
-export const countrylanguageWhereInput = inputObjectType({
+export const CountryLanguageWhereInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageWhereInput',
+  name: 'CountryLanguageWhereInput',
   definition(t) {
-    t.list.field('AND', { type: 'countrylanguageWhereInput' });
-    t.list.field('OR', { type: 'countrylanguageWhereInput' });
-    t.list.field('NOT', { type: 'countrylanguageWhereInput' });
-    t.field('CountryCode', { type: 'StringFilter' });
-    t.field('Language', { type: 'StringFilter' });
-    t.field('IsOfficial', { type: 'Enumcountrylanguage_IsOfficialFilter' });
-    t.field('Percentage', { type: 'DecimalFilter' });
+    t.list.field('AND', { type: 'CountryLanguageWhereInput' });
+    t.list.field('OR', { type: 'CountryLanguageWhereInput' });
+    t.list.field('NOT', { type: 'CountryLanguageWhereInput' });
+    t.field('countryCode', { type: 'StringFilter' });
+    t.field('language', { type: 'StringFilter' });
+    t.field('isOfficial', { type: 'EnumCountryLanguageIsOfficialFilter' });
+    t.field('percentage', { type: 'DecimalFilter' });
     t.field('country', { type: 'CountryRelationFilter' });
   },
 });
 
-export const countrylanguageOrderByWithRelationInput = inputObjectType({
+export const CountryLanguageOrderByWithRelationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageOrderByWithRelationInput',
+  name: 'CountryLanguageOrderByWithRelationInput',
   definition(t) {
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('Language', { type: 'SortOrder' });
-    t.field('IsOfficial', { type: 'SortOrder' });
-    t.field('Percentage', { type: 'SortOrder' });
-    t.field('country', { type: 'countryOrderByWithRelationInput' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('language', { type: 'SortOrder' });
+    t.field('isOfficial', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
+    t.field('country', { type: 'CountryOrderByWithRelationInput' });
   },
 });
 
-export const countrylanguageWhereUniqueInput = inputObjectType({
+export const CountryLanguageWhereUniqueInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageWhereUniqueInput',
+  name: 'CountryLanguageWhereUniqueInput',
   definition(t) {
-    t.field('CountryCode_Language', {
-      type: 'countrylanguageCountryCodeLanguageCompoundUniqueInput',
+    t.field('countryCode_language', {
+      type: 'CountryLanguageCountryCodeLanguageCompoundUniqueInput',
     });
-    t.list.field('AND', { type: 'countrylanguageWhereInput' });
-    t.list.field('OR', { type: 'countrylanguageWhereInput' });
-    t.list.field('NOT', { type: 'countrylanguageWhereInput' });
-    t.field('CountryCode', { type: 'StringFilter' });
-    t.field('Language', { type: 'StringFilter' });
-    t.field('IsOfficial', { type: 'Enumcountrylanguage_IsOfficialFilter' });
-    t.field('Percentage', { type: 'DecimalFilter' });
+    t.list.field('AND', { type: 'CountryLanguageWhereInput' });
+    t.list.field('OR', { type: 'CountryLanguageWhereInput' });
+    t.list.field('NOT', { type: 'CountryLanguageWhereInput' });
+    t.field('countryCode', { type: 'StringFilter' });
+    t.field('language', { type: 'StringFilter' });
+    t.field('isOfficial', { type: 'EnumCountryLanguageIsOfficialFilter' });
+    t.field('percentage', { type: 'DecimalFilter' });
     t.field('country', { type: 'CountryRelationFilter' });
   },
 });
 
-export const countrylanguageOrderByWithAggregationInput = inputObjectType({
+export const CountryLanguageOrderByWithAggregationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageOrderByWithAggregationInput',
+  name: 'CountryLanguageOrderByWithAggregationInput',
   definition(t) {
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('Language', { type: 'SortOrder' });
-    t.field('IsOfficial', { type: 'SortOrder' });
-    t.field('Percentage', { type: 'SortOrder' });
-    t.field('_count', { type: 'countrylanguageCountOrderByAggregateInput' });
-    t.field('_avg', { type: 'countrylanguageAvgOrderByAggregateInput' });
-    t.field('_max', { type: 'countrylanguageMaxOrderByAggregateInput' });
-    t.field('_min', { type: 'countrylanguageMinOrderByAggregateInput' });
-    t.field('_sum', { type: 'countrylanguageSumOrderByAggregateInput' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('language', { type: 'SortOrder' });
+    t.field('isOfficial', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
+    t.field('_count', { type: 'CountryLanguageCountOrderByAggregateInput' });
+    t.field('_avg', { type: 'CountryLanguageAvgOrderByAggregateInput' });
+    t.field('_max', { type: 'CountryLanguageMaxOrderByAggregateInput' });
+    t.field('_min', { type: 'CountryLanguageMinOrderByAggregateInput' });
+    t.field('_sum', { type: 'CountryLanguageSumOrderByAggregateInput' });
   },
 });
 
-export const countrylanguageScalarWhereWithAggregatesInput = inputObjectType({
+export const CountryLanguageScalarWhereWithAggregatesInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageScalarWhereWithAggregatesInput',
+  name: 'CountryLanguageScalarWhereWithAggregatesInput',
   definition(t) {
     t.list.field('AND', {
-      type: 'countrylanguageScalarWhereWithAggregatesInput',
+      type: 'CountryLanguageScalarWhereWithAggregatesInput',
     });
     t.list.field('OR', {
-      type: 'countrylanguageScalarWhereWithAggregatesInput',
+      type: 'CountryLanguageScalarWhereWithAggregatesInput',
     });
     t.list.field('NOT', {
-      type: 'countrylanguageScalarWhereWithAggregatesInput',
+      type: 'CountryLanguageScalarWhereWithAggregatesInput',
     });
-    t.field('CountryCode', { type: 'StringWithAggregatesFilter' });
-    t.field('Language', { type: 'StringWithAggregatesFilter' });
-    t.field('IsOfficial', {
-      type: 'Enumcountrylanguage_IsOfficialWithAggregatesFilter',
+    t.field('countryCode', { type: 'StringWithAggregatesFilter' });
+    t.field('language', { type: 'StringWithAggregatesFilter' });
+    t.field('isOfficial', {
+      type: 'EnumCountryLanguageIsOfficialWithAggregatesFilter',
     });
-    t.field('Percentage', { type: 'DecimalWithAggregatesFilter' });
+    t.field('percentage', { type: 'DecimalWithAggregatesFilter' });
   },
 });
 
-export const cityCreateInput = inputObjectType({
+export const CityCreateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateInput',
+  name: 'CityCreateInput',
   definition(t) {
-    t.nonNull.field('Name', { type: 'String' });
-    t.nonNull.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.nonNull.field('name', { type: 'String' });
+    t.nonNull.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
     t.nonNull.field('country', {
-      type: 'countryCreateNestedOneWithoutCityInput',
+      type: 'CountryCreateNestedOneWithoutCityInput',
     });
   },
 });
 
-export const cityUncheckedCreateInput = inputObjectType({
+export const CityUncheckedCreateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUncheckedCreateInput',
+  name: 'CityUncheckedCreateInput',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.nonNull.field('CountryCode', { type: 'String' });
-    t.nonNull.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.field('id', { type: 'Int' });
+    t.nonNull.field('name', { type: 'String' });
+    t.nonNull.field('countryCode', { type: 'String' });
+    t.nonNull.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
   },
 });
 
-export const cityUpdateInput = inputObjectType({
+export const CityUpdateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpdateInput',
+  name: 'CityUpdateInput',
   definition(t) {
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
     t.field('country', {
-      type: 'countryUpdateOneRequiredWithoutCityNestedInput',
+      type: 'CountryUpdateOneRequiredWithoutCityNestedInput',
     });
   },
 });
 
-export const cityUncheckedUpdateInput = inputObjectType({
+export const CityUncheckedUpdateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUncheckedUpdateInput',
+  name: 'CityUncheckedUpdateInput',
   definition(t) {
-    t.field('ID', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('CountryCode', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('id', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('countryCode', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
   },
 });
 
-export const cityCreateManyInput = inputObjectType({
+export const CityCreateManyInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateManyInput',
+  name: 'CityCreateManyInput',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.nonNull.field('CountryCode', { type: 'String' });
-    t.nonNull.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.field('id', { type: 'Int' });
+    t.nonNull.field('name', { type: 'String' });
+    t.nonNull.field('countryCode', { type: 'String' });
+    t.nonNull.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
   },
 });
 
-export const cityUpdateManyMutationInput = inputObjectType({
+export const CityUpdateManyMutationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpdateManyMutationInput',
+  name: 'CityUpdateManyMutationInput',
   definition(t) {
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
   },
 });
 
-export const cityUncheckedUpdateManyInput = inputObjectType({
+export const CityUncheckedUpdateManyInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUncheckedUpdateManyInput',
+  name: 'CityUncheckedUpdateManyInput',
   definition(t) {
-    t.field('ID', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('CountryCode', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('id', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('countryCode', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
   },
 });
 
-export const countryCreateInput = inputObjectType({
+export const CountryCreateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCreateInput',
+  name: 'CountryCreateInput',
   definition(t) {
-    t.nonNull.field('Code', { type: 'String' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.nonNull.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Decimal' });
-    t.field('GNP', { type: 'Decimal' });
-    t.field('GNPOld', { type: 'Decimal' });
-    t.nonNull.field('LocalName', { type: 'String' });
-    t.nonNull.field('GovernmentForm', { type: 'String' });
-    t.field('HeadOfState', { type: 'String' });
-    t.field('Capital', { type: 'Int' });
-    t.nonNull.field('Code2', { type: 'String' });
-    t.field('city', { type: 'cityCreateNestedManyWithoutCountryInput' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageCreateNestedManyWithoutCountryInput',
+    t.nonNull.field('code', { type: 'String' });
+    t.nonNull.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.nonNull.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Decimal' });
+    t.field('gnp', { type: 'Decimal' });
+    t.field('gnpoId', { type: 'Decimal' });
+    t.nonNull.field('localName', { type: 'String' });
+    t.nonNull.field('governmentForm', { type: 'String' });
+    t.field('headOfState', { type: 'String' });
+    t.field('capital', { type: 'Int' });
+    t.nonNull.field('code2', { type: 'String' });
+    t.field('city', { type: 'CityCreateNestedManyWithoutCountryInput' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageCreateNestedManyWithoutCountryInput',
     });
   },
 });
 
-export const countryUncheckedCreateInput = inputObjectType({
+export const CountryUncheckedCreateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUncheckedCreateInput',
+  name: 'CountryUncheckedCreateInput',
   definition(t) {
-    t.nonNull.field('Code', { type: 'String' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.nonNull.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Decimal' });
-    t.field('GNP', { type: 'Decimal' });
-    t.field('GNPOld', { type: 'Decimal' });
-    t.nonNull.field('LocalName', { type: 'String' });
-    t.nonNull.field('GovernmentForm', { type: 'String' });
-    t.field('HeadOfState', { type: 'String' });
-    t.field('Capital', { type: 'Int' });
-    t.nonNull.field('Code2', { type: 'String' });
+    t.nonNull.field('code', { type: 'String' });
+    t.nonNull.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.nonNull.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Decimal' });
+    t.field('gnp', { type: 'Decimal' });
+    t.field('gnpoId', { type: 'Decimal' });
+    t.nonNull.field('localName', { type: 'String' });
+    t.nonNull.field('governmentForm', { type: 'String' });
+    t.field('headOfState', { type: 'String' });
+    t.field('capital', { type: 'Int' });
+    t.nonNull.field('code2', { type: 'String' });
     t.field('city', {
-      type: 'cityUncheckedCreateNestedManyWithoutCountryInput',
+      type: 'CityUncheckedCreateNestedManyWithoutCountryInput',
     });
-    t.field('countrylanguage', {
-      type: 'countrylanguageUncheckedCreateNestedManyWithoutCountryInput',
-    });
-  },
-});
-
-export const countryUpdateInput = inputObjectType({
-  nonNullDefaults: {
-    input: false,
-  },
-  name: 'countryUpdateInput',
-  definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
-    });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
-      type: 'NullableDecimalFieldUpdateOperationsInput',
-    });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
-      type: 'NullableStringFieldUpdateOperationsInput',
-    });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('city', { type: 'cityUpdateManyWithoutCountryNestedInput' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageUpdateManyWithoutCountryNestedInput',
+    t.field('countryLanguage', {
+      type: 'CountryLanguageUncheckedCreateNestedManyWithoutCountryInput',
     });
   },
 });
 
-export const countryUncheckedUpdateInput = inputObjectType({
+export const CountryUpdateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUncheckedUpdateInput',
+  name: 'CountryUpdateInput',
   definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
     });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
       type: 'NullableDecimalFieldUpdateOperationsInput',
     });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
       type: 'NullableStringFieldUpdateOperationsInput',
     });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('city', { type: 'CityUpdateManyWithoutCountryNestedInput' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageUpdateManyWithoutCountryNestedInput',
+    });
+  },
+});
+
+export const CountryUncheckedUpdateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'CountryUncheckedUpdateInput',
+  definition(t) {
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
+    });
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
+      type: 'NullableDecimalFieldUpdateOperationsInput',
+    });
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
+      type: 'NullableStringFieldUpdateOperationsInput',
+    });
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
     t.field('city', {
-      type: 'cityUncheckedUpdateManyWithoutCountryNestedInput',
+      type: 'CityUncheckedUpdateManyWithoutCountryNestedInput',
     });
-    t.field('countrylanguage', {
-      type: 'countrylanguageUncheckedUpdateManyWithoutCountryNestedInput',
+    t.field('countryLanguage', {
+      type: 'CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput',
     });
   },
 });
 
-export const countryCreateManyInput = inputObjectType({
+export const CountryCreateManyInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCreateManyInput',
+  name: 'CountryCreateManyInput',
   definition(t) {
-    t.nonNull.field('Code', { type: 'String' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.nonNull.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Decimal' });
-    t.field('GNP', { type: 'Decimal' });
-    t.field('GNPOld', { type: 'Decimal' });
-    t.nonNull.field('LocalName', { type: 'String' });
-    t.nonNull.field('GovernmentForm', { type: 'String' });
-    t.field('HeadOfState', { type: 'String' });
-    t.field('Capital', { type: 'Int' });
-    t.nonNull.field('Code2', { type: 'String' });
+    t.nonNull.field('code', { type: 'String' });
+    t.nonNull.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.nonNull.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Decimal' });
+    t.field('gnp', { type: 'Decimal' });
+    t.field('gnpoId', { type: 'Decimal' });
+    t.nonNull.field('localName', { type: 'String' });
+    t.nonNull.field('governmentForm', { type: 'String' });
+    t.field('headOfState', { type: 'String' });
+    t.field('capital', { type: 'Int' });
+    t.nonNull.field('code2', { type: 'String' });
   },
 });
 
-export const countryUpdateManyMutationInput = inputObjectType({
+export const CountryUpdateManyMutationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpdateManyMutationInput',
+  name: 'CountryUpdateManyMutationInput',
   definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
     });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
       type: 'NullableDecimalFieldUpdateOperationsInput',
     });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
       type: 'NullableStringFieldUpdateOperationsInput',
     });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
   },
 });
 
-export const countryUncheckedUpdateManyInput = inputObjectType({
+export const CountryUncheckedUpdateManyInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUncheckedUpdateManyInput',
+  name: 'CountryUncheckedUpdateManyInput',
   definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
     });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
       type: 'NullableDecimalFieldUpdateOperationsInput',
     });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
       type: 'NullableStringFieldUpdateOperationsInput',
     });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
   },
 });
 
-export const countrylanguageCreateInput = inputObjectType({
+export const CountryLanguageCreateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageCreateInput',
+  name: 'CountryLanguageCreateInput',
   definition(t) {
-    t.nonNull.field('Language', { type: 'String' });
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.field('Percentage', { type: 'Decimal' });
+    t.nonNull.field('language', { type: 'String' });
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.field('percentage', { type: 'Decimal' });
     t.nonNull.field('country', {
-      type: 'countryCreateNestedOneWithoutCountrylanguageInput',
+      type: 'CountryCreateNestedOneWithoutCountryLanguageInput',
     });
   },
 });
 
-export const countrylanguageUncheckedCreateInput = inputObjectType({
+export const CountryLanguageUncheckedCreateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageUncheckedCreateInput',
+  name: 'CountryLanguageUncheckedCreateInput',
   definition(t) {
-    t.nonNull.field('CountryCode', { type: 'String' });
-    t.nonNull.field('Language', { type: 'String' });
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.field('Percentage', { type: 'Decimal' });
+    t.nonNull.field('countryCode', { type: 'String' });
+    t.nonNull.field('language', { type: 'String' });
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const countrylanguageUpdateInput = inputObjectType({
+export const CountryLanguageUpdateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageUpdateInput',
+  name: 'CountryLanguageUpdateInput',
   definition(t) {
-    t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('IsOfficial', {
-      type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+    t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('isOfficial', {
+      type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     });
-    t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
     t.field('country', {
-      type: 'countryUpdateOneRequiredWithoutCountrylanguageNestedInput',
+      type: 'CountryUpdateOneRequiredWithoutCountryLanguageNestedInput',
     });
   },
 });
 
-export const countrylanguageUncheckedUpdateInput = inputObjectType({
+export const CountryLanguageUncheckedUpdateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageUncheckedUpdateInput',
+  name: 'CountryLanguageUncheckedUpdateInput',
   definition(t) {
-    t.field('CountryCode', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('IsOfficial', {
-      type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+    t.field('countryCode', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('isOfficial', {
+      type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     });
-    t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
   },
 });
 
-export const countrylanguageCreateManyInput = inputObjectType({
+export const CountryLanguageCreateManyInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageCreateManyInput',
+  name: 'CountryLanguageCreateManyInput',
   definition(t) {
-    t.nonNull.field('CountryCode', { type: 'String' });
-    t.nonNull.field('Language', { type: 'String' });
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.field('Percentage', { type: 'Decimal' });
+    t.nonNull.field('countryCode', { type: 'String' });
+    t.nonNull.field('language', { type: 'String' });
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const countrylanguageUpdateManyMutationInput = inputObjectType({
+export const CountryLanguageUpdateManyMutationInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageUpdateManyMutationInput',
+  name: 'CountryLanguageUpdateManyMutationInput',
   definition(t) {
-    t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('IsOfficial', {
-      type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+    t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('isOfficial', {
+      type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     });
-    t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
   },
 });
 
-export const countrylanguageUncheckedUpdateManyInput = inputObjectType({
+export const CountryLanguageUncheckedUpdateManyInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageUncheckedUpdateManyInput',
+  name: 'CountryLanguageUncheckedUpdateManyInput',
   definition(t) {
-    t.field('CountryCode', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('IsOfficial', {
-      type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+    t.field('countryCode', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('isOfficial', {
+      type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     });
-    t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
   },
 });
 
@@ -846,72 +846,72 @@ export const CountryRelationFilter = inputObjectType({
   },
   name: 'CountryRelationFilter',
   definition(t) {
-    t.field('is', { type: 'countryWhereInput' });
-    t.field('isNot', { type: 'countryWhereInput' });
+    t.field('is', { type: 'CountryWhereInput' });
+    t.field('isNot', { type: 'CountryWhereInput' });
   },
 });
 
-export const cityCountOrderByAggregateInput = inputObjectType({
+export const CityCountOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCountOrderByAggregateInput',
+  name: 'CityCountOrderByAggregateInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('District', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('district', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
   },
 });
 
-export const cityAvgOrderByAggregateInput = inputObjectType({
+export const CityAvgOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityAvgOrderByAggregateInput',
+  name: 'CityAvgOrderByAggregateInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
   },
 });
 
-export const cityMaxOrderByAggregateInput = inputObjectType({
+export const CityMaxOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityMaxOrderByAggregateInput',
+  name: 'CityMaxOrderByAggregateInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('District', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('district', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
   },
 });
 
-export const cityMinOrderByAggregateInput = inputObjectType({
+export const CityMinOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityMinOrderByAggregateInput',
+  name: 'CityMinOrderByAggregateInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('District', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('district', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
   },
 });
 
-export const citySumOrderByAggregateInput = inputObjectType({
+export const CitySumOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'citySumOrderByAggregateInput',
+  name: 'CitySumOrderByAggregateInput',
   definition(t) {
-    t.field('ID', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
+    t.field('id', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
   },
 });
 
@@ -960,16 +960,16 @@ export const StringWithAggregatesFilter = inputObjectType({
   },
 });
 
-export const Enumcountry_ContinentFilter = inputObjectType({
+export const EnumCountryContinentFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'Enumcountry_ContinentFilter',
+  name: 'EnumCountryContinentFilter',
   definition(t) {
-    t.field('equals', { type: 'country_Continent' });
-    t.list.field('in', { type: 'country_Continent' });
-    t.list.field('notIn', { type: 'country_Continent' });
-    t.field('not', { type: 'NestedEnumcountry_ContinentFilter' });
+    t.field('equals', { type: 'CountryContinent' });
+    t.list.field('in', { type: 'CountryContinent' });
+    t.list.field('notIn', { type: 'CountryContinent' });
+    t.field('not', { type: 'NestedEnumCountryContinentFilter' });
   },
 });
 
@@ -1050,21 +1050,21 @@ export const CityListRelationFilter = inputObjectType({
   },
   name: 'CityListRelationFilter',
   definition(t) {
-    t.field('every', { type: 'cityWhereInput' });
-    t.field('some', { type: 'cityWhereInput' });
-    t.field('none', { type: 'cityWhereInput' });
+    t.field('every', { type: 'CityWhereInput' });
+    t.field('some', { type: 'CityWhereInput' });
+    t.field('none', { type: 'CityWhereInput' });
   },
 });
 
-export const CountrylanguageListRelationFilter = inputObjectType({
+export const CountryLanguageListRelationFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'CountrylanguageListRelationFilter',
+  name: 'CountryLanguageListRelationFilter',
   definition(t) {
-    t.field('every', { type: 'countrylanguageWhereInput' });
-    t.field('some', { type: 'countrylanguageWhereInput' });
-    t.field('none', { type: 'countrylanguageWhereInput' });
+    t.field('every', { type: 'CountryLanguageWhereInput' });
+    t.field('some', { type: 'CountryLanguageWhereInput' });
+    t.field('none', { type: 'CountryLanguageWhereInput' });
   },
 });
 
@@ -1079,143 +1079,143 @@ export const SortOrderInput = inputObjectType({
   },
 });
 
-export const cityOrderByRelationAggregateInput = inputObjectType({
+export const CityOrderByRelationAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityOrderByRelationAggregateInput',
+  name: 'CityOrderByRelationAggregateInput',
   definition(t) {
     t.field('_count', { type: 'SortOrder' });
   },
 });
 
-export const countrylanguageOrderByRelationAggregateInput = inputObjectType({
+export const CountryLanguageOrderByRelationAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageOrderByRelationAggregateInput',
+  name: 'CountryLanguageOrderByRelationAggregateInput',
   definition(t) {
     t.field('_count', { type: 'SortOrder' });
   },
 });
 
-export const countryCountOrderByAggregateInput = inputObjectType({
+export const CountryCountOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCountOrderByAggregateInput',
+  name: 'CountryCountOrderByAggregateInput',
   definition(t) {
-    t.field('Code', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('Continent', { type: 'SortOrder' });
-    t.field('Region', { type: 'SortOrder' });
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrder' });
-    t.field('GNP', { type: 'SortOrder' });
-    t.field('GNPOld', { type: 'SortOrder' });
-    t.field('LocalName', { type: 'SortOrder' });
-    t.field('GovernmentForm', { type: 'SortOrder' });
-    t.field('HeadOfState', { type: 'SortOrder' });
-    t.field('Capital', { type: 'SortOrder' });
-    t.field('Code2', { type: 'SortOrder' });
+    t.field('code', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('continent', { type: 'SortOrder' });
+    t.field('region', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrder' });
+    t.field('gnp', { type: 'SortOrder' });
+    t.field('gnpoId', { type: 'SortOrder' });
+    t.field('localName', { type: 'SortOrder' });
+    t.field('governmentForm', { type: 'SortOrder' });
+    t.field('headOfState', { type: 'SortOrder' });
+    t.field('capital', { type: 'SortOrder' });
+    t.field('code2', { type: 'SortOrder' });
   },
 });
 
-export const countryAvgOrderByAggregateInput = inputObjectType({
+export const CountryAvgOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryAvgOrderByAggregateInput',
+  name: 'CountryAvgOrderByAggregateInput',
   definition(t) {
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrder' });
-    t.field('GNP', { type: 'SortOrder' });
-    t.field('GNPOld', { type: 'SortOrder' });
-    t.field('Capital', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrder' });
+    t.field('gnp', { type: 'SortOrder' });
+    t.field('gnpoId', { type: 'SortOrder' });
+    t.field('capital', { type: 'SortOrder' });
   },
 });
 
-export const countryMaxOrderByAggregateInput = inputObjectType({
+export const CountryMaxOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryMaxOrderByAggregateInput',
+  name: 'CountryMaxOrderByAggregateInput',
   definition(t) {
-    t.field('Code', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('Continent', { type: 'SortOrder' });
-    t.field('Region', { type: 'SortOrder' });
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrder' });
-    t.field('GNP', { type: 'SortOrder' });
-    t.field('GNPOld', { type: 'SortOrder' });
-    t.field('LocalName', { type: 'SortOrder' });
-    t.field('GovernmentForm', { type: 'SortOrder' });
-    t.field('HeadOfState', { type: 'SortOrder' });
-    t.field('Capital', { type: 'SortOrder' });
-    t.field('Code2', { type: 'SortOrder' });
+    t.field('code', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('continent', { type: 'SortOrder' });
+    t.field('region', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrder' });
+    t.field('gnp', { type: 'SortOrder' });
+    t.field('gnpoId', { type: 'SortOrder' });
+    t.field('localName', { type: 'SortOrder' });
+    t.field('governmentForm', { type: 'SortOrder' });
+    t.field('headOfState', { type: 'SortOrder' });
+    t.field('capital', { type: 'SortOrder' });
+    t.field('code2', { type: 'SortOrder' });
   },
 });
 
-export const countryMinOrderByAggregateInput = inputObjectType({
+export const CountryMinOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryMinOrderByAggregateInput',
+  name: 'CountryMinOrderByAggregateInput',
   definition(t) {
-    t.field('Code', { type: 'SortOrder' });
-    t.field('Name', { type: 'SortOrder' });
-    t.field('Continent', { type: 'SortOrder' });
-    t.field('Region', { type: 'SortOrder' });
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrder' });
-    t.field('GNP', { type: 'SortOrder' });
-    t.field('GNPOld', { type: 'SortOrder' });
-    t.field('LocalName', { type: 'SortOrder' });
-    t.field('GovernmentForm', { type: 'SortOrder' });
-    t.field('HeadOfState', { type: 'SortOrder' });
-    t.field('Capital', { type: 'SortOrder' });
-    t.field('Code2', { type: 'SortOrder' });
+    t.field('code', { type: 'SortOrder' });
+    t.field('name', { type: 'SortOrder' });
+    t.field('continent', { type: 'SortOrder' });
+    t.field('region', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrder' });
+    t.field('gnp', { type: 'SortOrder' });
+    t.field('gnpoId', { type: 'SortOrder' });
+    t.field('localName', { type: 'SortOrder' });
+    t.field('governmentForm', { type: 'SortOrder' });
+    t.field('headOfState', { type: 'SortOrder' });
+    t.field('capital', { type: 'SortOrder' });
+    t.field('code2', { type: 'SortOrder' });
   },
 });
 
-export const countrySumOrderByAggregateInput = inputObjectType({
+export const CountrySumOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrySumOrderByAggregateInput',
+  name: 'CountrySumOrderByAggregateInput',
   definition(t) {
-    t.field('SurfaceArea', { type: 'SortOrder' });
-    t.field('IndepYear', { type: 'SortOrder' });
-    t.field('Population', { type: 'SortOrder' });
-    t.field('LifeExpectancy', { type: 'SortOrder' });
-    t.field('GNP', { type: 'SortOrder' });
-    t.field('GNPOld', { type: 'SortOrder' });
-    t.field('Capital', { type: 'SortOrder' });
+    t.field('surfaceArea', { type: 'SortOrder' });
+    t.field('indepYear', { type: 'SortOrder' });
+    t.field('population', { type: 'SortOrder' });
+    t.field('lifeExpectancy', { type: 'SortOrder' });
+    t.field('gnp', { type: 'SortOrder' });
+    t.field('gnpoId', { type: 'SortOrder' });
+    t.field('capital', { type: 'SortOrder' });
   },
 });
 
-export const Enumcountry_ContinentWithAggregatesFilter = inputObjectType({
+export const EnumCountryContinentWithAggregatesFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'Enumcountry_ContinentWithAggregatesFilter',
+  name: 'EnumCountryContinentWithAggregatesFilter',
   definition(t) {
-    t.field('equals', { type: 'country_Continent' });
-    t.list.field('in', { type: 'country_Continent' });
-    t.list.field('notIn', { type: 'country_Continent' });
-    t.field('not', { type: 'NestedEnumcountry_ContinentWithAggregatesFilter' });
+    t.field('equals', { type: 'CountryContinent' });
+    t.list.field('in', { type: 'CountryContinent' });
+    t.list.field('notIn', { type: 'CountryContinent' });
+    t.field('not', { type: 'NestedEnumCountryContinentWithAggregatesFilter' });
     t.field('_count', { type: 'NestedIntFilter' });
-    t.field('_min', { type: 'NestedEnumcountry_ContinentFilter' });
-    t.field('_max', { type: 'NestedEnumcountry_ContinentFilter' });
+    t.field('_min', { type: 'NestedEnumCountryContinentFilter' });
+    t.field('_max', { type: 'NestedEnumCountryContinentFilter' });
   },
 });
 
@@ -1308,120 +1308,120 @@ export const StringNullableWithAggregatesFilter = inputObjectType({
   },
 });
 
-export const Enumcountrylanguage_IsOfficialFilter = inputObjectType({
+export const EnumCountryLanguageIsOfficialFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'Enumcountrylanguage_IsOfficialFilter',
+  name: 'EnumCountryLanguageIsOfficialFilter',
   definition(t) {
-    t.field('equals', { type: 'countrylanguage_IsOfficial' });
-    t.list.field('in', { type: 'countrylanguage_IsOfficial' });
-    t.list.field('notIn', { type: 'countrylanguage_IsOfficial' });
-    t.field('not', { type: 'NestedEnumcountrylanguage_IsOfficialFilter' });
+    t.field('equals', { type: 'CountryLanguageIsOfficial' });
+    t.list.field('in', { type: 'CountryLanguageIsOfficial' });
+    t.list.field('notIn', { type: 'CountryLanguageIsOfficial' });
+    t.field('not', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
   },
 });
 
-export const countrylanguageCountryCodeLanguageCompoundUniqueInput =
+export const CountryLanguageCountryCodeLanguageCompoundUniqueInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageCountryCodeLanguageCompoundUniqueInput',
+    name: 'CountryLanguageCountryCodeLanguageCompoundUniqueInput',
     definition(t) {
-      t.nonNull.field('CountryCode', { type: 'String' });
-      t.nonNull.field('Language', { type: 'String' });
+      t.nonNull.field('countryCode', { type: 'String' });
+      t.nonNull.field('language', { type: 'String' });
     },
   });
 
-export const countrylanguageCountOrderByAggregateInput = inputObjectType({
+export const CountryLanguageCountOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageCountOrderByAggregateInput',
+  name: 'CountryLanguageCountOrderByAggregateInput',
   definition(t) {
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('Language', { type: 'SortOrder' });
-    t.field('IsOfficial', { type: 'SortOrder' });
-    t.field('Percentage', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('language', { type: 'SortOrder' });
+    t.field('isOfficial', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
   },
 });
 
-export const countrylanguageAvgOrderByAggregateInput = inputObjectType({
+export const CountryLanguageAvgOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageAvgOrderByAggregateInput',
+  name: 'CountryLanguageAvgOrderByAggregateInput',
   definition(t) {
-    t.field('Percentage', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
   },
 });
 
-export const countrylanguageMaxOrderByAggregateInput = inputObjectType({
+export const CountryLanguageMaxOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageMaxOrderByAggregateInput',
+  name: 'CountryLanguageMaxOrderByAggregateInput',
   definition(t) {
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('Language', { type: 'SortOrder' });
-    t.field('IsOfficial', { type: 'SortOrder' });
-    t.field('Percentage', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('language', { type: 'SortOrder' });
+    t.field('isOfficial', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
   },
 });
 
-export const countrylanguageMinOrderByAggregateInput = inputObjectType({
+export const CountryLanguageMinOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageMinOrderByAggregateInput',
+  name: 'CountryLanguageMinOrderByAggregateInput',
   definition(t) {
-    t.field('CountryCode', { type: 'SortOrder' });
-    t.field('Language', { type: 'SortOrder' });
-    t.field('IsOfficial', { type: 'SortOrder' });
-    t.field('Percentage', { type: 'SortOrder' });
+    t.field('countryCode', { type: 'SortOrder' });
+    t.field('language', { type: 'SortOrder' });
+    t.field('isOfficial', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
   },
 });
 
-export const countrylanguageSumOrderByAggregateInput = inputObjectType({
+export const CountryLanguageSumOrderByAggregateInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageSumOrderByAggregateInput',
+  name: 'CountryLanguageSumOrderByAggregateInput',
   definition(t) {
-    t.field('Percentage', { type: 'SortOrder' });
+    t.field('percentage', { type: 'SortOrder' });
   },
 });
 
-export const Enumcountrylanguage_IsOfficialWithAggregatesFilter =
+export const EnumCountryLanguageIsOfficialWithAggregatesFilter =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'Enumcountrylanguage_IsOfficialWithAggregatesFilter',
+    name: 'EnumCountryLanguageIsOfficialWithAggregatesFilter',
     definition(t) {
-      t.field('equals', { type: 'countrylanguage_IsOfficial' });
-      t.list.field('in', { type: 'countrylanguage_IsOfficial' });
-      t.list.field('notIn', { type: 'countrylanguage_IsOfficial' });
+      t.field('equals', { type: 'CountryLanguageIsOfficial' });
+      t.list.field('in', { type: 'CountryLanguageIsOfficial' });
+      t.list.field('notIn', { type: 'CountryLanguageIsOfficial' });
       t.field('not', {
-        type: 'NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter',
+        type: 'NestedEnumCountryLanguageIsOfficialWithAggregatesFilter',
       });
       t.field('_count', { type: 'NestedIntFilter' });
-      t.field('_min', { type: 'NestedEnumcountrylanguage_IsOfficialFilter' });
-      t.field('_max', { type: 'NestedEnumcountrylanguage_IsOfficialFilter' });
+      t.field('_min', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
+      t.field('_max', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
     },
   });
 
-export const countryCreateNestedOneWithoutCityInput = inputObjectType({
+export const CountryCreateNestedOneWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCreateNestedOneWithoutCityInput',
+  name: 'CountryCreateNestedOneWithoutCityInput',
   definition(t) {
-    t.field('create', { type: 'countryCreateWithoutCityInput' });
+    t.field('create', { type: 'CountryCreateWithoutCityInput' });
     t.field('connectOrCreate', {
-      type: 'countryCreateOrConnectWithoutCityInput',
+      type: 'CountryCreateOrConnectWithoutCityInput',
     });
-    t.field('connect', { type: 'countryWhereUniqueInput' });
+    t.field('connect', { type: 'CountryWhereUniqueInput' });
   },
 });
 
@@ -1449,101 +1449,101 @@ export const IntFieldUpdateOperationsInput = inputObjectType({
   },
 });
 
-export const countryUpdateOneRequiredWithoutCityNestedInput = inputObjectType({
+export const CountryUpdateOneRequiredWithoutCityNestedInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpdateOneRequiredWithoutCityNestedInput',
+  name: 'CountryUpdateOneRequiredWithoutCityNestedInput',
   definition(t) {
-    t.field('create', { type: 'countryCreateWithoutCityInput' });
+    t.field('create', { type: 'CountryCreateWithoutCityInput' });
     t.field('connectOrCreate', {
-      type: 'countryCreateOrConnectWithoutCityInput',
+      type: 'CountryCreateOrConnectWithoutCityInput',
     });
-    t.field('upsert', { type: 'countryUpsertWithoutCityInput' });
-    t.field('connect', { type: 'countryWhereUniqueInput' });
-    t.field('update', { type: 'countryUpdateToOneWithWhereWithoutCityInput' });
+    t.field('upsert', { type: 'CountryUpsertWithoutCityInput' });
+    t.field('connect', { type: 'CountryWhereUniqueInput' });
+    t.field('update', { type: 'CountryUpdateToOneWithWhereWithoutCityInput' });
   },
 });
 
-export const cityCreateNestedManyWithoutCountryInput = inputObjectType({
+export const CityCreateNestedManyWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateNestedManyWithoutCountryInput',
+  name: 'CityCreateNestedManyWithoutCountryInput',
   definition(t) {
-    t.list.field('create', { type: 'cityCreateWithoutCountryInput' });
+    t.list.field('create', { type: 'CityCreateWithoutCountryInput' });
     t.list.field('connectOrCreate', {
-      type: 'cityCreateOrConnectWithoutCountryInput',
+      type: 'CityCreateOrConnectWithoutCountryInput',
     });
-    t.field('createMany', { type: 'cityCreateManyCountryInputEnvelope' });
-    t.list.field('connect', { type: 'cityWhereUniqueInput' });
+    t.field('createMany', { type: 'CityCreateManyCountryInputEnvelope' });
+    t.list.field('connect', { type: 'CityWhereUniqueInput' });
   },
 });
 
-export const countrylanguageCreateNestedManyWithoutCountryInput =
+export const CountryLanguageCreateNestedManyWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageCreateNestedManyWithoutCountryInput',
+    name: 'CountryLanguageCreateNestedManyWithoutCountryInput',
     definition(t) {
       t.list.field('create', {
-        type: 'countrylanguageCreateWithoutCountryInput',
+        type: 'CountryLanguageCreateWithoutCountryInput',
       });
       t.list.field('connectOrCreate', {
-        type: 'countrylanguageCreateOrConnectWithoutCountryInput',
+        type: 'CountryLanguageCreateOrConnectWithoutCountryInput',
       });
       t.field('createMany', {
-        type: 'countrylanguageCreateManyCountryInputEnvelope',
+        type: 'CountryLanguageCreateManyCountryInputEnvelope',
       });
-      t.list.field('connect', { type: 'countrylanguageWhereUniqueInput' });
+      t.list.field('connect', { type: 'CountryLanguageWhereUniqueInput' });
     },
   });
 
-export const cityUncheckedCreateNestedManyWithoutCountryInput = inputObjectType(
+export const CityUncheckedCreateNestedManyWithoutCountryInput = inputObjectType(
   {
     nonNullDefaults: {
       input: false,
     },
-    name: 'cityUncheckedCreateNestedManyWithoutCountryInput',
+    name: 'CityUncheckedCreateNestedManyWithoutCountryInput',
     definition(t) {
-      t.list.field('create', { type: 'cityCreateWithoutCountryInput' });
+      t.list.field('create', { type: 'CityCreateWithoutCountryInput' });
       t.list.field('connectOrCreate', {
-        type: 'cityCreateOrConnectWithoutCountryInput',
+        type: 'CityCreateOrConnectWithoutCountryInput',
       });
-      t.field('createMany', { type: 'cityCreateManyCountryInputEnvelope' });
-      t.list.field('connect', { type: 'cityWhereUniqueInput' });
+      t.field('createMany', { type: 'CityCreateManyCountryInputEnvelope' });
+      t.list.field('connect', { type: 'CityWhereUniqueInput' });
     },
   },
 );
 
-export const countrylanguageUncheckedCreateNestedManyWithoutCountryInput =
+export const CountryLanguageUncheckedCreateNestedManyWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUncheckedCreateNestedManyWithoutCountryInput',
+    name: 'CountryLanguageUncheckedCreateNestedManyWithoutCountryInput',
     definition(t) {
       t.list.field('create', {
-        type: 'countrylanguageCreateWithoutCountryInput',
+        type: 'CountryLanguageCreateWithoutCountryInput',
       });
       t.list.field('connectOrCreate', {
-        type: 'countrylanguageCreateOrConnectWithoutCountryInput',
+        type: 'CountryLanguageCreateOrConnectWithoutCountryInput',
       });
       t.field('createMany', {
-        type: 'countrylanguageCreateManyCountryInputEnvelope',
+        type: 'CountryLanguageCreateManyCountryInputEnvelope',
       });
-      t.list.field('connect', { type: 'countrylanguageWhereUniqueInput' });
+      t.list.field('connect', { type: 'CountryLanguageWhereUniqueInput' });
     },
   });
 
-export const Enumcountry_ContinentFieldUpdateOperationsInput = inputObjectType({
+export const EnumCountryContinentFieldUpdateOperationsInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+  name: 'EnumCountryContinentFieldUpdateOperationsInput',
   definition(t) {
-    t.field('set', { type: 'country_Continent' });
+    t.field('set', { type: 'CountryContinent' });
   },
 });
 
@@ -1599,171 +1599,171 @@ export const NullableStringFieldUpdateOperationsInput = inputObjectType({
   },
 });
 
-export const cityUpdateManyWithoutCountryNestedInput = inputObjectType({
+export const CityUpdateManyWithoutCountryNestedInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpdateManyWithoutCountryNestedInput',
+  name: 'CityUpdateManyWithoutCountryNestedInput',
   definition(t) {
-    t.list.field('create', { type: 'cityCreateWithoutCountryInput' });
+    t.list.field('create', { type: 'CityCreateWithoutCountryInput' });
     t.list.field('connectOrCreate', {
-      type: 'cityCreateOrConnectWithoutCountryInput',
+      type: 'CityCreateOrConnectWithoutCountryInput',
     });
     t.list.field('upsert', {
-      type: 'cityUpsertWithWhereUniqueWithoutCountryInput',
+      type: 'CityUpsertWithWhereUniqueWithoutCountryInput',
     });
-    t.field('createMany', { type: 'cityCreateManyCountryInputEnvelope' });
-    t.list.field('set', { type: 'cityWhereUniqueInput' });
-    t.list.field('disconnect', { type: 'cityWhereUniqueInput' });
-    t.list.field('delete', { type: 'cityWhereUniqueInput' });
-    t.list.field('connect', { type: 'cityWhereUniqueInput' });
+    t.field('createMany', { type: 'CityCreateManyCountryInputEnvelope' });
+    t.list.field('set', { type: 'CityWhereUniqueInput' });
+    t.list.field('disconnect', { type: 'CityWhereUniqueInput' });
+    t.list.field('delete', { type: 'CityWhereUniqueInput' });
+    t.list.field('connect', { type: 'CityWhereUniqueInput' });
     t.list.field('update', {
-      type: 'cityUpdateWithWhereUniqueWithoutCountryInput',
+      type: 'CityUpdateWithWhereUniqueWithoutCountryInput',
     });
     t.list.field('updateMany', {
-      type: 'cityUpdateManyWithWhereWithoutCountryInput',
+      type: 'CityUpdateManyWithWhereWithoutCountryInput',
     });
-    t.list.field('deleteMany', { type: 'cityScalarWhereInput' });
+    t.list.field('deleteMany', { type: 'CityScalarWhereInput' });
   },
 });
 
-export const countrylanguageUpdateManyWithoutCountryNestedInput =
+export const CountryLanguageUpdateManyWithoutCountryNestedInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUpdateManyWithoutCountryNestedInput',
+    name: 'CountryLanguageUpdateManyWithoutCountryNestedInput',
     definition(t) {
       t.list.field('create', {
-        type: 'countrylanguageCreateWithoutCountryInput',
+        type: 'CountryLanguageCreateWithoutCountryInput',
       });
       t.list.field('connectOrCreate', {
-        type: 'countrylanguageCreateOrConnectWithoutCountryInput',
+        type: 'CountryLanguageCreateOrConnectWithoutCountryInput',
       });
       t.list.field('upsert', {
-        type: 'countrylanguageUpsertWithWhereUniqueWithoutCountryInput',
+        type: 'CountryLanguageUpsertWithWhereUniqueWithoutCountryInput',
       });
       t.field('createMany', {
-        type: 'countrylanguageCreateManyCountryInputEnvelope',
+        type: 'CountryLanguageCreateManyCountryInputEnvelope',
       });
-      t.list.field('set', { type: 'countrylanguageWhereUniqueInput' });
-      t.list.field('disconnect', { type: 'countrylanguageWhereUniqueInput' });
-      t.list.field('delete', { type: 'countrylanguageWhereUniqueInput' });
-      t.list.field('connect', { type: 'countrylanguageWhereUniqueInput' });
+      t.list.field('set', { type: 'CountryLanguageWhereUniqueInput' });
+      t.list.field('disconnect', { type: 'CountryLanguageWhereUniqueInput' });
+      t.list.field('delete', { type: 'CountryLanguageWhereUniqueInput' });
+      t.list.field('connect', { type: 'CountryLanguageWhereUniqueInput' });
       t.list.field('update', {
-        type: 'countrylanguageUpdateWithWhereUniqueWithoutCountryInput',
+        type: 'CountryLanguageUpdateWithWhereUniqueWithoutCountryInput',
       });
       t.list.field('updateMany', {
-        type: 'countrylanguageUpdateManyWithWhereWithoutCountryInput',
+        type: 'CountryLanguageUpdateManyWithWhereWithoutCountryInput',
       });
-      t.list.field('deleteMany', { type: 'countrylanguageScalarWhereInput' });
+      t.list.field('deleteMany', { type: 'CountryLanguageScalarWhereInput' });
     },
   });
 
-export const cityUncheckedUpdateManyWithoutCountryNestedInput = inputObjectType(
+export const CityUncheckedUpdateManyWithoutCountryNestedInput = inputObjectType(
   {
     nonNullDefaults: {
       input: false,
     },
-    name: 'cityUncheckedUpdateManyWithoutCountryNestedInput',
+    name: 'CityUncheckedUpdateManyWithoutCountryNestedInput',
     definition(t) {
-      t.list.field('create', { type: 'cityCreateWithoutCountryInput' });
+      t.list.field('create', { type: 'CityCreateWithoutCountryInput' });
       t.list.field('connectOrCreate', {
-        type: 'cityCreateOrConnectWithoutCountryInput',
+        type: 'CityCreateOrConnectWithoutCountryInput',
       });
       t.list.field('upsert', {
-        type: 'cityUpsertWithWhereUniqueWithoutCountryInput',
+        type: 'CityUpsertWithWhereUniqueWithoutCountryInput',
       });
-      t.field('createMany', { type: 'cityCreateManyCountryInputEnvelope' });
-      t.list.field('set', { type: 'cityWhereUniqueInput' });
-      t.list.field('disconnect', { type: 'cityWhereUniqueInput' });
-      t.list.field('delete', { type: 'cityWhereUniqueInput' });
-      t.list.field('connect', { type: 'cityWhereUniqueInput' });
+      t.field('createMany', { type: 'CityCreateManyCountryInputEnvelope' });
+      t.list.field('set', { type: 'CityWhereUniqueInput' });
+      t.list.field('disconnect', { type: 'CityWhereUniqueInput' });
+      t.list.field('delete', { type: 'CityWhereUniqueInput' });
+      t.list.field('connect', { type: 'CityWhereUniqueInput' });
       t.list.field('update', {
-        type: 'cityUpdateWithWhereUniqueWithoutCountryInput',
+        type: 'CityUpdateWithWhereUniqueWithoutCountryInput',
       });
       t.list.field('updateMany', {
-        type: 'cityUpdateManyWithWhereWithoutCountryInput',
+        type: 'CityUpdateManyWithWhereWithoutCountryInput',
       });
-      t.list.field('deleteMany', { type: 'cityScalarWhereInput' });
+      t.list.field('deleteMany', { type: 'CityScalarWhereInput' });
     },
   },
 );
 
-export const countrylanguageUncheckedUpdateManyWithoutCountryNestedInput =
+export const CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUncheckedUpdateManyWithoutCountryNestedInput',
+    name: 'CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput',
     definition(t) {
       t.list.field('create', {
-        type: 'countrylanguageCreateWithoutCountryInput',
+        type: 'CountryLanguageCreateWithoutCountryInput',
       });
       t.list.field('connectOrCreate', {
-        type: 'countrylanguageCreateOrConnectWithoutCountryInput',
+        type: 'CountryLanguageCreateOrConnectWithoutCountryInput',
       });
       t.list.field('upsert', {
-        type: 'countrylanguageUpsertWithWhereUniqueWithoutCountryInput',
+        type: 'CountryLanguageUpsertWithWhereUniqueWithoutCountryInput',
       });
       t.field('createMany', {
-        type: 'countrylanguageCreateManyCountryInputEnvelope',
+        type: 'CountryLanguageCreateManyCountryInputEnvelope',
       });
-      t.list.field('set', { type: 'countrylanguageWhereUniqueInput' });
-      t.list.field('disconnect', { type: 'countrylanguageWhereUniqueInput' });
-      t.list.field('delete', { type: 'countrylanguageWhereUniqueInput' });
-      t.list.field('connect', { type: 'countrylanguageWhereUniqueInput' });
+      t.list.field('set', { type: 'CountryLanguageWhereUniqueInput' });
+      t.list.field('disconnect', { type: 'CountryLanguageWhereUniqueInput' });
+      t.list.field('delete', { type: 'CountryLanguageWhereUniqueInput' });
+      t.list.field('connect', { type: 'CountryLanguageWhereUniqueInput' });
       t.list.field('update', {
-        type: 'countrylanguageUpdateWithWhereUniqueWithoutCountryInput',
+        type: 'CountryLanguageUpdateWithWhereUniqueWithoutCountryInput',
       });
       t.list.field('updateMany', {
-        type: 'countrylanguageUpdateManyWithWhereWithoutCountryInput',
+        type: 'CountryLanguageUpdateManyWithWhereWithoutCountryInput',
       });
-      t.list.field('deleteMany', { type: 'countrylanguageScalarWhereInput' });
+      t.list.field('deleteMany', { type: 'CountryLanguageScalarWhereInput' });
     },
   });
 
-export const countryCreateNestedOneWithoutCountrylanguageInput =
+export const CountryCreateNestedOneWithoutCountryLanguageInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countryCreateNestedOneWithoutCountrylanguageInput',
+    name: 'CountryCreateNestedOneWithoutCountryLanguageInput',
     definition(t) {
-      t.field('create', { type: 'countryCreateWithoutCountrylanguageInput' });
+      t.field('create', { type: 'CountryCreateWithoutCountryLanguageInput' });
       t.field('connectOrCreate', {
-        type: 'countryCreateOrConnectWithoutCountrylanguageInput',
+        type: 'CountryCreateOrConnectWithoutCountryLanguageInput',
       });
-      t.field('connect', { type: 'countryWhereUniqueInput' });
+      t.field('connect', { type: 'CountryWhereUniqueInput' });
     },
   });
 
-export const Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput =
+export const EnumCountryLanguageIsOfficialFieldUpdateOperationsInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+    name: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     definition(t) {
-      t.field('set', { type: 'countrylanguage_IsOfficial' });
+      t.field('set', { type: 'CountryLanguageIsOfficial' });
     },
   });
 
-export const countryUpdateOneRequiredWithoutCountrylanguageNestedInput =
+export const CountryUpdateOneRequiredWithoutCountryLanguageNestedInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countryUpdateOneRequiredWithoutCountrylanguageNestedInput',
+    name: 'CountryUpdateOneRequiredWithoutCountryLanguageNestedInput',
     definition(t) {
-      t.field('create', { type: 'countryCreateWithoutCountrylanguageInput' });
+      t.field('create', { type: 'CountryCreateWithoutCountryLanguageInput' });
       t.field('connectOrCreate', {
-        type: 'countryCreateOrConnectWithoutCountrylanguageInput',
+        type: 'CountryCreateOrConnectWithoutCountryLanguageInput',
       });
-      t.field('upsert', { type: 'countryUpsertWithoutCountrylanguageInput' });
-      t.field('connect', { type: 'countryWhereUniqueInput' });
+      t.field('upsert', { type: 'CountryUpsertWithoutCountryLanguageInput' });
+      t.field('connect', { type: 'CountryWhereUniqueInput' });
       t.field('update', {
-        type: 'countryUpdateToOneWithWhereWithoutCountrylanguageInput',
+        type: 'CountryUpdateToOneWithWhereWithoutCountryLanguageInput',
       });
     },
   });
@@ -1867,16 +1867,16 @@ export const NestedStringWithAggregatesFilter = inputObjectType({
   },
 });
 
-export const NestedEnumcountry_ContinentFilter = inputObjectType({
+export const NestedEnumCountryContinentFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'NestedEnumcountry_ContinentFilter',
+  name: 'NestedEnumCountryContinentFilter',
   definition(t) {
-    t.field('equals', { type: 'country_Continent' });
-    t.list.field('in', { type: 'country_Continent' });
-    t.list.field('notIn', { type: 'country_Continent' });
-    t.field('not', { type: 'NestedEnumcountry_ContinentFilter' });
+    t.field('equals', { type: 'CountryContinent' });
+    t.list.field('in', { type: 'CountryContinent' });
+    t.list.field('notIn', { type: 'CountryContinent' });
+    t.field('not', { type: 'NestedEnumCountryContinentFilter' });
   },
 });
 
@@ -1951,19 +1951,19 @@ export const NestedStringNullableFilter = inputObjectType({
   },
 });
 
-export const NestedEnumcountry_ContinentWithAggregatesFilter = inputObjectType({
+export const NestedEnumCountryContinentWithAggregatesFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'NestedEnumcountry_ContinentWithAggregatesFilter',
+  name: 'NestedEnumCountryContinentWithAggregatesFilter',
   definition(t) {
-    t.field('equals', { type: 'country_Continent' });
-    t.list.field('in', { type: 'country_Continent' });
-    t.list.field('notIn', { type: 'country_Continent' });
-    t.field('not', { type: 'NestedEnumcountry_ContinentWithAggregatesFilter' });
+    t.field('equals', { type: 'CountryContinent' });
+    t.list.field('in', { type: 'CountryContinent' });
+    t.list.field('notIn', { type: 'CountryContinent' });
+    t.field('not', { type: 'NestedEnumCountryContinentWithAggregatesFilter' });
     t.field('_count', { type: 'NestedIntFilter' });
-    t.field('_min', { type: 'NestedEnumcountry_ContinentFilter' });
-    t.field('_max', { type: 'NestedEnumcountry_ContinentFilter' });
+    t.field('_min', { type: 'NestedEnumCountryContinentFilter' });
+    t.field('_max', { type: 'NestedEnumCountryContinentFilter' });
   },
 });
 
@@ -2073,667 +2073,667 @@ export const NestedStringNullableWithAggregatesFilter = inputObjectType({
   },
 });
 
-export const NestedEnumcountrylanguage_IsOfficialFilter = inputObjectType({
+export const NestedEnumCountryLanguageIsOfficialFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'NestedEnumcountrylanguage_IsOfficialFilter',
+  name: 'NestedEnumCountryLanguageIsOfficialFilter',
   definition(t) {
-    t.field('equals', { type: 'countrylanguage_IsOfficial' });
-    t.list.field('in', { type: 'countrylanguage_IsOfficial' });
-    t.list.field('notIn', { type: 'countrylanguage_IsOfficial' });
-    t.field('not', { type: 'NestedEnumcountrylanguage_IsOfficialFilter' });
+    t.field('equals', { type: 'CountryLanguageIsOfficial' });
+    t.list.field('in', { type: 'CountryLanguageIsOfficial' });
+    t.list.field('notIn', { type: 'CountryLanguageIsOfficial' });
+    t.field('not', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
   },
 });
 
-export const NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter =
+export const NestedEnumCountryLanguageIsOfficialWithAggregatesFilter =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter',
+    name: 'NestedEnumCountryLanguageIsOfficialWithAggregatesFilter',
     definition(t) {
-      t.field('equals', { type: 'countrylanguage_IsOfficial' });
-      t.list.field('in', { type: 'countrylanguage_IsOfficial' });
-      t.list.field('notIn', { type: 'countrylanguage_IsOfficial' });
+      t.field('equals', { type: 'CountryLanguageIsOfficial' });
+      t.list.field('in', { type: 'CountryLanguageIsOfficial' });
+      t.list.field('notIn', { type: 'CountryLanguageIsOfficial' });
       t.field('not', {
-        type: 'NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter',
+        type: 'NestedEnumCountryLanguageIsOfficialWithAggregatesFilter',
       });
       t.field('_count', { type: 'NestedIntFilter' });
-      t.field('_min', { type: 'NestedEnumcountrylanguage_IsOfficialFilter' });
-      t.field('_max', { type: 'NestedEnumcountrylanguage_IsOfficialFilter' });
+      t.field('_min', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
+      t.field('_max', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
     },
   });
 
-export const countryCreateWithoutCityInput = inputObjectType({
+export const CountryCreateWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCreateWithoutCityInput',
+  name: 'CountryCreateWithoutCityInput',
   definition(t) {
-    t.nonNull.field('Code', { type: 'String' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.nonNull.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Decimal' });
-    t.field('GNP', { type: 'Decimal' });
-    t.field('GNPOld', { type: 'Decimal' });
-    t.nonNull.field('LocalName', { type: 'String' });
-    t.nonNull.field('GovernmentForm', { type: 'String' });
-    t.field('HeadOfState', { type: 'String' });
-    t.field('Capital', { type: 'Int' });
-    t.nonNull.field('Code2', { type: 'String' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageCreateNestedManyWithoutCountryInput',
+    t.nonNull.field('code', { type: 'String' });
+    t.nonNull.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.nonNull.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Decimal' });
+    t.field('gnp', { type: 'Decimal' });
+    t.field('gnpoId', { type: 'Decimal' });
+    t.nonNull.field('localName', { type: 'String' });
+    t.nonNull.field('governmentForm', { type: 'String' });
+    t.field('headOfState', { type: 'String' });
+    t.field('capital', { type: 'Int' });
+    t.nonNull.field('code2', { type: 'String' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageCreateNestedManyWithoutCountryInput',
     });
   },
 });
 
-export const countryUncheckedCreateWithoutCityInput = inputObjectType({
+export const CountryUncheckedCreateWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUncheckedCreateWithoutCityInput',
+  name: 'CountryUncheckedCreateWithoutCityInput',
   definition(t) {
-    t.nonNull.field('Code', { type: 'String' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.nonNull.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Decimal' });
-    t.field('GNP', { type: 'Decimal' });
-    t.field('GNPOld', { type: 'Decimal' });
-    t.nonNull.field('LocalName', { type: 'String' });
-    t.nonNull.field('GovernmentForm', { type: 'String' });
-    t.field('HeadOfState', { type: 'String' });
-    t.field('Capital', { type: 'Int' });
-    t.nonNull.field('Code2', { type: 'String' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageUncheckedCreateNestedManyWithoutCountryInput',
+    t.nonNull.field('code', { type: 'String' });
+    t.nonNull.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.nonNull.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Decimal' });
+    t.field('gnp', { type: 'Decimal' });
+    t.field('gnpoId', { type: 'Decimal' });
+    t.nonNull.field('localName', { type: 'String' });
+    t.nonNull.field('governmentForm', { type: 'String' });
+    t.field('headOfState', { type: 'String' });
+    t.field('capital', { type: 'Int' });
+    t.nonNull.field('code2', { type: 'String' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageUncheckedCreateNestedManyWithoutCountryInput',
     });
   },
 });
 
-export const countryCreateOrConnectWithoutCityInput = inputObjectType({
+export const CountryCreateOrConnectWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCreateOrConnectWithoutCityInput',
+  name: 'CountryCreateOrConnectWithoutCityInput',
   definition(t) {
-    t.nonNull.field('where', { type: 'countryWhereUniqueInput' });
-    t.nonNull.field('create', { type: 'countryCreateWithoutCityInput' });
+    t.nonNull.field('where', { type: 'CountryWhereUniqueInput' });
+    t.nonNull.field('create', { type: 'CountryCreateWithoutCityInput' });
   },
 });
 
-export const countryUpsertWithoutCityInput = inputObjectType({
+export const CountryUpsertWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpsertWithoutCityInput',
+  name: 'CountryUpsertWithoutCityInput',
   definition(t) {
-    t.nonNull.field('update', { type: 'countryUpdateWithoutCityInput' });
-    t.nonNull.field('create', { type: 'countryCreateWithoutCityInput' });
-    t.field('where', { type: 'countryWhereInput' });
+    t.nonNull.field('update', { type: 'CountryUpdateWithoutCityInput' });
+    t.nonNull.field('create', { type: 'CountryCreateWithoutCityInput' });
+    t.field('where', { type: 'CountryWhereInput' });
   },
 });
 
-export const countryUpdateToOneWithWhereWithoutCityInput = inputObjectType({
+export const CountryUpdateToOneWithWhereWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpdateToOneWithWhereWithoutCityInput',
+  name: 'CountryUpdateToOneWithWhereWithoutCityInput',
   definition(t) {
-    t.field('where', { type: 'countryWhereInput' });
-    t.nonNull.field('data', { type: 'countryUpdateWithoutCityInput' });
+    t.field('where', { type: 'CountryWhereInput' });
+    t.nonNull.field('data', { type: 'CountryUpdateWithoutCityInput' });
   },
 });
 
-export const countryUpdateWithoutCityInput = inputObjectType({
+export const CountryUpdateWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpdateWithoutCityInput',
+  name: 'CountryUpdateWithoutCityInput',
   definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
     });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
       type: 'NullableDecimalFieldUpdateOperationsInput',
     });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
       type: 'NullableStringFieldUpdateOperationsInput',
     });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageUpdateManyWithoutCountryNestedInput',
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageUpdateManyWithoutCountryNestedInput',
     });
   },
 });
 
-export const countryUncheckedUpdateWithoutCityInput = inputObjectType({
+export const CountryUncheckedUpdateWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUncheckedUpdateWithoutCityInput',
+  name: 'CountryUncheckedUpdateWithoutCityInput',
   definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
     });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
       type: 'NullableDecimalFieldUpdateOperationsInput',
     });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
       type: 'NullableStringFieldUpdateOperationsInput',
     });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('countrylanguage', {
-      type: 'countrylanguageUncheckedUpdateManyWithoutCountryNestedInput',
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('countryLanguage', {
+      type: 'CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput',
     });
   },
 });
 
-export const cityCreateWithoutCountryInput = inputObjectType({
+export const CityCreateWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateWithoutCountryInput',
+  name: 'CityCreateWithoutCountryInput',
   definition(t) {
-    t.nonNull.field('Name', { type: 'String' });
-    t.nonNull.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.nonNull.field('name', { type: 'String' });
+    t.nonNull.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
   },
 });
 
-export const cityUncheckedCreateWithoutCountryInput = inputObjectType({
+export const CityUncheckedCreateWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUncheckedCreateWithoutCountryInput',
+  name: 'CityUncheckedCreateWithoutCountryInput',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.nonNull.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.field('id', { type: 'Int' });
+    t.nonNull.field('name', { type: 'String' });
+    t.nonNull.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
   },
 });
 
-export const cityCreateOrConnectWithoutCountryInput = inputObjectType({
+export const CityCreateOrConnectWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateOrConnectWithoutCountryInput',
+  name: 'CityCreateOrConnectWithoutCountryInput',
   definition(t) {
-    t.nonNull.field('where', { type: 'cityWhereUniqueInput' });
-    t.nonNull.field('create', { type: 'cityCreateWithoutCountryInput' });
+    t.nonNull.field('where', { type: 'CityWhereUniqueInput' });
+    t.nonNull.field('create', { type: 'CityCreateWithoutCountryInput' });
   },
 });
 
-export const cityCreateManyCountryInputEnvelope = inputObjectType({
+export const CityCreateManyCountryInputEnvelope = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateManyCountryInputEnvelope',
+  name: 'CityCreateManyCountryInputEnvelope',
   definition(t) {
-    t.nonNull.field('data', { type: 'cityCreateManyCountryInput' });
+    t.nonNull.field('data', { type: 'CityCreateManyCountryInput' });
     t.field('skipDuplicates', { type: 'Boolean' });
   },
 });
 
-export const countrylanguageCreateWithoutCountryInput = inputObjectType({
+export const CountryLanguageCreateWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageCreateWithoutCountryInput',
+  name: 'CountryLanguageCreateWithoutCountryInput',
   definition(t) {
-    t.nonNull.field('Language', { type: 'String' });
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.field('Percentage', { type: 'Decimal' });
+    t.nonNull.field('language', { type: 'String' });
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const countrylanguageUncheckedCreateWithoutCountryInput =
+export const CountryLanguageUncheckedCreateWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUncheckedCreateWithoutCountryInput',
+    name: 'CountryLanguageUncheckedCreateWithoutCountryInput',
     definition(t) {
-      t.nonNull.field('Language', { type: 'String' });
-      t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-      t.field('Percentage', { type: 'Decimal' });
+      t.nonNull.field('language', { type: 'String' });
+      t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+      t.field('percentage', { type: 'Decimal' });
     },
   });
 
-export const countrylanguageCreateOrConnectWithoutCountryInput =
+export const CountryLanguageCreateOrConnectWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageCreateOrConnectWithoutCountryInput',
+    name: 'CountryLanguageCreateOrConnectWithoutCountryInput',
     definition(t) {
-      t.nonNull.field('where', { type: 'countrylanguageWhereUniqueInput' });
+      t.nonNull.field('where', { type: 'CountryLanguageWhereUniqueInput' });
       t.nonNull.field('create', {
-        type: 'countrylanguageCreateWithoutCountryInput',
+        type: 'CountryLanguageCreateWithoutCountryInput',
       });
     },
   });
 
-export const countrylanguageCreateManyCountryInputEnvelope = inputObjectType({
+export const CountryLanguageCreateManyCountryInputEnvelope = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageCreateManyCountryInputEnvelope',
+  name: 'CountryLanguageCreateManyCountryInputEnvelope',
   definition(t) {
-    t.nonNull.field('data', { type: 'countrylanguageCreateManyCountryInput' });
+    t.nonNull.field('data', { type: 'CountryLanguageCreateManyCountryInput' });
     t.field('skipDuplicates', { type: 'Boolean' });
   },
 });
 
-export const cityUpsertWithWhereUniqueWithoutCountryInput = inputObjectType({
+export const CityUpsertWithWhereUniqueWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpsertWithWhereUniqueWithoutCountryInput',
+  name: 'CityUpsertWithWhereUniqueWithoutCountryInput',
   definition(t) {
-    t.nonNull.field('where', { type: 'cityWhereUniqueInput' });
-    t.nonNull.field('update', { type: 'cityUpdateWithoutCountryInput' });
-    t.nonNull.field('create', { type: 'cityCreateWithoutCountryInput' });
+    t.nonNull.field('where', { type: 'CityWhereUniqueInput' });
+    t.nonNull.field('update', { type: 'CityUpdateWithoutCountryInput' });
+    t.nonNull.field('create', { type: 'CityCreateWithoutCountryInput' });
   },
 });
 
-export const cityUpdateWithWhereUniqueWithoutCountryInput = inputObjectType({
+export const CityUpdateWithWhereUniqueWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpdateWithWhereUniqueWithoutCountryInput',
+  name: 'CityUpdateWithWhereUniqueWithoutCountryInput',
   definition(t) {
-    t.nonNull.field('where', { type: 'cityWhereUniqueInput' });
-    t.nonNull.field('data', { type: 'cityUpdateWithoutCountryInput' });
+    t.nonNull.field('where', { type: 'CityWhereUniqueInput' });
+    t.nonNull.field('data', { type: 'CityUpdateWithoutCountryInput' });
   },
 });
 
-export const cityUpdateManyWithWhereWithoutCountryInput = inputObjectType({
+export const CityUpdateManyWithWhereWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpdateManyWithWhereWithoutCountryInput',
+  name: 'CityUpdateManyWithWhereWithoutCountryInput',
   definition(t) {
-    t.nonNull.field('where', { type: 'cityScalarWhereInput' });
-    t.nonNull.field('data', { type: 'cityUpdateManyMutationInput' });
+    t.nonNull.field('where', { type: 'CityScalarWhereInput' });
+    t.nonNull.field('data', { type: 'CityUpdateManyMutationInput' });
   },
 });
 
-export const cityScalarWhereInput = inputObjectType({
+export const CityScalarWhereInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityScalarWhereInput',
+  name: 'CityScalarWhereInput',
   definition(t) {
-    t.list.field('AND', { type: 'cityScalarWhereInput' });
-    t.list.field('OR', { type: 'cityScalarWhereInput' });
-    t.list.field('NOT', { type: 'cityScalarWhereInput' });
-    t.field('ID', { type: 'IntFilter' });
-    t.field('Name', { type: 'StringFilter' });
-    t.field('CountryCode', { type: 'StringFilter' });
-    t.field('District', { type: 'StringFilter' });
-    t.field('Population', { type: 'IntFilter' });
+    t.list.field('AND', { type: 'CityScalarWhereInput' });
+    t.list.field('OR', { type: 'CityScalarWhereInput' });
+    t.list.field('NOT', { type: 'CityScalarWhereInput' });
+    t.field('id', { type: 'IntFilter' });
+    t.field('name', { type: 'StringFilter' });
+    t.field('countryCode', { type: 'StringFilter' });
+    t.field('district', { type: 'StringFilter' });
+    t.field('population', { type: 'IntFilter' });
   },
 });
 
-export const countrylanguageUpsertWithWhereUniqueWithoutCountryInput =
+export const CountryLanguageUpsertWithWhereUniqueWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUpsertWithWhereUniqueWithoutCountryInput',
+    name: 'CountryLanguageUpsertWithWhereUniqueWithoutCountryInput',
     definition(t) {
-      t.nonNull.field('where', { type: 'countrylanguageWhereUniqueInput' });
+      t.nonNull.field('where', { type: 'CountryLanguageWhereUniqueInput' });
       t.nonNull.field('update', {
-        type: 'countrylanguageUpdateWithoutCountryInput',
+        type: 'CountryLanguageUpdateWithoutCountryInput',
       });
       t.nonNull.field('create', {
-        type: 'countrylanguageCreateWithoutCountryInput',
+        type: 'CountryLanguageCreateWithoutCountryInput',
       });
     },
   });
 
-export const countrylanguageUpdateWithWhereUniqueWithoutCountryInput =
+export const CountryLanguageUpdateWithWhereUniqueWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUpdateWithWhereUniqueWithoutCountryInput',
+    name: 'CountryLanguageUpdateWithWhereUniqueWithoutCountryInput',
     definition(t) {
-      t.nonNull.field('where', { type: 'countrylanguageWhereUniqueInput' });
+      t.nonNull.field('where', { type: 'CountryLanguageWhereUniqueInput' });
       t.nonNull.field('data', {
-        type: 'countrylanguageUpdateWithoutCountryInput',
+        type: 'CountryLanguageUpdateWithoutCountryInput',
       });
     },
   });
 
-export const countrylanguageUpdateManyWithWhereWithoutCountryInput =
+export const CountryLanguageUpdateManyWithWhereWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUpdateManyWithWhereWithoutCountryInput',
+    name: 'CountryLanguageUpdateManyWithWhereWithoutCountryInput',
     definition(t) {
-      t.nonNull.field('where', { type: 'countrylanguageScalarWhereInput' });
+      t.nonNull.field('where', { type: 'CountryLanguageScalarWhereInput' });
       t.nonNull.field('data', {
-        type: 'countrylanguageUpdateManyMutationInput',
+        type: 'CountryLanguageUpdateManyMutationInput',
       });
     },
   });
 
-export const countrylanguageScalarWhereInput = inputObjectType({
+export const CountryLanguageScalarWhereInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageScalarWhereInput',
+  name: 'CountryLanguageScalarWhereInput',
   definition(t) {
-    t.list.field('AND', { type: 'countrylanguageScalarWhereInput' });
-    t.list.field('OR', { type: 'countrylanguageScalarWhereInput' });
-    t.list.field('NOT', { type: 'countrylanguageScalarWhereInput' });
-    t.field('CountryCode', { type: 'StringFilter' });
-    t.field('Language', { type: 'StringFilter' });
-    t.field('IsOfficial', { type: 'Enumcountrylanguage_IsOfficialFilter' });
-    t.field('Percentage', { type: 'DecimalFilter' });
+    t.list.field('AND', { type: 'CountryLanguageScalarWhereInput' });
+    t.list.field('OR', { type: 'CountryLanguageScalarWhereInput' });
+    t.list.field('NOT', { type: 'CountryLanguageScalarWhereInput' });
+    t.field('countryCode', { type: 'StringFilter' });
+    t.field('language', { type: 'StringFilter' });
+    t.field('isOfficial', { type: 'EnumCountryLanguageIsOfficialFilter' });
+    t.field('percentage', { type: 'DecimalFilter' });
   },
 });
 
-export const countryCreateWithoutCountrylanguageInput = inputObjectType({
+export const CountryCreateWithoutCountryLanguageInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryCreateWithoutCountrylanguageInput',
+  name: 'CountryCreateWithoutCountryLanguageInput',
   definition(t) {
-    t.nonNull.field('Code', { type: 'String' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.nonNull.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Decimal' });
-    t.field('GNP', { type: 'Decimal' });
-    t.field('GNPOld', { type: 'Decimal' });
-    t.nonNull.field('LocalName', { type: 'String' });
-    t.nonNull.field('GovernmentForm', { type: 'String' });
-    t.field('HeadOfState', { type: 'String' });
-    t.field('Capital', { type: 'Int' });
-    t.nonNull.field('Code2', { type: 'String' });
-    t.field('city', { type: 'cityCreateNestedManyWithoutCountryInput' });
+    t.nonNull.field('code', { type: 'String' });
+    t.nonNull.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.nonNull.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Decimal' });
+    t.field('gnp', { type: 'Decimal' });
+    t.field('gnpoId', { type: 'Decimal' });
+    t.nonNull.field('localName', { type: 'String' });
+    t.nonNull.field('governmentForm', { type: 'String' });
+    t.field('headOfState', { type: 'String' });
+    t.field('capital', { type: 'Int' });
+    t.nonNull.field('code2', { type: 'String' });
+    t.field('city', { type: 'CityCreateNestedManyWithoutCountryInput' });
   },
 });
 
-export const countryUncheckedCreateWithoutCountrylanguageInput =
+export const CountryUncheckedCreateWithoutCountryLanguageInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countryUncheckedCreateWithoutCountrylanguageInput',
+    name: 'CountryUncheckedCreateWithoutCountryLanguageInput',
     definition(t) {
-      t.nonNull.field('Code', { type: 'String' });
-      t.nonNull.field('Name', { type: 'String' });
-      t.field('Continent', { type: 'country_Continent' });
-      t.nonNull.field('Region', { type: 'String' });
-      t.field('SurfaceArea', { type: 'Decimal' });
-      t.field('IndepYear', { type: 'Int' });
-      t.field('Population', { type: 'Int' });
-      t.field('LifeExpectancy', { type: 'Decimal' });
-      t.field('GNP', { type: 'Decimal' });
-      t.field('GNPOld', { type: 'Decimal' });
-      t.nonNull.field('LocalName', { type: 'String' });
-      t.nonNull.field('GovernmentForm', { type: 'String' });
-      t.field('HeadOfState', { type: 'String' });
-      t.field('Capital', { type: 'Int' });
-      t.nonNull.field('Code2', { type: 'String' });
+      t.nonNull.field('code', { type: 'String' });
+      t.nonNull.field('name', { type: 'String' });
+      t.field('continent', { type: 'CountryContinent' });
+      t.nonNull.field('region', { type: 'String' });
+      t.field('surfaceArea', { type: 'Decimal' });
+      t.field('indepYear', { type: 'Int' });
+      t.field('population', { type: 'Int' });
+      t.field('lifeExpectancy', { type: 'Decimal' });
+      t.field('gnp', { type: 'Decimal' });
+      t.field('gnpoId', { type: 'Decimal' });
+      t.nonNull.field('localName', { type: 'String' });
+      t.nonNull.field('governmentForm', { type: 'String' });
+      t.field('headOfState', { type: 'String' });
+      t.field('capital', { type: 'Int' });
+      t.nonNull.field('code2', { type: 'String' });
       t.field('city', {
-        type: 'cityUncheckedCreateNestedManyWithoutCountryInput',
+        type: 'CityUncheckedCreateNestedManyWithoutCountryInput',
       });
     },
   });
 
-export const countryCreateOrConnectWithoutCountrylanguageInput =
+export const CountryCreateOrConnectWithoutCountryLanguageInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countryCreateOrConnectWithoutCountrylanguageInput',
+    name: 'CountryCreateOrConnectWithoutCountryLanguageInput',
     definition(t) {
-      t.nonNull.field('where', { type: 'countryWhereUniqueInput' });
+      t.nonNull.field('where', { type: 'CountryWhereUniqueInput' });
       t.nonNull.field('create', {
-        type: 'countryCreateWithoutCountrylanguageInput',
+        type: 'CountryCreateWithoutCountryLanguageInput',
       });
     },
   });
 
-export const countryUpsertWithoutCountrylanguageInput = inputObjectType({
+export const CountryUpsertWithoutCountryLanguageInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpsertWithoutCountrylanguageInput',
+  name: 'CountryUpsertWithoutCountryLanguageInput',
   definition(t) {
     t.nonNull.field('update', {
-      type: 'countryUpdateWithoutCountrylanguageInput',
+      type: 'CountryUpdateWithoutCountryLanguageInput',
     });
     t.nonNull.field('create', {
-      type: 'countryCreateWithoutCountrylanguageInput',
+      type: 'CountryCreateWithoutCountryLanguageInput',
     });
-    t.field('where', { type: 'countryWhereInput' });
+    t.field('where', { type: 'CountryWhereInput' });
   },
 });
 
-export const countryUpdateToOneWithWhereWithoutCountrylanguageInput =
+export const CountryUpdateToOneWithWhereWithoutCountryLanguageInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countryUpdateToOneWithWhereWithoutCountrylanguageInput',
+    name: 'CountryUpdateToOneWithWhereWithoutCountryLanguageInput',
     definition(t) {
-      t.field('where', { type: 'countryWhereInput' });
+      t.field('where', { type: 'CountryWhereInput' });
       t.nonNull.field('data', {
-        type: 'countryUpdateWithoutCountrylanguageInput',
+        type: 'CountryUpdateWithoutCountryLanguageInput',
       });
     },
   });
 
-export const countryUpdateWithoutCountrylanguageInput = inputObjectType({
+export const CountryUpdateWithoutCountryLanguageInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countryUpdateWithoutCountrylanguageInput',
+  name: 'CountryUpdateWithoutCountryLanguageInput',
   definition(t) {
-    t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Continent', {
-      type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+    t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('continent', {
+      type: 'EnumCountryContinentFieldUpdateOperationsInput',
     });
-    t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-    t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('LifeExpectancy', {
+    t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('lifeExpectancy', {
       type: 'NullableDecimalFieldUpdateOperationsInput',
     });
-    t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-    t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('HeadOfState', {
+    t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+    t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('headOfState', {
       type: 'NullableStringFieldUpdateOperationsInput',
     });
-    t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-    t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('city', { type: 'cityUpdateManyWithoutCountryNestedInput' });
+    t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+    t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('city', { type: 'CityUpdateManyWithoutCountryNestedInput' });
   },
 });
 
-export const countryUncheckedUpdateWithoutCountrylanguageInput =
+export const CountryUncheckedUpdateWithoutCountryLanguageInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countryUncheckedUpdateWithoutCountrylanguageInput',
+    name: 'CountryUncheckedUpdateWithoutCountryLanguageInput',
     definition(t) {
-      t.field('Code', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('Continent', {
-        type: 'Enumcountry_ContinentFieldUpdateOperationsInput',
+      t.field('code', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('continent', {
+        type: 'EnumCountryContinentFieldUpdateOperationsInput',
       });
-      t.field('Region', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('SurfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
-      t.field('IndepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
-      t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
-      t.field('LifeExpectancy', {
+      t.field('region', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('surfaceArea', { type: 'DecimalFieldUpdateOperationsInput' });
+      t.field('indepYear', { type: 'NullableIntFieldUpdateOperationsInput' });
+      t.field('population', { type: 'IntFieldUpdateOperationsInput' });
+      t.field('lifeExpectancy', {
         type: 'NullableDecimalFieldUpdateOperationsInput',
       });
-      t.field('GNP', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-      t.field('GNPOld', { type: 'NullableDecimalFieldUpdateOperationsInput' });
-      t.field('LocalName', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('GovernmentForm', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('HeadOfState', {
+      t.field('gnp', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+      t.field('gnpoId', { type: 'NullableDecimalFieldUpdateOperationsInput' });
+      t.field('localName', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('governmentForm', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('headOfState', {
         type: 'NullableStringFieldUpdateOperationsInput',
       });
-      t.field('Capital', { type: 'NullableIntFieldUpdateOperationsInput' });
-      t.field('Code2', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('capital', { type: 'NullableIntFieldUpdateOperationsInput' });
+      t.field('code2', { type: 'StringFieldUpdateOperationsInput' });
       t.field('city', {
-        type: 'cityUncheckedUpdateManyWithoutCountryNestedInput',
+        type: 'CityUncheckedUpdateManyWithoutCountryNestedInput',
       });
     },
   });
 
-export const cityCreateManyCountryInput = inputObjectType({
+export const CityCreateManyCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityCreateManyCountryInput',
+  name: 'CityCreateManyCountryInput',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.nonNull.field('Name', { type: 'String' });
-    t.nonNull.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.field('id', { type: 'Int' });
+    t.nonNull.field('name', { type: 'String' });
+    t.nonNull.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
   },
 });
 
-export const countrylanguageCreateManyCountryInput = inputObjectType({
+export const CountryLanguageCreateManyCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageCreateManyCountryInput',
+  name: 'CountryLanguageCreateManyCountryInput',
   definition(t) {
-    t.nonNull.field('Language', { type: 'String' });
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.field('Percentage', { type: 'Decimal' });
+    t.nonNull.field('language', { type: 'String' });
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const cityUpdateWithoutCountryInput = inputObjectType({
+export const CityUpdateWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUpdateWithoutCountryInput',
+  name: 'CityUpdateWithoutCountryInput',
   definition(t) {
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
   },
 });
 
-export const cityUncheckedUpdateWithoutCountryInput = inputObjectType({
+export const CityUncheckedUpdateWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUncheckedUpdateWithoutCountryInput',
+  name: 'CityUncheckedUpdateWithoutCountryInput',
   definition(t) {
-    t.field('ID', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('id', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
   },
 });
 
-export const cityUncheckedUpdateManyWithoutCountryInput = inputObjectType({
+export const CityUncheckedUpdateManyWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'cityUncheckedUpdateManyWithoutCountryInput',
+  name: 'CityUncheckedUpdateManyWithoutCountryInput',
   definition(t) {
-    t.field('ID', { type: 'IntFieldUpdateOperationsInput' });
-    t.field('Name', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('District', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('Population', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('id', { type: 'IntFieldUpdateOperationsInput' });
+    t.field('name', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('district', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('population', { type: 'IntFieldUpdateOperationsInput' });
   },
 });
 
-export const countrylanguageUpdateWithoutCountryInput = inputObjectType({
+export const CountryLanguageUpdateWithoutCountryInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'countrylanguageUpdateWithoutCountryInput',
+  name: 'CountryLanguageUpdateWithoutCountryInput',
   definition(t) {
-    t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-    t.field('IsOfficial', {
-      type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+    t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('isOfficial', {
+      type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     });
-    t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+    t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
   },
 });
 
-export const countrylanguageUncheckedUpdateWithoutCountryInput =
+export const CountryLanguageUncheckedUpdateWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUncheckedUpdateWithoutCountryInput',
+    name: 'CountryLanguageUncheckedUpdateWithoutCountryInput',
     definition(t) {
-      t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('IsOfficial', {
-        type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+      t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('isOfficial', {
+        type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
       });
-      t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+      t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
     },
   });
 
-export const countrylanguageUncheckedUpdateManyWithoutCountryInput =
+export const CountryLanguageUncheckedUpdateManyWithoutCountryInput =
   inputObjectType({
     nonNullDefaults: {
       input: false,
     },
-    name: 'countrylanguageUncheckedUpdateManyWithoutCountryInput',
+    name: 'CountryLanguageUncheckedUpdateManyWithoutCountryInput',
     definition(t) {
-      t.field('Language', { type: 'StringFieldUpdateOperationsInput' });
-      t.field('IsOfficial', {
-        type: 'Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput',
+      t.field('language', { type: 'StringFieldUpdateOperationsInput' });
+      t.field('isOfficial', {
+        type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
       });
-      t.field('Percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+      t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
     },
   });
 
@@ -2757,11 +2757,11 @@ export const CityGroupByOutputType = objectType({
   },
   name: 'CityGroupByOutputType',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.field('Name', { type: 'String' });
-    t.field('CountryCode', { type: 'String' });
-    t.field('District', { type: 'String' });
-    t.field('Population', { type: 'Int' });
+    t.field('id', { type: 'Int' });
+    t.field('name', { type: 'String' });
+    t.field('countryCode', { type: 'String' });
+    t.field('district', { type: 'String' });
+    t.field('population', { type: 'Int' });
     t.nullable.field('_count', { type: 'CityCountAggregateOutputType' });
     t.nullable.field('_avg', { type: 'CityAvgAggregateOutputType' });
     t.nullable.field('_sum', { type: 'CitySumAggregateOutputType' });
@@ -2790,21 +2790,21 @@ export const CountryGroupByOutputType = objectType({
   },
   name: 'CountryGroupByOutputType',
   definition(t) {
-    t.field('Code', { type: 'String' });
-    t.field('Name', { type: 'String' });
-    t.field('Continent', { type: 'country_Continent' });
-    t.field('Region', { type: 'String' });
-    t.field('SurfaceArea', { type: 'Decimal' });
-    t.nullable.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.nullable.field('LifeExpectancy', { type: 'Decimal' });
-    t.nullable.field('GNP', { type: 'Decimal' });
-    t.nullable.field('GNPOld', { type: 'Decimal' });
-    t.field('LocalName', { type: 'String' });
-    t.field('GovernmentForm', { type: 'String' });
-    t.nullable.field('HeadOfState', { type: 'String' });
-    t.nullable.field('Capital', { type: 'Int' });
-    t.field('Code2', { type: 'String' });
+    t.field('code', { type: 'String' });
+    t.field('name', { type: 'String' });
+    t.field('continent', { type: 'CountryContinent' });
+    t.field('region', { type: 'String' });
+    t.field('surfaceArea', { type: 'Decimal' });
+    t.nullable.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.nullable.field('lifeExpectancy', { type: 'Decimal' });
+    t.nullable.field('gnp', { type: 'Decimal' });
+    t.nullable.field('gnpoId', { type: 'Decimal' });
+    t.field('localName', { type: 'String' });
+    t.field('governmentForm', { type: 'String' });
+    t.nullable.field('headOfState', { type: 'String' });
+    t.nullable.field('capital', { type: 'Int' });
+    t.field('code2', { type: 'String' });
     t.nullable.field('_count', { type: 'CountryCountAggregateOutputType' });
     t.nullable.field('_avg', { type: 'CountryAvgAggregateOutputType' });
     t.nullable.field('_sum', { type: 'CountrySumAggregateOutputType' });
@@ -2813,39 +2813,39 @@ export const CountryGroupByOutputType = objectType({
   },
 });
 
-export const AggregateCountrylanguage = objectType({
+export const AggregateCountryLanguage = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'AggregateCountrylanguage',
+  name: 'AggregateCountryLanguage',
   definition(t) {
     t.nullable.field('_count', {
-      type: 'CountrylanguageCountAggregateOutputType',
+      type: 'CountryLanguageCountAggregateOutputType',
     });
-    t.nullable.field('_avg', { type: 'CountrylanguageAvgAggregateOutputType' });
-    t.nullable.field('_sum', { type: 'CountrylanguageSumAggregateOutputType' });
-    t.nullable.field('_min', { type: 'CountrylanguageMinAggregateOutputType' });
-    t.nullable.field('_max', { type: 'CountrylanguageMaxAggregateOutputType' });
+    t.nullable.field('_avg', { type: 'CountryLanguageAvgAggregateOutputType' });
+    t.nullable.field('_sum', { type: 'CountryLanguageSumAggregateOutputType' });
+    t.nullable.field('_min', { type: 'CountryLanguageMinAggregateOutputType' });
+    t.nullable.field('_max', { type: 'CountryLanguageMaxAggregateOutputType' });
   },
 });
 
-export const CountrylanguageGroupByOutputType = objectType({
+export const CountryLanguageGroupByOutputType = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'CountrylanguageGroupByOutputType',
+  name: 'CountryLanguageGroupByOutputType',
   definition(t) {
-    t.field('CountryCode', { type: 'String' });
-    t.field('Language', { type: 'String' });
-    t.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.field('Percentage', { type: 'Decimal' });
+    t.field('countryCode', { type: 'String' });
+    t.field('language', { type: 'String' });
+    t.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.field('percentage', { type: 'Decimal' });
     t.nullable.field('_count', {
-      type: 'CountrylanguageCountAggregateOutputType',
+      type: 'CountryLanguageCountAggregateOutputType',
     });
-    t.nullable.field('_avg', { type: 'CountrylanguageAvgAggregateOutputType' });
-    t.nullable.field('_sum', { type: 'CountrylanguageSumAggregateOutputType' });
-    t.nullable.field('_min', { type: 'CountrylanguageMinAggregateOutputType' });
-    t.nullable.field('_max', { type: 'CountrylanguageMaxAggregateOutputType' });
+    t.nullable.field('_avg', { type: 'CountryLanguageAvgAggregateOutputType' });
+    t.nullable.field('_sum', { type: 'CountryLanguageSumAggregateOutputType' });
+    t.nullable.field('_min', { type: 'CountryLanguageMinAggregateOutputType' });
+    t.nullable.field('_max', { type: 'CountryLanguageMaxAggregateOutputType' });
   },
 });
 
@@ -2855,11 +2855,11 @@ export const CityCountAggregateOutputType = objectType({
   },
   name: 'CityCountAggregateOutputType',
   definition(t) {
-    t.field('ID', { type: 'Int' });
-    t.field('Name', { type: 'Int' });
-    t.field('CountryCode', { type: 'Int' });
-    t.field('District', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
+    t.field('id', { type: 'Int' });
+    t.field('name', { type: 'Int' });
+    t.field('countryCode', { type: 'Int' });
+    t.field('district', { type: 'Int' });
+    t.field('population', { type: 'Int' });
     t.field('_all', { type: 'Int' });
   },
 });
@@ -2870,8 +2870,8 @@ export const CityAvgAggregateOutputType = objectType({
   },
   name: 'CityAvgAggregateOutputType',
   definition(t) {
-    t.nullable.field('ID', { type: 'Float' });
-    t.nullable.field('Population', { type: 'Float' });
+    t.nullable.field('id', { type: 'Float' });
+    t.nullable.field('population', { type: 'Float' });
   },
 });
 
@@ -2881,8 +2881,8 @@ export const CitySumAggregateOutputType = objectType({
   },
   name: 'CitySumAggregateOutputType',
   definition(t) {
-    t.nullable.field('ID', { type: 'Int' });
-    t.nullable.field('Population', { type: 'Int' });
+    t.nullable.field('id', { type: 'Int' });
+    t.nullable.field('population', { type: 'Int' });
   },
 });
 
@@ -2892,11 +2892,11 @@ export const CityMinAggregateOutputType = objectType({
   },
   name: 'CityMinAggregateOutputType',
   definition(t) {
-    t.nullable.field('ID', { type: 'Int' });
-    t.nullable.field('Name', { type: 'String' });
-    t.nullable.field('CountryCode', { type: 'String' });
-    t.nullable.field('District', { type: 'String' });
-    t.nullable.field('Population', { type: 'Int' });
+    t.nullable.field('id', { type: 'Int' });
+    t.nullable.field('name', { type: 'String' });
+    t.nullable.field('countryCode', { type: 'String' });
+    t.nullable.field('district', { type: 'String' });
+    t.nullable.field('population', { type: 'Int' });
   },
 });
 
@@ -2906,11 +2906,11 @@ export const CityMaxAggregateOutputType = objectType({
   },
   name: 'CityMaxAggregateOutputType',
   definition(t) {
-    t.nullable.field('ID', { type: 'Int' });
-    t.nullable.field('Name', { type: 'String' });
-    t.nullable.field('CountryCode', { type: 'String' });
-    t.nullable.field('District', { type: 'String' });
-    t.nullable.field('Population', { type: 'Int' });
+    t.nullable.field('id', { type: 'Int' });
+    t.nullable.field('name', { type: 'String' });
+    t.nullable.field('countryCode', { type: 'String' });
+    t.nullable.field('district', { type: 'String' });
+    t.nullable.field('population', { type: 'Int' });
   },
 });
 
@@ -2921,7 +2921,7 @@ export const CountryCountOutputType = objectType({
   name: 'CountryCountOutputType',
   definition(t) {
     t.field('city', { type: 'Int' });
-    t.field('countrylanguage', { type: 'Int' });
+    t.field('countryLanguage', { type: 'Int' });
   },
 });
 
@@ -2931,21 +2931,21 @@ export const CountryCountAggregateOutputType = objectType({
   },
   name: 'CountryCountAggregateOutputType',
   definition(t) {
-    t.field('Code', { type: 'Int' });
-    t.field('Name', { type: 'Int' });
-    t.field('Continent', { type: 'Int' });
-    t.field('Region', { type: 'Int' });
-    t.field('SurfaceArea', { type: 'Int' });
-    t.field('IndepYear', { type: 'Int' });
-    t.field('Population', { type: 'Int' });
-    t.field('LifeExpectancy', { type: 'Int' });
-    t.field('GNP', { type: 'Int' });
-    t.field('GNPOld', { type: 'Int' });
-    t.field('LocalName', { type: 'Int' });
-    t.field('GovernmentForm', { type: 'Int' });
-    t.field('HeadOfState', { type: 'Int' });
-    t.field('Capital', { type: 'Int' });
-    t.field('Code2', { type: 'Int' });
+    t.field('code', { type: 'Int' });
+    t.field('name', { type: 'Int' });
+    t.field('continent', { type: 'Int' });
+    t.field('region', { type: 'Int' });
+    t.field('surfaceArea', { type: 'Int' });
+    t.field('indepYear', { type: 'Int' });
+    t.field('population', { type: 'Int' });
+    t.field('lifeExpectancy', { type: 'Int' });
+    t.field('gnp', { type: 'Int' });
+    t.field('gnpoId', { type: 'Int' });
+    t.field('localName', { type: 'Int' });
+    t.field('governmentForm', { type: 'Int' });
+    t.field('headOfState', { type: 'Int' });
+    t.field('capital', { type: 'Int' });
+    t.field('code2', { type: 'Int' });
     t.field('_all', { type: 'Int' });
   },
 });
@@ -2956,13 +2956,13 @@ export const CountryAvgAggregateOutputType = objectType({
   },
   name: 'CountryAvgAggregateOutputType',
   definition(t) {
-    t.nullable.field('SurfaceArea', { type: 'Decimal' });
-    t.nullable.field('IndepYear', { type: 'Float' });
-    t.nullable.field('Population', { type: 'Float' });
-    t.nullable.field('LifeExpectancy', { type: 'Decimal' });
-    t.nullable.field('GNP', { type: 'Decimal' });
-    t.nullable.field('GNPOld', { type: 'Decimal' });
-    t.nullable.field('Capital', { type: 'Float' });
+    t.nullable.field('surfaceArea', { type: 'Decimal' });
+    t.nullable.field('indepYear', { type: 'Float' });
+    t.nullable.field('population', { type: 'Float' });
+    t.nullable.field('lifeExpectancy', { type: 'Decimal' });
+    t.nullable.field('gnp', { type: 'Decimal' });
+    t.nullable.field('gnpoId', { type: 'Decimal' });
+    t.nullable.field('capital', { type: 'Float' });
   },
 });
 
@@ -2972,13 +2972,13 @@ export const CountrySumAggregateOutputType = objectType({
   },
   name: 'CountrySumAggregateOutputType',
   definition(t) {
-    t.nullable.field('SurfaceArea', { type: 'Decimal' });
-    t.nullable.field('IndepYear', { type: 'Int' });
-    t.nullable.field('Population', { type: 'Int' });
-    t.nullable.field('LifeExpectancy', { type: 'Decimal' });
-    t.nullable.field('GNP', { type: 'Decimal' });
-    t.nullable.field('GNPOld', { type: 'Decimal' });
-    t.nullable.field('Capital', { type: 'Int' });
+    t.nullable.field('surfaceArea', { type: 'Decimal' });
+    t.nullable.field('indepYear', { type: 'Int' });
+    t.nullable.field('population', { type: 'Int' });
+    t.nullable.field('lifeExpectancy', { type: 'Decimal' });
+    t.nullable.field('gnp', { type: 'Decimal' });
+    t.nullable.field('gnpoId', { type: 'Decimal' });
+    t.nullable.field('capital', { type: 'Int' });
   },
 });
 
@@ -2988,21 +2988,21 @@ export const CountryMinAggregateOutputType = objectType({
   },
   name: 'CountryMinAggregateOutputType',
   definition(t) {
-    t.nullable.field('Code', { type: 'String' });
-    t.nullable.field('Name', { type: 'String' });
-    t.nullable.field('Continent', { type: 'country_Continent' });
-    t.nullable.field('Region', { type: 'String' });
-    t.nullable.field('SurfaceArea', { type: 'Decimal' });
-    t.nullable.field('IndepYear', { type: 'Int' });
-    t.nullable.field('Population', { type: 'Int' });
-    t.nullable.field('LifeExpectancy', { type: 'Decimal' });
-    t.nullable.field('GNP', { type: 'Decimal' });
-    t.nullable.field('GNPOld', { type: 'Decimal' });
-    t.nullable.field('LocalName', { type: 'String' });
-    t.nullable.field('GovernmentForm', { type: 'String' });
-    t.nullable.field('HeadOfState', { type: 'String' });
-    t.nullable.field('Capital', { type: 'Int' });
-    t.nullable.field('Code2', { type: 'String' });
+    t.nullable.field('code', { type: 'String' });
+    t.nullable.field('name', { type: 'String' });
+    t.nullable.field('continent', { type: 'CountryContinent' });
+    t.nullable.field('region', { type: 'String' });
+    t.nullable.field('surfaceArea', { type: 'Decimal' });
+    t.nullable.field('indepYear', { type: 'Int' });
+    t.nullable.field('population', { type: 'Int' });
+    t.nullable.field('lifeExpectancy', { type: 'Decimal' });
+    t.nullable.field('gnp', { type: 'Decimal' });
+    t.nullable.field('gnpoId', { type: 'Decimal' });
+    t.nullable.field('localName', { type: 'String' });
+    t.nullable.field('governmentForm', { type: 'String' });
+    t.nullable.field('headOfState', { type: 'String' });
+    t.nullable.field('capital', { type: 'Int' });
+    t.nullable.field('code2', { type: 'String' });
   },
 });
 
@@ -3012,80 +3012,80 @@ export const CountryMaxAggregateOutputType = objectType({
   },
   name: 'CountryMaxAggregateOutputType',
   definition(t) {
-    t.nullable.field('Code', { type: 'String' });
-    t.nullable.field('Name', { type: 'String' });
-    t.nullable.field('Continent', { type: 'country_Continent' });
-    t.nullable.field('Region', { type: 'String' });
-    t.nullable.field('SurfaceArea', { type: 'Decimal' });
-    t.nullable.field('IndepYear', { type: 'Int' });
-    t.nullable.field('Population', { type: 'Int' });
-    t.nullable.field('LifeExpectancy', { type: 'Decimal' });
-    t.nullable.field('GNP', { type: 'Decimal' });
-    t.nullable.field('GNPOld', { type: 'Decimal' });
-    t.nullable.field('LocalName', { type: 'String' });
-    t.nullable.field('GovernmentForm', { type: 'String' });
-    t.nullable.field('HeadOfState', { type: 'String' });
-    t.nullable.field('Capital', { type: 'Int' });
-    t.nullable.field('Code2', { type: 'String' });
+    t.nullable.field('code', { type: 'String' });
+    t.nullable.field('name', { type: 'String' });
+    t.nullable.field('continent', { type: 'CountryContinent' });
+    t.nullable.field('region', { type: 'String' });
+    t.nullable.field('surfaceArea', { type: 'Decimal' });
+    t.nullable.field('indepYear', { type: 'Int' });
+    t.nullable.field('population', { type: 'Int' });
+    t.nullable.field('lifeExpectancy', { type: 'Decimal' });
+    t.nullable.field('gnp', { type: 'Decimal' });
+    t.nullable.field('gnpoId', { type: 'Decimal' });
+    t.nullable.field('localName', { type: 'String' });
+    t.nullable.field('governmentForm', { type: 'String' });
+    t.nullable.field('headOfState', { type: 'String' });
+    t.nullable.field('capital', { type: 'Int' });
+    t.nullable.field('code2', { type: 'String' });
   },
 });
 
-export const CountrylanguageCountAggregateOutputType = objectType({
+export const CountryLanguageCountAggregateOutputType = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'CountrylanguageCountAggregateOutputType',
+  name: 'CountryLanguageCountAggregateOutputType',
   definition(t) {
-    t.field('CountryCode', { type: 'Int' });
-    t.field('Language', { type: 'Int' });
-    t.field('IsOfficial', { type: 'Int' });
-    t.field('Percentage', { type: 'Int' });
+    t.field('countryCode', { type: 'Int' });
+    t.field('language', { type: 'Int' });
+    t.field('isOfficial', { type: 'Int' });
+    t.field('percentage', { type: 'Int' });
     t.field('_all', { type: 'Int' });
   },
 });
 
-export const CountrylanguageAvgAggregateOutputType = objectType({
+export const CountryLanguageAvgAggregateOutputType = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'CountrylanguageAvgAggregateOutputType',
+  name: 'CountryLanguageAvgAggregateOutputType',
   definition(t) {
-    t.nullable.field('Percentage', { type: 'Decimal' });
+    t.nullable.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const CountrylanguageSumAggregateOutputType = objectType({
+export const CountryLanguageSumAggregateOutputType = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'CountrylanguageSumAggregateOutputType',
+  name: 'CountryLanguageSumAggregateOutputType',
   definition(t) {
-    t.nullable.field('Percentage', { type: 'Decimal' });
+    t.nullable.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const CountrylanguageMinAggregateOutputType = objectType({
+export const CountryLanguageMinAggregateOutputType = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'CountrylanguageMinAggregateOutputType',
+  name: 'CountryLanguageMinAggregateOutputType',
   definition(t) {
-    t.nullable.field('CountryCode', { type: 'String' });
-    t.nullable.field('Language', { type: 'String' });
-    t.nullable.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.nullable.field('Percentage', { type: 'Decimal' });
+    t.nullable.field('countryCode', { type: 'String' });
+    t.nullable.field('language', { type: 'String' });
+    t.nullable.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.nullable.field('percentage', { type: 'Decimal' });
   },
 });
 
-export const CountrylanguageMaxAggregateOutputType = objectType({
+export const CountryLanguageMaxAggregateOutputType = objectType({
   nonNullDefaults: {
     output: true,
   },
-  name: 'CountrylanguageMaxAggregateOutputType',
+  name: 'CountryLanguageMaxAggregateOutputType',
   definition(t) {
-    t.nullable.field('CountryCode', { type: 'String' });
-    t.nullable.field('Language', { type: 'String' });
-    t.nullable.field('IsOfficial', { type: 'countrylanguage_IsOfficial' });
-    t.nullable.field('Percentage', { type: 'Decimal' });
+    t.nullable.field('countryCode', { type: 'String' });
+    t.nullable.field('language', { type: 'String' });
+    t.nullable.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
+    t.nullable.field('percentage', { type: 'Decimal' });
   },
 });

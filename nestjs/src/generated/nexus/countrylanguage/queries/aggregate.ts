@@ -1,18 +1,18 @@
 import { queryField, list } from 'nexus';
 
-export const CountrylanguageAggregateQuery = queryField(
-  'aggregateCountrylanguage',
+export const CountryLanguageAggregateQuery = queryField(
+  'aggregateCountryLanguage',
   {
-    type: 'AggregateCountrylanguage',
+    type: 'AggregateCountryLanguage',
     args: {
-      where: 'countrylanguageWhereInput',
-      orderBy: list('countrylanguageOrderByWithRelationInput'),
-      cursor: 'countrylanguageWhereUniqueInput',
+      where: 'CountryLanguageWhereInput',
+      orderBy: list('CountryLanguageOrderByWithRelationInput'),
+      cursor: 'CountryLanguageWhereUniqueInput',
       take: 'Int',
       skip: 'Int',
     },
     resolve(_parent, args, { prisma, select }) {
-      return prisma.countrylanguage.aggregate({ ...args, ...select }) as any;
+      return prisma.countryLanguage.aggregate({ ...args, ...select }) as any;
     },
   },
 );

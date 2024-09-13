@@ -17,12 +17,12 @@ type AggregateCountry {
   _sum: CountrySumAggregateOutputType
 }
 
-type AggregateCountrylanguage {
-  _avg: CountrylanguageAvgAggregateOutputType
-  _count: CountrylanguageCountAggregateOutputType
-  _max: CountrylanguageMaxAggregateOutputType
-  _min: CountrylanguageMinAggregateOutputType
-  _sum: CountrylanguageSumAggregateOutputType
+type AggregateCountryLanguage {
+  _avg: CountryLanguageAvgAggregateOutputType
+  _count: CountryLanguageCountAggregateOutputType
+  _max: CountryLanguageMaxAggregateOutputType
+  _min: CountryLanguageMinAggregateOutputType
+  _sum: CountryLanguageSumAggregateOutputType
 }
 
 type BatchPayload {
@@ -40,247 +40,1363 @@ The `Byte` scalar type represents byte value as a Buffer
 """
 scalar Bytes
 
+type City {
+  country: Country!
+  countryCode: String!
+  district: String!
+  id: Int!
+  name: String!
+  population: Int!
+}
+
 type CityAvgAggregateOutputType {
-  ID: Float
-  Population: Float
+  id: Float
+  population: Float
+}
+
+input CityAvgOrderByAggregateInput {
+  id: SortOrder
+  population: SortOrder
 }
 
 type CityCountAggregateOutputType {
-  CountryCode: Int!
-  District: Int!
-  ID: Int!
-  Name: Int!
-  Population: Int!
   _all: Int!
+  countryCode: Int!
+  district: Int!
+  id: Int!
+  name: Int!
+  population: Int!
+}
+
+input CityCountOrderByAggregateInput {
+  countryCode: SortOrder
+  district: SortOrder
+  id: SortOrder
+  name: SortOrder
+  population: SortOrder
+}
+
+input CityCreateInput {
+  country: CountryCreateNestedOneWithoutCityInput!
+  district: String!
+  name: String!
+  population: Int
+}
+
+input CityCreateManyCountryInput {
+  district: String!
+  id: Int
+  name: String!
+  population: Int
+}
+
+input CityCreateManyCountryInputEnvelope {
+  data: CityCreateManyCountryInput!
+  skipDuplicates: Boolean
+}
+
+input CityCreateManyInput {
+  countryCode: String!
+  district: String!
+  id: Int
+  name: String!
+  population: Int
+}
+
+input CityCreateNestedManyWithoutCountryInput {
+  connect: [CityWhereUniqueInput]
+  connectOrCreate: [CityCreateOrConnectWithoutCountryInput]
+  create: [CityCreateWithoutCountryInput]
+  createMany: CityCreateManyCountryInputEnvelope
+}
+
+input CityCreateOrConnectWithoutCountryInput {
+  create: CityCreateWithoutCountryInput!
+  where: CityWhereUniqueInput!
+}
+
+input CityCreateWithoutCountryInput {
+  district: String!
+  name: String!
+  population: Int
 }
 
 type CityGroupByOutputType {
-  CountryCode: String!
-  District: String!
-  ID: Int!
-  Name: String!
-  Population: Int!
   _avg: CityAvgAggregateOutputType
   _count: CityCountAggregateOutputType
   _max: CityMaxAggregateOutputType
   _min: CityMinAggregateOutputType
   _sum: CitySumAggregateOutputType
+  countryCode: String!
+  district: String!
+  id: Int!
+  name: String!
+  population: Int!
 }
 
 input CityListRelationFilter {
-  every: cityWhereInput
-  none: cityWhereInput
-  some: cityWhereInput
+  every: CityWhereInput
+  none: CityWhereInput
+  some: CityWhereInput
 }
 
 type CityMaxAggregateOutputType {
-  CountryCode: String
-  District: String
-  ID: Int
-  Name: String
-  Population: Int
+  countryCode: String
+  district: String
+  id: Int
+  name: String
+  population: Int
+}
+
+input CityMaxOrderByAggregateInput {
+  countryCode: SortOrder
+  district: SortOrder
+  id: SortOrder
+  name: SortOrder
+  population: SortOrder
 }
 
 type CityMinAggregateOutputType {
-  CountryCode: String
-  District: String
-  ID: Int
-  Name: String
-  Population: Int
+  countryCode: String
+  district: String
+  id: Int
+  name: String
+  population: Int
+}
+
+input CityMinOrderByAggregateInput {
+  countryCode: SortOrder
+  district: SortOrder
+  id: SortOrder
+  name: SortOrder
+  population: SortOrder
+}
+
+input CityOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CityOrderByWithAggregationInput {
+  _avg: CityAvgOrderByAggregateInput
+  _count: CityCountOrderByAggregateInput
+  _max: CityMaxOrderByAggregateInput
+  _min: CityMinOrderByAggregateInput
+  _sum: CitySumOrderByAggregateInput
+  countryCode: SortOrder
+  district: SortOrder
+  id: SortOrder
+  name: SortOrder
+  population: SortOrder
+}
+
+input CityOrderByWithRelationInput {
+  country: CountryOrderByWithRelationInput
+  countryCode: SortOrder
+  district: SortOrder
+  id: SortOrder
+  name: SortOrder
+  population: SortOrder
 }
 
 enum CityScalarFieldEnum {
-  CountryCode
-  District
-  ID
-  Name
-  Population
+  countryCode
+  district
+  id
+  name
+  population
+}
+
+input CityScalarWhereInput {
+  AND: [CityScalarWhereInput]
+  NOT: [CityScalarWhereInput]
+  OR: [CityScalarWhereInput]
+  countryCode: StringFilter
+  district: StringFilter
+  id: IntFilter
+  name: StringFilter
+  population: IntFilter
+}
+
+input CityScalarWhereWithAggregatesInput {
+  AND: [CityScalarWhereWithAggregatesInput]
+  NOT: [CityScalarWhereWithAggregatesInput]
+  OR: [CityScalarWhereWithAggregatesInput]
+  countryCode: StringWithAggregatesFilter
+  district: StringWithAggregatesFilter
+  id: IntWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  population: IntWithAggregatesFilter
 }
 
 type CitySumAggregateOutputType {
-  ID: Int
-  Population: Int
+  id: Int
+  population: Int
+}
+
+input CitySumOrderByAggregateInput {
+  id: SortOrder
+  population: SortOrder
+}
+
+input CityUncheckedCreateInput {
+  countryCode: String!
+  district: String!
+  id: Int
+  name: String!
+  population: Int
+}
+
+input CityUncheckedCreateNestedManyWithoutCountryInput {
+  connect: [CityWhereUniqueInput]
+  connectOrCreate: [CityCreateOrConnectWithoutCountryInput]
+  create: [CityCreateWithoutCountryInput]
+  createMany: CityCreateManyCountryInputEnvelope
+}
+
+input CityUncheckedCreateWithoutCountryInput {
+  district: String!
+  id: Int
+  name: String!
+  population: Int
+}
+
+input CityUncheckedUpdateInput {
+  countryCode: StringFieldUpdateOperationsInput
+  district: StringFieldUpdateOperationsInput
+  id: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUncheckedUpdateManyInput {
+  countryCode: StringFieldUpdateOperationsInput
+  district: StringFieldUpdateOperationsInput
+  id: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUncheckedUpdateManyWithoutCountryInput {
+  district: StringFieldUpdateOperationsInput
+  id: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUncheckedUpdateManyWithoutCountryNestedInput {
+  connect: [CityWhereUniqueInput]
+  connectOrCreate: [CityCreateOrConnectWithoutCountryInput]
+  create: [CityCreateWithoutCountryInput]
+  createMany: CityCreateManyCountryInputEnvelope
+  delete: [CityWhereUniqueInput]
+  deleteMany: [CityScalarWhereInput]
+  disconnect: [CityWhereUniqueInput]
+  set: [CityWhereUniqueInput]
+  update: [CityUpdateWithWhereUniqueWithoutCountryInput]
+  updateMany: [CityUpdateManyWithWhereWithoutCountryInput]
+  upsert: [CityUpsertWithWhereUniqueWithoutCountryInput]
+}
+
+input CityUncheckedUpdateWithoutCountryInput {
+  district: StringFieldUpdateOperationsInput
+  id: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUpdateInput {
+  country: CountryUpdateOneRequiredWithoutCityNestedInput
+  district: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUpdateManyMutationInput {
+  district: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUpdateManyWithWhereWithoutCountryInput {
+  data: CityUpdateManyMutationInput!
+  where: CityScalarWhereInput!
+}
+
+input CityUpdateManyWithoutCountryNestedInput {
+  connect: [CityWhereUniqueInput]
+  connectOrCreate: [CityCreateOrConnectWithoutCountryInput]
+  create: [CityCreateWithoutCountryInput]
+  createMany: CityCreateManyCountryInputEnvelope
+  delete: [CityWhereUniqueInput]
+  deleteMany: [CityScalarWhereInput]
+  disconnect: [CityWhereUniqueInput]
+  set: [CityWhereUniqueInput]
+  update: [CityUpdateWithWhereUniqueWithoutCountryInput]
+  updateMany: [CityUpdateManyWithWhereWithoutCountryInput]
+  upsert: [CityUpsertWithWhereUniqueWithoutCountryInput]
+}
+
+input CityUpdateWithWhereUniqueWithoutCountryInput {
+  data: CityUpdateWithoutCountryInput!
+  where: CityWhereUniqueInput!
+}
+
+input CityUpdateWithoutCountryInput {
+  district: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+}
+
+input CityUpsertWithWhereUniqueWithoutCountryInput {
+  create: CityCreateWithoutCountryInput!
+  update: CityUpdateWithoutCountryInput!
+  where: CityWhereUniqueInput!
+}
+
+input CityWhereInput {
+  AND: [CityWhereInput]
+  NOT: [CityWhereInput]
+  OR: [CityWhereInput]
+  country: CountryRelationFilter
+  countryCode: StringFilter
+  district: StringFilter
+  id: IntFilter
+  name: StringFilter
+  population: IntFilter
+}
+
+input CityWhereUniqueInput {
+  AND: [CityWhereInput]
+  NOT: [CityWhereInput]
+  OR: [CityWhereInput]
+  country: CountryRelationFilter
+  countryCode: StringFilter
+  district: StringFilter
+  id: Int
+  name: StringFilter
+  population: IntFilter
+}
+
+type Country {
+  _count: CountryCountOutputType!
+  capital: Int
+  city(
+    cursor: CityWhereUniqueInput
+    distinct: [CityScalarFieldEnum]
+    orderBy: [CityOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: CityWhereInput
+  ): [City!]!
+  code: String!
+  code2: String!
+  continent: CountryContinent!
+  countryLanguage(
+    cursor: CountryLanguageWhereUniqueInput
+    distinct: [CountryLanguageScalarFieldEnum]
+    orderBy: [CountryLanguageOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: CountryLanguageWhereInput
+  ): [CountryLanguage!]!
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int!
+  region: String!
+  surfaceArea: Decimal!
 }
 
 type CountryAvgAggregateOutputType {
-  Capital: Float
-  GNP: Decimal
-  GNPOld: Decimal
-  IndepYear: Float
-  LifeExpectancy: Decimal
-  Population: Float
-  SurfaceArea: Decimal
+  capital: Float
+  gnp: Decimal
+  gnpoId: Decimal
+  indepYear: Float
+  lifeExpectancy: Decimal
+  population: Float
+  surfaceArea: Decimal
+}
+
+input CountryAvgOrderByAggregateInput {
+  capital: SortOrder
+  gnp: SortOrder
+  gnpoId: SortOrder
+  indepYear: SortOrder
+  lifeExpectancy: SortOrder
+  population: SortOrder
+  surfaceArea: SortOrder
+}
+
+enum CountryContinent {
+  Africa
+  Antarctica
+  Asia
+  Europe
+  North_America
+  Oceania
+  South_America
 }
 
 type CountryCountAggregateOutputType {
-  Capital: Int!
-  Code: Int!
-  Code2: Int!
-  Continent: Int!
-  GNP: Int!
-  GNPOld: Int!
-  GovernmentForm: Int!
-  HeadOfState: Int!
-  IndepYear: Int!
-  LifeExpectancy: Int!
-  LocalName: Int!
-  Name: Int!
-  Population: Int!
-  Region: Int!
-  SurfaceArea: Int!
   _all: Int!
+  capital: Int!
+  code: Int!
+  code2: Int!
+  continent: Int!
+  gnp: Int!
+  gnpoId: Int!
+  governmentForm: Int!
+  headOfState: Int!
+  indepYear: Int!
+  lifeExpectancy: Int!
+  localName: Int!
+  name: Int!
+  population: Int!
+  region: Int!
+  surfaceArea: Int!
+}
+
+input CountryCountOrderByAggregateInput {
+  capital: SortOrder
+  code: SortOrder
+  code2: SortOrder
+  continent: SortOrder
+  gnp: SortOrder
+  gnpoId: SortOrder
+  governmentForm: SortOrder
+  headOfState: SortOrder
+  indepYear: SortOrder
+  lifeExpectancy: SortOrder
+  localName: SortOrder
+  name: SortOrder
+  population: SortOrder
+  region: SortOrder
+  surfaceArea: SortOrder
 }
 
 type CountryCountOutputType {
   city: Int!
-  countrylanguage: Int!
+  countryLanguage: Int!
+}
+
+input CountryCreateInput {
+  capital: Int
+  city: CityCreateNestedManyWithoutCountryInput
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  countryLanguage: CountryLanguageCreateNestedManyWithoutCountryInput
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
+}
+
+input CountryCreateManyInput {
+  capital: Int
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
+}
+
+input CountryCreateNestedOneWithoutCityInput {
+  connect: CountryWhereUniqueInput
+  connectOrCreate: CountryCreateOrConnectWithoutCityInput
+  create: CountryCreateWithoutCityInput
+}
+
+input CountryCreateNestedOneWithoutCountryLanguageInput {
+  connect: CountryWhereUniqueInput
+  connectOrCreate: CountryCreateOrConnectWithoutCountryLanguageInput
+  create: CountryCreateWithoutCountryLanguageInput
+}
+
+input CountryCreateOrConnectWithoutCityInput {
+  create: CountryCreateWithoutCityInput!
+  where: CountryWhereUniqueInput!
+}
+
+input CountryCreateOrConnectWithoutCountryLanguageInput {
+  create: CountryCreateWithoutCountryLanguageInput!
+  where: CountryWhereUniqueInput!
+}
+
+input CountryCreateWithoutCityInput {
+  capital: Int
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  countryLanguage: CountryLanguageCreateNestedManyWithoutCountryInput
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
+}
+
+input CountryCreateWithoutCountryLanguageInput {
+  capital: Int
+  city: CityCreateNestedManyWithoutCountryInput
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
 }
 
 type CountryGroupByOutputType {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent!
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int!
-  Region: String!
-  SurfaceArea: Decimal!
   _avg: CountryAvgAggregateOutputType
   _count: CountryCountAggregateOutputType
   _max: CountryMaxAggregateOutputType
   _min: CountryMinAggregateOutputType
   _sum: CountrySumAggregateOutputType
+  capital: Int
+  code: String!
+  code2: String!
+  continent: CountryContinent!
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int!
+  region: String!
+  surfaceArea: Decimal!
+}
+
+type CountryLanguage {
+  country: Country!
+  countryCode: String!
+  isOfficial: CountryLanguageIsOfficial!
+  language: String!
+  percentage: Decimal!
+}
+
+type CountryLanguageAvgAggregateOutputType {
+  percentage: Decimal
+}
+
+input CountryLanguageAvgOrderByAggregateInput {
+  percentage: SortOrder
+}
+
+type CountryLanguageCountAggregateOutputType {
+  _all: Int!
+  countryCode: Int!
+  isOfficial: Int!
+  language: Int!
+  percentage: Int!
+}
+
+input CountryLanguageCountOrderByAggregateInput {
+  countryCode: SortOrder
+  isOfficial: SortOrder
+  language: SortOrder
+  percentage: SortOrder
+}
+
+input CountryLanguageCountryCodeLanguageCompoundUniqueInput {
+  countryCode: String!
+  language: String!
+}
+
+input CountryLanguageCreateInput {
+  country: CountryCreateNestedOneWithoutCountryLanguageInput!
+  isOfficial: CountryLanguageIsOfficial
+  language: String!
+  percentage: Decimal
+}
+
+input CountryLanguageCreateManyCountryInput {
+  isOfficial: CountryLanguageIsOfficial
+  language: String!
+  percentage: Decimal
+}
+
+input CountryLanguageCreateManyCountryInputEnvelope {
+  data: CountryLanguageCreateManyCountryInput!
+  skipDuplicates: Boolean
+}
+
+input CountryLanguageCreateManyInput {
+  countryCode: String!
+  isOfficial: CountryLanguageIsOfficial
+  language: String!
+  percentage: Decimal
+}
+
+input CountryLanguageCreateNestedManyWithoutCountryInput {
+  connect: [CountryLanguageWhereUniqueInput]
+  connectOrCreate: [CountryLanguageCreateOrConnectWithoutCountryInput]
+  create: [CountryLanguageCreateWithoutCountryInput]
+  createMany: CountryLanguageCreateManyCountryInputEnvelope
+}
+
+input CountryLanguageCreateOrConnectWithoutCountryInput {
+  create: CountryLanguageCreateWithoutCountryInput!
+  where: CountryLanguageWhereUniqueInput!
+}
+
+input CountryLanguageCreateWithoutCountryInput {
+  isOfficial: CountryLanguageIsOfficial
+  language: String!
+  percentage: Decimal
+}
+
+type CountryLanguageGroupByOutputType {
+  _avg: CountryLanguageAvgAggregateOutputType
+  _count: CountryLanguageCountAggregateOutputType
+  _max: CountryLanguageMaxAggregateOutputType
+  _min: CountryLanguageMinAggregateOutputType
+  _sum: CountryLanguageSumAggregateOutputType
+  countryCode: String!
+  isOfficial: CountryLanguageIsOfficial!
+  language: String!
+  percentage: Decimal!
+}
+
+enum CountryLanguageIsOfficial {
+  F
+  T
+}
+
+input CountryLanguageListRelationFilter {
+  every: CountryLanguageWhereInput
+  none: CountryLanguageWhereInput
+  some: CountryLanguageWhereInput
+}
+
+type CountryLanguageMaxAggregateOutputType {
+  countryCode: String
+  isOfficial: CountryLanguageIsOfficial
+  language: String
+  percentage: Decimal
+}
+
+input CountryLanguageMaxOrderByAggregateInput {
+  countryCode: SortOrder
+  isOfficial: SortOrder
+  language: SortOrder
+  percentage: SortOrder
+}
+
+type CountryLanguageMinAggregateOutputType {
+  countryCode: String
+  isOfficial: CountryLanguageIsOfficial
+  language: String
+  percentage: Decimal
+}
+
+input CountryLanguageMinOrderByAggregateInput {
+  countryCode: SortOrder
+  isOfficial: SortOrder
+  language: SortOrder
+  percentage: SortOrder
+}
+
+input CountryLanguageOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CountryLanguageOrderByWithAggregationInput {
+  _avg: CountryLanguageAvgOrderByAggregateInput
+  _count: CountryLanguageCountOrderByAggregateInput
+  _max: CountryLanguageMaxOrderByAggregateInput
+  _min: CountryLanguageMinOrderByAggregateInput
+  _sum: CountryLanguageSumOrderByAggregateInput
+  countryCode: SortOrder
+  isOfficial: SortOrder
+  language: SortOrder
+  percentage: SortOrder
+}
+
+input CountryLanguageOrderByWithRelationInput {
+  country: CountryOrderByWithRelationInput
+  countryCode: SortOrder
+  isOfficial: SortOrder
+  language: SortOrder
+  percentage: SortOrder
+}
+
+enum CountryLanguageScalarFieldEnum {
+  countryCode
+  isOfficial
+  language
+  percentage
+}
+
+input CountryLanguageScalarWhereInput {
+  AND: [CountryLanguageScalarWhereInput]
+  NOT: [CountryLanguageScalarWhereInput]
+  OR: [CountryLanguageScalarWhereInput]
+  countryCode: StringFilter
+  isOfficial: EnumCountryLanguageIsOfficialFilter
+  language: StringFilter
+  percentage: DecimalFilter
+}
+
+input CountryLanguageScalarWhereWithAggregatesInput {
+  AND: [CountryLanguageScalarWhereWithAggregatesInput]
+  NOT: [CountryLanguageScalarWhereWithAggregatesInput]
+  OR: [CountryLanguageScalarWhereWithAggregatesInput]
+  countryCode: StringWithAggregatesFilter
+  isOfficial: EnumCountryLanguageIsOfficialWithAggregatesFilter
+  language: StringWithAggregatesFilter
+  percentage: DecimalWithAggregatesFilter
+}
+
+type CountryLanguageSumAggregateOutputType {
+  percentage: Decimal
+}
+
+input CountryLanguageSumOrderByAggregateInput {
+  percentage: SortOrder
+}
+
+input CountryLanguageUncheckedCreateInput {
+  countryCode: String!
+  isOfficial: CountryLanguageIsOfficial
+  language: String!
+  percentage: Decimal
+}
+
+input CountryLanguageUncheckedCreateNestedManyWithoutCountryInput {
+  connect: [CountryLanguageWhereUniqueInput]
+  connectOrCreate: [CountryLanguageCreateOrConnectWithoutCountryInput]
+  create: [CountryLanguageCreateWithoutCountryInput]
+  createMany: CountryLanguageCreateManyCountryInputEnvelope
+}
+
+input CountryLanguageUncheckedCreateWithoutCountryInput {
+  isOfficial: CountryLanguageIsOfficial
+  language: String!
+  percentage: Decimal
+}
+
+input CountryLanguageUncheckedUpdateInput {
+  countryCode: StringFieldUpdateOperationsInput
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUncheckedUpdateManyInput {
+  countryCode: StringFieldUpdateOperationsInput
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUncheckedUpdateManyWithoutCountryInput {
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput {
+  connect: [CountryLanguageWhereUniqueInput]
+  connectOrCreate: [CountryLanguageCreateOrConnectWithoutCountryInput]
+  create: [CountryLanguageCreateWithoutCountryInput]
+  createMany: CountryLanguageCreateManyCountryInputEnvelope
+  delete: [CountryLanguageWhereUniqueInput]
+  deleteMany: [CountryLanguageScalarWhereInput]
+  disconnect: [CountryLanguageWhereUniqueInput]
+  set: [CountryLanguageWhereUniqueInput]
+  update: [CountryLanguageUpdateWithWhereUniqueWithoutCountryInput]
+  updateMany: [CountryLanguageUpdateManyWithWhereWithoutCountryInput]
+  upsert: [CountryLanguageUpsertWithWhereUniqueWithoutCountryInput]
+}
+
+input CountryLanguageUncheckedUpdateWithoutCountryInput {
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUpdateInput {
+  country: CountryUpdateOneRequiredWithoutCountryLanguageNestedInput
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUpdateManyMutationInput {
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUpdateManyWithWhereWithoutCountryInput {
+  data: CountryLanguageUpdateManyMutationInput!
+  where: CountryLanguageScalarWhereInput!
+}
+
+input CountryLanguageUpdateManyWithoutCountryNestedInput {
+  connect: [CountryLanguageWhereUniqueInput]
+  connectOrCreate: [CountryLanguageCreateOrConnectWithoutCountryInput]
+  create: [CountryLanguageCreateWithoutCountryInput]
+  createMany: CountryLanguageCreateManyCountryInputEnvelope
+  delete: [CountryLanguageWhereUniqueInput]
+  deleteMany: [CountryLanguageScalarWhereInput]
+  disconnect: [CountryLanguageWhereUniqueInput]
+  set: [CountryLanguageWhereUniqueInput]
+  update: [CountryLanguageUpdateWithWhereUniqueWithoutCountryInput]
+  updateMany: [CountryLanguageUpdateManyWithWhereWithoutCountryInput]
+  upsert: [CountryLanguageUpsertWithWhereUniqueWithoutCountryInput]
+}
+
+input CountryLanguageUpdateWithWhereUniqueWithoutCountryInput {
+  data: CountryLanguageUpdateWithoutCountryInput!
+  where: CountryLanguageWhereUniqueInput!
+}
+
+input CountryLanguageUpdateWithoutCountryInput {
+  isOfficial: EnumCountryLanguageIsOfficialFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  percentage: DecimalFieldUpdateOperationsInput
+}
+
+input CountryLanguageUpsertWithWhereUniqueWithoutCountryInput {
+  create: CountryLanguageCreateWithoutCountryInput!
+  update: CountryLanguageUpdateWithoutCountryInput!
+  where: CountryLanguageWhereUniqueInput!
+}
+
+input CountryLanguageWhereInput {
+  AND: [CountryLanguageWhereInput]
+  NOT: [CountryLanguageWhereInput]
+  OR: [CountryLanguageWhereInput]
+  country: CountryRelationFilter
+  countryCode: StringFilter
+  isOfficial: EnumCountryLanguageIsOfficialFilter
+  language: StringFilter
+  percentage: DecimalFilter
+}
+
+input CountryLanguageWhereUniqueInput {
+  AND: [CountryLanguageWhereInput]
+  NOT: [CountryLanguageWhereInput]
+  OR: [CountryLanguageWhereInput]
+  country: CountryRelationFilter
+  countryCode: StringFilter
+  countryCode_language: CountryLanguageCountryCodeLanguageCompoundUniqueInput
+  isOfficial: EnumCountryLanguageIsOfficialFilter
+  language: StringFilter
+  percentage: DecimalFilter
 }
 
 type CountryMaxAggregateOutputType {
-  Capital: Int
-  Code: String
-  Code2: String
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String
-  Name: String
-  Population: Int
-  Region: String
-  SurfaceArea: Decimal
+  capital: Int
+  code: String
+  code2: String
+  continent: CountryContinent
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String
+  name: String
+  population: Int
+  region: String
+  surfaceArea: Decimal
+}
+
+input CountryMaxOrderByAggregateInput {
+  capital: SortOrder
+  code: SortOrder
+  code2: SortOrder
+  continent: SortOrder
+  gnp: SortOrder
+  gnpoId: SortOrder
+  governmentForm: SortOrder
+  headOfState: SortOrder
+  indepYear: SortOrder
+  lifeExpectancy: SortOrder
+  localName: SortOrder
+  name: SortOrder
+  population: SortOrder
+  region: SortOrder
+  surfaceArea: SortOrder
 }
 
 type CountryMinAggregateOutputType {
-  Capital: Int
-  Code: String
-  Code2: String
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String
-  Name: String
-  Population: Int
-  Region: String
-  SurfaceArea: Decimal
+  capital: Int
+  code: String
+  code2: String
+  continent: CountryContinent
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String
+  name: String
+  population: Int
+  region: String
+  surfaceArea: Decimal
+}
+
+input CountryMinOrderByAggregateInput {
+  capital: SortOrder
+  code: SortOrder
+  code2: SortOrder
+  continent: SortOrder
+  gnp: SortOrder
+  gnpoId: SortOrder
+  governmentForm: SortOrder
+  headOfState: SortOrder
+  indepYear: SortOrder
+  lifeExpectancy: SortOrder
+  localName: SortOrder
+  name: SortOrder
+  population: SortOrder
+  region: SortOrder
+  surfaceArea: SortOrder
+}
+
+input CountryOrderByWithAggregationInput {
+  _avg: CountryAvgOrderByAggregateInput
+  _count: CountryCountOrderByAggregateInput
+  _max: CountryMaxOrderByAggregateInput
+  _min: CountryMinOrderByAggregateInput
+  _sum: CountrySumOrderByAggregateInput
+  capital: SortOrderInput
+  code: SortOrder
+  code2: SortOrder
+  continent: SortOrder
+  gnp: SortOrderInput
+  gnpoId: SortOrderInput
+  governmentForm: SortOrder
+  headOfState: SortOrderInput
+  indepYear: SortOrderInput
+  lifeExpectancy: SortOrderInput
+  localName: SortOrder
+  name: SortOrder
+  population: SortOrder
+  region: SortOrder
+  surfaceArea: SortOrder
+}
+
+input CountryOrderByWithRelationInput {
+  capital: SortOrderInput
+  city: CityOrderByRelationAggregateInput
+  code: SortOrder
+  code2: SortOrder
+  continent: SortOrder
+  countryLanguage: CountryLanguageOrderByRelationAggregateInput
+  gnp: SortOrderInput
+  gnpoId: SortOrderInput
+  governmentForm: SortOrder
+  headOfState: SortOrderInput
+  indepYear: SortOrderInput
+  lifeExpectancy: SortOrderInput
+  localName: SortOrder
+  name: SortOrder
+  population: SortOrder
+  region: SortOrder
+  surfaceArea: SortOrder
 }
 
 input CountryRelationFilter {
-  is: countryWhereInput
-  isNot: countryWhereInput
+  is: CountryWhereInput
+  isNot: CountryWhereInput
 }
 
 enum CountryScalarFieldEnum {
-  Capital
-  Code
-  Code2
-  Continent
-  GNP
-  GNPOld
-  GovernmentForm
-  HeadOfState
-  IndepYear
-  LifeExpectancy
-  LocalName
-  Name
-  Population
-  Region
-  SurfaceArea
+  capital
+  code
+  code2
+  continent
+  gnp
+  gnpoId
+  governmentForm
+  headOfState
+  indepYear
+  lifeExpectancy
+  localName
+  name
+  population
+  region
+  surfaceArea
+}
+
+input CountryScalarWhereWithAggregatesInput {
+  AND: [CountryScalarWhereWithAggregatesInput]
+  NOT: [CountryScalarWhereWithAggregatesInput]
+  OR: [CountryScalarWhereWithAggregatesInput]
+  capital: IntNullableWithAggregatesFilter
+  code: StringWithAggregatesFilter
+  code2: StringWithAggregatesFilter
+  continent: EnumCountryContinentWithAggregatesFilter
+  gnp: DecimalNullableWithAggregatesFilter
+  gnpoId: DecimalNullableWithAggregatesFilter
+  governmentForm: StringWithAggregatesFilter
+  headOfState: StringNullableWithAggregatesFilter
+  indepYear: IntNullableWithAggregatesFilter
+  lifeExpectancy: DecimalNullableWithAggregatesFilter
+  localName: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  population: IntWithAggregatesFilter
+  region: StringWithAggregatesFilter
+  surfaceArea: DecimalWithAggregatesFilter
 }
 
 type CountrySumAggregateOutputType {
-  Capital: Int
-  GNP: Decimal
-  GNPOld: Decimal
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  Population: Int
-  SurfaceArea: Decimal
+  capital: Int
+  gnp: Decimal
+  gnpoId: Decimal
+  indepYear: Int
+  lifeExpectancy: Decimal
+  population: Int
+  surfaceArea: Decimal
 }
 
-type CountrylanguageAvgAggregateOutputType {
-  Percentage: Decimal
+input CountrySumOrderByAggregateInput {
+  capital: SortOrder
+  gnp: SortOrder
+  gnpoId: SortOrder
+  indepYear: SortOrder
+  lifeExpectancy: SortOrder
+  population: SortOrder
+  surfaceArea: SortOrder
 }
 
-type CountrylanguageCountAggregateOutputType {
-  CountryCode: Int!
-  IsOfficial: Int!
-  Language: Int!
-  Percentage: Int!
-  _all: Int!
+input CountryUncheckedCreateInput {
+  capital: Int
+  city: CityUncheckedCreateNestedManyWithoutCountryInput
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  countryLanguage: CountryLanguageUncheckedCreateNestedManyWithoutCountryInput
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
 }
 
-type CountrylanguageGroupByOutputType {
-  CountryCode: String!
-  IsOfficial: countrylanguage_IsOfficial!
-  Language: String!
-  Percentage: Decimal!
-  _avg: CountrylanguageAvgAggregateOutputType
-  _count: CountrylanguageCountAggregateOutputType
-  _max: CountrylanguageMaxAggregateOutputType
-  _min: CountrylanguageMinAggregateOutputType
-  _sum: CountrylanguageSumAggregateOutputType
+input CountryUncheckedCreateWithoutCityInput {
+  capital: Int
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  countryLanguage: CountryLanguageUncheckedCreateNestedManyWithoutCountryInput
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
 }
 
-input CountrylanguageListRelationFilter {
-  every: countrylanguageWhereInput
-  none: countrylanguageWhereInput
-  some: countrylanguageWhereInput
+input CountryUncheckedCreateWithoutCountryLanguageInput {
+  capital: Int
+  city: CityUncheckedCreateNestedManyWithoutCountryInput
+  code: String!
+  code2: String!
+  continent: CountryContinent
+  gnp: Decimal
+  gnpoId: Decimal
+  governmentForm: String!
+  headOfState: String
+  indepYear: Int
+  lifeExpectancy: Decimal
+  localName: String!
+  name: String!
+  population: Int
+  region: String!
+  surfaceArea: Decimal
 }
 
-type CountrylanguageMaxAggregateOutputType {
-  CountryCode: String
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String
-  Percentage: Decimal
+input CountryUncheckedUpdateInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  city: CityUncheckedUpdateManyWithoutCountryNestedInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  countryLanguage: CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
 }
 
-type CountrylanguageMinAggregateOutputType {
-  CountryCode: String
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String
-  Percentage: Decimal
+input CountryUncheckedUpdateManyInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
 }
 
-enum CountrylanguageScalarFieldEnum {
-  CountryCode
-  IsOfficial
-  Language
-  Percentage
+input CountryUncheckedUpdateWithoutCityInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  countryLanguage: CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
 }
 
-type CountrylanguageSumAggregateOutputType {
-  Percentage: Decimal
+input CountryUncheckedUpdateWithoutCountryLanguageInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  city: CityUncheckedUpdateManyWithoutCountryNestedInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
+}
+
+input CountryUpdateInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  city: CityUpdateManyWithoutCountryNestedInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  countryLanguage: CountryLanguageUpdateManyWithoutCountryNestedInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
+}
+
+input CountryUpdateManyMutationInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
+}
+
+input CountryUpdateOneRequiredWithoutCityNestedInput {
+  connect: CountryWhereUniqueInput
+  connectOrCreate: CountryCreateOrConnectWithoutCityInput
+  create: CountryCreateWithoutCityInput
+  update: CountryUpdateToOneWithWhereWithoutCityInput
+  upsert: CountryUpsertWithoutCityInput
+}
+
+input CountryUpdateOneRequiredWithoutCountryLanguageNestedInput {
+  connect: CountryWhereUniqueInput
+  connectOrCreate: CountryCreateOrConnectWithoutCountryLanguageInput
+  create: CountryCreateWithoutCountryLanguageInput
+  update: CountryUpdateToOneWithWhereWithoutCountryLanguageInput
+  upsert: CountryUpsertWithoutCountryLanguageInput
+}
+
+input CountryUpdateToOneWithWhereWithoutCityInput {
+  data: CountryUpdateWithoutCityInput!
+  where: CountryWhereInput
+}
+
+input CountryUpdateToOneWithWhereWithoutCountryLanguageInput {
+  data: CountryUpdateWithoutCountryLanguageInput!
+  where: CountryWhereInput
+}
+
+input CountryUpdateWithoutCityInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  countryLanguage: CountryLanguageUpdateManyWithoutCountryNestedInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
+}
+
+input CountryUpdateWithoutCountryLanguageInput {
+  capital: NullableIntFieldUpdateOperationsInput
+  city: CityUpdateManyWithoutCountryNestedInput
+  code: StringFieldUpdateOperationsInput
+  code2: StringFieldUpdateOperationsInput
+  continent: EnumCountryContinentFieldUpdateOperationsInput
+  gnp: NullableDecimalFieldUpdateOperationsInput
+  gnpoId: NullableDecimalFieldUpdateOperationsInput
+  governmentForm: StringFieldUpdateOperationsInput
+  headOfState: NullableStringFieldUpdateOperationsInput
+  indepYear: NullableIntFieldUpdateOperationsInput
+  lifeExpectancy: NullableDecimalFieldUpdateOperationsInput
+  localName: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  population: IntFieldUpdateOperationsInput
+  region: StringFieldUpdateOperationsInput
+  surfaceArea: DecimalFieldUpdateOperationsInput
+}
+
+input CountryUpsertWithoutCityInput {
+  create: CountryCreateWithoutCityInput!
+  update: CountryUpdateWithoutCityInput!
+  where: CountryWhereInput
+}
+
+input CountryUpsertWithoutCountryLanguageInput {
+  create: CountryCreateWithoutCountryLanguageInput!
+  update: CountryUpdateWithoutCountryLanguageInput!
+  where: CountryWhereInput
+}
+
+input CountryWhereInput {
+  AND: [CountryWhereInput]
+  NOT: [CountryWhereInput]
+  OR: [CountryWhereInput]
+  capital: IntNullableFilter
+  city: CityListRelationFilter
+  code: StringFilter
+  code2: StringFilter
+  continent: EnumCountryContinentFilter
+  countryLanguage: CountryLanguageListRelationFilter
+  gnp: DecimalNullableFilter
+  gnpoId: DecimalNullableFilter
+  governmentForm: StringFilter
+  headOfState: StringNullableFilter
+  indepYear: IntNullableFilter
+  lifeExpectancy: DecimalNullableFilter
+  localName: StringFilter
+  name: StringFilter
+  population: IntFilter
+  region: StringFilter
+  surfaceArea: DecimalFilter
+}
+
+input CountryWhereUniqueInput {
+  AND: [CountryWhereInput]
+  NOT: [CountryWhereInput]
+  OR: [CountryWhereInput]
+  capital: IntNullableFilter
+  city: CityListRelationFilter
+  code: String
+  code2: StringFilter
+  continent: EnumCountryContinentFilter
+  countryLanguage: CountryLanguageListRelationFilter
+  gnp: DecimalNullableFilter
+  gnpoId: DecimalNullableFilter
+  governmentForm: StringFilter
+  headOfState: StringNullableFilter
+  indepYear: IntNullableFilter
+  lifeExpectancy: DecimalNullableFilter
+  localName: StringFilter
+  name: StringFilter
+  population: IntFilter
+  region: StringFilter
+  surfaceArea: DecimalFilter
 }
 
 """
@@ -355,46 +1471,46 @@ input DecimalWithAggregatesFilter {
   notIn: [Decimal]
 }
 
-input Enumcountry_ContinentFieldUpdateOperationsInput {
-  set: country_Continent
+input EnumCountryContinentFieldUpdateOperationsInput {
+  set: CountryContinent
 }
 
-input Enumcountry_ContinentFilter {
-  equals: country_Continent
-  in: [country_Continent]
-  not: NestedEnumcountry_ContinentFilter
-  notIn: [country_Continent]
+input EnumCountryContinentFilter {
+  equals: CountryContinent
+  in: [CountryContinent]
+  not: NestedEnumCountryContinentFilter
+  notIn: [CountryContinent]
 }
 
-input Enumcountry_ContinentWithAggregatesFilter {
+input EnumCountryContinentWithAggregatesFilter {
   _count: NestedIntFilter
-  _max: NestedEnumcountry_ContinentFilter
-  _min: NestedEnumcountry_ContinentFilter
-  equals: country_Continent
-  in: [country_Continent]
-  not: NestedEnumcountry_ContinentWithAggregatesFilter
-  notIn: [country_Continent]
+  _max: NestedEnumCountryContinentFilter
+  _min: NestedEnumCountryContinentFilter
+  equals: CountryContinent
+  in: [CountryContinent]
+  not: NestedEnumCountryContinentWithAggregatesFilter
+  notIn: [CountryContinent]
 }
 
-input Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput {
-  set: countrylanguage_IsOfficial
+input EnumCountryLanguageIsOfficialFieldUpdateOperationsInput {
+  set: CountryLanguageIsOfficial
 }
 
-input Enumcountrylanguage_IsOfficialFilter {
-  equals: countrylanguage_IsOfficial
-  in: [countrylanguage_IsOfficial]
-  not: NestedEnumcountrylanguage_IsOfficialFilter
-  notIn: [countrylanguage_IsOfficial]
+input EnumCountryLanguageIsOfficialFilter {
+  equals: CountryLanguageIsOfficial
+  in: [CountryLanguageIsOfficial]
+  not: NestedEnumCountryLanguageIsOfficialFilter
+  notIn: [CountryLanguageIsOfficial]
 }
 
-input Enumcountrylanguage_IsOfficialWithAggregatesFilter {
+input EnumCountryLanguageIsOfficialWithAggregatesFilter {
   _count: NestedIntFilter
-  _max: NestedEnumcountrylanguage_IsOfficialFilter
-  _min: NestedEnumcountrylanguage_IsOfficialFilter
-  equals: countrylanguage_IsOfficial
-  in: [countrylanguage_IsOfficial]
-  not: NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter
-  notIn: [countrylanguage_IsOfficial]
+  _max: NestedEnumCountryLanguageIsOfficialFilter
+  _min: NestedEnumCountryLanguageIsOfficialFilter
+  equals: CountryLanguageIsOfficial
+  in: [CountryLanguageIsOfficial]
+  not: NestedEnumCountryLanguageIsOfficialWithAggregatesFilter
+  notIn: [CountryLanguageIsOfficial]
 }
 
 input IntFieldUpdateOperationsInput {
@@ -468,53 +1584,53 @@ scalar Json
   )
 
 type Mutation {
-  createOneCity(data: cityCreateInput!): city!
-  createOneCountry(data: countryCreateInput!): country!
-  createOneCountrylanguage(data: countrylanguageCreateInput!): countrylanguage!
-  deleteManyCity(where: cityWhereInput): BatchPayload!
-  deleteManyCountry(where: countryWhereInput): BatchPayload!
-  deleteManyCountrylanguage(where: countrylanguageWhereInput): BatchPayload!
-  deleteOneCity(where: cityWhereUniqueInput!): city
-  deleteOneCountry(where: countryWhereUniqueInput!): country
-  deleteOneCountrylanguage(
-    where: countrylanguageWhereUniqueInput!
-  ): countrylanguage
+  createOneCity(data: CityCreateInput!): City!
+  createOneCountry(data: CountryCreateInput!): Country!
+  createOneCountryLanguage(data: CountryLanguageCreateInput!): CountryLanguage!
+  deleteManyCity(where: CityWhereInput): BatchPayload!
+  deleteManyCountry(where: CountryWhereInput): BatchPayload!
+  deleteManyCountryLanguage(where: CountryLanguageWhereInput): BatchPayload!
+  deleteOneCity(where: CityWhereUniqueInput!): City
+  deleteOneCountry(where: CountryWhereUniqueInput!): Country
+  deleteOneCountryLanguage(
+    where: CountryLanguageWhereUniqueInput!
+  ): CountryLanguage
   updateManyCity(
-    data: cityUpdateManyMutationInput!
-    where: cityWhereInput
+    data: CityUpdateManyMutationInput!
+    where: CityWhereInput
   ): BatchPayload!
   updateManyCountry(
-    data: countryUpdateManyMutationInput!
-    where: countryWhereInput
+    data: CountryUpdateManyMutationInput!
+    where: CountryWhereInput
   ): BatchPayload!
-  updateManyCountrylanguage(
-    data: countrylanguageUpdateManyMutationInput!
-    where: countrylanguageWhereInput
+  updateManyCountryLanguage(
+    data: CountryLanguageUpdateManyMutationInput!
+    where: CountryLanguageWhereInput
   ): BatchPayload!
-  updateOneCity(data: cityUpdateInput!, where: cityWhereUniqueInput!): city!
+  updateOneCity(data: CityUpdateInput!, where: CityWhereUniqueInput!): City!
   updateOneCountry(
-    data: countryUpdateInput!
-    where: countryWhereUniqueInput!
-  ): country!
-  updateOneCountrylanguage(
-    data: countrylanguageUpdateInput!
-    where: countrylanguageWhereUniqueInput!
-  ): countrylanguage!
+    data: CountryUpdateInput!
+    where: CountryWhereUniqueInput!
+  ): Country!
+  updateOneCountryLanguage(
+    data: CountryLanguageUpdateInput!
+    where: CountryLanguageWhereUniqueInput!
+  ): CountryLanguage!
   upsertOneCity(
-    create: cityCreateInput!
-    update: cityUpdateInput!
-    where: cityWhereUniqueInput!
-  ): city!
+    create: CityCreateInput!
+    update: CityUpdateInput!
+    where: CityWhereUniqueInput!
+  ): City!
   upsertOneCountry(
-    create: countryCreateInput!
-    update: countryUpdateInput!
-    where: countryWhereUniqueInput!
-  ): country!
-  upsertOneCountrylanguage(
-    create: countrylanguageCreateInput!
-    update: countrylanguageUpdateInput!
-    where: countrylanguageWhereUniqueInput!
-  ): countrylanguage!
+    create: CountryCreateInput!
+    update: CountryUpdateInput!
+    where: CountryWhereUniqueInput!
+  ): Country!
+  upsertOneCountryLanguage(
+    create: CountryLanguageCreateInput!
+    update: CountryLanguageUpdateInput!
+    where: CountryLanguageWhereUniqueInput!
+  ): CountryLanguage!
 }
 
 input NestedDecimalFilter {
@@ -571,38 +1687,38 @@ input NestedDecimalWithAggregatesFilter {
   notIn: [Decimal]
 }
 
-input NestedEnumcountry_ContinentFilter {
-  equals: country_Continent
-  in: [country_Continent]
-  not: NestedEnumcountry_ContinentFilter
-  notIn: [country_Continent]
+input NestedEnumCountryContinentFilter {
+  equals: CountryContinent
+  in: [CountryContinent]
+  not: NestedEnumCountryContinentFilter
+  notIn: [CountryContinent]
 }
 
-input NestedEnumcountry_ContinentWithAggregatesFilter {
+input NestedEnumCountryContinentWithAggregatesFilter {
   _count: NestedIntFilter
-  _max: NestedEnumcountry_ContinentFilter
-  _min: NestedEnumcountry_ContinentFilter
-  equals: country_Continent
-  in: [country_Continent]
-  not: NestedEnumcountry_ContinentWithAggregatesFilter
-  notIn: [country_Continent]
+  _max: NestedEnumCountryContinentFilter
+  _min: NestedEnumCountryContinentFilter
+  equals: CountryContinent
+  in: [CountryContinent]
+  not: NestedEnumCountryContinentWithAggregatesFilter
+  notIn: [CountryContinent]
 }
 
-input NestedEnumcountrylanguage_IsOfficialFilter {
-  equals: countrylanguage_IsOfficial
-  in: [countrylanguage_IsOfficial]
-  not: NestedEnumcountrylanguage_IsOfficialFilter
-  notIn: [countrylanguage_IsOfficial]
+input NestedEnumCountryLanguageIsOfficialFilter {
+  equals: CountryLanguageIsOfficial
+  in: [CountryLanguageIsOfficial]
+  not: NestedEnumCountryLanguageIsOfficialFilter
+  notIn: [CountryLanguageIsOfficial]
 }
 
-input NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter {
+input NestedEnumCountryLanguageIsOfficialWithAggregatesFilter {
   _count: NestedIntFilter
-  _max: NestedEnumcountrylanguage_IsOfficialFilter
-  _min: NestedEnumcountrylanguage_IsOfficialFilter
-  equals: countrylanguage_IsOfficial
-  in: [countrylanguage_IsOfficial]
-  not: NestedEnumcountrylanguage_IsOfficialWithAggregatesFilter
-  notIn: [countrylanguage_IsOfficial]
+  _max: NestedEnumCountryLanguageIsOfficialFilter
+  _min: NestedEnumCountryLanguageIsOfficialFilter
+  equals: CountryLanguageIsOfficial
+  in: [CountryLanguageIsOfficial]
+  not: NestedEnumCountryLanguageIsOfficialWithAggregatesFilter
+  notIn: [CountryLanguageIsOfficial]
 }
 
 input NestedFloatFilter {
@@ -770,103 +1886,103 @@ enum NullsOrder {
 
 type Query {
   aggregateCity(
-    cursor: cityWhereUniqueInput
-    orderBy: [cityOrderByWithRelationInput]
+    cursor: CityWhereUniqueInput
+    orderBy: [CityOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: cityWhereInput
+    where: CityWhereInput
   ): AggregateCity
   aggregateCountry(
-    cursor: countryWhereUniqueInput
-    orderBy: [countryOrderByWithRelationInput]
+    cursor: CountryWhereUniqueInput
+    orderBy: [CountryOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countryWhereInput
+    where: CountryWhereInput
   ): AggregateCountry
-  aggregateCountrylanguage(
-    cursor: countrylanguageWhereUniqueInput
-    orderBy: [countrylanguageOrderByWithRelationInput]
+  aggregateCountryLanguage(
+    cursor: CountryLanguageWhereUniqueInput
+    orderBy: [CountryLanguageOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countrylanguageWhereInput
-  ): AggregateCountrylanguage
+    where: CountryLanguageWhereInput
+  ): AggregateCountryLanguage
   findFirstCity(
-    cursor: cityWhereUniqueInput
+    cursor: CityWhereUniqueInput
     distinct: [CityScalarFieldEnum]
-    orderBy: [cityOrderByWithRelationInput]
+    orderBy: [CityOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: cityWhereInput
-  ): city
+    where: CityWhereInput
+  ): City
   findFirstCountry(
-    cursor: countryWhereUniqueInput
+    cursor: CountryWhereUniqueInput
     distinct: [CountryScalarFieldEnum]
-    orderBy: [countryOrderByWithRelationInput]
+    orderBy: [CountryOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countryWhereInput
-  ): country
-  findFirstCountrylanguage(
-    cursor: countrylanguageWhereUniqueInput
-    distinct: [CountrylanguageScalarFieldEnum]
-    orderBy: [countrylanguageOrderByWithRelationInput]
+    where: CountryWhereInput
+  ): Country
+  findFirstCountryLanguage(
+    cursor: CountryLanguageWhereUniqueInput
+    distinct: [CountryLanguageScalarFieldEnum]
+    orderBy: [CountryLanguageOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countrylanguageWhereInput
-  ): countrylanguage
+    where: CountryLanguageWhereInput
+  ): CountryLanguage
   findManyCity(
-    cursor: cityWhereUniqueInput
+    cursor: CityWhereUniqueInput
     distinct: [CityScalarFieldEnum]
-    orderBy: [cityOrderByWithRelationInput]
+    orderBy: [CityOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: cityWhereInput
-  ): [city!]!
+    where: CityWhereInput
+  ): [City!]!
   findManyCityCount(
-    cursor: cityWhereUniqueInput
+    cursor: CityWhereUniqueInput
     distinct: [CityScalarFieldEnum]
-    orderBy: [cityOrderByWithRelationInput]
+    orderBy: [CityOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: cityWhereInput
+    where: CityWhereInput
   ): Int!
   findManyCountry(
-    cursor: countryWhereUniqueInput
+    cursor: CountryWhereUniqueInput
     distinct: [CountryScalarFieldEnum]
-    orderBy: [countryOrderByWithRelationInput]
+    orderBy: [CountryOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countryWhereInput
-  ): [country!]!
+    where: CountryWhereInput
+  ): [Country!]!
   findManyCountryCount(
-    cursor: countryWhereUniqueInput
+    cursor: CountryWhereUniqueInput
     distinct: [CountryScalarFieldEnum]
-    orderBy: [countryOrderByWithRelationInput]
+    orderBy: [CountryOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countryWhereInput
+    where: CountryWhereInput
   ): Int!
-  findManyCountrylanguage(
-    cursor: countrylanguageWhereUniqueInput
-    distinct: [CountrylanguageScalarFieldEnum]
-    orderBy: [countrylanguageOrderByWithRelationInput]
+  findManyCountryLanguage(
+    cursor: CountryLanguageWhereUniqueInput
+    distinct: [CountryLanguageScalarFieldEnum]
+    orderBy: [CountryLanguageOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countrylanguageWhereInput
-  ): [countrylanguage!]!
-  findManyCountrylanguageCount(
-    cursor: countrylanguageWhereUniqueInput
-    distinct: [CountrylanguageScalarFieldEnum]
-    orderBy: [countrylanguageOrderByWithRelationInput]
+    where: CountryLanguageWhereInput
+  ): [CountryLanguage!]!
+  findManyCountryLanguageCount(
+    cursor: CountryLanguageWhereUniqueInput
+    distinct: [CountryLanguageScalarFieldEnum]
+    orderBy: [CountryLanguageOrderByWithRelationInput]
     skip: Int
     take: Int
-    where: countrylanguageWhereInput
+    where: CountryLanguageWhereInput
   ): Int!
-  findUniqueCity(where: cityWhereUniqueInput!): city
-  findUniqueCountry(where: countryWhereUniqueInput!): country
-  findUniqueCountrylanguage(
-    where: countrylanguageWhereUniqueInput!
-  ): countrylanguage
+  findUniqueCity(where: CityWhereUniqueInput!): City
+  findUniqueCountry(where: CountryWhereUniqueInput!): Country
+  findUniqueCountryLanguage(
+    where: CountryLanguageWhereUniqueInput!
+  ): CountryLanguage
 }
 
 enum SortOrder {
@@ -953,1117 +2069,5 @@ enum TransactionIsolationLevel {
 }
 
 type city {
-  CountryCode: String!
-  District: String!
-  ID: Int!
-  Name: String!
-  Population: Int!
-  country: country!
-}
-
-input cityAvgOrderByAggregateInput {
-  ID: SortOrder
-  Population: SortOrder
-}
-
-input cityCountOrderByAggregateInput {
-  CountryCode: SortOrder
-  District: SortOrder
-  ID: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-}
-
-input cityCreateInput {
-  District: String!
-  Name: String!
   Population: Int
-  country: countryCreateNestedOneWithoutCityInput!
-}
-
-input cityCreateManyCountryInput {
-  District: String!
-  ID: Int
-  Name: String!
-  Population: Int
-}
-
-input cityCreateManyCountryInputEnvelope {
-  data: cityCreateManyCountryInput!
-  skipDuplicates: Boolean
-}
-
-input cityCreateManyInput {
-  CountryCode: String!
-  District: String!
-  ID: Int
-  Name: String!
-  Population: Int
-}
-
-input cityCreateNestedManyWithoutCountryInput {
-  connect: [cityWhereUniqueInput]
-  connectOrCreate: [cityCreateOrConnectWithoutCountryInput]
-  create: [cityCreateWithoutCountryInput]
-  createMany: cityCreateManyCountryInputEnvelope
-}
-
-input cityCreateOrConnectWithoutCountryInput {
-  create: cityCreateWithoutCountryInput!
-  where: cityWhereUniqueInput!
-}
-
-input cityCreateWithoutCountryInput {
-  District: String!
-  Name: String!
-  Population: Int
-}
-
-input cityMaxOrderByAggregateInput {
-  CountryCode: SortOrder
-  District: SortOrder
-  ID: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-}
-
-input cityMinOrderByAggregateInput {
-  CountryCode: SortOrder
-  District: SortOrder
-  ID: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-}
-
-input cityOrderByRelationAggregateInput {
-  _count: SortOrder
-}
-
-input cityOrderByWithAggregationInput {
-  CountryCode: SortOrder
-  District: SortOrder
-  ID: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  _avg: cityAvgOrderByAggregateInput
-  _count: cityCountOrderByAggregateInput
-  _max: cityMaxOrderByAggregateInput
-  _min: cityMinOrderByAggregateInput
-  _sum: citySumOrderByAggregateInput
-}
-
-input cityOrderByWithRelationInput {
-  CountryCode: SortOrder
-  District: SortOrder
-  ID: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  country: countryOrderByWithRelationInput
-}
-
-input cityScalarWhereInput {
-  AND: [cityScalarWhereInput]
-  CountryCode: StringFilter
-  District: StringFilter
-  ID: IntFilter
-  NOT: [cityScalarWhereInput]
-  Name: StringFilter
-  OR: [cityScalarWhereInput]
-  Population: IntFilter
-}
-
-input cityScalarWhereWithAggregatesInput {
-  AND: [cityScalarWhereWithAggregatesInput]
-  CountryCode: StringWithAggregatesFilter
-  District: StringWithAggregatesFilter
-  ID: IntWithAggregatesFilter
-  NOT: [cityScalarWhereWithAggregatesInput]
-  Name: StringWithAggregatesFilter
-  OR: [cityScalarWhereWithAggregatesInput]
-  Population: IntWithAggregatesFilter
-}
-
-input citySumOrderByAggregateInput {
-  ID: SortOrder
-  Population: SortOrder
-}
-
-input cityUncheckedCreateInput {
-  CountryCode: String!
-  District: String!
-  ID: Int
-  Name: String!
-  Population: Int
-}
-
-input cityUncheckedCreateNestedManyWithoutCountryInput {
-  connect: [cityWhereUniqueInput]
-  connectOrCreate: [cityCreateOrConnectWithoutCountryInput]
-  create: [cityCreateWithoutCountryInput]
-  createMany: cityCreateManyCountryInputEnvelope
-}
-
-input cityUncheckedCreateWithoutCountryInput {
-  District: String!
-  ID: Int
-  Name: String!
-  Population: Int
-}
-
-input cityUncheckedUpdateInput {
-  CountryCode: StringFieldUpdateOperationsInput
-  District: StringFieldUpdateOperationsInput
-  ID: IntFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-}
-
-input cityUncheckedUpdateManyInput {
-  CountryCode: StringFieldUpdateOperationsInput
-  District: StringFieldUpdateOperationsInput
-  ID: IntFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-}
-
-input cityUncheckedUpdateManyWithoutCountryInput {
-  District: StringFieldUpdateOperationsInput
-  ID: IntFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-}
-
-input cityUncheckedUpdateManyWithoutCountryNestedInput {
-  connect: [cityWhereUniqueInput]
-  connectOrCreate: [cityCreateOrConnectWithoutCountryInput]
-  create: [cityCreateWithoutCountryInput]
-  createMany: cityCreateManyCountryInputEnvelope
-  delete: [cityWhereUniqueInput]
-  deleteMany: [cityScalarWhereInput]
-  disconnect: [cityWhereUniqueInput]
-  set: [cityWhereUniqueInput]
-  update: [cityUpdateWithWhereUniqueWithoutCountryInput]
-  updateMany: [cityUpdateManyWithWhereWithoutCountryInput]
-  upsert: [cityUpsertWithWhereUniqueWithoutCountryInput]
-}
-
-input cityUncheckedUpdateWithoutCountryInput {
-  District: StringFieldUpdateOperationsInput
-  ID: IntFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-}
-
-input cityUpdateInput {
-  District: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  country: countryUpdateOneRequiredWithoutCityNestedInput
-}
-
-input cityUpdateManyMutationInput {
-  District: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-}
-
-input cityUpdateManyWithWhereWithoutCountryInput {
-  data: cityUpdateManyMutationInput!
-  where: cityScalarWhereInput!
-}
-
-input cityUpdateManyWithoutCountryNestedInput {
-  connect: [cityWhereUniqueInput]
-  connectOrCreate: [cityCreateOrConnectWithoutCountryInput]
-  create: [cityCreateWithoutCountryInput]
-  createMany: cityCreateManyCountryInputEnvelope
-  delete: [cityWhereUniqueInput]
-  deleteMany: [cityScalarWhereInput]
-  disconnect: [cityWhereUniqueInput]
-  set: [cityWhereUniqueInput]
-  update: [cityUpdateWithWhereUniqueWithoutCountryInput]
-  updateMany: [cityUpdateManyWithWhereWithoutCountryInput]
-  upsert: [cityUpsertWithWhereUniqueWithoutCountryInput]
-}
-
-input cityUpdateWithWhereUniqueWithoutCountryInput {
-  data: cityUpdateWithoutCountryInput!
-  where: cityWhereUniqueInput!
-}
-
-input cityUpdateWithoutCountryInput {
-  District: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-}
-
-input cityUpsertWithWhereUniqueWithoutCountryInput {
-  create: cityCreateWithoutCountryInput!
-  update: cityUpdateWithoutCountryInput!
-  where: cityWhereUniqueInput!
-}
-
-input cityWhereInput {
-  AND: [cityWhereInput]
-  CountryCode: StringFilter
-  District: StringFilter
-  ID: IntFilter
-  NOT: [cityWhereInput]
-  Name: StringFilter
-  OR: [cityWhereInput]
-  Population: IntFilter
-  country: CountryRelationFilter
-}
-
-input cityWhereUniqueInput {
-  AND: [cityWhereInput]
-  CountryCode: StringFilter
-  District: StringFilter
-  ID: Int
-  NOT: [cityWhereInput]
-  Name: StringFilter
-  OR: [cityWhereInput]
-  Population: IntFilter
-  country: CountryRelationFilter
-}
-
-type country {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent!
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int!
-  Region: String!
-  SurfaceArea: Decimal!
-  _count: CountryCountOutputType!
-  city(
-    cursor: cityWhereUniqueInput
-    distinct: [CityScalarFieldEnum]
-    orderBy: [cityOrderByWithRelationInput]
-    skip: Int
-    take: Int
-    where: cityWhereInput
-  ): [city!]!
-  countrylanguage(
-    cursor: countrylanguageWhereUniqueInput
-    distinct: [CountrylanguageScalarFieldEnum]
-    orderBy: [countrylanguageOrderByWithRelationInput]
-    skip: Int
-    take: Int
-    where: countrylanguageWhereInput
-  ): [countrylanguage!]!
-}
-
-input countryAvgOrderByAggregateInput {
-  Capital: SortOrder
-  GNP: SortOrder
-  GNPOld: SortOrder
-  IndepYear: SortOrder
-  LifeExpectancy: SortOrder
-  Population: SortOrder
-  SurfaceArea: SortOrder
-}
-
-input countryCountOrderByAggregateInput {
-  Capital: SortOrder
-  Code: SortOrder
-  Code2: SortOrder
-  Continent: SortOrder
-  GNP: SortOrder
-  GNPOld: SortOrder
-  GovernmentForm: SortOrder
-  HeadOfState: SortOrder
-  IndepYear: SortOrder
-  LifeExpectancy: SortOrder
-  LocalName: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  Region: SortOrder
-  SurfaceArea: SortOrder
-}
-
-input countryCreateInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-  city: cityCreateNestedManyWithoutCountryInput
-  countrylanguage: countrylanguageCreateNestedManyWithoutCountryInput
-}
-
-input countryCreateManyInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-}
-
-input countryCreateNestedOneWithoutCityInput {
-  connect: countryWhereUniqueInput
-  connectOrCreate: countryCreateOrConnectWithoutCityInput
-  create: countryCreateWithoutCityInput
-}
-
-input countryCreateNestedOneWithoutCountrylanguageInput {
-  connect: countryWhereUniqueInput
-  connectOrCreate: countryCreateOrConnectWithoutCountrylanguageInput
-  create: countryCreateWithoutCountrylanguageInput
-}
-
-input countryCreateOrConnectWithoutCityInput {
-  create: countryCreateWithoutCityInput!
-  where: countryWhereUniqueInput!
-}
-
-input countryCreateOrConnectWithoutCountrylanguageInput {
-  create: countryCreateWithoutCountrylanguageInput!
-  where: countryWhereUniqueInput!
-}
-
-input countryCreateWithoutCityInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-  countrylanguage: countrylanguageCreateNestedManyWithoutCountryInput
-}
-
-input countryCreateWithoutCountrylanguageInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-  city: cityCreateNestedManyWithoutCountryInput
-}
-
-input countryMaxOrderByAggregateInput {
-  Capital: SortOrder
-  Code: SortOrder
-  Code2: SortOrder
-  Continent: SortOrder
-  GNP: SortOrder
-  GNPOld: SortOrder
-  GovernmentForm: SortOrder
-  HeadOfState: SortOrder
-  IndepYear: SortOrder
-  LifeExpectancy: SortOrder
-  LocalName: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  Region: SortOrder
-  SurfaceArea: SortOrder
-}
-
-input countryMinOrderByAggregateInput {
-  Capital: SortOrder
-  Code: SortOrder
-  Code2: SortOrder
-  Continent: SortOrder
-  GNP: SortOrder
-  GNPOld: SortOrder
-  GovernmentForm: SortOrder
-  HeadOfState: SortOrder
-  IndepYear: SortOrder
-  LifeExpectancy: SortOrder
-  LocalName: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  Region: SortOrder
-  SurfaceArea: SortOrder
-}
-
-input countryOrderByWithAggregationInput {
-  Capital: SortOrderInput
-  Code: SortOrder
-  Code2: SortOrder
-  Continent: SortOrder
-  GNP: SortOrderInput
-  GNPOld: SortOrderInput
-  GovernmentForm: SortOrder
-  HeadOfState: SortOrderInput
-  IndepYear: SortOrderInput
-  LifeExpectancy: SortOrderInput
-  LocalName: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  Region: SortOrder
-  SurfaceArea: SortOrder
-  _avg: countryAvgOrderByAggregateInput
-  _count: countryCountOrderByAggregateInput
-  _max: countryMaxOrderByAggregateInput
-  _min: countryMinOrderByAggregateInput
-  _sum: countrySumOrderByAggregateInput
-}
-
-input countryOrderByWithRelationInput {
-  Capital: SortOrderInput
-  Code: SortOrder
-  Code2: SortOrder
-  Continent: SortOrder
-  GNP: SortOrderInput
-  GNPOld: SortOrderInput
-  GovernmentForm: SortOrder
-  HeadOfState: SortOrderInput
-  IndepYear: SortOrderInput
-  LifeExpectancy: SortOrderInput
-  LocalName: SortOrder
-  Name: SortOrder
-  Population: SortOrder
-  Region: SortOrder
-  SurfaceArea: SortOrder
-  city: cityOrderByRelationAggregateInput
-  countrylanguage: countrylanguageOrderByRelationAggregateInput
-}
-
-input countryScalarWhereWithAggregatesInput {
-  AND: [countryScalarWhereWithAggregatesInput]
-  Capital: IntNullableWithAggregatesFilter
-  Code: StringWithAggregatesFilter
-  Code2: StringWithAggregatesFilter
-  Continent: Enumcountry_ContinentWithAggregatesFilter
-  GNP: DecimalNullableWithAggregatesFilter
-  GNPOld: DecimalNullableWithAggregatesFilter
-  GovernmentForm: StringWithAggregatesFilter
-  HeadOfState: StringNullableWithAggregatesFilter
-  IndepYear: IntNullableWithAggregatesFilter
-  LifeExpectancy: DecimalNullableWithAggregatesFilter
-  LocalName: StringWithAggregatesFilter
-  NOT: [countryScalarWhereWithAggregatesInput]
-  Name: StringWithAggregatesFilter
-  OR: [countryScalarWhereWithAggregatesInput]
-  Population: IntWithAggregatesFilter
-  Region: StringWithAggregatesFilter
-  SurfaceArea: DecimalWithAggregatesFilter
-}
-
-input countrySumOrderByAggregateInput {
-  Capital: SortOrder
-  GNP: SortOrder
-  GNPOld: SortOrder
-  IndepYear: SortOrder
-  LifeExpectancy: SortOrder
-  Population: SortOrder
-  SurfaceArea: SortOrder
-}
-
-input countryUncheckedCreateInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-  city: cityUncheckedCreateNestedManyWithoutCountryInput
-  countrylanguage: countrylanguageUncheckedCreateNestedManyWithoutCountryInput
-}
-
-input countryUncheckedCreateWithoutCityInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-  countrylanguage: countrylanguageUncheckedCreateNestedManyWithoutCountryInput
-}
-
-input countryUncheckedCreateWithoutCountrylanguageInput {
-  Capital: Int
-  Code: String!
-  Code2: String!
-  Continent: country_Continent
-  GNP: Decimal
-  GNPOld: Decimal
-  GovernmentForm: String!
-  HeadOfState: String
-  IndepYear: Int
-  LifeExpectancy: Decimal
-  LocalName: String!
-  Name: String!
-  Population: Int
-  Region: String!
-  SurfaceArea: Decimal
-  city: cityUncheckedCreateNestedManyWithoutCountryInput
-}
-
-input countryUncheckedUpdateInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-  city: cityUncheckedUpdateManyWithoutCountryNestedInput
-  countrylanguage: countrylanguageUncheckedUpdateManyWithoutCountryNestedInput
-}
-
-input countryUncheckedUpdateManyInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-}
-
-input countryUncheckedUpdateWithoutCityInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-  countrylanguage: countrylanguageUncheckedUpdateManyWithoutCountryNestedInput
-}
-
-input countryUncheckedUpdateWithoutCountrylanguageInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-  city: cityUncheckedUpdateManyWithoutCountryNestedInput
-}
-
-input countryUpdateInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-  city: cityUpdateManyWithoutCountryNestedInput
-  countrylanguage: countrylanguageUpdateManyWithoutCountryNestedInput
-}
-
-input countryUpdateManyMutationInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-}
-
-input countryUpdateOneRequiredWithoutCityNestedInput {
-  connect: countryWhereUniqueInput
-  connectOrCreate: countryCreateOrConnectWithoutCityInput
-  create: countryCreateWithoutCityInput
-  update: countryUpdateToOneWithWhereWithoutCityInput
-  upsert: countryUpsertWithoutCityInput
-}
-
-input countryUpdateOneRequiredWithoutCountrylanguageNestedInput {
-  connect: countryWhereUniqueInput
-  connectOrCreate: countryCreateOrConnectWithoutCountrylanguageInput
-  create: countryCreateWithoutCountrylanguageInput
-  update: countryUpdateToOneWithWhereWithoutCountrylanguageInput
-  upsert: countryUpsertWithoutCountrylanguageInput
-}
-
-input countryUpdateToOneWithWhereWithoutCityInput {
-  data: countryUpdateWithoutCityInput!
-  where: countryWhereInput
-}
-
-input countryUpdateToOneWithWhereWithoutCountrylanguageInput {
-  data: countryUpdateWithoutCountrylanguageInput!
-  where: countryWhereInput
-}
-
-input countryUpdateWithoutCityInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-  countrylanguage: countrylanguageUpdateManyWithoutCountryNestedInput
-}
-
-input countryUpdateWithoutCountrylanguageInput {
-  Capital: NullableIntFieldUpdateOperationsInput
-  Code: StringFieldUpdateOperationsInput
-  Code2: StringFieldUpdateOperationsInput
-  Continent: Enumcountry_ContinentFieldUpdateOperationsInput
-  GNP: NullableDecimalFieldUpdateOperationsInput
-  GNPOld: NullableDecimalFieldUpdateOperationsInput
-  GovernmentForm: StringFieldUpdateOperationsInput
-  HeadOfState: NullableStringFieldUpdateOperationsInput
-  IndepYear: NullableIntFieldUpdateOperationsInput
-  LifeExpectancy: NullableDecimalFieldUpdateOperationsInput
-  LocalName: StringFieldUpdateOperationsInput
-  Name: StringFieldUpdateOperationsInput
-  Population: IntFieldUpdateOperationsInput
-  Region: StringFieldUpdateOperationsInput
-  SurfaceArea: DecimalFieldUpdateOperationsInput
-  city: cityUpdateManyWithoutCountryNestedInput
-}
-
-input countryUpsertWithoutCityInput {
-  create: countryCreateWithoutCityInput!
-  update: countryUpdateWithoutCityInput!
-  where: countryWhereInput
-}
-
-input countryUpsertWithoutCountrylanguageInput {
-  create: countryCreateWithoutCountrylanguageInput!
-  update: countryUpdateWithoutCountrylanguageInput!
-  where: countryWhereInput
-}
-
-input countryWhereInput {
-  AND: [countryWhereInput]
-  Capital: IntNullableFilter
-  Code: StringFilter
-  Code2: StringFilter
-  Continent: Enumcountry_ContinentFilter
-  GNP: DecimalNullableFilter
-  GNPOld: DecimalNullableFilter
-  GovernmentForm: StringFilter
-  HeadOfState: StringNullableFilter
-  IndepYear: IntNullableFilter
-  LifeExpectancy: DecimalNullableFilter
-  LocalName: StringFilter
-  NOT: [countryWhereInput]
-  Name: StringFilter
-  OR: [countryWhereInput]
-  Population: IntFilter
-  Region: StringFilter
-  SurfaceArea: DecimalFilter
-  city: CityListRelationFilter
-  countrylanguage: CountrylanguageListRelationFilter
-}
-
-input countryWhereUniqueInput {
-  AND: [countryWhereInput]
-  Capital: IntNullableFilter
-  Code: String
-  Code2: StringFilter
-  Continent: Enumcountry_ContinentFilter
-  GNP: DecimalNullableFilter
-  GNPOld: DecimalNullableFilter
-  GovernmentForm: StringFilter
-  HeadOfState: StringNullableFilter
-  IndepYear: IntNullableFilter
-  LifeExpectancy: DecimalNullableFilter
-  LocalName: StringFilter
-  NOT: [countryWhereInput]
-  Name: StringFilter
-  OR: [countryWhereInput]
-  Population: IntFilter
-  Region: StringFilter
-  SurfaceArea: DecimalFilter
-  city: CityListRelationFilter
-  countrylanguage: CountrylanguageListRelationFilter
-}
-
-enum country_Continent {
-  Africa
-  Antarctica
-  Asia
-  Europe
-  North_America
-  Oceania
-  South_America
-}
-
-type countrylanguage {
-  CountryCode: String!
-  IsOfficial: countrylanguage_IsOfficial!
-  Language: String!
-  Percentage: Decimal!
-  country: country!
-}
-
-input countrylanguageAvgOrderByAggregateInput {
-  Percentage: SortOrder
-}
-
-input countrylanguageCountOrderByAggregateInput {
-  CountryCode: SortOrder
-  IsOfficial: SortOrder
-  Language: SortOrder
-  Percentage: SortOrder
-}
-
-input countrylanguageCountryCodeLanguageCompoundUniqueInput {
-  CountryCode: String!
-  Language: String!
-}
-
-input countrylanguageCreateInput {
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String!
-  Percentage: Decimal
-  country: countryCreateNestedOneWithoutCountrylanguageInput!
-}
-
-input countrylanguageCreateManyCountryInput {
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String!
-  Percentage: Decimal
-}
-
-input countrylanguageCreateManyCountryInputEnvelope {
-  data: countrylanguageCreateManyCountryInput!
-  skipDuplicates: Boolean
-}
-
-input countrylanguageCreateManyInput {
-  CountryCode: String!
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String!
-  Percentage: Decimal
-}
-
-input countrylanguageCreateNestedManyWithoutCountryInput {
-  connect: [countrylanguageWhereUniqueInput]
-  connectOrCreate: [countrylanguageCreateOrConnectWithoutCountryInput]
-  create: [countrylanguageCreateWithoutCountryInput]
-  createMany: countrylanguageCreateManyCountryInputEnvelope
-}
-
-input countrylanguageCreateOrConnectWithoutCountryInput {
-  create: countrylanguageCreateWithoutCountryInput!
-  where: countrylanguageWhereUniqueInput!
-}
-
-input countrylanguageCreateWithoutCountryInput {
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String!
-  Percentage: Decimal
-}
-
-input countrylanguageMaxOrderByAggregateInput {
-  CountryCode: SortOrder
-  IsOfficial: SortOrder
-  Language: SortOrder
-  Percentage: SortOrder
-}
-
-input countrylanguageMinOrderByAggregateInput {
-  CountryCode: SortOrder
-  IsOfficial: SortOrder
-  Language: SortOrder
-  Percentage: SortOrder
-}
-
-input countrylanguageOrderByRelationAggregateInput {
-  _count: SortOrder
-}
-
-input countrylanguageOrderByWithAggregationInput {
-  CountryCode: SortOrder
-  IsOfficial: SortOrder
-  Language: SortOrder
-  Percentage: SortOrder
-  _avg: countrylanguageAvgOrderByAggregateInput
-  _count: countrylanguageCountOrderByAggregateInput
-  _max: countrylanguageMaxOrderByAggregateInput
-  _min: countrylanguageMinOrderByAggregateInput
-  _sum: countrylanguageSumOrderByAggregateInput
-}
-
-input countrylanguageOrderByWithRelationInput {
-  CountryCode: SortOrder
-  IsOfficial: SortOrder
-  Language: SortOrder
-  Percentage: SortOrder
-  country: countryOrderByWithRelationInput
-}
-
-input countrylanguageScalarWhereInput {
-  AND: [countrylanguageScalarWhereInput]
-  CountryCode: StringFilter
-  IsOfficial: Enumcountrylanguage_IsOfficialFilter
-  Language: StringFilter
-  NOT: [countrylanguageScalarWhereInput]
-  OR: [countrylanguageScalarWhereInput]
-  Percentage: DecimalFilter
-}
-
-input countrylanguageScalarWhereWithAggregatesInput {
-  AND: [countrylanguageScalarWhereWithAggregatesInput]
-  CountryCode: StringWithAggregatesFilter
-  IsOfficial: Enumcountrylanguage_IsOfficialWithAggregatesFilter
-  Language: StringWithAggregatesFilter
-  NOT: [countrylanguageScalarWhereWithAggregatesInput]
-  OR: [countrylanguageScalarWhereWithAggregatesInput]
-  Percentage: DecimalWithAggregatesFilter
-}
-
-input countrylanguageSumOrderByAggregateInput {
-  Percentage: SortOrder
-}
-
-input countrylanguageUncheckedCreateInput {
-  CountryCode: String!
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String!
-  Percentage: Decimal
-}
-
-input countrylanguageUncheckedCreateNestedManyWithoutCountryInput {
-  connect: [countrylanguageWhereUniqueInput]
-  connectOrCreate: [countrylanguageCreateOrConnectWithoutCountryInput]
-  create: [countrylanguageCreateWithoutCountryInput]
-  createMany: countrylanguageCreateManyCountryInputEnvelope
-}
-
-input countrylanguageUncheckedCreateWithoutCountryInput {
-  IsOfficial: countrylanguage_IsOfficial
-  Language: String!
-  Percentage: Decimal
-}
-
-input countrylanguageUncheckedUpdateInput {
-  CountryCode: StringFieldUpdateOperationsInput
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-}
-
-input countrylanguageUncheckedUpdateManyInput {
-  CountryCode: StringFieldUpdateOperationsInput
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-}
-
-input countrylanguageUncheckedUpdateManyWithoutCountryInput {
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-}
-
-input countrylanguageUncheckedUpdateManyWithoutCountryNestedInput {
-  connect: [countrylanguageWhereUniqueInput]
-  connectOrCreate: [countrylanguageCreateOrConnectWithoutCountryInput]
-  create: [countrylanguageCreateWithoutCountryInput]
-  createMany: countrylanguageCreateManyCountryInputEnvelope
-  delete: [countrylanguageWhereUniqueInput]
-  deleteMany: [countrylanguageScalarWhereInput]
-  disconnect: [countrylanguageWhereUniqueInput]
-  set: [countrylanguageWhereUniqueInput]
-  update: [countrylanguageUpdateWithWhereUniqueWithoutCountryInput]
-  updateMany: [countrylanguageUpdateManyWithWhereWithoutCountryInput]
-  upsert: [countrylanguageUpsertWithWhereUniqueWithoutCountryInput]
-}
-
-input countrylanguageUncheckedUpdateWithoutCountryInput {
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-}
-
-input countrylanguageUpdateInput {
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-  country: countryUpdateOneRequiredWithoutCountrylanguageNestedInput
-}
-
-input countrylanguageUpdateManyMutationInput {
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-}
-
-input countrylanguageUpdateManyWithWhereWithoutCountryInput {
-  data: countrylanguageUpdateManyMutationInput!
-  where: countrylanguageScalarWhereInput!
-}
-
-input countrylanguageUpdateManyWithoutCountryNestedInput {
-  connect: [countrylanguageWhereUniqueInput]
-  connectOrCreate: [countrylanguageCreateOrConnectWithoutCountryInput]
-  create: [countrylanguageCreateWithoutCountryInput]
-  createMany: countrylanguageCreateManyCountryInputEnvelope
-  delete: [countrylanguageWhereUniqueInput]
-  deleteMany: [countrylanguageScalarWhereInput]
-  disconnect: [countrylanguageWhereUniqueInput]
-  set: [countrylanguageWhereUniqueInput]
-  update: [countrylanguageUpdateWithWhereUniqueWithoutCountryInput]
-  updateMany: [countrylanguageUpdateManyWithWhereWithoutCountryInput]
-  upsert: [countrylanguageUpsertWithWhereUniqueWithoutCountryInput]
-}
-
-input countrylanguageUpdateWithWhereUniqueWithoutCountryInput {
-  data: countrylanguageUpdateWithoutCountryInput!
-  where: countrylanguageWhereUniqueInput!
-}
-
-input countrylanguageUpdateWithoutCountryInput {
-  IsOfficial: Enumcountrylanguage_IsOfficialFieldUpdateOperationsInput
-  Language: StringFieldUpdateOperationsInput
-  Percentage: DecimalFieldUpdateOperationsInput
-}
-
-input countrylanguageUpsertWithWhereUniqueWithoutCountryInput {
-  create: countrylanguageCreateWithoutCountryInput!
-  update: countrylanguageUpdateWithoutCountryInput!
-  where: countrylanguageWhereUniqueInput!
-}
-
-input countrylanguageWhereInput {
-  AND: [countrylanguageWhereInput]
-  CountryCode: StringFilter
-  IsOfficial: Enumcountrylanguage_IsOfficialFilter
-  Language: StringFilter
-  NOT: [countrylanguageWhereInput]
-  OR: [countrylanguageWhereInput]
-  Percentage: DecimalFilter
-  country: CountryRelationFilter
-}
-
-input countrylanguageWhereUniqueInput {
-  AND: [countrylanguageWhereInput]
-  CountryCode: StringFilter
-  CountryCode_Language: countrylanguageCountryCodeLanguageCompoundUniqueInput
-  IsOfficial: Enumcountrylanguage_IsOfficialFilter
-  Language: StringFilter
-  NOT: [countrylanguageWhereInput]
-  OR: [countrylanguageWhereInput]
-  Percentage: DecimalFilter
-  country: CountryRelationFilter
-}
-
-enum countrylanguage_IsOfficial {
-  F
-  T
 }
