@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { city } from '@prisma/client';
 
 const cityMiddleware = async (params, next) => {
@@ -5,7 +6,9 @@ const cityMiddleware = async (params, next) => {
     const result: city = await next(params);
     if (result.Name !== undefined) {
       // delete result.population;
-      throw new Error(`You do not have permission to access city.name.`);
+      throw new InternalServerErrorException(
+        `You do not have permission to access city.name.`,
+      );
     }
 
     return result;

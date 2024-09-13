@@ -1,0 +1,30 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "nestjs",
+      "program": "src/main.ts",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-r",
+        "tsconfig-paths/register", // build with tsconfig file
+        "-r",
+        "ts-node/register"
+      ],
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/**", // debug call stack hide node_modules files
+      ],
+      // "resolveSourceMapLocations": [
+      //   "${workspaceFolder}/dist/**/*.js",
+      //   "${workspaceFolder}/src/**/*.ts"
+      // ],
+    }
+  ]
+}

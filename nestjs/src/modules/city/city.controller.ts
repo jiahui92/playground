@@ -17,11 +17,16 @@ export class CityController {
     private readonly cityService: CityService,
   ) {}
 
-  @Get('findOne/:id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  @Get('findUnique/:id')
+  findUnique(@Param('id', ParseIntPipe) id: number) {
     return this.prisma.city.findUnique({
       where: { ID: id },
     });
+  }
+
+  @Get('findFirst')
+  findFirst() {
+    return this.prisma.city.findFirst();
   }
 
   @Post('create')

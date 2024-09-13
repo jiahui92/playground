@@ -1,3 +1,4 @@
+import './generated/typings';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { makeSchema, fieldAuthorizePlugin } from 'nexus';

@@ -37,16 +37,6 @@ query {
 }
 ```
 
-
-```bash
-# generate files at src/user
-npx nest g resource modules/user
-
-npx nest g module modules/user
-npx nest g service modules/user
-npx nest g controller modules/user
-```
-
 ## Test
 
 ```bash
