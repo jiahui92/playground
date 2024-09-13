@@ -80,13 +80,15 @@ type City {
 ## entities
 ### generate
 * 配置`.env`的连接数据库信息
-* 执行`npx prisma db pull` 从数据库拉取最新的sqlSchema到`./prisma/schema.prisma`
-* 执行`npx prisma generate` 生成`@prisma/client`代码
-  * 根据sqlSchema生成prisma相关查询方法，比如`prisma.user.findMany/create/update`等
-  * 生成数据库model的ts相关定义`node_modules/nexus-prisma`
+* 执行`npm run pull-db`
+  * `npx prisma db pull` 从数据库拉取最新的sqlSchema到`./prisma/schema.prisma`
+  * `npx prisma-case-format` 格式化model和field的命名
+  * `npx prisma generate` 生成`@prisma/client`代码
+    * 根据sqlSchema生成prisma相关查询方法，比如`prisma.user.findMany/create/update`等
+    * 生成数据库model的ts定义
 * 执行`npm run generate-nexus` 生成`src/generated/nexus`代码
   * paljs(prisma-tool)根据sqlSchema生成prisma相关gql的方法，比如`findManyUser`
-* 执行`npm start` 生成`src/generated/schema.gql,typings.ts`代码
+* <!--执行`npm start` 生成`src/generated/schema.gql,typings.ts`代码-->
 
 ### migration
 数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
@@ -95,6 +97,23 @@ npx prisma db push
 npx prisma db reset
 ```
 
+### schema format
+paljs不会格式化enum变量，所以暂时使用prisma-case-format，并且支持model和field忽略配置
+```sh
+# pal schema camel-case
+prisma-case-format -f prisma/schema.prisma
+```
+```sh
+# prisma-case-format config
+default: ...
+override:
+  mYTaBlE: 'disable' # skip convention management for this table
+  ...
+  YourTable:
+    default: '...'
+    field:
+      unmanaged_property: 'disable' # skip convention management for this field
+```
 
 ## 安全校验
 可选安全校验的逻辑设置的优先级：`nestjs > prisma > nexus/gql`，比如
