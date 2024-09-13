@@ -11,7 +11,7 @@ npm install
 # 本项目依赖mysql数据库，初次使用时可以使用prisma在本地自动创建数据库（根据./prisma/schema.prisma的表结构）
 # https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/troubleshooting-development
 code ./env # 修改数据库连接相关信息
-npx prisma migrate dev # 执行命令后会自动创建完数据库
+npx prisma migrate dev # 执行命令后会自动创建/升级数据库、并生成node_modules/prisma/client
 ```
 
 ## Running the app
@@ -136,6 +136,23 @@ npx prisma migrate reset
 * gql的特殊层参数校验（不涉及prisma时）则使用nexus的中间件
   * 例如`src/graphql/city.ts`
 
+
+## Deploy
+```sh
+git pull
+
+# 安装依赖
+npm install
+
+# 生成 Prisma Client
+npx prisma generate
+
+# 应用数据库迁移
+npx prisma migrate deploy
+
+# 启动应用
+npm start:prod
+```
 
 ## entities (old: typeOrm这个库太多bug，已弃用)
 ### generate
