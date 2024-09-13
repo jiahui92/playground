@@ -11,7 +11,7 @@ npm install
 # 本项目依赖mysql数据库，初次使用时可以使用prisma在本地自动创建数据库（根据./prisma/schema.prisma的表结构）
 # https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/troubleshooting-development
 code ./env # 修改数据库连接相关信息
-npx prisma migrate dev --name init
+npx prisma migrate dev # 执行命令后会自动创建完数据库
 ```
 
 ## Running the app
@@ -90,14 +90,7 @@ type City {
   * paljs(prisma-tool)根据sqlSchema生成prisma相关gql的方法，比如`findManyUser`
 * 执行`npm start` 生成`src/generated/schema.gql,nexus-typings.ts`代码
 
-### migration
-数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
-```bash
-npx prisma db push
-npx prisma db reset
-```
-
-### schema format
+#### schema format
 paljs不会格式化enum变量，所以暂时使用prisma-case-format，并且支持model和field忽略配置
 ```sh
 # pal schema camel-case
@@ -114,6 +107,25 @@ override:
     field:
       unmanaged_property: 'disable' # skip convention management for this field
 ```
+
+
+## migration
+数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
+```bash
+# 本地执行，根据schema.prisma生成`prisma/migrations/xxx_<migration-name>/migration.sql`数据库升级文件
+npx prisma migrate dev --name <migration-name>
+
+# 远端执行升级数据库，升级完毕后，数据库会在table._prisma_migrations插入一条记录
+# 升级前备份数据库！！！
+npx prisma migrate deploy
+# 回滚
+npx prisma migrate resolve --rolled-back <migration-name>
+
+
+# 开发中遇到升级冲突时，此命令会清空数据库，再重新创建
+npx prisma migrate reset
+```
+
 
 ## 安全校验
 可选安全校验的逻辑设置的优先级：`nestjs > prisma > nexus/gql`，比如
