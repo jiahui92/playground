@@ -109,9 +109,9 @@ npx prisma db reset
 ## 安全校验
 可选安全校验的逻辑设置的优先级：`nestjs > prisma > nexus/gql`，比如
 * 登录校验建议设置在nestjs的中间件
-  * 例如`src/middleware/req.middleware.ts`
+  * 例如`src/middlewares/req.middleware.ts`
 * 对象级/字段级的安全校验建议设置在prisma的中间件
-  * 例如`src/middleware/prisma.middleware.ts`
+  * 例如`src/middlewares/prisma.middleware.ts`
 * gql的特殊层参数校验（不涉及prisma时）则使用nexus的中间件
   * 例如`src/graphql/city.ts`
 
