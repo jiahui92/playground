@@ -10,7 +10,8 @@ import * as genTypes from './generated/nexus';
 import * as extendTypes from './graphql/extendTypes';
 import { cityAuth } from './graphql/city';
 import { PrismaService } from './prisma.service';
-import { ReqMiddleware } from './middleware/req.middleware';
+import { ReqMiddleware } from './middlewares/req.middleware';
+import { BusinessModule } from './modules/index.module';
 
 const schema = makeSchema({
   types: [extendTypes, genTypes, cityAuth],
@@ -35,6 +36,7 @@ const schema = makeSchema({
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
       playground: isDev(),
     }),
+    BusinessModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

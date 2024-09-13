@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { prismaMiddlewares } from './middleware/prisma.middleware';
+import { prismaMiddlewares } from './middlewares/prisma.middleware';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {

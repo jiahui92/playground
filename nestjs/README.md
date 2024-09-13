@@ -40,11 +40,11 @@ query {
 
 ```bash
 # generate files at src/user
-nest g resource user
+npx nest g resource modules/user
 
-nest g module user
-nest g service user
-nest g controller user
+npx nest g module modules/user
+npx nest g service modules/user
+npx nest g controller modules/user
 ```
 
 ## Test
