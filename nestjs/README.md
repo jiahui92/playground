@@ -131,11 +131,11 @@ npx prisma migrate reset
 可选安全校验的逻辑设置的优先级：`nestjs > prisma > nexus/gql`，比如
 * 登录校验建议设置在nestjs的中间件
   * 例如`src/middlewares/req.middleware.ts`
-* 对象级/字段级的安全校验建议设置在prisma的中间件
+* prisma+gql的对象级/字段级的安全校验建议设置在prisma的中间件
   * 例如`src/middlewares/prisma.middleware.ts`
-* gql的特殊层参数校验（不涉及prisma时）则使用nexus的中间件
-  * 例如`src/graphql/city.ts`
-
+* gql的安全校验【[参考资料](https://dgraph.io/blog/post/graphql-security-best-practices/)】
+  * 推荐使用`graphql-shield`: `src/graphql/permission.ts`
+  * 次选nexus中间件`src/graphql/city.ts`
 
 ## Deploy
 ```sh

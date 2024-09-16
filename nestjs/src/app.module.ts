@@ -1,8 +1,10 @@
+import { permissions } from './graphql/permissions';
 import './generated/nexus-typings';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { makeSchema, fieldAuthorizePlugin } from 'nexus';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { applyMiddleware } from 'graphql-middleware';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,6 +15,7 @@ import { cityAuth } from './graphql/city';
 import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
 import { BusinessModule } from './modules/index.module';
+// import { FormatResponsePlugin } from './graphql/plugins';
 
 const schema = makeSchema({
   types: [extendTypes, genTypes, cityAuth],
@@ -29,13 +32,15 @@ const schema = makeSchema({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      schema,
+      schema: applyMiddleware(schema, permissions),
       context: ({ req }) => {
         const user = getUserFromToken(req.token);
         return { prisma: req.prisma, user };
       },
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
       playground: isDev(),
+      introspection: isDev(),
+      // plugins: [FormatResponsePlugin],
     }),
     BusinessModule,
   ],
