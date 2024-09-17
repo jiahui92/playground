@@ -136,6 +136,9 @@ npx prisma migrate reset
 * gql的安全校验【[参考资料](https://dgraph.io/blog/post/graphql-security-best-practices/)】
   * 推荐使用`graphql-shield`: `src/graphql/permission.ts`
   * 次选nexus中间件`src/graphql/city.ts`
+* 其它
+  * `graphql-encrypt`: 加密请求参数
+
 
 ## Deploy
 ```sh

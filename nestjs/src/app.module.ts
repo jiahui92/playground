@@ -5,6 +5,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { makeSchema, fieldAuthorizePlugin } from 'nexus';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { applyMiddleware } from 'graphql-middleware';
+import {
+  createComplexityRule,
+  simpleEstimator,
+} from 'graphql-query-complexity';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -37,6 +41,13 @@ const schema = makeSchema({
         const user = getUserFromToken(req.token);
         return { prisma: req.prisma, user };
       },
+      validationRules: [
+        // 最多嵌套5层，防止DDOS或耗性能查询
+        createComplexityRule({
+          estimators: [simpleEstimator({ defaultComplexity: 1 })],
+          maximumComplexity: 5,
+        }),
+      ],
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
       playground: isDev(),
       introspection: isDev(),

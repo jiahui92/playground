@@ -1,10 +1,10 @@
-import { shield, allow, deny, rule, and, or } from 'graphql-shield';
+import { shield, deny, rule, and } from 'graphql-shield';
 import * as utils from 'src/common/utils';
 
 // 是否登录
 // isAdmin
 
-const isLogin = rule()(async (parent, args, ctx) => {
+const isLogin = rule()(async () => {
   // return !!ctx.user;
   return true;
 });
