@@ -108,6 +108,26 @@ override:
       unmanaged_property: 'disable' # skip convention management for this field
 ```
 
+#### query schema
+```gql
+query {
+  __schema {
+    queryType {
+      fields {
+        name
+        type {
+          kind
+          ofType {
+            kind
+            name
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 
 ## migration
 数据库的表结构发生变化后，需要使用migration生成的SQL语句同步升级线上数据库
@@ -129,13 +149,12 @@ npx prisma migrate reset
 
 ## 安全校验
 可选安全校验的逻辑设置的优先级：`nestjs > prisma > nexus/gql`，比如
-* 登录校验建议设置在nestjs的中间件
+* 登录校验建议设置在nestjs的中间件/guard
   * 例如`src/middlewares/req.middleware.ts`
 * prisma+gql的对象级/字段级的安全校验建议设置在prisma的中间件
   * 例如`src/middlewares/prisma.middleware.ts`
 * gql的安全校验【[参考资料](https://dgraph.io/blog/post/graphql-security-best-practices/)】
   * 推荐使用`graphql-shield`: `src/graphql/permission.ts`
-  * 次选nexus中间件`src/graphql/city.ts`
 * 其它
   * `graphql-encrypt`: 加密请求参数
 
@@ -156,6 +175,7 @@ npx prisma migrate deploy
 # 启动应用
 npm start:prod
 ```
+
 
 ## entities (old: typeOrm这个库太多bug，已弃用)
 ### generate
@@ -201,3 +221,21 @@ typeorm migration:run
 typeorm migration:revert
 ```
 
+## 选型
+* 数据库
+  * MySQL: 批量操作快？
+  * PostgrepSQL: 相比mysql多了数据类型，支持json按key查找、商用免费
+* ORM
+  * prisma
+    * 缺点：默认生成的gql.schema与规范的不太一样、api不支持复杂查询（可以写queryRaw）
+    * 优点：完美支持ts、三方支持好
+  * typeorm
+    * 缺点：此库作者和三方插件已慢慢不维护了、目前bug比较多
+    * 优点：gql.schema与规范接近、api支持复杂查询
+  * knex/objection/mikro-orm
+    * 优点: api支持复杂查询
+    * 缺点: 三方生态不是很好，尤其是gql相关的很多已不维护
+  * sequelize: ts支持不好
+  * code-first: TypeGraphQL, nexus
+    * 缺点：需手动编写ObjectType, ArgsType, Resolver(query,mutation)
+    * 优点：nestjs默认支持

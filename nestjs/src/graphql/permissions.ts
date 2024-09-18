@@ -17,11 +17,11 @@ export const permissions = shield(
   {
     Query: {
       '*': isLogin,
-      findManyCity: deny,
+      // findManyCity: deny,
     },
     Mutation: {
       '*': deny,
-      createOneCity: and(isLogin, isAdmin),
+      // createOneCity: and(isLogin, isAdmin),
     },
     CountryLanguage: isAdmin, // model级权限控制，防止gql嵌套级别的权限控制，比如city.country.countryLanguage
     City: {

@@ -26,7 +26,7 @@ type AggregateCountryLanguage {
 }
 
 type BatchPayload {
-  count: Int
+  count: Int!
 }
 
 """
@@ -2066,8 +2066,4 @@ enum TransactionIsolationLevel {
   ReadUncommitted
   RepeatableRead
   Serializable
-}
-
-type city {
-  Population: Int
 }

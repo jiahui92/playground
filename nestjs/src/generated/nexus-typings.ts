@@ -3,7 +3,6 @@
  * Do not make changes to this file directly
  */
 
-import type { FieldAuthorizeResolver } from 'nexus/dist/plugins/fieldAuthorizePlugin';
 import type { core } from 'nexus';
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -11,7 +10,7 @@ declare global {
      * The `BigInt` scalar type represents non-fractional signed whole numeric values.
      * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
      */
-    bigInt<FieldName extends string>(
+    bigint<FieldName extends string>(
       fieldName: FieldName,
       opts?: core.CommonInputFieldConfig<TypeName, FieldName>,
     ): void; // "BigInt";
@@ -51,7 +50,7 @@ declare global {
      * The `BigInt` scalar type represents non-fractional signed whole numeric values.
      * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
      */
-    bigInt<FieldName extends string>(
+    bigint<FieldName extends string>(
       fieldName: FieldName,
       ...opts: core.ScalarOutSpread<TypeName, FieldName>
     ): void; // "BigInt";
@@ -1970,7 +1969,7 @@ export interface NexusGenObjects {
   };
   BatchPayload: {
     // root type
-    count?: number | null; // Int
+    count: number; // Int!
   };
   City: {
     // root type
@@ -2202,10 +2201,6 @@ export interface NexusGenObjects {
   };
   Mutation: {};
   Query: {};
-  city: {
-    // root type
-    Population?: number | null; // Int
-  };
 }
 
 export interface NexusGenInterfaces {}
@@ -2245,7 +2240,7 @@ export interface NexusGenFieldTypes {
   };
   BatchPayload: {
     // field return type
-    count: number | null; // Int
+    count: number; // Int!
   };
   City: {
     // field return type
@@ -2518,10 +2513,6 @@ export interface NexusGenFieldTypes {
     findUniqueCity: NexusGenRootTypes['City'] | null; // City
     findUniqueCountry: NexusGenRootTypes['Country'] | null; // Country
     findUniqueCountryLanguage: NexusGenRootTypes['CountryLanguage'] | null; // CountryLanguage
-  };
-  city: {
-    // field return type
-    Population: number | null; // Int
   };
 }
 
@@ -2823,10 +2814,6 @@ export interface NexusGenFieldTypeNames {
     findUniqueCity: 'City';
     findUniqueCountry: 'Country';
     findUniqueCountryLanguage: 'CountryLanguage';
-  };
-  city: {
-    // field return type name
-    Population: 'Int';
   };
 }
 
@@ -3164,17 +3151,7 @@ declare global {
   interface NexusGenPluginFieldConfig<
     TypeName extends string,
     FieldName extends string,
-  > {
-    /**
-     * Authorization for an individual field. Returning "true"
-     * or "Promise<true>" means the field can be accessed.
-     * Returning "false" or "Promise<false>" will respond
-     * with a "Not Authorized" error for the field.
-     * Returning or throwing an error will also prevent the
-     * resolver from executing.
-     */
-    authorize?: FieldAuthorizeResolver<TypeName, FieldName>;
-  }
+  > {}
   interface NexusGenPluginInputFieldConfig<
     TypeName extends string,
     FieldName extends string,
