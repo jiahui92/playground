@@ -9,6 +9,7 @@ import {
   createComplexityRule,
   simpleEstimator,
 } from 'graphql-query-complexity';
+import { rateLimit } from 'express-rate-limit';
 import { paljs } from '@paljs/nexus';
 
 import { AppController } from './app.controller';
@@ -63,6 +64,16 @@ const schema = makeSchema({
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     // 中间件
+    // 限制10分钟内最多600次请求
+    consumer
+      .apply(
+        rateLimit({
+          max: 600,
+          windowMs: 10 * 60 * 1000, // 10min
+          message: 'Too many requests, please try again later.',
+        }),
+      )
+      .forRoutes('*');
     consumer.apply(ReqMiddleware).forRoutes('*');
   }
 }
