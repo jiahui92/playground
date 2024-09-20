@@ -19,6 +19,9 @@ import * as genTypes from './generated/nexus';
 import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
 import { BusinessModule } from './modules/index.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
+import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
 // import { FormatResponsePlugin } from './graphql/plugins';
 
 const schema = makeSchema({
@@ -39,27 +42,28 @@ const schema = makeSchema({
       schema: applyMiddleware(schema, permissions),
       context: ({ req }) => {
         const user = getUserFromToken(req.token);
-        return { prisma: req.prisma, user };
+        return { req, user, prisma: req.prisma };
       },
       validationRules: [
-        // 最多嵌套5层，防止DDOS或耗性能查询
-        // TODO 嵌套的估算值？？？
-        // TODO maximumComplexity的配置
         createComplexityRule({
+          maximumComplexity: 500, // 设置只是为了防止DDOS
           estimators: [simpleEstimator({ defaultComplexity: 1 })],
-          maximumComplexity: 300,
         }),
       ],
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
       playground: isDev(),
       introspection: isDev(), // 生产环境禁止获取query.__schema
       // TODO data可能为null
-      // plugins: [FormatResponsePlugin],
+      plugins: [LoggerPlugin],
     }),
     BusinessModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [
+    AppService,
+    PrismaService,
+    { provide: APP_GUARD, useClass: RolesGuard },
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
