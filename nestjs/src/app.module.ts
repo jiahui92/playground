@@ -19,8 +19,6 @@ import * as genTypes from './generated/nexus';
 import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
 import { BusinessModule } from './modules/index.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './guards/roles.guard';
 import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
 // import { FormatResponsePlugin } from './graphql/plugins';
 
@@ -59,11 +57,7 @@ const schema = makeSchema({
     BusinessModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    PrismaService,
-    { provide: APP_GUARD, useClass: RolesGuard },
-  ],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

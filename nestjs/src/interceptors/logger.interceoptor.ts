@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { SLOW_REQUEST_THRESHOLD } from 'src/common/const';
 
+// 此拦截器无法拦截gql，gql的拦截在"src/graphql/plugins/LoggerPlugin.ts"中
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
   private readonly logger = new Logger(LoggingInterceptor.name);

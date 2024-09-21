@@ -61,8 +61,8 @@ $ npm run test:cov
   * schema.gql: 由nexus生成的gqlSchema，一般提供给前端使用，类似curd里的api定义
 * src/graphql
   * 拓展目录，覆盖重写`src/generated/nexus`里的types,resolver，比如`city.ts`增加字段级权限控制
-* interceptors, guards, middlewares
-  * middlewares: 遵循express的顺序执行，而非koa的洋葱模型
+* middlewares > guards > interceptors
+  * middlewares: 最早执行，底层使用的express顺序执行，而非koa的洋葱模型
   * guards: 控制请求是否能去到controller，通常用于权限校验
   * interceptors: controller/请求执行前后的逻辑，通常用于日志记录或修改responseData
 

@@ -6,10 +6,6 @@ import { City } from '@prisma/client';
 export class AppService {
   constructor(private prisma: PrismaService) {}
 
-  getHello(): string {
-    return 'Hello World! jiahui';
-  }
-
   async getManyCity(): Promise<City[]> {
     const cities = await this.prisma.city.findMany({
       // take: 10,
