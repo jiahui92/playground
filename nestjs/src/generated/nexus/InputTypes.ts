@@ -41,14 +41,38 @@ export const CountryLanguageScalarFieldEnum = enumType({
   members: ['countryCode', 'language', 'isOfficial', 'percentage'],
 });
 
+export const UserScalarFieldEnum = enumType({
+  name: 'UserScalarFieldEnum',
+  members: [
+    'id',
+    'username',
+    'password',
+    'email',
+    'roles',
+    'isActive',
+    'createdAt',
+    'updatedAt',
+  ],
+});
+
 export const SortOrder = enumType({
   name: 'SortOrder',
   members: ['asc', 'desc'],
 });
 
+export const JsonNullValueInput = enumType({
+  name: 'JsonNullValueInput',
+  members: ['JsonNull'],
+});
+
 export const NullsOrder = enumType({
   name: 'NullsOrder',
   members: ['first', 'last'],
+});
+
+export const JsonNullValueFilter = enumType({
+  name: 'JsonNullValueFilter',
+  members: ['DbNull', 'JsonNull', 'AnyNull'],
 });
 
 export const CountryContinent = enumType({
@@ -388,6 +412,103 @@ export const CountryLanguageScalarWhereWithAggregatesInput = inputObjectType({
       type: 'EnumCountryLanguageIsOfficialWithAggregatesFilter',
     });
     t.field('percentage', { type: 'DecimalWithAggregatesFilter' });
+  },
+});
+
+export const UserWhereInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserWhereInput',
+  definition(t) {
+    t.list.field('AND', { type: 'UserWhereInput' });
+    t.list.field('OR', { type: 'UserWhereInput' });
+    t.list.field('NOT', { type: 'UserWhereInput' });
+    t.field('id', { type: 'StringFilter' });
+    t.field('username', { type: 'StringFilter' });
+    t.field('password', { type: 'StringFilter' });
+    t.field('email', { type: 'StringFilter' });
+    t.field('roles', { type: 'JsonFilter' });
+    t.field('isActive', { type: 'BoolNullableFilter' });
+    t.field('createdAt', { type: 'DateTimeNullableFilter' });
+    t.field('updatedAt', { type: 'DateTimeNullableFilter' });
+  },
+});
+
+export const UserOrderByWithRelationInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserOrderByWithRelationInput',
+  definition(t) {
+    t.field('id', { type: 'SortOrder' });
+    t.field('username', { type: 'SortOrder' });
+    t.field('password', { type: 'SortOrder' });
+    t.field('email', { type: 'SortOrder' });
+    t.field('roles', { type: 'SortOrder' });
+    t.field('isActive', { type: 'SortOrderInput' });
+    t.field('createdAt', { type: 'SortOrderInput' });
+    t.field('updatedAt', { type: 'SortOrderInput' });
+  },
+});
+
+export const UserWhereUniqueInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserWhereUniqueInput',
+  definition(t) {
+    t.field('id', { type: 'String' });
+    t.field('username', { type: 'String' });
+    t.field('email', { type: 'String' });
+    t.list.field('AND', { type: 'UserWhereInput' });
+    t.list.field('OR', { type: 'UserWhereInput' });
+    t.list.field('NOT', { type: 'UserWhereInput' });
+    t.field('password', { type: 'StringFilter' });
+    t.field('roles', { type: 'JsonFilter' });
+    t.field('isActive', { type: 'BoolNullableFilter' });
+    t.field('createdAt', { type: 'DateTimeNullableFilter' });
+    t.field('updatedAt', { type: 'DateTimeNullableFilter' });
+  },
+});
+
+export const UserOrderByWithAggregationInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserOrderByWithAggregationInput',
+  definition(t) {
+    t.field('id', { type: 'SortOrder' });
+    t.field('username', { type: 'SortOrder' });
+    t.field('password', { type: 'SortOrder' });
+    t.field('email', { type: 'SortOrder' });
+    t.field('roles', { type: 'SortOrder' });
+    t.field('isActive', { type: 'SortOrderInput' });
+    t.field('createdAt', { type: 'SortOrderInput' });
+    t.field('updatedAt', { type: 'SortOrderInput' });
+    t.field('_count', { type: 'UserCountOrderByAggregateInput' });
+    t.field('_max', { type: 'UserMaxOrderByAggregateInput' });
+    t.field('_min', { type: 'UserMinOrderByAggregateInput' });
+  },
+});
+
+export const UserScalarWhereWithAggregatesInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserScalarWhereWithAggregatesInput',
+  definition(t) {
+    t.list.field('AND', { type: 'UserScalarWhereWithAggregatesInput' });
+    t.list.field('OR', { type: 'UserScalarWhereWithAggregatesInput' });
+    t.list.field('NOT', { type: 'UserScalarWhereWithAggregatesInput' });
+    t.field('id', { type: 'StringWithAggregatesFilter' });
+    t.field('username', { type: 'StringWithAggregatesFilter' });
+    t.field('password', { type: 'StringWithAggregatesFilter' });
+    t.field('email', { type: 'StringWithAggregatesFilter' });
+    t.field('roles', { type: 'JsonWithAggregatesFilter' });
+    t.field('isActive', { type: 'BoolNullableWithAggregatesFilter' });
+    t.field('createdAt', { type: 'DateTimeNullableWithAggregatesFilter' });
+    t.field('updatedAt', { type: 'DateTimeNullableWithAggregatesFilter' });
   },
 });
 
@@ -800,6 +921,141 @@ export const CountryLanguageUncheckedUpdateManyInput = inputObjectType({
       type: 'EnumCountryLanguageIsOfficialFieldUpdateOperationsInput',
     });
     t.field('percentage', { type: 'DecimalFieldUpdateOperationsInput' });
+  },
+});
+
+export const UserCreateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserCreateInput',
+  definition(t) {
+    t.nonNull.field('id', { type: 'String' });
+    t.nonNull.field('username', { type: 'String' });
+    t.nonNull.field('password', { type: 'String' });
+    t.nonNull.field('email', { type: 'String' });
+    t.nonNull.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'Boolean' });
+    t.field('createdAt', { type: 'DateTime' });
+    t.field('updatedAt', { type: 'DateTime' });
+  },
+});
+
+export const UserUncheckedCreateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserUncheckedCreateInput',
+  definition(t) {
+    t.nonNull.field('id', { type: 'String' });
+    t.nonNull.field('username', { type: 'String' });
+    t.nonNull.field('password', { type: 'String' });
+    t.nonNull.field('email', { type: 'String' });
+    t.nonNull.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'Boolean' });
+    t.field('createdAt', { type: 'DateTime' });
+    t.field('updatedAt', { type: 'DateTime' });
+  },
+});
+
+export const UserUpdateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserUpdateInput',
+  definition(t) {
+    t.field('id', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('username', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('password', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('email', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
+    t.field('createdAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+    t.field('updatedAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+  },
+});
+
+export const UserUncheckedUpdateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserUncheckedUpdateInput',
+  definition(t) {
+    t.field('id', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('username', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('password', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('email', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
+    t.field('createdAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+    t.field('updatedAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+  },
+});
+
+export const UserCreateManyInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserCreateManyInput',
+  definition(t) {
+    t.nonNull.field('id', { type: 'String' });
+    t.nonNull.field('username', { type: 'String' });
+    t.nonNull.field('password', { type: 'String' });
+    t.nonNull.field('email', { type: 'String' });
+    t.nonNull.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'Boolean' });
+    t.field('createdAt', { type: 'DateTime' });
+    t.field('updatedAt', { type: 'DateTime' });
+  },
+});
+
+export const UserUpdateManyMutationInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserUpdateManyMutationInput',
+  definition(t) {
+    t.field('id', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('username', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('password', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('email', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
+    t.field('createdAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+    t.field('updatedAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+  },
+});
+
+export const UserUncheckedUpdateManyInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserUncheckedUpdateManyInput',
+  definition(t) {
+    t.field('id', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('username', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('password', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('email', { type: 'StringFieldUpdateOperationsInput' });
+    t.field('roles', { type: 'Json' });
+    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
+    t.field('createdAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
+    t.field('updatedAt', {
+      type: 'NullableDateTimeFieldUpdateOperationsInput',
+    });
   },
 });
 
@@ -1411,6 +1667,164 @@ export const EnumCountryLanguageIsOfficialWithAggregatesFilter =
     },
   });
 
+export const JsonFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'JsonFilter',
+  definition(t) {
+    t.field('equals', { type: 'Json' });
+    t.field('path', { type: 'String' });
+    t.field('string_contains', { type: 'String' });
+    t.field('string_starts_with', { type: 'String' });
+    t.field('string_ends_with', { type: 'String' });
+    t.field('array_contains', { type: 'Json' });
+    t.field('array_starts_with', { type: 'Json' });
+    t.field('array_ends_with', { type: 'Json' });
+    t.field('lt', { type: 'Json' });
+    t.field('lte', { type: 'Json' });
+    t.field('gt', { type: 'Json' });
+    t.field('gte', { type: 'Json' });
+    t.field('not', { type: 'Json' });
+  },
+});
+
+export const BoolNullableFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'BoolNullableFilter',
+  definition(t) {
+    t.field('equals', { type: 'Boolean' });
+    t.field('not', { type: 'NestedBoolNullableFilter' });
+  },
+});
+
+export const DateTimeNullableFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'DateTimeNullableFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeNullableFilter' });
+  },
+});
+
+export const UserCountOrderByAggregateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserCountOrderByAggregateInput',
+  definition(t) {
+    t.field('id', { type: 'SortOrder' });
+    t.field('username', { type: 'SortOrder' });
+    t.field('password', { type: 'SortOrder' });
+    t.field('email', { type: 'SortOrder' });
+    t.field('roles', { type: 'SortOrder' });
+    t.field('isActive', { type: 'SortOrder' });
+    t.field('createdAt', { type: 'SortOrder' });
+    t.field('updatedAt', { type: 'SortOrder' });
+  },
+});
+
+export const UserMaxOrderByAggregateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserMaxOrderByAggregateInput',
+  definition(t) {
+    t.field('id', { type: 'SortOrder' });
+    t.field('username', { type: 'SortOrder' });
+    t.field('password', { type: 'SortOrder' });
+    t.field('email', { type: 'SortOrder' });
+    t.field('isActive', { type: 'SortOrder' });
+    t.field('createdAt', { type: 'SortOrder' });
+    t.field('updatedAt', { type: 'SortOrder' });
+  },
+});
+
+export const UserMinOrderByAggregateInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'UserMinOrderByAggregateInput',
+  definition(t) {
+    t.field('id', { type: 'SortOrder' });
+    t.field('username', { type: 'SortOrder' });
+    t.field('password', { type: 'SortOrder' });
+    t.field('email', { type: 'SortOrder' });
+    t.field('isActive', { type: 'SortOrder' });
+    t.field('createdAt', { type: 'SortOrder' });
+    t.field('updatedAt', { type: 'SortOrder' });
+  },
+});
+
+export const JsonWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'JsonWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'Json' });
+    t.field('path', { type: 'String' });
+    t.field('string_contains', { type: 'String' });
+    t.field('string_starts_with', { type: 'String' });
+    t.field('string_ends_with', { type: 'String' });
+    t.field('array_contains', { type: 'Json' });
+    t.field('array_starts_with', { type: 'Json' });
+    t.field('array_ends_with', { type: 'Json' });
+    t.field('lt', { type: 'Json' });
+    t.field('lte', { type: 'Json' });
+    t.field('gt', { type: 'Json' });
+    t.field('gte', { type: 'Json' });
+    t.field('not', { type: 'Json' });
+    t.field('_count', { type: 'NestedIntFilter' });
+    t.field('_min', { type: 'NestedJsonFilter' });
+    t.field('_max', { type: 'NestedJsonFilter' });
+  },
+});
+
+export const BoolNullableWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'BoolNullableWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'Boolean' });
+    t.field('not', { type: 'NestedBoolNullableWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntNullableFilter' });
+    t.field('_min', { type: 'NestedBoolNullableFilter' });
+    t.field('_max', { type: 'NestedBoolNullableFilter' });
+  },
+});
+
+export const DateTimeNullableWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'DateTimeNullableWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeNullableWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntNullableFilter' });
+    t.field('_min', { type: 'NestedDateTimeNullableFilter' });
+    t.field('_max', { type: 'NestedDateTimeNullableFilter' });
+  },
+});
+
 export const CountryCreateNestedOneWithoutCityInput = inputObjectType({
   nonNullDefaults: {
     input: false,
@@ -1768,6 +2182,26 @@ export const CountryUpdateOneRequiredWithoutCountryLanguageNestedInput =
     },
   });
 
+export const NullableBoolFieldUpdateOperationsInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NullableBoolFieldUpdateOperationsInput',
+  definition(t) {
+    t.field('set', { type: 'Boolean' });
+  },
+});
+
+export const NullableDateTimeFieldUpdateOperationsInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NullableDateTimeFieldUpdateOperationsInput',
+  definition(t) {
+    t.field('set', { type: 'DateTime' });
+  },
+});
+
 export const NestedIntFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
@@ -2104,6 +2538,90 @@ export const NestedEnumCountryLanguageIsOfficialWithAggregatesFilter =
       t.field('_max', { type: 'NestedEnumCountryLanguageIsOfficialFilter' });
     },
   });
+
+export const NestedBoolNullableFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedBoolNullableFilter',
+  definition(t) {
+    t.field('equals', { type: 'Boolean' });
+    t.field('not', { type: 'NestedBoolNullableFilter' });
+  },
+});
+
+export const NestedDateTimeNullableFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedDateTimeNullableFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeNullableFilter' });
+  },
+});
+
+export const NestedJsonFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedJsonFilter',
+  definition(t) {
+    t.field('equals', { type: 'Json' });
+    t.field('path', { type: 'String' });
+    t.field('string_contains', { type: 'String' });
+    t.field('string_starts_with', { type: 'String' });
+    t.field('string_ends_with', { type: 'String' });
+    t.field('array_contains', { type: 'Json' });
+    t.field('array_starts_with', { type: 'Json' });
+    t.field('array_ends_with', { type: 'Json' });
+    t.field('lt', { type: 'Json' });
+    t.field('lte', { type: 'Json' });
+    t.field('gt', { type: 'Json' });
+    t.field('gte', { type: 'Json' });
+    t.field('not', { type: 'Json' });
+  },
+});
+
+export const NestedBoolNullableWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedBoolNullableWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'Boolean' });
+    t.field('not', { type: 'NestedBoolNullableWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntNullableFilter' });
+    t.field('_min', { type: 'NestedBoolNullableFilter' });
+    t.field('_max', { type: 'NestedBoolNullableFilter' });
+  },
+});
+
+export const NestedDateTimeNullableWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedDateTimeNullableWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeNullableWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntNullableFilter' });
+    t.field('_min', { type: 'NestedDateTimeNullableFilter' });
+    t.field('_max', { type: 'NestedDateTimeNullableFilter' });
+  },
+});
 
 export const CountryCreateWithoutCityInput = inputObjectType({
   nonNullDefaults: {
@@ -2849,6 +3367,38 @@ export const CountryLanguageGroupByOutputType = objectType({
   },
 });
 
+export const AggregateUser = objectType({
+  nonNullDefaults: {
+    output: true,
+  },
+  name: 'AggregateUser',
+  definition(t) {
+    t.nullable.field('_count', { type: 'UserCountAggregateOutputType' });
+    t.nullable.field('_min', { type: 'UserMinAggregateOutputType' });
+    t.nullable.field('_max', { type: 'UserMaxAggregateOutputType' });
+  },
+});
+
+export const UserGroupByOutputType = objectType({
+  nonNullDefaults: {
+    output: true,
+  },
+  name: 'UserGroupByOutputType',
+  definition(t) {
+    t.field('id', { type: 'String' });
+    t.field('username', { type: 'String' });
+    t.field('password', { type: 'String' });
+    t.field('email', { type: 'String' });
+    t.field('roles', { type: 'Json' });
+    t.nullable.field('isActive', { type: 'Boolean' });
+    t.nullable.field('createdAt', { type: 'DateTime' });
+    t.nullable.field('updatedAt', { type: 'DateTime' });
+    t.nullable.field('_count', { type: 'UserCountAggregateOutputType' });
+    t.nullable.field('_min', { type: 'UserMinAggregateOutputType' });
+    t.nullable.field('_max', { type: 'UserMaxAggregateOutputType' });
+  },
+});
+
 export const CityCountAggregateOutputType = objectType({
   nonNullDefaults: {
     output: true,
@@ -3087,5 +3637,55 @@ export const CountryLanguageMaxAggregateOutputType = objectType({
     t.nullable.field('language', { type: 'String' });
     t.nullable.field('isOfficial', { type: 'CountryLanguageIsOfficial' });
     t.nullable.field('percentage', { type: 'Decimal' });
+  },
+});
+
+export const UserCountAggregateOutputType = objectType({
+  nonNullDefaults: {
+    output: true,
+  },
+  name: 'UserCountAggregateOutputType',
+  definition(t) {
+    t.field('id', { type: 'Int' });
+    t.field('username', { type: 'Int' });
+    t.field('password', { type: 'Int' });
+    t.field('email', { type: 'Int' });
+    t.field('roles', { type: 'Int' });
+    t.field('isActive', { type: 'Int' });
+    t.field('createdAt', { type: 'Int' });
+    t.field('updatedAt', { type: 'Int' });
+    t.field('_all', { type: 'Int' });
+  },
+});
+
+export const UserMinAggregateOutputType = objectType({
+  nonNullDefaults: {
+    output: true,
+  },
+  name: 'UserMinAggregateOutputType',
+  definition(t) {
+    t.nullable.field('id', { type: 'String' });
+    t.nullable.field('username', { type: 'String' });
+    t.nullable.field('password', { type: 'String' });
+    t.nullable.field('email', { type: 'String' });
+    t.nullable.field('isActive', { type: 'Boolean' });
+    t.nullable.field('createdAt', { type: 'DateTime' });
+    t.nullable.field('updatedAt', { type: 'DateTime' });
+  },
+});
+
+export const UserMaxAggregateOutputType = objectType({
+  nonNullDefaults: {
+    output: true,
+  },
+  name: 'UserMaxAggregateOutputType',
+  definition(t) {
+    t.nullable.field('id', { type: 'String' });
+    t.nullable.field('username', { type: 'String' });
+    t.nullable.field('password', { type: 'String' });
+    t.nullable.field('email', { type: 'String' });
+    t.nullable.field('isActive', { type: 'Boolean' });
+    t.nullable.field('createdAt', { type: 'DateTime' });
+    t.nullable.field('updatedAt', { type: 'DateTime' });
   },
 });
