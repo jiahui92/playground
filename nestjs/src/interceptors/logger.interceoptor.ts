@@ -16,7 +16,6 @@ export class LoggingInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const now = Date.now(); // 请求开始时间
-    console.log('Before handling request');
 
     return next.handle().pipe(
       tap(() => {

@@ -19,3 +19,7 @@ export function getUserFromToken(token: string) {
 export function isAdmin(ctx): boolean {
   return ctx.user?.isAdmin === true;
 }
+
+export function createResponse(data, message = 'Success', statusCode = 200) {
+  return { data, message, statusCode };
+}

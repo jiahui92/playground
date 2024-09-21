@@ -3,9 +3,12 @@ import {
   CanActivate,
   ExecutionContext,
   SetMetadata,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Role } from 'src/common/const';
+import { JwtService } from '@nestjs/jwt';
+import { jwtConstants, Role } from 'src/common/const';
+import { JwtPayload } from 'src/modules/auth/auth.service';
 
 const rolesKey = 'roles';
 // @RolesGuard([Role.ADMIN])
@@ -13,23 +16,38 @@ export const RolesGuard = (roles: Role[]) => SetMetadata(rolesKey, roles);
 
 @Injectable()
 export class RolesGuardClass implements CanActivate {
-  constructor(private reflector: Reflector) {}
+  constructor(
+    private reflector: Reflector,
+    private jwtService: JwtService,
+  ) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     // 优先controller.handler的设置，再取controller的设置
     const roles =
       this.reflector.get<string[]>(rolesKey, context.getHandler()) ||
       this.reflector.get<string[]>(rolesKey, context.getClass());
-    // 只有配置了@Roles([Role.GUEST])，才默认为开放接口，不需要登录
+    // 只有配置了@Roles([Role.GUEST])才为开放接口，不需要登录
     if (roles?.includes(Role.GUEST)) {
       return true;
     }
     const request = context.switchToHttp().getRequest();
-    const user = request.user;
-    if (!user) {
-      return false;
+    const token = extractTokenFromHeader(request);
+    if (!token) {
+      throw new UnauthorizedException();
     }
-    return matchRoles(roles, user.roles);
+
+    try {
+      const payload: JwtPayload = await this.jwtService.verifyAsync(token, {
+        secret: jwtConstants.secret,
+      });
+
+      if (!matchRoles(roles, payload.roles)) return false;
+      request.user = payload;
+    } catch {
+      throw new UnauthorizedException();
+    }
+
+    return true;
   }
 }
 
@@ -41,4 +59,9 @@ function matchRoles(requiredRoles: string[], userRoles: string[]): boolean {
     requiredRoles = [Role.USER];
   }
   return requiredRoles.some((role) => userRoles.includes(role));
+}
+
+function extractTokenFromHeader(request: Request): string | undefined {
+  const [type, token] = request.headers.get('authorization')?.split(' ') ?? [];
+  return type === 'Bearer' ? token : undefined;
 }

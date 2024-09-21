@@ -2,7 +2,6 @@ import { permissions } from './graphql/permissions';
 import './generated/nexus-typings';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { makeSchema } from 'nexus';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { applyMiddleware } from 'graphql-middleware';
 import {
@@ -10,31 +9,31 @@ import {
   simpleEstimator,
 } from 'graphql-query-complexity';
 import { rateLimit } from 'express-rate-limit';
-import { paljs } from '@paljs/nexus';
+import { JwtModule } from '@nestjs/jwt';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { getPath, getUserFromToken, isDev } from './common/utils';
-import * as genTypes from './generated/nexus';
+import { getUserFromToken, isDev } from './common/utils';
+import { getNexusSchema } from './generated';
 import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
 import { BusinessModule } from './modules/index.module';
 import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
 // import { FormatResponsePlugin } from './graphql/plugins';
+import { AuthModule } from './modules/auth/auth.module';
+import { jwtConstants } from './common/const';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuardClass } from './guards/roles.guard';
 
-const schema = makeSchema({
-  types: [genTypes],
-  shouldGenerateArtifacts: isDev(),
-  plugins: [paljs()],
-  outputs: {
-    schema: getPath('src/generated/schema.gql'),
-    typegen: getPath('src/generated/nexus-typings.ts'),
-  },
-  prettierConfig: getPath('.prettierrc'),
-});
+const schema = getNexusSchema(false);
 
 @Module({
   imports: [
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: jwtConstants.expiresIn, noTimestamp: true },
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       schema: applyMiddleware(schema, permissions),
@@ -55,9 +54,17 @@ const schema = makeSchema({
       plugins: [LoggerPlugin],
     }),
     BusinessModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuardClass,
+    },
+    AppService,
+    PrismaService,
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

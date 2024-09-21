@@ -1,4 +1,5 @@
 import { execSync } from 'child_process';
+import { getNexusSchema } from 'src/generated';
 
 const entities_path = './src/generated/nexus';
 
@@ -15,3 +16,6 @@ const prettier = `npx prettier --write ${entities_path}`;
 
 execSync(`${del} && ${generate}`);
 execSync(`${prettier}`, { encoding: 'utf-8' });
+
+// 生成src/generated/nexus-typing.ts等文件
+getNexusSchema(true);

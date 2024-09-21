@@ -4,7 +4,7 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
-
+* 在`src/common/const.ts`中配置一些必要的TODO属性
 ```bash
 npm install
 
