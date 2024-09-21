@@ -13,14 +13,14 @@
   * [BFC](css/bfc)
   * [flex](css/flex)
 * JS
-  * [promise](promise)
-  * [throttle](throttle)
+  * [webRTC](web-rtc)
   * [webpack-plugin](webpack-plugin)
   * [reactnative](reactnative)
 * [Scaffolding](0.template)
   * static
   * webpack & react
   * eggjs-with-frontend
+  * nestjs + gql
 * Machine Learning
   * [Google ML](machine-learning)
   * [Face API](face-api)
