@@ -4,16 +4,13 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { applyMiddleware } from 'graphql-middleware';
-import {
-  createComplexityRule,
-  simpleEstimator,
-} from 'graphql-query-complexity';
 import { rateLimit } from 'express-rate-limit';
 import { JwtModule } from '@nestjs/jwt';
+import { ApolloArmor } from '@escape.tech/graphql-armor';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { getUserFromToken, isDev } from './common/utils';
+import { isDev } from './common/utils';
 import { getNexusSchema } from './generated';
 import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
@@ -25,6 +22,9 @@ import { jwtConstants } from './common/const';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuardClass } from './guards/roles.guard';
 
+// gql的通用安全套件
+const armor = new ApolloArmor();
+const protection = armor.protect();
 const schema = getNexusSchema(false);
 
 @Module({
@@ -38,20 +38,14 @@ const schema = getNexusSchema(false);
       driver: ApolloDriver,
       schema: applyMiddleware(schema, permissions),
       context: ({ req }) => {
-        const user = getUserFromToken(req.token);
-        return { req, user, prisma: req.prisma };
+        return { req, user: req.user, prisma: req.prisma };
       },
-      validationRules: [
-        createComplexityRule({
-          maximumComplexity: 500, // 设置只是为了防止DDOS
-          estimators: [simpleEstimator({ defaultComplexity: 1 })],
-        }),
-      ],
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
       playground: isDev(),
       introspection: isDev(), // 生产环境禁止获取query.__schema
-      // TODO data可能为null
-      plugins: [LoggerPlugin],
+      ...protection,
+      plugins: [LoggerPlugin, ...protection.plugins],
+      validationRules: [...protection.validationRules],
     }),
     BusinessModule,
     AuthModule,
