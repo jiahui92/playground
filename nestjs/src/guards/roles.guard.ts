@@ -3,11 +3,9 @@ import {
   CanActivate,
   ExecutionContext,
   SetMetadata,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
-import { jwtConstants, Role } from 'src/common/const';
+import { Role } from 'src/common/const';
 import { JwtPayload } from 'src/modules/auth/auth.service';
 
 const rolesKey = 'roles';
@@ -16,10 +14,7 @@ export const RolesGuard = (roles: Role[]) => SetMetadata(rolesKey, roles);
 
 @Injectable()
 export class RolesGuardClass implements CanActivate {
-  constructor(
-    private reflector: Reflector,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // 优先controller.handler的设置，再取controller的设置
@@ -31,21 +26,8 @@ export class RolesGuardClass implements CanActivate {
       return true;
     }
     const request = context.switchToHttp().getRequest();
-    const token = extractTokenFromHeader(request);
-    if (!token) {
-      throw new UnauthorizedException();
-    }
-
-    try {
-      const payload: JwtPayload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
-      });
-
-      if (!matchRoles(roles, payload.roles)) return false;
-      request.user = payload;
-    } catch {
-      throw new UnauthorizedException();
-    }
+    const user = request.user as JwtPayload;
+    if (!user || !matchRoles(roles, user?.roles)) return false;
 
     return true;
   }
@@ -58,10 +40,5 @@ function matchRoles(requiredRoles: string[], userRoles: string[]): boolean {
   if (!requiredRoles || requiredRoles.length === 0) {
     requiredRoles = [Role.USER];
   }
-  return requiredRoles.some((role) => userRoles.includes(role));
-}
-
-function extractTokenFromHeader(request: Request): string | undefined {
-  const [type, token] = request.headers.get('authorization')?.split(' ') ?? [];
-  return type === 'Bearer' ? token : undefined;
+  return requiredRoles.some((role) => userRoles?.includes(role));
 }

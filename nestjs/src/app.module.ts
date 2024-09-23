@@ -19,8 +19,6 @@ import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
 // import { FormatResponsePlugin } from './graphql/plugins';
 import { AuthModule } from './modules/auth/auth.module';
 import { jwtConstants } from './common/const';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuardClass } from './guards/roles.guard';
 
 // gql的通用安全套件
 const armor = new ApolloArmor();
@@ -51,14 +49,7 @@ const schema = getNexusSchema(false);
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuardClass,
-    },
-    AppService,
-    PrismaService,
-  ],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

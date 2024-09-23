@@ -63,8 +63,8 @@ $ npm run test:cov
   * 拓展目录，覆盖重写`src/generated/nexus`里的types,resolver，比如`city.ts`增加字段级权限控制
 * middlewares > guards > interceptors
   * middlewares: 最早执行，底层使用的express顺序执行，而非koa的洋葱模型
-  * guards: 控制请求是否能去到controller，通常用于权限校验
-  * interceptors: controller/请求执行前后的逻辑，通常用于日志记录或修改responseData
+  * guards: 控制请求是否能去到controller，通常用于权限校验 (gql不包含)
+  * interceptors: controller/请求执行前后的逻辑，通常用于日志记录或修改responseData (gql不包含)
 
 
 ## gql
@@ -162,6 +162,11 @@ npx prisma migrate reset
   * 推荐使用`graphql-shield`: `src/graphql/permission.ts`
 * 其它
   * `graphql-encrypt`: 加密请求参数
+
+### 接口的角色权限
+因为gql和nestjs的权限校验逻辑不一样，所以需要分别设置（底层使用的express.middleware，但是gql的逻辑是特殊处理的`app.use('graphql', () => {...})`，不包含nestjs的guard,interceptor）
+* nestjs.controller: `src/middlewares/guard/auth.guard.ts`
+* gql: `src/graphql/permission.ts`
 
 
 ## Deploy
