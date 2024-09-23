@@ -249,3 +249,15 @@ typeorm migration:revert
   * code-first: TypeGraphQL, nexus
     * 缺点：需手动编写ObjectType, ArgsType, Resolver(query,mutation)
     * 优点：nestjs默认支持
+
+## 性能优化
+### 大数据请求
+4000条数据的请求中，gql的执行时间大概是150~300ms，但restful api的执行时间大概是20ms
+* @paljs/plugin/select.js
+  * 已优化未合并https://github.com/paljs/prisma-tools/pull/341/files
+* @paljs/nexus/index.js
+  * onCreateFieldResolver 直接返回Promise，让外部处理
+  * 大概10%
+* field.resolve下还有很多不同类型的耗时函数未排查
+  * 可能与gql底层逻辑有关系，每个字段都必须执行一次resolver
+

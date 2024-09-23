@@ -1,32 +1,30 @@
-import { shield, deny, rule } from 'graphql-shield';
-import * as utils from 'src/common/utils';
+import { JwtPayload } from './../modules/auth/auth.service';
+import { shield, deny, rule, allow } from 'graphql-shield';
+import { Role } from 'src/common/const';
 
-// 是否登录
-// isAdmin
-
-const isLogin = rule()(async () => {
-  // return !!ctx.user;
-  return true;
+const isLogin = rule()(async (parent, args, ctx) => {
+  return !!ctx.user;
 });
 
 const isAdmin = rule()(async (parent, args, ctx) => {
-  return utils.isAdmin(ctx);
+  const { roles } = ctx?.user as JwtPayload;
+  return roles?.includes(Role.ADMIN);
 });
 
 export const permissions = shield(
   {
     Query: {
-      '*': isLogin,
+      '*': allow,
       // findManyCity: deny,
     },
     Mutation: {
       '*': deny,
-      // createOneCity: and(isLogin, isAdmin),
+      // createOneUser: and(isLogin, isEmail),
     },
-    User: deny,
+    User: isAdmin,
   },
   {
-    // 黑名单模式：兜底权限控制规则，默认登录了就可以使用
-    fallbackRule: isLogin,
+    // 黑名单模式：兜底权限控制规则，默认登录了就可以使用（已在req.middleware校验是否登录）
+    fallbackRule: allow,
   },
 );
