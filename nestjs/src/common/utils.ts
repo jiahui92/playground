@@ -21,5 +21,5 @@ export function isAdmin(ctx): boolean {
 }
 
 export function createResponse(data, message = 'Success', statusCode = 200) {
-  return { data, message, statusCode };
+  return { data, message, statusCode, success: true };
 }
