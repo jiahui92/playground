@@ -16,6 +16,7 @@ export class ReqMiddleware implements NestMiddleware {
     // 将 Prisma 实例添加到 req 对象中
     req['prisma'] = this.prismaService;
 
+    // req.user
     const token = extractTokenFromHeader(req);
     if (token) {
       try {

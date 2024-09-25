@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { Role } from '../common/const';
-import { ModelValidator } from './index';
+import { MakeCreateType, ModelValidator } from './index';
 
-const userSchema: z.Schema<Prisma.UserUpdateInput> = z
+const userSchema = z
   .object({
     id: z.string().uuid(),
     email: z.string().email(),
@@ -20,15 +20,29 @@ const userSchema: z.Schema<Prisma.UserUpdateInput> = z
     updatedAt: true,
   });
 
-export const userValidator: ModelValidator = {
+export type UserCreate = MakeCreateType<
+  Prisma.UserCreateInput,
+  'id' | 'createdAt', // 禁止传入参数
+  'roles' | 'isActive' // 可选传入参数
+>;
+export type UserUpdate = Omit<Prisma.UserCreateInput, 'updatedAt'>;
+export const userValidator = {
   schema: userSchema,
-  onCreate: (data: User) => {
-    data.id = uuidv4();
-    data.roles = [Role.USER];
-    data.createdAt = new Date();
-    data.isActive = true;
+  initCreateData: (data: UserCreate) => {
+    const result: Prisma.UserCreateInput = {
+      ...data,
+      id: uuidv4(),
+      createdAt: new Date(),
+      roles: data.roles || [Role.USER],
+      isActive: data.isActive ?? true,
+    };
+    return result;
   },
-  onUpdate: (data: User) => {
-    data.updatedAt = new Date();
+  initUpdateData: (data: UserUpdate) => {
+    const result: Prisma.UserUpdateInput = {
+      ...data,
+      updatedAt: new Date(),
+    };
+    return result;
   },
-};
+} satisfies ModelValidator;

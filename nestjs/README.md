@@ -235,7 +235,7 @@ typeorm migration:revert
 * 数据库
   * MySQL: 批量操作快？
   * PostgrepSQL: 相比mysql多了数据类型，支持json按key查找、商用免费
-* ORM
+* ORM & gql
   * prisma
     * 缺点：默认生成的gql.schema与规范的不太一样、api不支持复杂查询（可以写queryRaw）
     * 优点：完美支持ts、三方支持好
@@ -246,9 +246,29 @@ typeorm migration:revert
     * 优点: api支持复杂查询
     * 缺点: 三方生态不是很好，尤其是gql相关的很多已不维护
   * sequelize: ts支持不好
-  * code-first: TypeGraphQL, nexus
-    * 缺点：需手动编写ObjectType, ArgsType, Resolver(query,mutation)
-    * 优点：nestjs默认支持
+* gql api/schema generate
+  * code-first
+    * [TypeGraphQL](https://typegraphql.com/) (社区推荐)
+      * 缺点：需手动编写ObjectType, ArgsType, Resolver(query,mutation)(目前有工具自动生成，但不更新了)
+      * 优点：nestjs默认支持、ts友好
+    * [nexus](https://nexusjs.org/)
+      * 缺点：貌似三方生态都处于不更新的状态、没有ts类型
+      * 优点：函数式编程
+    * [graphql-js](https://github.com/graphql/graphql-js)
+      * 官方支持的基础功能，nexus与TypeGraphQL都是基于此库的封装
+  * schema-first: SDL(Schema Definition Language)
+
+### gql generate的选型
+所有方案目前貌似都不支持生成自定义的gql入参（特指mutation.create）
+* paljs.nexus
+  * 权限最好使用graphql-shield但不维护了，需要使用其它办法
+  * gql入参校验貌似无法直接放开
+* [typegraphql-prisma](https://github.com/MichalLytek/typegraphql-prisma)
+  * 只维护不更新了
+  * 生成的代码比较符合nestjs官方的规范，貌似也支持在生成代码之外去拓展权限之类的功能
+  * 类似的方案还有`paljs.graphql-modules`
+* 使用Hygen生成自定义模板
+
 
 ## 性能优化
 ### 大数据请求

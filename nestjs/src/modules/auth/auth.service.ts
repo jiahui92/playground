@@ -1,14 +1,15 @@
 import { PrismaService } from '../../prisma.service';
 import {
+  BadRequestException,
   Injectable,
   UnauthorizedException,
-  BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { Role } from 'src/common/const';
 import { createResponse } from 'src/common/utils';
-import { v4 as uuidv4 } from 'uuid';
+import { validate } from 'src/validators';
+import { userValidator } from 'src/validators/user';
 
 @Injectable()
 export class AuthService {
@@ -18,9 +19,12 @@ export class AuthService {
   ) {}
 
   async signIn(email: string, password: string) {
-    if (!email || !password) {
-      throw new BadRequestException('Please input your email or password');
-    }
+    validate('User', { email, password }, (validator) => {
+      return validator.partial().required({
+        email: true,
+        password: true,
+      });
+    });
 
     const user = await this.prisma.user.findUnique({
       where: { email },
@@ -41,21 +45,31 @@ export class AuthService {
   }
 
   async signUp(email: string, password: string, username: string) {
-    // TODO 注册用户重复检查
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await this.prisma.user.create({
-      data: {
-        id: uuidv4(),
-        email,
-        password: hashedPassword,
-        username,
-        roles: [Role.USER],
-      },
+
+    // 检测用户是否存在
+    const existingUser = await this.prisma.user.findFirst({
+      where: { OR: [{ email }, { username }] },
     });
+
+    if (existingUser) {
+      if (existingUser.email === email) {
+        throw new BadRequestException('Email already exists');
+      }
+      throw new BadRequestException('Username already exists');
+    }
+
+    // TODO 这里有点怪，目前为了兼容gql并复用代码，暂时这样写
+    const data = userValidator.initCreateData({
+      email,
+      password: hashedPassword,
+      username,
+    });
+    const user = await this.prisma.user.create({ data });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...data } = user;
-    return createResponse(data);
+    const { password: _, ...res } = user;
+    return createResponse(res);
   }
 }
 
