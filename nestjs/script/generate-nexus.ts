@@ -1,9 +1,9 @@
 import { execSync } from 'child_process';
 import { getNexusSchema } from 'src/generated';
-// import palConfig = require('../prisma/pal');
+import palConfig = require('../prisma/pal');
 
-// const entities_path = palConfig.backend.output;
-const entities_path = './src/generated/nexus';
+const entities_path = palConfig.backend.output;
+// const entities_path = './src/generated/nexus';
 
 // 删除旧文件 rm -rf
 const del = `rimraf ${entities_path}`;

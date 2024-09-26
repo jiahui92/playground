@@ -13,8 +13,8 @@ export const User = objectType({
     t.string('password');
     t.string('email');
     t.json('roles');
-    t.nullable.boolean('isActive');
-    t.nullable.field('createdAt', { type: 'DateTime' });
+    t.boolean('isActive');
+    t.field('createdAt', { type: 'DateTime' });
     t.nullable.field('updatedAt', { type: 'DateTime' });
   },
 });

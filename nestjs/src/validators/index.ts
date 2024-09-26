@@ -54,7 +54,10 @@ export const validate = (
     if (result.success) {
       return result.data;
     } else {
-      throw new BadRequestException(result);
+      throw new BadRequestException('Validation Error', {
+        cause: result.error,
+        description: result.error.toString(),
+      });
     }
   }
   return data;

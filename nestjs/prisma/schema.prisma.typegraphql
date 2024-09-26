@@ -2,6 +2,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider                  = "typegraphql-prisma"
+  output                    = "./generated/type-graphql"
+  simpleResolvers           = "true"
+  omitInputFieldsByDefault  = ["password", "createdAt", "updatedAt"]
+  omitOutputFieldsByDefault = ["password"]
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")

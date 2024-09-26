@@ -114,6 +114,7 @@ override:
 ```
 
 #### query schema
+[Introspection](https://graphql.org/learn/introspection/)
 ```gql
 query {
   __schema {
@@ -248,12 +249,12 @@ typeorm migration:revert
   * sequelize: ts支持不好
 * gql api/schema generate
   * code-first
+    * [paljs.nexus](https://nexusjs.org/)
+      * 缺点：貌似三方生态都处于不更新的状态、ts支持不友好
+      * 优点：函数式编程
     * [TypeGraphQL](https://typegraphql.com/) (社区推荐)
       * 缺点：需手动编写ObjectType, ArgsType, Resolver(query,mutation)(目前有工具自动生成，但不更新了)
       * 优点：nestjs默认支持、ts友好
-    * [nexus](https://nexusjs.org/)
-      * 缺点：貌似三方生态都处于不更新的状态、没有ts类型
-      * 优点：函数式编程
     * [graphql-js](https://github.com/graphql/graphql-js)
       * 官方支持的基础功能，nexus与TypeGraphQL都是基于此库的封装
   * schema-first: SDL(Schema Definition Language)
@@ -261,14 +262,13 @@ typeorm migration:revert
 ### gql generate的选型
 所有方案目前貌似都不支持生成自定义的gql入参（特指mutation.create）
 * paljs.nexus
-  * 权限最好使用graphql-shield但不维护了，需要使用其它办法
-  * gql入参校验貌似无法直接放开
+  * 字段级权限的库graphql-shield不维护了，暂时也不需要用到，会影响性能
 * [typegraphql-prisma](https://github.com/MichalLytek/typegraphql-prisma)
-  * 只维护不更新了
-  * 生成的代码比较符合nestjs官方的规范，貌似也支持在生成代码之外去拓展权限之类的功能
+  * 只维护不更新了，大数据的性能优化很差（对比paljs没有PrismaSelect的优化）
+  * 生成的代码比较符合nestjs官方的规范，也支持在生成代码之外去拓展权限之类的功能
   * 类似的方案还有`paljs.graphql-modules`
-* 使用Hygen生成自定义模板
-
+* 使用`Hygen`生成自定义模板或者`AST`类生成工具`ts-morph`
+* 手动维护
 
 ## 性能优化
 ### 大数据请求
@@ -279,5 +279,24 @@ typeorm migration:revert
   * onCreateFieldResolver 直接返回Promise，让外部处理
   * 大概10%
 * field.resolve下还有很多不同类型的耗时函数未排查
-  * 可能与gql底层逻辑有关系，每个字段都必须执行一次resolver
+  * 可能与gql底层逻辑(graphql-js)有关系，每个字段都必须执行一次resolver
+  * 可能是每个resolver都是promise
+* 字段级权限: 可以放到ApolloServer.willSendResponse或者validation生命周期去做？这样就不会有filed.resolver影响性能问题
+
+## RestFul Api or Gql.mutation
+仅针对新增、更新、删除的场景
+* Restful Api
+  * 优点: 支持事务等批量复杂关联创建、逻辑很灵活(校验权限等)、三方支持好(自动化：api文档、测试)
+  * 缺点: 可能得封装很多不同字段组合的接口，比如更新User.name, User.email等都得封装新接口
+* Gql.mutation
+  * 优点: 可以任意组合更新字段
+  * 缺点: 
+    * 安全性: 每放开一个mutation的字段都要考虑清楚前端传入该字段的数据是否可信任，比如User.Roles不能由前端传入
+    * 自动生成的参数里不支持非模型字段，除非自定义mutation.resolver
+    * 设计逻辑的有点怪（针对字段进行设计，比如当放开User表name字段的update时，要针对这个字段做什么校验，name是否重复、权限控制等，有点像React hook里把restful api功能打散成几个小点，然后再复用里面的校验等逻辑，但万一更新一个字段有不同的校验逻辑，这样就会出问题了）
+* 总结能使用mutation场景
+  * 简单场景
+    * 任何业务场景下，字段的校验和权限逻辑都是一样/复用的
+    * 不需考虑用户输入数据的内部项目
+  * 限制放开可新增、更新的方法和字段
 

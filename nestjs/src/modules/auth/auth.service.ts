@@ -45,9 +45,6 @@ export class AuthService {
   }
 
   async signUp(email: string, password: string, username: string) {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     // 检测用户是否存在
     const existingUser = await this.prisma.user.findFirst({
       where: { OR: [{ email }, { username }] },
@@ -59,6 +56,9 @@ export class AuthService {
       }
       throw new BadRequestException('Username already exists');
     }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     // TODO 这里有点怪，目前为了兼容gql并复用代码，暂时这样写
     const data = userValidator.initCreateData({
