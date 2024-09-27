@@ -8,18 +8,19 @@ export const validationMiddleware: Prisma.Middleware = async (params, next) => {
   if (validator && (isCreate || isUpdate)) {
     // TODO 兼容upsert
     const isArrayData = Array.isArray(params.args.data);
-    let data: any[] = isArrayData ? params.args.data : [params.args.data];
+    let arr: any[] = isArrayData ? params.args.data : [params.args.data];
     if (isCreate && validator.initCreateData) {
-      data = data.map((item) => {
+      arr = arr.map((item) => {
         return validator.initCreateData(item);
       });
     }
     if (isUpdate && validator.initUpdateData) {
-      data = data.map((item) => {
+      arr = arr.map((item) => {
         return validator.initUpdateData(item);
       });
     }
 
+    const data = isArrayData ? arr : arr[0];
     params.args.data = validate(params.model, data, (schema) => {
       return isCreate ? schema : schema.partial();
     });

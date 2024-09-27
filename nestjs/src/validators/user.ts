@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Prisma } from '@prisma/client';
 import { Role } from '../common/const';
 import { MakeCreateType, ModelValidator } from './index';
+import { NexusGenInputs } from 'src/generated/nexus-typings';
 
 const userSchema = z
   .object({
@@ -28,7 +29,8 @@ export type UserCreate = MakeCreateType<
 export type UserUpdate = Omit<Prisma.UserCreateInput, 'updatedAt'>;
 export const userValidator = {
   schema: userSchema,
-  initCreateData: (data: UserCreate) => {
+  // TODO roles的类型变成any了
+  initCreateData: (data: NexusGenInputs['UserCreateInput']) => {
     const result: Prisma.UserCreateInput = {
       ...data,
       id: uuidv4(),

@@ -1,9 +1,7 @@
-import { permissions } from './graphql/permissions';
 import './generated/nexus-typings';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { applyMiddleware } from 'graphql-middleware';
 import { rateLimit } from 'express-rate-limit';
 import { JwtModule } from '@nestjs/jwt';
 import { ApolloArmor } from '@escape.tech/graphql-armor';
@@ -34,16 +32,24 @@ const schema = getNexusSchema(false);
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      schema: applyMiddleware(schema, permissions),
+      schema,
+      // schema: applyMiddleware(schema, permissions),
       context: ({ req }) => {
         return { req, user: req.user, prisma: req.prisma };
       },
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
       playground: isDev(),
       introspection: isDev(), // 生产环境禁止获取query.__schema
+      hideSchemaDetailsFromClientErrors: !isDev(),
+      nodeEnv: process.env.NODE_ENV, // 开发环境下报错时显示stacktrace
+      formatError: (formattedError) => {
+        return formattedError;
+      },
+      // TODO fieldResolver.simpleResolvers
+      // TODO willSendResponse.response.data = null
       ...protection,
+      validationRules: protection.validationRules,
       plugins: [LoggerPlugin, ...protection.plugins],
-      validationRules: [...protection.validationRules],
     }),
     AuthModule,
     BusinessModule,
