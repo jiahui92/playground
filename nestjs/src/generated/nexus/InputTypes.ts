@@ -429,8 +429,8 @@ export const UserWhereInput = inputObjectType({
     t.field('password', { type: 'StringFilter' });
     t.field('email', { type: 'StringFilter' });
     t.field('roles', { type: 'JsonFilter' });
-    t.field('isActive', { type: 'BoolNullableFilter' });
-    t.field('createdAt', { type: 'DateTimeNullableFilter' });
+    t.field('isActive', { type: 'BoolFilter' });
+    t.field('createdAt', { type: 'DateTimeFilter' });
     t.field('updatedAt', { type: 'DateTimeNullableFilter' });
   },
 });
@@ -446,8 +446,8 @@ export const UserOrderByWithRelationInput = inputObjectType({
     t.field('password', { type: 'SortOrder' });
     t.field('email', { type: 'SortOrder' });
     t.field('roles', { type: 'SortOrder' });
-    t.field('isActive', { type: 'SortOrderInput' });
-    t.field('createdAt', { type: 'SortOrderInput' });
+    t.field('isActive', { type: 'SortOrder' });
+    t.field('createdAt', { type: 'SortOrder' });
     t.field('updatedAt', { type: 'SortOrderInput' });
   },
 });
@@ -466,8 +466,8 @@ export const UserWhereUniqueInput = inputObjectType({
     t.list.field('NOT', { type: 'UserWhereInput' });
     t.field('password', { type: 'StringFilter' });
     t.field('roles', { type: 'JsonFilter' });
-    t.field('isActive', { type: 'BoolNullableFilter' });
-    t.field('createdAt', { type: 'DateTimeNullableFilter' });
+    t.field('isActive', { type: 'BoolFilter' });
+    t.field('createdAt', { type: 'DateTimeFilter' });
     t.field('updatedAt', { type: 'DateTimeNullableFilter' });
   },
 });
@@ -483,8 +483,8 @@ export const UserOrderByWithAggregationInput = inputObjectType({
     t.field('password', { type: 'SortOrder' });
     t.field('email', { type: 'SortOrder' });
     t.field('roles', { type: 'SortOrder' });
-    t.field('isActive', { type: 'SortOrderInput' });
-    t.field('createdAt', { type: 'SortOrderInput' });
+    t.field('isActive', { type: 'SortOrder' });
+    t.field('createdAt', { type: 'SortOrder' });
     t.field('updatedAt', { type: 'SortOrderInput' });
     t.field('_count', { type: 'UserCountOrderByAggregateInput' });
     t.field('_max', { type: 'UserMaxOrderByAggregateInput' });
@@ -506,8 +506,8 @@ export const UserScalarWhereWithAggregatesInput = inputObjectType({
     t.field('password', { type: 'StringWithAggregatesFilter' });
     t.field('email', { type: 'StringWithAggregatesFilter' });
     t.field('roles', { type: 'JsonWithAggregatesFilter' });
-    t.field('isActive', { type: 'BoolNullableWithAggregatesFilter' });
-    t.field('createdAt', { type: 'DateTimeNullableWithAggregatesFilter' });
+    t.field('isActive', { type: 'BoolWithAggregatesFilter' });
+    t.field('createdAt', { type: 'DateTimeWithAggregatesFilter' });
     t.field('updatedAt', { type: 'DateTimeNullableWithAggregatesFilter' });
   },
 });
@@ -936,7 +936,7 @@ export const UserCreateInput = inputObjectType({
     t.nonNull.field('email', { type: 'String' });
     t.nonNull.field('roles', { type: 'Json' });
     t.field('isActive', { type: 'Boolean' });
-    t.field('createdAt', { type: 'DateTime' });
+    t.nonNull.field('createdAt', { type: 'DateTime' });
     t.field('updatedAt', { type: 'DateTime' });
   },
 });
@@ -953,7 +953,7 @@ export const UserUncheckedCreateInput = inputObjectType({
     t.nonNull.field('email', { type: 'String' });
     t.nonNull.field('roles', { type: 'Json' });
     t.field('isActive', { type: 'Boolean' });
-    t.field('createdAt', { type: 'DateTime' });
+    t.nonNull.field('createdAt', { type: 'DateTime' });
     t.field('updatedAt', { type: 'DateTime' });
   },
 });
@@ -969,10 +969,8 @@ export const UserUpdateInput = inputObjectType({
     t.field('password', { type: 'StringFieldUpdateOperationsInput' });
     t.field('email', { type: 'StringFieldUpdateOperationsInput' });
     t.field('roles', { type: 'Json' });
-    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
-    t.field('createdAt', {
-      type: 'NullableDateTimeFieldUpdateOperationsInput',
-    });
+    t.field('isActive', { type: 'BoolFieldUpdateOperationsInput' });
+    t.field('createdAt', { type: 'DateTimeFieldUpdateOperationsInput' });
     t.field('updatedAt', {
       type: 'NullableDateTimeFieldUpdateOperationsInput',
     });
@@ -990,10 +988,8 @@ export const UserUncheckedUpdateInput = inputObjectType({
     t.field('password', { type: 'StringFieldUpdateOperationsInput' });
     t.field('email', { type: 'StringFieldUpdateOperationsInput' });
     t.field('roles', { type: 'Json' });
-    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
-    t.field('createdAt', {
-      type: 'NullableDateTimeFieldUpdateOperationsInput',
-    });
+    t.field('isActive', { type: 'BoolFieldUpdateOperationsInput' });
+    t.field('createdAt', { type: 'DateTimeFieldUpdateOperationsInput' });
     t.field('updatedAt', {
       type: 'NullableDateTimeFieldUpdateOperationsInput',
     });
@@ -1012,7 +1008,7 @@ export const UserCreateManyInput = inputObjectType({
     t.nonNull.field('email', { type: 'String' });
     t.nonNull.field('roles', { type: 'Json' });
     t.field('isActive', { type: 'Boolean' });
-    t.field('createdAt', { type: 'DateTime' });
+    t.nonNull.field('createdAt', { type: 'DateTime' });
     t.field('updatedAt', { type: 'DateTime' });
   },
 });
@@ -1028,10 +1024,8 @@ export const UserUpdateManyMutationInput = inputObjectType({
     t.field('password', { type: 'StringFieldUpdateOperationsInput' });
     t.field('email', { type: 'StringFieldUpdateOperationsInput' });
     t.field('roles', { type: 'Json' });
-    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
-    t.field('createdAt', {
-      type: 'NullableDateTimeFieldUpdateOperationsInput',
-    });
+    t.field('isActive', { type: 'BoolFieldUpdateOperationsInput' });
+    t.field('createdAt', { type: 'DateTimeFieldUpdateOperationsInput' });
     t.field('updatedAt', {
       type: 'NullableDateTimeFieldUpdateOperationsInput',
     });
@@ -1049,10 +1043,8 @@ export const UserUncheckedUpdateManyInput = inputObjectType({
     t.field('password', { type: 'StringFieldUpdateOperationsInput' });
     t.field('email', { type: 'StringFieldUpdateOperationsInput' });
     t.field('roles', { type: 'Json' });
-    t.field('isActive', { type: 'NullableBoolFieldUpdateOperationsInput' });
-    t.field('createdAt', {
-      type: 'NullableDateTimeFieldUpdateOperationsInput',
-    });
+    t.field('isActive', { type: 'BoolFieldUpdateOperationsInput' });
+    t.field('createdAt', { type: 'DateTimeFieldUpdateOperationsInput' });
     t.field('updatedAt', {
       type: 'NullableDateTimeFieldUpdateOperationsInput',
     });
@@ -1689,14 +1681,31 @@ export const JsonFilter = inputObjectType({
   },
 });
 
-export const BoolNullableFilter = inputObjectType({
+export const BoolFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'BoolNullableFilter',
+  name: 'BoolFilter',
   definition(t) {
     t.field('equals', { type: 'Boolean' });
-    t.field('not', { type: 'NestedBoolNullableFilter' });
+    t.field('not', { type: 'NestedBoolFilter' });
+  },
+});
+
+export const DateTimeFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'DateTimeFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeFilter' });
   },
 });
 
@@ -1791,17 +1800,37 @@ export const JsonWithAggregatesFilter = inputObjectType({
   },
 });
 
-export const BoolNullableWithAggregatesFilter = inputObjectType({
+export const BoolWithAggregatesFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'BoolNullableWithAggregatesFilter',
+  name: 'BoolWithAggregatesFilter',
   definition(t) {
     t.field('equals', { type: 'Boolean' });
-    t.field('not', { type: 'NestedBoolNullableWithAggregatesFilter' });
-    t.field('_count', { type: 'NestedIntNullableFilter' });
-    t.field('_min', { type: 'NestedBoolNullableFilter' });
-    t.field('_max', { type: 'NestedBoolNullableFilter' });
+    t.field('not', { type: 'NestedBoolWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntFilter' });
+    t.field('_min', { type: 'NestedBoolFilter' });
+    t.field('_max', { type: 'NestedBoolFilter' });
+  },
+});
+
+export const DateTimeWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'DateTimeWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntFilter' });
+    t.field('_min', { type: 'NestedDateTimeFilter' });
+    t.field('_max', { type: 'NestedDateTimeFilter' });
   },
 });
 
@@ -2182,13 +2211,23 @@ export const CountryUpdateOneRequiredWithoutCountryLanguageNestedInput =
     },
   });
 
-export const NullableBoolFieldUpdateOperationsInput = inputObjectType({
+export const BoolFieldUpdateOperationsInput = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'NullableBoolFieldUpdateOperationsInput',
+  name: 'BoolFieldUpdateOperationsInput',
   definition(t) {
     t.field('set', { type: 'Boolean' });
+  },
+});
+
+export const DateTimeFieldUpdateOperationsInput = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'DateTimeFieldUpdateOperationsInput',
+  definition(t) {
+    t.field('set', { type: 'DateTime' });
   },
 });
 
@@ -2539,14 +2578,31 @@ export const NestedEnumCountryLanguageIsOfficialWithAggregatesFilter =
     },
   });
 
-export const NestedBoolNullableFilter = inputObjectType({
+export const NestedBoolFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'NestedBoolNullableFilter',
+  name: 'NestedBoolFilter',
   definition(t) {
     t.field('equals', { type: 'Boolean' });
-    t.field('not', { type: 'NestedBoolNullableFilter' });
+    t.field('not', { type: 'NestedBoolFilter' });
+  },
+});
+
+export const NestedDateTimeFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedDateTimeFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeFilter' });
   },
 });
 
@@ -2589,17 +2645,37 @@ export const NestedJsonFilter = inputObjectType({
   },
 });
 
-export const NestedBoolNullableWithAggregatesFilter = inputObjectType({
+export const NestedBoolWithAggregatesFilter = inputObjectType({
   nonNullDefaults: {
     input: false,
   },
-  name: 'NestedBoolNullableWithAggregatesFilter',
+  name: 'NestedBoolWithAggregatesFilter',
   definition(t) {
     t.field('equals', { type: 'Boolean' });
-    t.field('not', { type: 'NestedBoolNullableWithAggregatesFilter' });
-    t.field('_count', { type: 'NestedIntNullableFilter' });
-    t.field('_min', { type: 'NestedBoolNullableFilter' });
-    t.field('_max', { type: 'NestedBoolNullableFilter' });
+    t.field('not', { type: 'NestedBoolWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntFilter' });
+    t.field('_min', { type: 'NestedBoolFilter' });
+    t.field('_max', { type: 'NestedBoolFilter' });
+  },
+});
+
+export const NestedDateTimeWithAggregatesFilter = inputObjectType({
+  nonNullDefaults: {
+    input: false,
+  },
+  name: 'NestedDateTimeWithAggregatesFilter',
+  definition(t) {
+    t.field('equals', { type: 'DateTime' });
+    t.list.field('in', { type: 'DateTime' });
+    t.list.field('notIn', { type: 'DateTime' });
+    t.field('lt', { type: 'DateTime' });
+    t.field('lte', { type: 'DateTime' });
+    t.field('gt', { type: 'DateTime' });
+    t.field('gte', { type: 'DateTime' });
+    t.field('not', { type: 'NestedDateTimeWithAggregatesFilter' });
+    t.field('_count', { type: 'NestedIntFilter' });
+    t.field('_min', { type: 'NestedDateTimeFilter' });
+    t.field('_max', { type: 'NestedDateTimeFilter' });
   },
 });
 
@@ -3390,8 +3466,8 @@ export const UserGroupByOutputType = objectType({
     t.field('password', { type: 'String' });
     t.field('email', { type: 'String' });
     t.field('roles', { type: 'Json' });
-    t.nullable.field('isActive', { type: 'Boolean' });
-    t.nullable.field('createdAt', { type: 'DateTime' });
+    t.field('isActive', { type: 'Boolean' });
+    t.field('createdAt', { type: 'DateTime' });
     t.nullable.field('updatedAt', { type: 'DateTime' });
     t.nullable.field('_count', { type: 'UserCountAggregateOutputType' });
     t.nullable.field('_min', { type: 'UserMinAggregateOutputType' });

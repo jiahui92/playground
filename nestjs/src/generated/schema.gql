@@ -1705,6 +1705,23 @@ input JsonWithAggregatesFilter {
   string_starts_with: String
 }
 
+type Mutation {
+  createOneCity(data: CityCreateInput!): City!
+  createOneUser(data: UserCreateInput!): User!
+  deleteManyCity(where: CityWhereInput): BatchPayload!
+  deleteOneCity(where: CityWhereUniqueInput!): City
+  updateManyCity(
+    data: CityUpdateManyMutationInput!
+    where: CityWhereInput
+  ): BatchPayload!
+  updateOneCity(data: CityUpdateInput!, where: CityWhereUniqueInput!): City!
+  upsertOneCity(
+    create: CityCreateInput!
+    update: CityUpdateInput!
+    where: CityWhereUniqueInput!
+  ): City!
+}
+
 input NestedBoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -2040,6 +2057,29 @@ enum NullsOrder {
 }
 
 type Query {
+  aggregateCity(
+    cursor: CityWhereUniqueInput
+    orderBy: [CityOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: CityWhereInput
+  ): AggregateCity
+  findFirstCity(
+    cursor: CityWhereUniqueInput
+    distinct: [CityScalarFieldEnum]
+    orderBy: [CityOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: CityWhereInput
+  ): City
+  findFirstUser(
+    cursor: UserWhereUniqueInput
+    distinct: [UserScalarFieldEnum]
+    orderBy: [UserOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: UserWhereInput
+  ): User
   findManyCity(
     cursor: CityWhereUniqueInput
     distinct: [CityScalarFieldEnum]
@@ -2048,6 +2088,32 @@ type Query {
     take: Int
     where: CityWhereInput
   ): [City!]!
+  findManyCityCount(
+    cursor: CityWhereUniqueInput
+    distinct: [CityScalarFieldEnum]
+    orderBy: [CityOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: CityWhereInput
+  ): Int!
+  findManyUser(
+    cursor: UserWhereUniqueInput
+    distinct: [UserScalarFieldEnum]
+    orderBy: [UserOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: UserWhereInput
+  ): [User!]!
+  findManyUserCount(
+    cursor: UserWhereUniqueInput
+    distinct: [UserScalarFieldEnum]
+    orderBy: [UserOrderByWithRelationInput]
+    skip: Int
+    take: Int
+    where: UserWhereInput
+  ): Int!
+  findUniqueCity(where: CityWhereUniqueInput!): City
+  findUniqueUser(where: UserWhereUniqueInput!): User
 }
 
 enum SortOrder {
@@ -2141,8 +2207,8 @@ type User {
   email: String!
   id: String!
   isActive: Boolean!
-  password: String!
-  roles: Json!
+  password: Void!
+  roles: Void!
   updatedAt: DateTime
   username: String!
 }
@@ -2153,8 +2219,8 @@ type UserCountAggregateOutputType {
   email: Int!
   id: Int!
   isActive: Int!
-  password: Int!
-  roles: Int!
+  password: Void!
+  roles: Void!
   updatedAt: Int!
   username: Int!
 }
@@ -2164,30 +2230,30 @@ input UserCountOrderByAggregateInput {
   email: SortOrder
   id: SortOrder
   isActive: SortOrder
-  password: SortOrder
-  roles: SortOrder
+  password: Void
+  roles: Void
   updatedAt: SortOrder
   username: SortOrder
 }
 
 input UserCreateInput {
-  createdAt: DateTime
+  createdAt: Void
   email: String!
-  id: String
+  id: Void
   isActive: Boolean
   password: String!
-  roles: Json
+  roles: Void
   updatedAt: DateTime
   username: String!
 }
 
 input UserCreateManyInput {
-  createdAt: DateTime!
+  createdAt: Void
   email: String!
-  id: String!
+  id: Void
   isActive: Boolean
   password: String!
-  roles: Json!
+  roles: Void
   updatedAt: DateTime
   username: String!
 }
@@ -2200,8 +2266,8 @@ type UserGroupByOutputType {
   email: String!
   id: String!
   isActive: Boolean!
-  password: String!
-  roles: Json!
+  password: Void!
+  roles: Void!
   updatedAt: DateTime
   username: String!
 }
@@ -2211,7 +2277,7 @@ type UserMaxAggregateOutputType {
   email: String
   id: String
   isActive: Boolean
-  password: String
+  password: Void
   updatedAt: DateTime
   username: String
 }
@@ -2221,7 +2287,7 @@ input UserMaxOrderByAggregateInput {
   email: SortOrder
   id: SortOrder
   isActive: SortOrder
-  password: SortOrder
+  password: Void
   updatedAt: SortOrder
   username: SortOrder
 }
@@ -2231,7 +2297,7 @@ type UserMinAggregateOutputType {
   email: String
   id: String
   isActive: Boolean
-  password: String
+  password: Void
   updatedAt: DateTime
   username: String
 }
@@ -2241,7 +2307,7 @@ input UserMinOrderByAggregateInput {
   email: SortOrder
   id: SortOrder
   isActive: SortOrder
-  password: SortOrder
+  password: Void
   updatedAt: SortOrder
   username: SortOrder
 }
@@ -2254,8 +2320,8 @@ input UserOrderByWithAggregationInput {
   email: SortOrder
   id: SortOrder
   isActive: SortOrder
-  password: SortOrder
-  roles: SortOrder
+  password: Void
+  roles: Void
   updatedAt: SortOrderInput
   username: SortOrder
 }
@@ -2265,8 +2331,8 @@ input UserOrderByWithRelationInput {
   email: SortOrder
   id: SortOrder
   isActive: SortOrder
-  password: SortOrder
-  roles: SortOrder
+  password: Void
+  roles: Void
   updatedAt: SortOrderInput
   username: SortOrder
 }
@@ -2290,63 +2356,63 @@ input UserScalarWhereWithAggregatesInput {
   email: StringWithAggregatesFilter
   id: StringWithAggregatesFilter
   isActive: BoolWithAggregatesFilter
-  password: StringWithAggregatesFilter
-  roles: JsonWithAggregatesFilter
+  password: Void
+  roles: Void
   updatedAt: DateTimeNullableWithAggregatesFilter
   username: StringWithAggregatesFilter
 }
 
 input UserUncheckedCreateInput {
-  createdAt: DateTime!
+  createdAt: Void
   email: String!
-  id: String!
+  id: Void
   isActive: Boolean
   password: String!
-  roles: Json!
+  roles: Void
   updatedAt: DateTime
   username: String!
 }
 
 input UserUncheckedUpdateInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
+  createdAt: Void
   email: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
+  id: Void
   isActive: BoolFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  roles: Json
+  roles: Void
   updatedAt: NullableDateTimeFieldUpdateOperationsInput
   username: StringFieldUpdateOperationsInput
 }
 
 input UserUncheckedUpdateManyInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
+  createdAt: Void
   email: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
+  id: Void
   isActive: BoolFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  roles: Json
+  roles: Void
   updatedAt: NullableDateTimeFieldUpdateOperationsInput
   username: StringFieldUpdateOperationsInput
 }
 
 input UserUpdateInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
+  createdAt: Void
   email: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
+  id: Void
   isActive: BoolFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  roles: Json
+  roles: Void
   updatedAt: NullableDateTimeFieldUpdateOperationsInput
   username: StringFieldUpdateOperationsInput
 }
 
 input UserUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
+  createdAt: Void
   email: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
+  id: Void
   isActive: BoolFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  roles: Json
+  roles: Void
   updatedAt: NullableDateTimeFieldUpdateOperationsInput
   username: StringFieldUpdateOperationsInput
 }
@@ -2359,8 +2425,8 @@ input UserWhereInput {
   email: StringFilter
   id: StringFilter
   isActive: BoolFilter
-  password: StringFilter
-  roles: JsonFilter
+  password: Void
+  roles: Void
   updatedAt: DateTimeNullableFilter
   username: StringFilter
 }
@@ -2373,8 +2439,13 @@ input UserWhereUniqueInput {
   email: String
   id: String
   isActive: BoolFilter
-  password: StringFilter
-  roles: JsonFilter
+  password: Void
+  roles: Void
   updatedAt: DateTimeNullableFilter
   username: String
 }
+
+"""
+Represents NULL values
+"""
+scalar Void

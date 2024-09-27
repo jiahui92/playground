@@ -42,6 +42,13 @@ declare global {
       fieldName: FieldName,
       opts?: core.CommonInputFieldConfig<TypeName, FieldName>,
     ): void; // "Json";
+    /**
+     * Represents NULL values
+     */
+    void<FieldName extends string>(
+      fieldName: FieldName,
+      opts?: core.CommonInputFieldConfig<TypeName, FieldName>,
+    ): void; // "Void";
   }
 }
 declare global {
@@ -82,6 +89,13 @@ declare global {
       fieldName: FieldName,
       ...opts: core.ScalarOutSpread<TypeName, FieldName>
     ): void; // "Json";
+    /**
+     * Represents NULL values
+     */
+    void<FieldName extends string>(
+      fieldName: FieldName,
+      ...opts: core.ScalarOutSpread<TypeName, FieldName>
+    ): void; // "Void";
   }
 }
 
@@ -90,18 +104,22 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  BoolNullableFilter: {
+  BoolFieldUpdateOperationsInput: {
     // input type
-    equals?: boolean | null; // Boolean
-    not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
+    set?: boolean | null; // Boolean
   };
-  BoolNullableWithAggregatesFilter: {
+  BoolFilter: {
     // input type
-    _count?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
-    _max?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
-    _min?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
     equals?: boolean | null; // Boolean
-    not?: NexusGenInputs['NestedBoolNullableWithAggregatesFilter'] | null; // NestedBoolNullableWithAggregatesFilter
+    not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+  };
+  BoolWithAggregatesFilter: {
+    // input type
+    _count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    _max?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+    _min?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+    equals?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolWithAggregatesFilter'] | null; // NestedBoolWithAggregatesFilter
   };
   CityAvgOrderByAggregateInput: {
     // input type
@@ -1401,6 +1419,21 @@ export interface NexusGenInputs {
     region?: NexusGenInputs['StringFilter'] | null; // StringFilter
     surfaceArea?: NexusGenInputs['DecimalFilter'] | null; // DecimalFilter
   };
+  DateTimeFieldUpdateOperationsInput: {
+    // input type
+    set?: NexusGenScalars['DateTime'] | null; // DateTime
+  };
+  DateTimeFilter: {
+    // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+  };
   DateTimeNullableFilter: {
     // input type
     equals?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -1424,6 +1457,20 @@ export interface NexusGenInputs {
     lt?: NexusGenScalars['DateTime'] | null; // DateTime
     lte?: NexusGenScalars['DateTime'] | null; // DateTime
     not?: NexusGenInputs['NestedDateTimeNullableWithAggregatesFilter'] | null; // NestedDateTimeNullableWithAggregatesFilter
+    notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+  };
+  DateTimeWithAggregatesFilter: {
+    // input type
+    _count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    _max?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    _min?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeWithAggregatesFilter'] | null; // NestedDateTimeWithAggregatesFilter
     notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
   };
   DecimalFieldUpdateOperationsInput: {
@@ -1631,18 +1678,29 @@ export interface NexusGenInputs {
     string_ends_with?: string | null; // String
     string_starts_with?: string | null; // String
   };
-  NestedBoolNullableFilter: {
+  NestedBoolFilter: {
     // input type
     equals?: boolean | null; // Boolean
-    not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
+    not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
   };
-  NestedBoolNullableWithAggregatesFilter: {
+  NestedBoolWithAggregatesFilter: {
     // input type
-    _count?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
-    _max?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
-    _min?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
+    _count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    _max?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+    _min?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
     equals?: boolean | null; // Boolean
-    not?: NexusGenInputs['NestedBoolNullableWithAggregatesFilter'] | null; // NestedBoolNullableWithAggregatesFilter
+    not?: NexusGenInputs['NestedBoolWithAggregatesFilter'] | null; // NestedBoolWithAggregatesFilter
+  };
+  NestedDateTimeFilter: {
+    // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
   };
   NestedDateTimeNullableFilter: {
     // input type
@@ -1667,6 +1725,20 @@ export interface NexusGenInputs {
     lt?: NexusGenScalars['DateTime'] | null; // DateTime
     lte?: NexusGenScalars['DateTime'] | null; // DateTime
     not?: NexusGenInputs['NestedDateTimeNullableWithAggregatesFilter'] | null; // NestedDateTimeNullableWithAggregatesFilter
+    notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+  };
+  NestedDateTimeWithAggregatesFilter: {
+    // input type
+    _count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    _max?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    _min?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeWithAggregatesFilter'] | null; // NestedDateTimeWithAggregatesFilter
     notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
   };
   NestedDecimalFilter: {
@@ -1915,10 +1987,6 @@ export interface NexusGenInputs {
     notIn?: Array<string | null> | null; // [String]
     startsWith?: string | null; // String
   };
-  NullableBoolFieldUpdateOperationsInput: {
-    // input type
-    set?: boolean | null; // Boolean
-  };
   NullableDateTimeFieldUpdateOperationsInput: {
     // input type
     set?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -2020,30 +2088,30 @@ export interface NexusGenInputs {
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     isActive?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    roles?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenScalars['Void'] | null; // Void
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     username?: NexusGenEnums['SortOrder'] | null; // SortOrder
   };
   UserCreateInput: {
     // input type
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email: string; // String!
-    id: string; // String!
+    id?: NexusGenScalars['Void'] | null; // Void
     isActive?: boolean | null; // Boolean
     password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
   UserCreateManyInput: {
     // input type
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email: string; // String!
-    id: string; // String!
+    id?: NexusGenScalars['Void'] | null; // Void
     isActive?: boolean | null; // Boolean
     password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
@@ -2053,7 +2121,7 @@ export interface NexusGenInputs {
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     isActive?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     username?: NexusGenEnums['SortOrder'] | null; // SortOrder
   };
@@ -2063,7 +2131,7 @@ export interface NexusGenInputs {
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     isActive?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     username?: NexusGenEnums['SortOrder'] | null; // SortOrder
   };
@@ -2072,23 +2140,23 @@ export interface NexusGenInputs {
     _count?: NexusGenInputs['UserCountOrderByAggregateInput'] | null; // UserCountOrderByAggregateInput
     _max?: NexusGenInputs['UserMaxOrderByAggregateInput'] | null; // UserMaxOrderByAggregateInput
     _min?: NexusGenInputs['UserMinOrderByAggregateInput'] | null; // UserMinOrderByAggregateInput
-    createdAt?: NexusGenInputs['SortOrderInput'] | null; // SortOrderInput
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    isActive?: NexusGenInputs['SortOrderInput'] | null; // SortOrderInput
-    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    roles?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    isActive?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenScalars['Void'] | null; // Void
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenInputs['SortOrderInput'] | null; // SortOrderInput
     username?: NexusGenEnums['SortOrder'] | null; // SortOrder
   };
   UserOrderByWithRelationInput: {
     // input type
-    createdAt?: NexusGenInputs['SortOrderInput'] | null; // SortOrderInput
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    isActive?: NexusGenInputs['SortOrderInput'] | null; // SortOrderInput
-    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    roles?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    isActive?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenScalars['Void'] | null; // Void
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenInputs['SortOrderInput'] | null; // SortOrderInput
     username?: NexusGenEnums['SortOrder'] | null; // SortOrder
   };
@@ -2103,36 +2171,34 @@ export interface NexusGenInputs {
     OR?: Array<
       NexusGenInputs['UserScalarWhereWithAggregatesInput'] | null
     > | null; // [UserScalarWhereWithAggregatesInput]
-    createdAt?: NexusGenInputs['DateTimeNullableWithAggregatesFilter'] | null; // DateTimeNullableWithAggregatesFilter
+    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
     email?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
     id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    isActive?: NexusGenInputs['BoolNullableWithAggregatesFilter'] | null; // BoolNullableWithAggregatesFilter
-    password?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    roles?: NexusGenInputs['JsonWithAggregatesFilter'] | null; // JsonWithAggregatesFilter
+    isActive?: NexusGenInputs['BoolWithAggregatesFilter'] | null; // BoolWithAggregatesFilter
+    password?: NexusGenScalars['Void'] | null; // Void
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenInputs['DateTimeNullableWithAggregatesFilter'] | null; // DateTimeNullableWithAggregatesFilter
     username?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
   };
   UserUncheckedCreateInput: {
     // input type
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email: string; // String!
-    id: string; // String!
+    id?: NexusGenScalars['Void'] | null; // Void
     isActive?: boolean | null; // Boolean
     password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
   UserUncheckedUpdateInput: {
     // input type
-    createdAt?:
-      | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
-      | null; // NullableDateTimeFieldUpdateOperationsInput
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isActive?: NexusGenInputs['NullableBoolFieldUpdateOperationsInput'] | null; // NullableBoolFieldUpdateOperationsInput
+    id?: NexusGenScalars['Void'] | null; // Void
+    isActive?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    roles?: NexusGenScalars['Json'] | null; // Json
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?:
       | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
       | null; // NullableDateTimeFieldUpdateOperationsInput
@@ -2140,14 +2206,12 @@ export interface NexusGenInputs {
   };
   UserUncheckedUpdateManyInput: {
     // input type
-    createdAt?:
-      | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
-      | null; // NullableDateTimeFieldUpdateOperationsInput
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isActive?: NexusGenInputs['NullableBoolFieldUpdateOperationsInput'] | null; // NullableBoolFieldUpdateOperationsInput
+    id?: NexusGenScalars['Void'] | null; // Void
+    isActive?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    roles?: NexusGenScalars['Json'] | null; // Json
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?:
       | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
       | null; // NullableDateTimeFieldUpdateOperationsInput
@@ -2155,14 +2219,12 @@ export interface NexusGenInputs {
   };
   UserUpdateInput: {
     // input type
-    createdAt?:
-      | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
-      | null; // NullableDateTimeFieldUpdateOperationsInput
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isActive?: NexusGenInputs['NullableBoolFieldUpdateOperationsInput'] | null; // NullableBoolFieldUpdateOperationsInput
+    id?: NexusGenScalars['Void'] | null; // Void
+    isActive?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    roles?: NexusGenScalars['Json'] | null; // Json
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?:
       | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
       | null; // NullableDateTimeFieldUpdateOperationsInput
@@ -2170,14 +2232,12 @@ export interface NexusGenInputs {
   };
   UserUpdateManyMutationInput: {
     // input type
-    createdAt?:
-      | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
-      | null; // NullableDateTimeFieldUpdateOperationsInput
+    createdAt?: NexusGenScalars['Void'] | null; // Void
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isActive?: NexusGenInputs['NullableBoolFieldUpdateOperationsInput'] | null; // NullableBoolFieldUpdateOperationsInput
+    id?: NexusGenScalars['Void'] | null; // Void
+    isActive?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    roles?: NexusGenScalars['Json'] | null; // Json
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?:
       | NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput']
       | null; // NullableDateTimeFieldUpdateOperationsInput
@@ -2188,12 +2248,12 @@ export interface NexusGenInputs {
     AND?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     NOT?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     OR?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
-    createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    isActive?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
-    password?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    roles?: NexusGenInputs['JsonFilter'] | null; // JsonFilter
+    isActive?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    password?: NexusGenScalars['Void'] | null; // Void
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     username?: NexusGenInputs['StringFilter'] | null; // StringFilter
   };
@@ -2202,12 +2262,12 @@ export interface NexusGenInputs {
     AND?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     NOT?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     OR?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
-    createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: string | null; // String
     id?: string | null; // String
-    isActive?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
-    password?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    roles?: NexusGenInputs['JsonFilter'] | null; // JsonFilter
+    isActive?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    password?: NexusGenScalars['Void'] | null; // Void
+    roles?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     username?: string | null; // String
   };
@@ -2281,6 +2341,7 @@ export interface NexusGenScalars {
   DateTime: any;
   Decimal: any;
   Json: any;
+  Void: any;
 }
 
 export interface NexusGenObjects {
@@ -2552,12 +2613,12 @@ export interface NexusGenObjects {
   Query: {};
   User: {
     // root type
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     id: string; // String!
-    isActive?: boolean | null; // Boolean
-    password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    isActive: boolean; // Boolean!
+    password: NexusGenScalars['Void']; // Void!
+    roles: NexusGenScalars['Void']; // Void!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
@@ -2568,8 +2629,8 @@ export interface NexusGenObjects {
     email: number; // Int!
     id: number; // Int!
     isActive: number; // Int!
-    password: number; // Int!
-    roles: number; // Int!
+    password: NexusGenScalars['Void']; // Void!
+    roles: NexusGenScalars['Void']; // Void!
     updatedAt: number; // Int!
     username: number; // Int!
   };
@@ -2578,12 +2639,12 @@ export interface NexusGenObjects {
     _count?: NexusGenRootTypes['UserCountAggregateOutputType'] | null; // UserCountAggregateOutputType
     _max?: NexusGenRootTypes['UserMaxAggregateOutputType'] | null; // UserMaxAggregateOutputType
     _min?: NexusGenRootTypes['UserMinAggregateOutputType'] | null; // UserMinAggregateOutputType
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     id: string; // String!
-    isActive?: boolean | null; // Boolean
-    password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    isActive: boolean; // Boolean!
+    password: NexusGenScalars['Void']; // Void!
+    roles: NexusGenScalars['Void']; // Void!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
@@ -2593,7 +2654,7 @@ export interface NexusGenObjects {
     email?: string | null; // String
     id?: string | null; // String
     isActive?: boolean | null; // Boolean
-    password?: string | null; // String
+    password?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username?: string | null; // String
   };
@@ -2603,7 +2664,7 @@ export interface NexusGenObjects {
     email?: string | null; // String
     id?: string | null; // String
     isActive?: boolean | null; // Boolean
-    password?: string | null; // String
+    password?: NexusGenScalars['Void'] | null; // Void
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     username?: string | null; // String
   };
@@ -2888,63 +2949,33 @@ export interface NexusGenFieldTypes {
   Mutation: {
     // field return type
     createOneCity: NexusGenRootTypes['City']; // City!
-    createOneCountry: NexusGenRootTypes['Country']; // Country!
-    createOneCountryLanguage: NexusGenRootTypes['CountryLanguage']; // CountryLanguage!
     createOneUser: NexusGenRootTypes['User']; // User!
     deleteManyCity: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    deleteManyCountry: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    deleteManyCountryLanguage: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    deleteManyUser: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteOneCity: NexusGenRootTypes['City'] | null; // City
-    deleteOneCountry: NexusGenRootTypes['Country'] | null; // Country
-    deleteOneCountryLanguage: NexusGenRootTypes['CountryLanguage'] | null; // CountryLanguage
-    deleteOneUser: NexusGenRootTypes['User'] | null; // User
     updateManyCity: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateManyCountry: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateManyCountryLanguage: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateManyUser: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateOneCity: NexusGenRootTypes['City']; // City!
-    updateOneCountry: NexusGenRootTypes['Country']; // Country!
-    updateOneCountryLanguage: NexusGenRootTypes['CountryLanguage']; // CountryLanguage!
-    updateOneUser: NexusGenRootTypes['User']; // User!
     upsertOneCity: NexusGenRootTypes['City']; // City!
-    upsertOneCountry: NexusGenRootTypes['Country']; // Country!
-    upsertOneCountryLanguage: NexusGenRootTypes['CountryLanguage']; // CountryLanguage!
-    upsertOneUser: NexusGenRootTypes['User']; // User!
   };
   Query: {
     // field return type
     aggregateCity: NexusGenRootTypes['AggregateCity'] | null; // AggregateCity
-    aggregateCountry: NexusGenRootTypes['AggregateCountry'] | null; // AggregateCountry
-    aggregateCountryLanguage:
-      | NexusGenRootTypes['AggregateCountryLanguage']
-      | null; // AggregateCountryLanguage
-    aggregateUser: NexusGenRootTypes['AggregateUser'] | null; // AggregateUser
     findFirstCity: NexusGenRootTypes['City'] | null; // City
-    findFirstCountry: NexusGenRootTypes['Country'] | null; // Country
-    findFirstCountryLanguage: NexusGenRootTypes['CountryLanguage'] | null; // CountryLanguage
     findFirstUser: NexusGenRootTypes['User'] | null; // User
     findManyCity: NexusGenRootTypes['City'][]; // [City!]!
     findManyCityCount: number; // Int!
-    findManyCountry: NexusGenRootTypes['Country'][]; // [Country!]!
-    findManyCountryCount: number; // Int!
-    findManyCountryLanguage: NexusGenRootTypes['CountryLanguage'][]; // [CountryLanguage!]!
-    findManyCountryLanguageCount: number; // Int!
     findManyUser: NexusGenRootTypes['User'][]; // [User!]!
     findManyUserCount: number; // Int!
     findUniqueCity: NexusGenRootTypes['City'] | null; // City
-    findUniqueCountry: NexusGenRootTypes['Country'] | null; // Country
-    findUniqueCountryLanguage: NexusGenRootTypes['CountryLanguage'] | null; // CountryLanguage
     findUniqueUser: NexusGenRootTypes['User'] | null; // User
   };
   User: {
     // field return type
-    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     id: string; // String!
-    isActive: boolean | null; // Boolean
-    password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    isActive: boolean; // Boolean!
+    password: NexusGenScalars['Void']; // Void!
+    roles: NexusGenScalars['Void']; // Void!
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
@@ -2955,8 +2986,8 @@ export interface NexusGenFieldTypes {
     email: number; // Int!
     id: number; // Int!
     isActive: number; // Int!
-    password: number; // Int!
-    roles: number; // Int!
+    password: NexusGenScalars['Void']; // Void!
+    roles: NexusGenScalars['Void']; // Void!
     updatedAt: number; // Int!
     username: number; // Int!
   };
@@ -2965,12 +2996,12 @@ export interface NexusGenFieldTypes {
     _count: NexusGenRootTypes['UserCountAggregateOutputType'] | null; // UserCountAggregateOutputType
     _max: NexusGenRootTypes['UserMaxAggregateOutputType'] | null; // UserMaxAggregateOutputType
     _min: NexusGenRootTypes['UserMinAggregateOutputType'] | null; // UserMinAggregateOutputType
-    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     id: string; // String!
-    isActive: boolean | null; // Boolean
-    password: string; // String!
-    roles: NexusGenScalars['Json']; // Json!
+    isActive: boolean; // Boolean!
+    password: NexusGenScalars['Void']; // Void!
+    roles: NexusGenScalars['Void']; // Void!
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     username: string; // String!
   };
@@ -2980,7 +3011,7 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     id: string | null; // String
     isActive: boolean | null; // Boolean
-    password: string | null; // String
+    password: NexusGenScalars['Void'] | null; // Void
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     username: string | null; // String
   };
@@ -2990,7 +3021,7 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     id: string | null; // String
     isActive: boolean | null; // Boolean
-    password: string | null; // String
+    password: NexusGenScalars['Void'] | null; // Void
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     username: string | null; // String
   };
@@ -3265,51 +3296,23 @@ export interface NexusGenFieldTypeNames {
   Mutation: {
     // field return type name
     createOneCity: 'City';
-    createOneCountry: 'Country';
-    createOneCountryLanguage: 'CountryLanguage';
     createOneUser: 'User';
     deleteManyCity: 'BatchPayload';
-    deleteManyCountry: 'BatchPayload';
-    deleteManyCountryLanguage: 'BatchPayload';
-    deleteManyUser: 'BatchPayload';
     deleteOneCity: 'City';
-    deleteOneCountry: 'Country';
-    deleteOneCountryLanguage: 'CountryLanguage';
-    deleteOneUser: 'User';
     updateManyCity: 'BatchPayload';
-    updateManyCountry: 'BatchPayload';
-    updateManyCountryLanguage: 'BatchPayload';
-    updateManyUser: 'BatchPayload';
     updateOneCity: 'City';
-    updateOneCountry: 'Country';
-    updateOneCountryLanguage: 'CountryLanguage';
-    updateOneUser: 'User';
     upsertOneCity: 'City';
-    upsertOneCountry: 'Country';
-    upsertOneCountryLanguage: 'CountryLanguage';
-    upsertOneUser: 'User';
   };
   Query: {
     // field return type name
     aggregateCity: 'AggregateCity';
-    aggregateCountry: 'AggregateCountry';
-    aggregateCountryLanguage: 'AggregateCountryLanguage';
-    aggregateUser: 'AggregateUser';
     findFirstCity: 'City';
-    findFirstCountry: 'Country';
-    findFirstCountryLanguage: 'CountryLanguage';
     findFirstUser: 'User';
     findManyCity: 'City';
     findManyCityCount: 'Int';
-    findManyCountry: 'Country';
-    findManyCountryCount: 'Int';
-    findManyCountryLanguage: 'CountryLanguage';
-    findManyCountryLanguageCount: 'Int';
     findManyUser: 'User';
     findManyUserCount: 'Int';
     findUniqueCity: 'City';
-    findUniqueCountry: 'Country';
-    findUniqueCountryLanguage: 'CountryLanguage';
     findUniqueUser: 'User';
   };
   User: {
@@ -3318,8 +3321,8 @@ export interface NexusGenFieldTypeNames {
     email: 'String';
     id: 'String';
     isActive: 'Boolean';
-    password: 'String';
-    roles: 'Json';
+    password: 'Void';
+    roles: 'Void';
     updatedAt: 'DateTime';
     username: 'String';
   };
@@ -3330,8 +3333,8 @@ export interface NexusGenFieldTypeNames {
     email: 'Int';
     id: 'Int';
     isActive: 'Int';
-    password: 'Int';
-    roles: 'Int';
+    password: 'Void';
+    roles: 'Void';
     updatedAt: 'Int';
     username: 'Int';
   };
@@ -3344,8 +3347,8 @@ export interface NexusGenFieldTypeNames {
     email: 'String';
     id: 'String';
     isActive: 'Boolean';
-    password: 'String';
-    roles: 'Json';
+    password: 'Void';
+    roles: 'Void';
     updatedAt: 'DateTime';
     username: 'String';
   };
@@ -3355,7 +3358,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String';
     id: 'String';
     isActive: 'Boolean';
-    password: 'String';
+    password: 'Void';
     updatedAt: 'DateTime';
     username: 'String';
   };
@@ -3365,7 +3368,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String';
     id: 'String';
     isActive: 'Boolean';
-    password: 'String';
+    password: 'Void';
     updatedAt: 'DateTime';
     username: 'String';
   };
@@ -3403,14 +3406,6 @@ export interface NexusGenArgTypes {
       // args
       data: NexusGenInputs['CityCreateInput']; // CityCreateInput!
     };
-    createOneCountry: {
-      // args
-      data: NexusGenInputs['CountryCreateInput']; // CountryCreateInput!
-    };
-    createOneCountryLanguage: {
-      // args
-      data: NexusGenInputs['CountryLanguageCreateInput']; // CountryLanguageCreateInput!
-    };
     createOneUser: {
       // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
@@ -3419,97 +3414,25 @@ export interface NexusGenArgTypes {
       // args
       where?: NexusGenInputs['CityWhereInput'] | null; // CityWhereInput
     };
-    deleteManyCountry: {
-      // args
-      where?: NexusGenInputs['CountryWhereInput'] | null; // CountryWhereInput
-    };
-    deleteManyCountryLanguage: {
-      // args
-      where?: NexusGenInputs['CountryLanguageWhereInput'] | null; // CountryLanguageWhereInput
-    };
-    deleteManyUser: {
-      // args
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    };
     deleteOneCity: {
       // args
       where: NexusGenInputs['CityWhereUniqueInput']; // CityWhereUniqueInput!
-    };
-    deleteOneCountry: {
-      // args
-      where: NexusGenInputs['CountryWhereUniqueInput']; // CountryWhereUniqueInput!
-    };
-    deleteOneCountryLanguage: {
-      // args
-      where: NexusGenInputs['CountryLanguageWhereUniqueInput']; // CountryLanguageWhereUniqueInput!
-    };
-    deleteOneUser: {
-      // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     };
     updateManyCity: {
       // args
       data: NexusGenInputs['CityUpdateManyMutationInput']; // CityUpdateManyMutationInput!
       where?: NexusGenInputs['CityWhereInput'] | null; // CityWhereInput
     };
-    updateManyCountry: {
-      // args
-      data: NexusGenInputs['CountryUpdateManyMutationInput']; // CountryUpdateManyMutationInput!
-      where?: NexusGenInputs['CountryWhereInput'] | null; // CountryWhereInput
-    };
-    updateManyCountryLanguage: {
-      // args
-      data: NexusGenInputs['CountryLanguageUpdateManyMutationInput']; // CountryLanguageUpdateManyMutationInput!
-      where?: NexusGenInputs['CountryLanguageWhereInput'] | null; // CountryLanguageWhereInput
-    };
-    updateManyUser: {
-      // args
-      data: NexusGenInputs['UserUpdateManyMutationInput']; // UserUpdateManyMutationInput!
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    };
     updateOneCity: {
       // args
       data: NexusGenInputs['CityUpdateInput']; // CityUpdateInput!
       where: NexusGenInputs['CityWhereUniqueInput']; // CityWhereUniqueInput!
-    };
-    updateOneCountry: {
-      // args
-      data: NexusGenInputs['CountryUpdateInput']; // CountryUpdateInput!
-      where: NexusGenInputs['CountryWhereUniqueInput']; // CountryWhereUniqueInput!
-    };
-    updateOneCountryLanguage: {
-      // args
-      data: NexusGenInputs['CountryLanguageUpdateInput']; // CountryLanguageUpdateInput!
-      where: NexusGenInputs['CountryLanguageWhereUniqueInput']; // CountryLanguageWhereUniqueInput!
-    };
-    updateOneUser: {
-      // args
-      data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     };
     upsertOneCity: {
       // args
       create: NexusGenInputs['CityCreateInput']; // CityCreateInput!
       update: NexusGenInputs['CityUpdateInput']; // CityUpdateInput!
       where: NexusGenInputs['CityWhereUniqueInput']; // CityWhereUniqueInput!
-    };
-    upsertOneCountry: {
-      // args
-      create: NexusGenInputs['CountryCreateInput']; // CountryCreateInput!
-      update: NexusGenInputs['CountryUpdateInput']; // CountryUpdateInput!
-      where: NexusGenInputs['CountryWhereUniqueInput']; // CountryWhereUniqueInput!
-    };
-    upsertOneCountryLanguage: {
-      // args
-      create: NexusGenInputs['CountryLanguageCreateInput']; // CountryLanguageCreateInput!
-      update: NexusGenInputs['CountryLanguageUpdateInput']; // CountryLanguageUpdateInput!
-      where: NexusGenInputs['CountryLanguageWhereUniqueInput']; // CountryLanguageWhereUniqueInput!
-    };
-    upsertOneUser: {
-      // args
-      create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-      update: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     };
   };
   Query: {
@@ -3523,36 +3446,6 @@ export interface NexusGenArgTypes {
       take?: number | null; // Int
       where?: NexusGenInputs['CityWhereInput'] | null; // CityWhereInput
     };
-    aggregateCountry: {
-      // args
-      cursor?: NexusGenInputs['CountryWhereUniqueInput'] | null; // CountryWhereUniqueInput
-      orderBy?: Array<
-        NexusGenInputs['CountryOrderByWithRelationInput'] | null
-      > | null; // [CountryOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryWhereInput'] | null; // CountryWhereInput
-    };
-    aggregateCountryLanguage: {
-      // args
-      cursor?: NexusGenInputs['CountryLanguageWhereUniqueInput'] | null; // CountryLanguageWhereUniqueInput
-      orderBy?: Array<
-        NexusGenInputs['CountryLanguageOrderByWithRelationInput'] | null
-      > | null; // [CountryLanguageOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryLanguageWhereInput'] | null; // CountryLanguageWhereInput
-    };
-    aggregateUser: {
-      // args
-      cursor?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
-      orderBy?: Array<
-        NexusGenInputs['UserOrderByWithRelationInput'] | null
-      > | null; // [UserOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    };
     findFirstCity: {
       // args
       cursor?: NexusGenInputs['CityWhereUniqueInput'] | null; // CityWhereUniqueInput
@@ -3563,30 +3456,6 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       take?: number | null; // Int
       where?: NexusGenInputs['CityWhereInput'] | null; // CityWhereInput
-    };
-    findFirstCountry: {
-      // args
-      cursor?: NexusGenInputs['CountryWhereUniqueInput'] | null; // CountryWhereUniqueInput
-      distinct?: Array<NexusGenEnums['CountryScalarFieldEnum'] | null> | null; // [CountryScalarFieldEnum]
-      orderBy?: Array<
-        NexusGenInputs['CountryOrderByWithRelationInput'] | null
-      > | null; // [CountryOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryWhereInput'] | null; // CountryWhereInput
-    };
-    findFirstCountryLanguage: {
-      // args
-      cursor?: NexusGenInputs['CountryLanguageWhereUniqueInput'] | null; // CountryLanguageWhereUniqueInput
-      distinct?: Array<
-        NexusGenEnums['CountryLanguageScalarFieldEnum'] | null
-      > | null; // [CountryLanguageScalarFieldEnum]
-      orderBy?: Array<
-        NexusGenInputs['CountryLanguageOrderByWithRelationInput'] | null
-      > | null; // [CountryLanguageOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryLanguageWhereInput'] | null; // CountryLanguageWhereInput
     };
     findFirstUser: {
       // args
@@ -3621,54 +3490,6 @@ export interface NexusGenArgTypes {
       take?: number | null; // Int
       where?: NexusGenInputs['CityWhereInput'] | null; // CityWhereInput
     };
-    findManyCountry: {
-      // args
-      cursor?: NexusGenInputs['CountryWhereUniqueInput'] | null; // CountryWhereUniqueInput
-      distinct?: Array<NexusGenEnums['CountryScalarFieldEnum'] | null> | null; // [CountryScalarFieldEnum]
-      orderBy?: Array<
-        NexusGenInputs['CountryOrderByWithRelationInput'] | null
-      > | null; // [CountryOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryWhereInput'] | null; // CountryWhereInput
-    };
-    findManyCountryCount: {
-      // args
-      cursor?: NexusGenInputs['CountryWhereUniqueInput'] | null; // CountryWhereUniqueInput
-      distinct?: Array<NexusGenEnums['CountryScalarFieldEnum'] | null> | null; // [CountryScalarFieldEnum]
-      orderBy?: Array<
-        NexusGenInputs['CountryOrderByWithRelationInput'] | null
-      > | null; // [CountryOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryWhereInput'] | null; // CountryWhereInput
-    };
-    findManyCountryLanguage: {
-      // args
-      cursor?: NexusGenInputs['CountryLanguageWhereUniqueInput'] | null; // CountryLanguageWhereUniqueInput
-      distinct?: Array<
-        NexusGenEnums['CountryLanguageScalarFieldEnum'] | null
-      > | null; // [CountryLanguageScalarFieldEnum]
-      orderBy?: Array<
-        NexusGenInputs['CountryLanguageOrderByWithRelationInput'] | null
-      > | null; // [CountryLanguageOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryLanguageWhereInput'] | null; // CountryLanguageWhereInput
-    };
-    findManyCountryLanguageCount: {
-      // args
-      cursor?: NexusGenInputs['CountryLanguageWhereUniqueInput'] | null; // CountryLanguageWhereUniqueInput
-      distinct?: Array<
-        NexusGenEnums['CountryLanguageScalarFieldEnum'] | null
-      > | null; // [CountryLanguageScalarFieldEnum]
-      orderBy?: Array<
-        NexusGenInputs['CountryLanguageOrderByWithRelationInput'] | null
-      > | null; // [CountryLanguageOrderByWithRelationInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CountryLanguageWhereInput'] | null; // CountryLanguageWhereInput
-    };
     findManyUser: {
       // args
       cursor?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
@@ -3694,14 +3515,6 @@ export interface NexusGenArgTypes {
     findUniqueCity: {
       // args
       where: NexusGenInputs['CityWhereUniqueInput']; // CityWhereUniqueInput!
-    };
-    findUniqueCountry: {
-      // args
-      where: NexusGenInputs['CountryWhereUniqueInput']; // CountryWhereUniqueInput!
-    };
-    findUniqueCountryLanguage: {
-      // args
-      where: NexusGenInputs['CountryLanguageWhereUniqueInput']; // CountryLanguageWhereUniqueInput!
     };
     findUniqueUser: {
       // args
