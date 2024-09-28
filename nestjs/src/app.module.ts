@@ -15,11 +15,11 @@ import { ReqMiddleware } from './middlewares/req.middleware';
 import { BusinessModule } from './modules/index.module';
 import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
 import { AuthPlugin } from './graphql/plugins/AuthPlugin';
-// import { FormatResponsePlugin } from './graphql/plugins';
 import { AuthModule } from './modules/auth/auth.module';
 import { jwtConstants } from './common/const';
+import { ErrorLoggerPlugin } from './graphql/plugins/ErrorLoggerPlugin';
 
-// gql的通用安全套件
+// gql的通用安全套件: 主要修复DDOS和一些schema泄漏相关的漏洞
 const armor = new ApolloArmor({
   blockFieldSuggestion: {
     enabled: isProd(),
@@ -40,8 +40,8 @@ const schema = getNexusSchema(false);
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      debug: !isProd(),
       schema,
-      // schema: applyMiddleware(schema, permissions),
       context: ({ req }) => {
         return { req, user: req.user, prisma: req.prisma };
       },
@@ -50,14 +50,18 @@ const schema = getNexusSchema(false);
       introspection: !isProd(), // 生产环境禁止获取query.__schema
       hideSchemaDetailsFromClientErrors: isProd(),
       nodeEnv: process.env.NODE_ENV, // 开发环境下报错时显示stacktrace
-      formatError: (formattedError) => {
-        return formattedError;
-      },
-      // TODO fieldResolver.simpleResolvers
-      // TODO willSendResponse.response.data = null
+      // formatError: (formattedError, err: any) => {
+      //   debugger;
+      //   return formattedError;
+      // },
       ...protection,
       validationRules: protection.validationRules,
-      plugins: [AuthPlugin, LoggerPlugin, ...protection.plugins],
+      plugins: [
+        AuthPlugin,
+        LoggerPlugin,
+        ErrorLoggerPlugin,
+        ...protection.plugins,
+      ],
     }),
     AuthModule,
     BusinessModule,

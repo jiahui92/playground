@@ -35,13 +35,16 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
     const payload: JwtPayload = {
-      userId: user.id,
+      id: user.id,
       roles: user.roles as Role[],
     };
     return createResponse({
       // TODO refresh_token
       // TODO logout
-      access_token: await this.jwtService.signAsync(payload),
+      data: {
+        access_token: await this.jwtService.signAsync(payload),
+      },
+      success: true,
     });
   }
 
@@ -70,6 +73,9 @@ export class AuthService {
     const user = await this.prisma.user.create({ data });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...res } = user;
-    return createResponse(res);
+    return createResponse({
+      data: res,
+      success: true,
+    });
   }
 }

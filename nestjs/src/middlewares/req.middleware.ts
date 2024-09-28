@@ -5,7 +5,7 @@ import { jwtConstants, Role } from 'src/common/const';
 import { PrismaService } from '../prisma.service';
 
 export interface JwtPayload {
-  userId: string;
+  id: string;
   roles: Role[];
   // jwt会默认赋值 过期时间
   exp?: number;

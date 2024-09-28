@@ -4,6 +4,7 @@ import { LoggingInterceptor } from './interceptors/logger.interceoptor';
 import { RolesGuardClass } from './guards/roles.guard';
 import { Reflector } from '@nestjs/core';
 import helmet from 'helmet';
+import { AllExceptionsFilter } from './filters/AllExceptionsFilter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,6 +29,7 @@ async function bootstrap() {
       },
     }),
   );
+  app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalGuards(new RolesGuardClass(new Reflector()));
   app.useGlobalInterceptors(new LoggingInterceptor());
   await app.listen(3000);

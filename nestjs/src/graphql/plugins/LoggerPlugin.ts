@@ -1,6 +1,6 @@
 import { ApolloServerPlugin } from '@apollo/server';
 import { SLOW_REQUEST_THRESHOLD } from 'src/common/const';
-import { logger } from 'src/common/utils';
+import { logWarn } from 'src/common/utils';
 
 export const LoggerPlugin: ApolloServerPlugin = {
   async requestDidStart() {
@@ -12,18 +12,18 @@ export const LoggerPlugin: ApolloServerPlugin = {
         const duration = endTime - startTime; // 请求耗时
         if (duration < SLOW_REQUEST_THRESHOLD) return;
 
-        const { errors } = requestContext;
+        // const { errors } = requestContext;
+        const req = requestContext.request;
+        const context: any = requestContext.contextValue;
 
-        // 构建日志信息
-        const log = {
-          ...requestContext.request,
-          duration, // 请求执行的时间
-          status: errors ? 'Error' : 'Success',
-          errors,
-        };
-
-        const msg = `GraphQL Slow Request: ${JSON.stringify(log)}`;
-        logger.warn(msg);
+        logWarn({
+          method: 'POST',
+          url: '/graphql',
+          body: req.http?.body,
+          userId: context.user?.id,
+          msg: `GraphQL Slow API: ${duration}ms;`,
+          // error: errors,
+        });
       },
     };
   },

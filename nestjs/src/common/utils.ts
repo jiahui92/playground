@@ -1,3 +1,4 @@
+import { HttpStatus } from '@nestjs/common';
 import { resolve } from 'path';
 import winston = require('winston');
 
@@ -21,12 +22,27 @@ export function isAdmin(ctx): boolean {
   return ctx.user?.isAdmin === true;
 }
 
-export function createResponse(data, message = 'Success', statusCode = 200) {
-  return { data, message, statusCode, success: true };
+interface ResponseData {
+  success: boolean;
+  statusCode?: number; // 默认 200 || 500
+  data?: any;
+  message?: string;
+}
+export function createResponse(d: ResponseData) {
+  const defaultMessage = d.success ? 'Success' : 'Failed';
+  const defaultStatusCode = d.success
+    ? HttpStatus.OK
+    : HttpStatus.INTERNAL_SERVER_ERROR;
+  return {
+    data: d.data,
+    message: d.message || defaultMessage,
+    statusCode: d.statusCode || defaultStatusCode,
+    success: d.success,
+  };
 }
 
 const { combine, timestamp, label, printf } = winston.format;
-export const logger = winston.createLogger({
+const logger = winston.createLogger({
   format: combine(
     label({ label: 'Nestjs' }),
     timestamp(),
@@ -46,3 +62,24 @@ export const logger = winston.createLogger({
     new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
   ],
 });
+
+interface LogData {
+  method: string;
+  url: string;
+  body: any;
+  userId: string;
+  msg?: any; // 不能叫message，不然log.warn会只有message的输出
+}
+
+interface LogErrorData extends LogData {
+  error: any;
+  stacktrace?: any;
+  extraData?: any;
+}
+export function logError(data: LogErrorData) {
+  logger.error(data);
+}
+
+export function logWarn(data: LogData) {
+  logger.warn(data);
+}
