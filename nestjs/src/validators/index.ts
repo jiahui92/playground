@@ -53,7 +53,11 @@ export const validate = (
     if (result.success) {
       return result.data;
     } else {
-      throw new BadRequestException('Validation Error', {
+      // https://zod.dev/ERROR_HANDLING
+      const message = result.error.issues
+        .map((error) => `${error.path}: ${error.message}`)
+        .join(', ');
+      throw new BadRequestException(message, {
         cause: result.error,
         description: result.error.toString(),
       });

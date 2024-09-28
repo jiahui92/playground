@@ -1,4 +1,6 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { isProd, logger } from 'src/common/utils';
 import { validate, validatorMap } from 'src/validators';
 
 export const validationMiddleware: Prisma.Middleware = async (params, next) => {
@@ -25,5 +27,15 @@ export const validationMiddleware: Prisma.Middleware = async (params, next) => {
       return isCreate ? schema : schema.partial();
     });
   }
-  return next(params);
+
+  return next(params).catch((error) => {
+    logger.error({ params, error });
+    // 默认的error.message会暴露堆栈信息
+    if (isProd()) {
+      throw new InternalServerErrorException('', {
+        description: `${error.code} ${error.name} ${error.meta?.target}`,
+      });
+    }
+    throw error;
+  });
 };

@@ -9,7 +9,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   }
 
   constructor() {
-    super();
+    super({
+      log: ['query', 'info', 'warn', 'error'],
+    });
     /***
      * nestjs与prisma.$extends结合不是很好，下面这段代码无效，暂时还是先用$use
      *  https://github.com/prisma/prisma/issues/18628

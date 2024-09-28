@@ -1,8 +1,7 @@
-import { Logger } from '@nestjs/common';
 import { ApolloServerPlugin } from '@apollo/server';
 import { SLOW_REQUEST_THRESHOLD } from 'src/common/const';
+import { logger } from 'src/common/utils';
 
-const logger = new Logger('LoggerPlugin');
 export const LoggerPlugin: ApolloServerPlugin = {
   async requestDidStart() {
     const startTime = Date.now(); // 请求开始时间

@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import winston = require('winston');
 
 // 是否为开发环境
 export function isProd() {
@@ -23,3 +24,25 @@ export function isAdmin(ctx): boolean {
 export function createResponse(data, message = 'Success', statusCode = 200) {
   return { data, message, statusCode, success: true };
 }
+
+const { combine, timestamp, label, printf } = winston.format;
+export const logger = winston.createLogger({
+  format: combine(
+    label({ label: 'Nestjs' }),
+    timestamp(),
+    printf(({ level, message, label, timestamp }) => {
+      let str;
+      try {
+        str = message instanceof Object ? JSON.stringify(message) : message;
+      } catch (error) {
+        str = message;
+      }
+      return `${timestamp} [${label}] ${level}: ${str}`;
+    }),
+  ),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'logs/winston.log' }),
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+  ],
+});

@@ -25,7 +25,10 @@ const armor = new ApolloArmor({
     enabled: isProd(),
   },
 });
-const protection = armor.protect();
+const protection = Object.assign(armor.protect(), {
+  // 非生产环境时把报错堆栈返回来
+  includeStacktraceInErrorResponses: !isProd(),
+});
 const schema = getNexusSchema(false);
 
 @Module({
