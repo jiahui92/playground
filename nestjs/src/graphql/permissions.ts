@@ -1,4 +1,4 @@
-import { JwtPayload } from './../modules/auth/auth.service';
+import { JwtPayload } from 'src/middlewares/req.middleware';
 import { shield, deny, rule, allow } from 'graphql-shield';
 import { Role } from 'src/common/const';
 

@@ -6,12 +6,13 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Role } from 'src/common/const';
-import { JwtPayload } from 'src/modules/auth/auth.service';
+import { JwtPayload } from 'src/middlewares/req.middleware';
 
 const rolesKey = 'roles';
 // @RolesGuard([Role.ADMIN])
 export const RolesGuard = (roles: Role[]) => SetMetadata(rolesKey, roles);
 
+// !!! gql的校验在`src/graphql/plugins/AuthPlugin.ts`
 @Injectable()
 export class RolesGuardClass implements CanActivate {
   constructor(private reflector: Reflector) {}

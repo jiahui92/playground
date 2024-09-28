@@ -14,6 +14,7 @@ import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
 import { BusinessModule } from './modules/index.module';
 import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
+import { AuthPlugin } from './graphql/plugins/AuthPlugin';
 // import { FormatResponsePlugin } from './graphql/plugins';
 import { AuthModule } from './modules/auth/auth.module';
 import { jwtConstants } from './common/const';
@@ -49,7 +50,7 @@ const schema = getNexusSchema(false);
       // TODO willSendResponse.response.data = null
       ...protection,
       validationRules: protection.validationRules,
-      plugins: [LoggerPlugin, ...protection.plugins],
+      plugins: [AuthPlugin, LoggerPlugin, ...protection.plugins],
     }),
     AuthModule,
     BusinessModule,

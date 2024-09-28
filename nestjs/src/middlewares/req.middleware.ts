@@ -1,9 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from 'src/modules/auth/auth.service';
-import { jwtConstants } from 'src/common/const';
+import { jwtConstants, Role } from 'src/common/const';
 import { PrismaService } from '../prisma.service';
+
+export interface JwtPayload {
+  userId: string;
+  roles: Role[];
+  // jwt会默认赋值 过期时间
+  exp?: number;
+}
 
 @Injectable()
 export class ReqMiddleware implements NestMiddleware {
@@ -24,8 +30,8 @@ export class ReqMiddleware implements NestMiddleware {
           secret: jwtConstants.secret,
         });
         req['user'] = payload;
-      } catch {
-        console.error('token error');
+      } catch (e) {
+        console.error('jwt error:', e?.name, e?.message);
       }
     }
 

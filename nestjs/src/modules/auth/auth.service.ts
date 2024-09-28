@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { Role } from 'src/common/const';
 import { createResponse } from 'src/common/utils';
+import { JwtPayload } from 'src/middlewares/req.middleware';
 import { validate } from 'src/validators';
 import { userValidator } from 'src/validators/user';
 
@@ -71,9 +72,4 @@ export class AuthService {
     const { password: _, ...res } = user;
     return createResponse(res);
   }
-}
-
-export interface JwtPayload {
-  userId: string;
-  roles: Role[];
 }
