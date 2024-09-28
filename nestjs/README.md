@@ -56,8 +56,9 @@ $ npm run test:cov
   * controller
   * service
 * src/generated
+  * index: 配置支持的gql api（出于安全考虑，默认都不放开）
   * nexus: 由paljs生成的nexus代码，gql操作背后的执行逻辑，内部使用prisma连接数据库
-  * typings.ts: 由nexus生成的ts.types类型定义文件
+  * nexus-typings.ts: 由nexus生成的ts.types类型定义文件
   * schema.gql: 由nexus生成的gqlSchema，一般提供给前端使用，类似curd里的api定义
 * src/graphql
   * 拓展目录，覆盖重写`src/generated/nexus`里的types,resolver，比如`city.ts`增加字段级权限控制
@@ -297,6 +298,5 @@ typeorm migration:revert
 * 总结能使用mutation场景
   * 简单场景
     * 任何业务场景下，字段的校验和权限逻辑都是一样/复用的
-    * 不需考虑用户输入数据的内部项目
+    * 不需考虑用户输入数据安全性的内部项目
   * 限制放开可新增、更新的方法和字段
-
