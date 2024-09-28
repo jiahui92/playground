@@ -7,21 +7,20 @@ import {
   NexusPlugin,
 } from 'nexus/dist/core';
 import { GraphQLScalarType } from 'graphql';
+import { Prisma } from '@prisma/client';
 
-export interface GqlApiConfig {
-  [Model: string]: GqlApiConfigItem;
-}
+export type GqlApiConfig = {
+  [key in Prisma.ModelName]?: GqlApiConfigItem;
+};
 
 interface GqlApiConfigItem {
   // 允许的query,支持通配符,如['*', 'find*']
   queries?: string[];
   // 允许的mutation,支持通配符,如['*', 'create*']
   mutations?: string[];
-  // query不支持查询的字段，同时不能出现在查询参数里，比如where里
-  // TODO 优化ts类型，不然输错了字段名称就尴尬了
+  // query不支持查询的字段(支持通配符)，同时也不能出现在查询参数里，比如where里
   queryDisabledFields?: string[];
-  // mutation参数里不允许出现的字段，一般代表由后端进行设置的字段
-  // TODO 优化ts类型，不然输错了字段名称就尴尬了
+  // mutation参数里不允许出现的字段(支持通配符)，一般代表由后端进行设置的字段
   mutationDisabledFields?: string[];
   // 以下为非配置项，用于存储运行过程中的预处理数据
   queriesRegExp?: RegExp | undefined;
@@ -96,27 +95,54 @@ const prismaApi = {
   },
 };
 
-export function genFilterPlugin(genTypes, gqlApiConfig: GqlApiConfig) {
+let gqlApiConfig: GqlApiConfig;
+function setGqlApiConfig(userConfig: GqlApiConfig) {
   // 预处理gqlApiConfig数据
-  Object.keys(gqlApiConfig).forEach((model) => {
-    const config = gqlApiConfig[model];
+  Object.keys(userConfig).forEach((model) => {
+    const config = userConfig[model];
     config.queriesRegExp = getRegExp(config.queries);
     config.mutationsRegExp = getRegExp(config.mutations);
     config.queryDisabledFieldsRegExp = getRegExp(config.queryDisabledFields);
     config.mutationDisabledFieldsRegExp = getRegExp(
       config.mutationDisabledFields,
     );
+    const fields: string[] = Object.values(Prisma[`${model}ScalarFieldEnum`]);
+    config.queryDisabledFields?.forEach((disabledField) => {
+      const index = fields.findIndex((f) => getRegExp([disabledField]).test(f));
+      if (index === -1) {
+        throw Error(
+          `GqlApiConfig配置有问题: ${model}.queryDisabledFields.${disabledField}在模型中不存在`,
+        );
+      }
+    });
+    config.mutationDisabledFields?.forEach((disabledField) => {
+      const index = fields.findIndex((f) => getRegExp([disabledField]).test(f));
+      if (index === -1) {
+        throw Error(
+          `GqlApiConfig配置有问题: ${model}.mutationDisabledFields.${disabledField}在模型中不存在`,
+        );
+      }
+    });
   });
 
+  gqlApiConfig = userConfig;
+}
+function getGqlApiConfigItem(model: string): GqlApiConfigItem {
+  return gqlApiConfig[model];
+}
+
+export function genFilterPlugin(genTypes, userConfig: GqlApiConfig) {
+  setGqlApiConfig(userConfig);
+
   return new NexusPlugin({
-    name: 'onInstallExample',
+    name: 'genFilterPlugin',
     onInstall: (builder) => {
       const types = Object.keys(genTypes);
       types.forEach((type) => {
         const gqlType = getGqlType(type);
-        // TODO 目前只过滤Query和Mutation，后续可以过滤掉用不到的ts类型
+        // TODO 目前只过滤Query和Mutation，后续可以过滤掉用不到的ts类型(可以做成通用过滤，类似去掉没被引用的变量)
         if (['Query', 'Mutation'].includes(gqlType.type)) {
-          const config = gqlApiConfig[gqlType.model];
+          const config = getGqlApiConfigItem(gqlType.model);
           const key = {
             Query: 'queriesRegExp',
             Mutation: 'mutationsRegExp',
@@ -141,7 +167,7 @@ export function genFilterPlugin(genTypes, gqlApiConfig: GqlApiConfig) {
       // TODO 这里会有小概率replace不掉的情况，然后又取到了config的值
       const regExp = new RegExp(`${prismaApi.outputType.join('|')}$`);
       const model = field.parentType.replace(regExp, '');
-      const config = gqlApiConfig[model];
+      const config = getGqlApiConfigItem(model);
       if (config?.queryDisabledFieldsRegExp?.test(field.name)) {
         // 禁止查询该字段，无论如何都返回空字符串
         setVoid(field);
@@ -155,7 +181,7 @@ export function genFilterPlugin(genTypes, gqlApiConfig: GqlApiConfig) {
       const regExpStr1 = `(${prismaApi.inputType.query.join('|')})$`;
       if (new RegExp(`.*${regExpStr1}`).test(field.parentType)) {
         const model = field.parentType.replace(new RegExp(regExpStr1), '');
-        const config = gqlApiConfig[model];
+        const config = getGqlApiConfigItem(model);
         if (config?.queryDisabledFieldsRegExp?.test(field.name)) {
           setVoid(field);
         }
@@ -165,7 +191,7 @@ export function genFilterPlugin(genTypes, gqlApiConfig: GqlApiConfig) {
       const regExpStr2 = `(${prismaApi.inputType.mutation.join('|')})$`;
       if (new RegExp(`.*${regExpStr2}`).test(field.parentType)) {
         const model = field.parentType.replace(new RegExp(regExpStr2), '');
-        const config = gqlApiConfig[model];
+        const config = getGqlApiConfigItem(model);
         if (config?.mutationDisabledFieldsRegExp?.test(field.name)) {
           setVoid(field);
         }

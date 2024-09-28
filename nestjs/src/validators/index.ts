@@ -36,7 +36,6 @@ export interface ModelValidator {
 
 type Data = Record<string, any>;
 type zObject = z.ZodObject<Data>;
-// TODO 根据onCreate或onUpdate优化需要传入data类型
 export const validate = (
   model: string,
   data: Data | Array<Data>,

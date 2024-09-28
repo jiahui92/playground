@@ -273,9 +273,10 @@ typeorm migration:revert
 
 ## 性能优化
 ### 大数据请求
-4000条数据的请求中，gql的执行时间大概是150~300ms，但restful api的执行时间大概是20ms
+4000条数据的请求中，gql的执行时间大概是150~300ms，但restful api的执行时间大概是20ms（数据量少则无太大差别）
 * @paljs/plugin/select.js
   * 已优化未合并https://github.com/paljs/prisma-tools/pull/341/files
+  * 能从1~2s --> 200ms
 * @paljs/nexus/index.js
   * onCreateFieldResolver 直接返回Promise，让外部处理
   * 大概10%
