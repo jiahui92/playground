@@ -7,8 +7,27 @@ import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // TODO 把graphql.playground的jsdeliver.js给block了
-  // app.use(helmet());
+  app.use(
+    // 放开gql.playground的一些资源加载
+    // https://docs.nestjs.com/security/helmet
+    helmet({
+      crossOriginEmbedderPolicy: false,
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: [`'self'`],
+          styleSrc: [
+            `'self'`,
+            `'unsafe-inline'`,
+            'cdn.jsdelivr.net',
+            'fonts.googleapis.com',
+          ],
+          fontSrc: [`'self'`, 'fonts.gstatic.com'],
+          imgSrc: [`'self'`, 'data:', 'cdn.jsdelivr.net'],
+          scriptSrc: [`'self'`, `https: 'unsafe-inline'`, `cdn.jsdelivr.net`],
+        },
+      },
+    }),
+  );
   app.useGlobalGuards(new RolesGuardClass(new Reflector()));
   app.useGlobalInterceptors(new LoggingInterceptor());
   await app.listen(3000);
