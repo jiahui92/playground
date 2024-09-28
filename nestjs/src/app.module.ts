@@ -8,7 +8,7 @@ import { ApolloArmor } from '@escape.tech/graphql-armor';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { isDev } from './common/utils';
+import { isProd } from './common/utils';
 import { getNexusSchema } from './generated';
 import { PrismaService } from './prisma.service';
 import { ReqMiddleware } from './middlewares/req.middleware';
@@ -20,7 +20,11 @@ import { AuthModule } from './modules/auth/auth.module';
 import { jwtConstants } from './common/const';
 
 // gql的通用安全套件
-const armor = new ApolloArmor();
+const armor = new ApolloArmor({
+  blockFieldSuggestion: {
+    enabled: isProd(),
+  },
+});
 const protection = armor.protect();
 const schema = getNexusSchema(false);
 
@@ -39,9 +43,9 @@ const schema = getNexusSchema(false);
         return { req, user: req.user, prisma: req.prisma };
       },
       // autoSchemaFile: getPath('src/schema.gql'), // 搭配自动生成 schema.gql 文件
-      playground: isDev(),
-      introspection: isDev(), // 生产环境禁止获取query.__schema
-      hideSchemaDetailsFromClientErrors: !isDev(),
+      playground: !isProd(),
+      introspection: !isProd(), // 生产环境禁止获取query.__schema
+      hideSchemaDetailsFromClientErrors: isProd(),
       nodeEnv: process.env.NODE_ENV, // 开发环境下报错时显示stacktrace
       formatError: (formattedError) => {
         return formattedError;
