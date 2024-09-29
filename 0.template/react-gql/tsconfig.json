@@ -1,5 +1,6 @@
 {
   "compilerOptions": { // 这些配置只提供给vscode等编译器使用，编译则由babel负责
+    "moduleResolution":"node",
     "target": "ESNext", // 支持的js版本
     "allowJs": false, // 允许编译 .js 文件
     "checkJs": false, // 是否检查 JavaScript 文件

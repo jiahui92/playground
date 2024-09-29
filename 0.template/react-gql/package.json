@@ -6,10 +6,10 @@
     "lint"
   ],
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "concurrently \"webpack-dev-server --open\" \"npm run codegen --watch\"",
     "build": "cross-env NODE_ENV=production && webpack",
-    "gen": "ts-node ./scripts/gen.ts",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,13 +19,19 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.8.3",
-    "@graphql-codegen/cli": "^5.0.2",
-    "@types/react": "^18.3.5",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/client-preset": "4.3.3",
+    "@graphql-codegen/introspection": "4.0.3",
+    "@parcel/watcher": "^2.4.1",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.0.6",
+    "concurrently": "^9.0.1",
     "core-js": "^3.6.4",
     "cross-env": "^7.0.3",
     "css-loader": "^3.4.2",
@@ -44,7 +50,8 @@
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
+    "@graphql-typed-document-node/core": "^3.2.0",
     "graphql": "^16.9.0",
-    "ts-node": "^10.9.2"
+    "urql": "^4.1.0"
   }
 }
