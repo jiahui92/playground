@@ -38,7 +38,6 @@ query {
 ```
 
 ## Test
-
 ```bash
 # unit tests
 $ npm run test
@@ -284,7 +283,7 @@ typeorm migration:revert
   * 可能与gql底层逻辑(graphql-js)有关系，每个字段都必须执行一次resolver
   * 可能是每个resolver都是promise
 * 字段级权限: 可以放到ApolloServer.willSendResponse或者validation生命周期去做？这样就不会有filed.resolver影响性能问题
-
+* apollo-server.parseOptions.noLoadtion: 关闭location的计算
 ## RestFul Api or Gql.mutation
 仅针对新增、更新、删除的场景
 * Restful Api
@@ -301,3 +300,18 @@ typeorm migration:revert
     * 任何业务场景下，字段的校验和权限逻辑都是一样/复用的
     * 不需考虑用户输入数据安全性的内部项目
   * 限制放开可新增、更新的方法和字段
+
+
+## 方案相关
+### gql处理各种介入时机
+* paljs: no plugin
+  * 控制生成的neuxs
+* nexus: plugin
+  * 控制生成的gql shcema
+* apollo: plugin, validationRules
+  * 控制gql请求
+* prisma: middleware
+
+### nestjs处理各种介入时机
+* nestjs: middleware, filter, guard, interceptor
+* express: middleware

@@ -16,8 +16,10 @@ import { BusinessModule } from './modules/index.module';
 import { LoggerPlugin } from './graphql/plugins/LoggerPlugin';
 import { AuthPlugin } from './graphql/plugins/AuthPlugin';
 import { AuthModule } from './modules/auth/auth.module';
-import { jwtConstants } from './common/const';
+import { jwtConstants } from './config/common';
 import { ErrorLoggerPlugin } from './graphql/plugins/ErrorLoggerPlugin';
+import { createQuerySizeLimitPlugin } from './graphql/plugins/AuthPlugin copy';
+import { GQL_QUERY_SIZE_Limit } from './config/gql';
 
 // gql的通用安全套件: 主要修复DDOS和一些schema泄漏相关的漏洞
 const armor = new ApolloArmor({
@@ -60,6 +62,8 @@ const schema = getNexusSchema(false);
         AuthPlugin,
         LoggerPlugin,
         ErrorLoggerPlugin,
+        // 限制take的大小
+        createQuerySizeLimitPlugin(GQL_QUERY_SIZE_Limit),
         ...protection.plugins,
       ],
     }),
@@ -71,17 +75,13 @@ const schema = getNexusSchema(false);
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    // 中间件
     // 限制10分钟内最多600次请求
-    consumer
-      .apply(
-        rateLimit({
-          max: 600,
-          windowMs: 10 * 60 * 1000, // 10min
-          message: 'Too many requests, please try again later.',
-        }),
-      )
-      .forRoutes('*');
+    const rateLimitMiddleware = rateLimit({
+      max: 600,
+      windowMs: 10 * 60 * 1000, // 10min
+      message: 'Too many requests, please try again later.',
+    });
+    consumer.apply(rateLimitMiddleware).forRoutes('*');
     consumer.apply(ReqMiddleware).forRoutes('*');
   }
 }

@@ -1,5 +1,5 @@
 import { ApolloServerPlugin } from '@apollo/server';
-import { SLOW_REQUEST_THRESHOLD } from 'src/common/const';
+import { SLOW_REQUEST_THRESHOLD } from 'src/config/common';
 import { logWarn } from 'src/common/utils';
 
 export const LoggerPlugin: ApolloServerPlugin = {

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SLOW_REQUEST_THRESHOLD } from 'src/common/const';
+import { SLOW_REQUEST_THRESHOLD } from 'src/config/common';
 import { logWarn } from 'src/common/utils';
 
 // 此拦截器无法拦截gql，gql的拦截在"src/graphql/plugins/LoggerPlugin.ts"中

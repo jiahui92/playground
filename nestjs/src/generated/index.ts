@@ -2,23 +2,9 @@ import { paljs } from '@paljs/nexus';
 import { makeSchema } from 'nexus';
 import { getPath } from 'src/common/utils';
 import * as genTypes from './nexus';
-import { genFilterPlugin, GqlApiConfig } from './genFilterPlugin';
+import { genFilterPlugin } from './genFilterPlugin';
+import { gqlApiConfig } from 'src/config/gql';
 
-// 设置放开部分gql.api
-const gqlAPiConfig: GqlApiConfig = {
-  User: {
-    queries: ['find*'],
-    queryDisabledFields: ['password', 'roles'],
-    mutations: ['create*'],
-    mutationDisabledFields: ['id', 'roles', 'createdAt'],
-  },
-  City: {
-    queries: ['*'],
-    queryDisabledFields: [],
-    mutations: ['*'],
-    mutationDisabledFields: [],
-  },
-};
 
 export function getNexusSchema(shouldExitAfterGenerateArtifacts: boolean) {
   const schema = makeSchema({
@@ -30,7 +16,7 @@ export function getNexusSchema(shouldExitAfterGenerateArtifacts: boolean) {
       schema: getPath('src/generated/schema.gql'),
       typegen: getPath('src/generated/nexus-typings.ts'),
     },
-    plugins: [paljs(), genFilterPlugin(genTypes, gqlAPiConfig)],
+    plugins: [paljs(), genFilterPlugin(genTypes, gqlApiConfig)],
   });
   return schema;
 }

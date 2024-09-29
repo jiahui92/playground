@@ -52,7 +52,6 @@ const prismaApi = {
     'findCount',
     'aggregate',
     // 'groupBy', // plajs默认不支持
-    // 'count', // plajs默认不支持
   ],
   mutation: [
     'createOne',

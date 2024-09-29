@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConstants, Role } from 'src/common/const';
+import { Role } from 'src/common/const';
+import { jwtConstants } from 'src/config/common';
 import { PrismaService } from '../prisma.service';
 
 export interface JwtPayload {
