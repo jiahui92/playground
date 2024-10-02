@@ -8,6 +8,7 @@
 [目录: 0.template](0.template)
 * [x] static
 * [x] react + ts
+  * [ ] webpack5
 * [ ] micro-frontend
 * [x] eggjs-with-frontend
 * [x] nestjs + gql

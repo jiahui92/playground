@@ -10,10 +10,12 @@ module.exports = {
   mode: isProduction ? 'production' : 'development',
   devtool,
   devServer: {
-    // host: '0.0.0.0', // lan network
+    host: '0.0.0.0', // lan network
+    disableHostCheck: true,
     hot: true,
     compress: true,
-    port: 9000
+    port: 9000,
+    contentBase: path.join(__dirname, 'assets'),
   },
   output: {
     filename: '[name].[hash:8].js',
