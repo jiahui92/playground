@@ -1,0 +1,15 @@
+{
+  "compilerOptions": { // 这些配置只提供给vscode等编译器使用，编译则由babel负责
+    "moduleResolution":"node",  
+    "target": "ESNext", // 支持的js版本
+    "allowJs": false, // 允许编译 .js 文件
+    "checkJs": false, // 是否检查 JavaScript 文件
+    "jsx": "preserve", // 由babel处理
+    "skipLibCheck": true, // 跳过对声明文件（.d.ts）的类型检查
+    "forceConsistentCasingInFileNames": true,    // 强制在导入时的文件名大小写一致
+    "strict": true, // 启用所有严格类型检查选项
+    "noImplicitReturns": true // 在函数没有返回值或缺少返回值时发出错误
+  },
+  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "exclude": ["node_modules"] // 指定要排除的文件目录
+}
