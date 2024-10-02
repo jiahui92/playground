@@ -4,23 +4,23 @@
 一些简单的试验
 
 
-### todo
-* xx
+### 脚手架
+[目录: 0.template](0.template)
+* [x] static
+* [x] react + ts
+* [ ] micro-frontend
+* [x] eggjs-with-frontend
+* [x] nestjs + gql
+* [x] react + gql
+* [ ] reactnative
+* [ ] electron
 
-### 目录
-* JS
-  * [webRTC](web-rtc)
-  * [webpack-plugin](webpack-plugin)
-  * [reactnative](reactnative)
-* [Scaffolding](0.template)
-  * static
-  * webpack + react
-  * eggjs-with-frontend
-  * nestjs + gql
-  * react + gql
-* trending test
-  * Machine Learning
-    * [Google ML](machine-learning)
-    * [Face API](face-api)
-    * [OCR](ocr)
-* archived
+### trending test
+[目录: trend](trend)
+* [Google ML](trend/machine-learning)
+* [Face API](trend/face-api)
+* [OCR](trend/ocr)
+* [webRTC](trend/web-rtc)
+
+### archived
+[目录: archived](archived)
