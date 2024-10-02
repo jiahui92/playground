@@ -8,23 +8,19 @@
 * xx
 
 ### 目录
-* [Leetcode](leetcode)
-* CSS
-  * [BFC](css/bfc)
-  * [flex](css/flex)
 * JS
   * [webRTC](web-rtc)
   * [webpack-plugin](webpack-plugin)
   * [reactnative](reactnative)
 * [Scaffolding](0.template)
   * static
-  * webpack & react
+  * webpack + react
   * eggjs-with-frontend
   * nestjs + gql
-* Machine Learning
-  * [Google ML](machine-learning)
-  * [Face API](face-api)
-  * [OCR](ocr)
-* 其它
-  * [豆瓣小组抓包](spider-douban-group)
-  * [xmind](xmind)
+  * react + gql
+* trending test
+  * Machine Learning
+    * [Google ML](machine-learning)
+    * [Face API](face-api)
+    * [OCR](ocr)
+* archived

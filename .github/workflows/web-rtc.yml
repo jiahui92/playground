@@ -6,7 +6,7 @@ name: Node.js CI (deploy github pages)
 on:
   
   push:
-    paths: 'web-rtc/**'
+    paths: 'trend/web-rtc/**'
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
