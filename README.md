@@ -9,12 +9,14 @@
 * [x] static
 * [x] react + ts
   * [ ] webpack5
-* [ ] micro-frontend
+* [ ] [micro-frontend](https://vercel.com/templates/next.js/microfrontends)
+  * [ ] rush
 * [x] eggjs-with-frontend
 * [x] nestjs + gql
 * [x] react + gql
 * [ ] reactnative
 * [ ] electron
+* [x] chrome extension
 
 ### trending test
 [目录: trend](trend)
