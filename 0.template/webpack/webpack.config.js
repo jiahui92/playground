@@ -11,6 +11,7 @@ module.exports = {
   devtool,
   devServer: {
     // host: '0.0.0.0', // lan network
+    // host: 'local.com', // lan network
     hot: true,
     compress: true,
     port: 9000

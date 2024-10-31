@@ -1,4 +1,3 @@
 ## 启动
-* npm i
-* npm run start
-
+* pnpm install
+* pnpm run start
