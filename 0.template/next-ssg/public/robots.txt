@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: *.json
+Disallow: *.ico
+
+Host: https://yoursite.com
+Sitemap: https://yoursite.com/sitemap.xml

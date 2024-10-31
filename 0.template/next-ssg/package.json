@@ -1,0 +1,35 @@
+{
+  "name": "next-ssg",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next-sitemap",
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build",
+    "deploy": "rimraf out/_next/data && wrangler pages deploy out --project-name wow2fun-movie",
+    "dev:wrangler": "wrangler pages dev out",
+    "indexNow": "bun run ./scripts/indexNow.ts"
+  },
+  "dependencies": {
+    "@next/third-parties": "^15.0.2",
+    "@nextui-org/react": "^2.4.8",
+    "framer-motion": "^11.11.10",
+    "next": "^14.2.16"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^15.0.2",
+    "@types/node": "^20.17.4",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "axios": "^1.7.7",
+    "bun": "^1.1.33",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.16",
+    "fast-xml-parser": "^4.5.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
