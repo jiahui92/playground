@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "analyze": "cross-env ANALYZE=true next build",
-    "deploy": "rimraf out/_next/data && wrangler pages deploy out --project-name wow2fun-movie",
+    "deploy": "rimraf out/_next/data && wrangler pages deploy out --project-name site-tools",
     "dev:wrangler": "wrangler pages dev out",
     "indexNow": "bun run ./scripts/indexNow.ts"
   },
@@ -25,11 +25,15 @@
     "@types/react-dom": "^18",
     "axios": "^1.7.7",
     "bun": "^1.1.33",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "^14.2.16",
     "fast-xml-parser": "^4.5.0",
+    "next-sitemap": "^4.2.3",
     "postcss": "^8",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^3.84.0"
   }
 }
