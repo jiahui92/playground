@@ -7,6 +7,7 @@
 ### 脚手架
 [目录: 0.template](0.template)
 * [x] static
+* [x] nextjs-SSG
 * [x] react + ts
   * [ ] webpack5
 * [ ] [micro-frontend](https://vercel.com/templates/next.js/microfrontends)
