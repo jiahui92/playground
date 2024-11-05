@@ -23,11 +23,12 @@ function getCommonLayout(Component: React.ComponentType<any>, pageProps: any) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { favicon } = getSiteInfo();
   const getLayout = (Component as any).getLayout ?? getCommonLayout;
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={favicon} />
         {getExternalLink()}
       </Head>
       <NextUIProvider>
@@ -73,10 +74,11 @@ export function getBaseJsonLd() {
 }
 
 function getExternalLink() {
+  const env = process.env.NODE_ENV;
   return (
     <>
-      <script defer src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
-      <script defer src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+      <script defer src={`https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.${env}.min.js`}></script>
+      <script defer src={`https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.${env}.min.js`}></script>
     </>
   )
 }

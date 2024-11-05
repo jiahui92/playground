@@ -6,6 +6,7 @@ nextjs@14 SSG
   * 全局替换`yoursite.com`
   * 修改`lib/const.ts`的`getSiteInfo`, `indexNowKey`
   * 完善head里的title,desc,keywords
+  * favicon
 * deploy
   * 设置`.env`里的`CLOUDFLARE_API_TOKEN`
   * 设置`package.json`的script.deploy.project

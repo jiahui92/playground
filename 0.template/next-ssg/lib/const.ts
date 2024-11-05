@@ -10,6 +10,6 @@ export function getSiteInfo() {
     description: `desc`, // 150 words
     keywords: `${name},k1,k2`, // useless seo
     url: baseUrl,
-    favicon: `${baseUrl}/favicon.ico`,
+    favicon: `/favicon.ico`,
   }
 }
