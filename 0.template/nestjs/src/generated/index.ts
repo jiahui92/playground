@@ -4,7 +4,7 @@ import { getPath } from 'src/common/utils';
 import * as genTypes from './nexus';
 import { genFilterPlugin } from './genFilterPlugin';
 import { gqlApiConfig } from 'src/config/gql';
-
+import { Prisma } from '@prisma/client';
 
 export function getNexusSchema(shouldExitAfterGenerateArtifacts: boolean) {
   const schema = makeSchema({
@@ -16,7 +16,12 @@ export function getNexusSchema(shouldExitAfterGenerateArtifacts: boolean) {
       schema: getPath('src/generated/schema.gql'),
       typegen: getPath('src/generated/nexus-typings.ts'),
     },
-    plugins: [paljs(), genFilterPlugin(genTypes, gqlApiConfig)],
+    plugins: [
+      // https://github.com/paljs/prisma-tools/pull/341
+      // 避免内部require('@prisma/client')，导致慢查询
+      paljs({ prismaSelectOptions: { dmmf: [Prisma.dmmf] } }),
+      genFilterPlugin(genTypes, gqlApiConfig),
+    ],
   });
   return schema;
 }
