@@ -1,0 +1,1 @@
+export const isLocal = chrome.runtime.getURL('').includes('kcmjieiinapjplaockokkphfnglcjbfh');
