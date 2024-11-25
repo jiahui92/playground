@@ -1,3 +1,4 @@
+import "./style.css";
 import React from "react";
 import {NextUIProvider} from "@nextui-org/react";
 

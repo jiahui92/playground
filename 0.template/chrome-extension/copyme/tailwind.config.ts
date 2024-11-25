@@ -3,6 +3,11 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
+    "./popup/**/*.{js,ts,jsx,tsx,mdx}",
+    "./options/**/*.{js,ts,jsx,tsx,mdx}",
+    "./newtab/**/*.{js,ts,jsx,tsx,mdx}",
+    "./sidepanel/**/*.{js,ts,jsx,tsx,mdx}",
+    "./devtools/**/*.{js,ts,jsx,tsx,mdx}",
     "./tabs/**/*.{js,ts,jsx,tsx,mdx}",
     "./lib/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
