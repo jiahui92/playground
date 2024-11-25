@@ -2,7 +2,7 @@
 [plasmo](https://github.com/PlasmoHQ/plasmo)
 * pnpm create plasmo
 * mv ./copyme ../
-* pnpm i tailwindcss @nextui-org/react sweetalert2
+* pnpm i tailwindcss @nextui-org/react sweetalert2 framer-motion
 
 
 ## seo
