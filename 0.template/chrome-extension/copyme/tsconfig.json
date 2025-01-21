@@ -9,8 +9,10 @@
     "./**/*.tsx"
   ],
   "compilerOptions": {
+    "strictNullChecks": true,
     "jsx": "react",
     "esModuleInterop": true,
+    "types": ["@types/gtag.js", "@types/chrome"],
     "paths": {
       "@/*": ["./*"],
     },
